@@ -1,0 +1,15 @@
+PODS:
+  - CWLateralSlide (1.5.8)
+  - Masonry (1.1.0)
+
+DEPENDENCIES:
+  - CWLateralSlide
+  - Masonry
+
+SPEC CHECKSUMS:
+  CWLateralSlide: 3af190c8ffa08040abfd9780f279dac94d531f8b
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+
+PODFILE CHECKSUM: f9d940ea567cf7387358c827a62a1a8ef21cfc91
+
+COCOAPODS: 1.4.0
