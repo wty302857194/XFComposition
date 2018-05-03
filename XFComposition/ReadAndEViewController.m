@@ -255,9 +255,9 @@ typedef void(^MoreMessageBlock)();
 
         [self bookRequst:self.tuijianbookArray :@"4" :@"0" :@"0" :@"21440" :@"0" :@"0"];
         [self bookRequst:self.xuexiaobookArray :@"4" :@"0" :@"0" :@"21440" :@"0" :@"0"];
-        [self bookRequst:@"1" :self.xuexiaobookArray :@"4"];
-        [self bookRequst:@"1" :self.xianfengbookArray :@"2"];
-        [self bookRequst:@"2" :self.remenbookArray :@"2"];
+//        [self bookRequst:@"1" :self.xuexiaobookArray :@"4"];
+//        [self bookRequst:@"1" :self.xianfengbookArray :@"2"];
+//        [self bookRequst:@"2" :self.remenbookArray :@"2"];
         [self readBJRequst];
         [self GetBookpaihangRequst:@"0" :self.weekArray];//周排行
         [self GetBookpaihangRequst:@"1" :self.monthArray];//月排行
@@ -376,41 +376,7 @@ xuexiao：0    //学校"
     
     
 }
-- (void)readListRequestData
-{
-    
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    BaseRequest *request = [BaseRequest requestWithURL:nil];
-    NSDictionary *dic = @{
-                          @"Action":@"GetBookList",
-                          @"Token":@"0A66A4FD-146F-4542-8D7B-33CDEC2981F9",
-                          @"PageIndex":@"1",
-                          @"PageSize":pagesize,
-                          @"chaperid":@"0",
-                          @"author":@"",
-                          @"keyword":@"",
-                          @"booktype":@"0",
-                          @"isdaodu":@"0",
-//                          @"istuijian":istuijian,
-                          @"quxian":@"0"
-                          };
-    
-    [request startWithMethod:HTTPTypePOST params:dic successedBlock:^(id succeedResult) {
-        [self.collectionView.mj_footer endRefreshing];
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
-        NSLog(@"ForecastUrl === %@",succeedResult);
-        NSArray *arr = succeedResult[@"ret_data"][@"pageInfo"];
-        for (NSDictionary *dic in arr) {
-//            HomeLessonModel *lessonModel = [HomeLessonModel mj_objectWithKeyValues:dic];
-//            [_homeLessonArr addObject:lessonModel];
-        }
-        [self.collectionView reloadData];
-    } failedBolck:^(NSURLSessionDataTask *task, NSError *error) {
-        NSLog(@"error===%@",error.localizedDescription);
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
-    }];
-    
-}
+
 //读书笔记
 -(void)readBJRequst{
     GetBookBjRequst *requst = [[GetBookBjRequst alloc]init];

@@ -188,19 +188,19 @@
 }
 
 -(void)bookRequst{
-    __weak typeof (self) weakSelf = self;
-    HomeBookRequst *bookRequst = [[HomeBookRequst alloc]init];
-    [bookRequst HomeGetBookListWithchaperid :@"0" :@"0" :@"4" :^(NSDictionary *json) {
-        
-        [weakSelf.bookArray removeAllObjects];
-        for (NSDictionary *dic in json[@"ret_data"][@"pageInfo"]) {
-            BookModel *model = [BookModel loadWithJSOn:dic];
-            [weakSelf.bookArray addObject:model];
-        }
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [weakSelf.collectionView reloadData];
-        });
-    }];
+//    __weak typeof (self) weakSelf = self;
+//    HomeBookRequst *bookRequst = [[HomeBookRequst alloc]init];
+//    [bookRequst HomeGetBookListWithchaperid :@"0" :@"0" :@"4" :^(NSDictionary *json) {
+//
+//        [weakSelf.bookArray removeAllObjects];
+//        for (NSDictionary *dic in json[@"ret_data"][@"pageInfo"]) {
+//            BookModel *model = [BookModel loadWithJSOn:dic];
+//            [weakSelf.bookArray addObject:model];
+//        }
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            [weakSelf.collectionView reloadData];
+//        });
+//    }];
     
 }
 -(void)RingRequst{
