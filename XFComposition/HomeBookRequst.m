@@ -26,7 +26,7 @@
                                  @"chaperid":@"0",
                                  @"author":@"",
                                  @"keyword":@"",
-                                 @"booktype":@"0",
+                                 @"booktype":@"-1",
                                  @"isdaodu":@"0",
                                  @"ishost":isHost,
                                  @"istuijian":istuijian,
@@ -34,6 +34,7 @@
                                  @"student":student,
                                  @"teacher":teacher
                                  };
+    NSLog(@"%@",parameters);
     [requst requestWithURLString:APIurl parameters:parameters type:NetworkRequestTypePost imgData:nil resultBlock:^(id responseObject, NSError *error, NSURLSessionDataTask *task) {
         
         

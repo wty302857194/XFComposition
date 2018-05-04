@@ -60,6 +60,7 @@
 		32CBFA8520883C58004CB00F /* Global.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CBFA8420883C57004CB00F /* Global.m */; };
 		32CBFA8B20886B5C004CB00F /* LeftMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CBFA8920886B5C004CB00F /* LeftMenuViewController.m */; };
 		32CBFA8C20886B5C004CB00F /* LeftMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32CBFA8A20886B5C004CB00F /* LeftMenuViewController.xib */; };
+		32F3D6A8209C396F007157A3 /* BookRecViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32F3D6A7209C396F007157A3 /* BookRecViewController.xib */; };
 		32F7E755209323FD0016C1A6 /* TYVolunteerCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32F7E753209323FD0016C1A6 /* TYVolunteerCollectionViewCell.m */; };
 		32F7E756209323FD0016C1A6 /* TYVolunteerCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32F7E754209323FD0016C1A6 /* TYVolunteerCollectionViewCell.xib */; };
 		32F7E75A209341470016C1A6 /* VolunteerActiveiTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32F7E758209341470016C1A6 /* VolunteerActiveiTableViewCell.m */; };
@@ -707,6 +708,7 @@
 		32CBFA8820886B5C004CB00F /* LeftMenuViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LeftMenuViewController.h; sourceTree = "<group>"; };
 		32CBFA8920886B5C004CB00F /* LeftMenuViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LeftMenuViewController.m; sourceTree = "<group>"; };
 		32CBFA8A20886B5C004CB00F /* LeftMenuViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LeftMenuViewController.xib; sourceTree = "<group>"; };
+		32F3D6A7209C396F007157A3 /* BookRecViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BookRecViewController.xib; sourceTree = "<group>"; };
 		32F7E752209323FD0016C1A6 /* TYVolunteerCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TYVolunteerCollectionViewCell.h; sourceTree = "<group>"; };
 		32F7E753209323FD0016C1A6 /* TYVolunteerCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TYVolunteerCollectionViewCell.m; sourceTree = "<group>"; };
 		32F7E754209323FD0016C1A6 /* TYVolunteerCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TYVolunteerCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -4081,6 +4083,7 @@
 				F6D6378E1F7CA1AD00FF6FA4 /* M */,
 				F6D637931F7CA60100FF6FA4 /* BookRecViewController.h */,
 				F6D637941F7CA60100FF6FA4 /* BookRecViewController.m */,
+				32F3D6A7209C396F007157A3 /* BookRecViewController.xib */,
 				F69C99831F8E40B800F0C7D6 /* V */,
 				F69C99821F8E40B100F0C7D6 /* M */,
 				F6DC7CC61F91C25B0050D1DF /* BookRankViewController.h */,
@@ -4637,6 +4640,7 @@
 				32F7E756209323FD0016C1A6 /* TYVolunteerCollectionViewCell.xib in Resources */,
 				320D1BD1208611B700F7D45A /* HomeViewController.xib in Resources */,
 				F6D637D61F7D284900FF6FA4 /* IQKeyboardManager.bundle in Resources */,
+				32F3D6A8209C396F007157A3 /* BookRecViewController.xib in Resources */,
 				3284728320909C8D00A1F3D0 /* TopMenuView.xib in Resources */,
 				3262C5BB2091F6870063DE19 /* TYStoryboard.storyboard in Resources */,
 				3256A5FD2098A7EB00A19946 /* TYAllListViewController.xib in Resources */,
