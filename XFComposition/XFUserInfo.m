@@ -88,7 +88,7 @@
 }
 //
 // 获取用户信息
-+ (id)getUserInfo {
++ (XFUserInfo*)getUserInfo {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSData *myEncodedObject = [defaults objectForKey:ZSH_USERINFO_MODEL];
     XFUserInfo *aModel = [NSKeyedUnarchiver unarchiveObjectWithData:myEncodedObject];

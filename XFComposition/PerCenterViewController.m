@@ -11,8 +11,13 @@
 #import "GetMessageListRequst.h"
 #import "GetMessageListModel.h"
 #import "ReplaceCell.h"
+#import "MessageDetailViewController.h"
 @interface PerCenterViewController ()<UITableViewDelegate,UITableViewDataSource>
-
+{
+    
+    NSInteger index;
+    
+}
 @property (nonatomic,strong) XFUserInfo *xf;
 
 @end
@@ -26,6 +31,7 @@
         _tabelView.dataSource = self;
         [_tabelView registerClass:[PerCenterCell class] forCellReuseIdentifier:@"cell"];
         [_tabelView registerClass:[ReplaceCell class] forCellReuseIdentifier:@"replacecell"];
+        _tabelView.estimatedRowHeight=450.0f;
     }
     return _tabelView;
 }
@@ -41,28 +47,65 @@
     }
     return _messgeArray;
 }
+-(void)viewWillAppear:(BOOL)animated{
+    
+    [super viewWillAppear:animated];
+    [self.tabelView.mj_header beginRefreshing];
+
+}
+-(void)viewDidDisappear:(BOOL)animated{
+    
+    [super viewDidDisappear:animated];
+    
+    [self.tabelView.mj_header endRefreshing];
+    [self.tabelView.mj_footer endRefreshing];
+    
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.tabelView];
     
-    self.typeStr = @"0";
-    self.flagStr = @"0";
+    
     self.xf = [XFUserInfo getUserInfo];
     [self GetMessagelist];
 }
 
 -(void)GetMessagelist{
     __weak typeof (self) weakSelf = self;
-    GetMessageListRequst *requst = [[GetMessageListRequst alloc]init];
-    [requst GetMessageListRequstwithPageIndex:@"1" withPageSize:@"20" withtype:self.typeStr withflag:self.flagStr withuserid:self.xf.Loginid :^(NSDictionary *json) {
-//        weakSelf.messgeArray = [[NSMutableArray alloc]init];
-        [weakSelf.messgeArray removeAllObjects];
-        for (NSDictionary *dic in json[@"ret_data"][@"pageInfo"]) {
-            GetMessageListModel *model = [GetMessageListModel loadWithJSOn:dic];
-            [weakSelf.messgeArray addObject:model];
-        }
-        [weakSelf.tabelView reloadData];
+    
+    index = 1;
+    
+    weakSelf.tabelView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        index = 1;
+        GetMessageListRequst *requst = [[GetMessageListRequst alloc]init];
+        [requst GetMessageListRequstwithPageIndex:[NSString stringWithFormat:@"%ld",(long)index] withPageSize:@"10" withtype:self.typeStr withflag:self.flagStr withuserid:self.xf.Loginid :^(NSDictionary *json) {
+            
+            [weakSelf.messgeArray removeAllObjects];
+            for (NSDictionary *dic in json[@"ret_data"][@"pageInfo"]) {
+                GetMessageListModel *model = [[GetMessageListModel alloc] initWithDictionary:dic];
+                [weakSelf.messgeArray addObject:model];
+            }
+            [weakSelf.tabelView reloadData];
+            
+            [weakSelf.tabelView.mj_header endRefreshing];
+            [weakSelf.tabelView.mj_footer endRefreshing];
+            
+        }];
+    }];
+    
+    weakSelf.tabelView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        index ++ ;
+        GetMessageListRequst *requst = [[GetMessageListRequst alloc]init];
+        [requst GetMessageListRequstwithPageIndex:[NSString stringWithFormat:@"%ld",(long)index] withPageSize:@"10" withtype:self.typeStr withflag:self.flagStr withuserid:self.xf.Loginid :^(NSDictionary *json) {
+            for (NSDictionary *dic in json[@"ret_data"][@"pageInfo"]) {
+                GetMessageListModel *model = [[GetMessageListModel alloc] initWithDictionary :dic];
+                [weakSelf.messgeArray addObject:model];
+            }
+            [weakSelf.tabelView reloadData];
+            [weakSelf.tabelView.mj_header endRefreshing];
+            [weakSelf.tabelView.mj_footer endRefreshing];
+        }];
     }];
 
 }
@@ -96,6 +139,16 @@
         return HeightFrame-64;
     }
     return 100;
+}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    
+    MessageDetailViewController * vc = [[MessageDetailViewController alloc]init];
+     GetMessageListModel *Model = self.messgeArray[indexPath.row];
+    vc.msgId = Model.ID;
+    [self.navigationController pushViewController:vc animated:YES];
+    
+    
 }
 #pragma header高度
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section

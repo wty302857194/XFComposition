@@ -44,6 +44,8 @@
         self.label5.textColor = [UIColor lightGrayColor];
         [self.label5 setSingleLineAutoResizeWithMaxWidth:0];
         self.label5.font = [UIFont systemFontOfSize:12];
+        
+        
     }
     return self;
 }

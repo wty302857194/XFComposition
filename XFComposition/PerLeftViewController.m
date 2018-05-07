@@ -9,7 +9,7 @@
 #import "PerLeftViewController.h"
 #import "PerLeftFristCell.h"
 #import "PerLeftSecondCell.h"
-#import "PerCenterViewController.h"
+#import "PerCenterViewController1.h"
 
 
 #import "GetMessageListRequst.h"
@@ -106,7 +106,7 @@
     [requst GetMessageListRequstwithPageIndex:@"1" withPageSize:@"20" withtype:self.str1 withflag:self.str2 withuserid:self.xf.Loginid :^(NSDictionary *json) {
         [weakSelf.array removeAllObjects];
         for (NSDictionary *dic in json[@"ret_data"][@"pageInfo"]) {
-            GetMessageListModel *model = [GetMessageListModel loadWithJSOn:dic];
+            GetMessageListModel *model = [[GetMessageListModel alloc] initWithDictionary:dic];
             [weakSelf.array addObject:model];
         }
 
@@ -218,9 +218,10 @@
         
         //执行点击事件，如果传值可以将plainViewController作成单例传值
         
-        PerCenterViewController *plainVC = [PerCenterViewController defaultPlainViewController];
-        plainVC.messgeArray = self.array;
-        [plainVC.tabelView reloadData];
+        PerCenterViewController1 *plainVC = [PerCenterViewController1 defaultPlainViewController];
+//        plainVC.messgeArray = self.array;
+        plainVC.flagStr = self.str2;
+         plainVC.typeStr = self.str1;
         
     }];
 }

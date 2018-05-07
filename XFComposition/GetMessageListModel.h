@@ -8,12 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-@interface GetMessageListModel : NSObject
+@interface GetMessageListModel : FMBean
 @property (nonatomic,strong)NSString *DateTime;
 @property (nonatomic,strong)NSString *ID;
 @property (nonatomic,strong)NSString *MesType;
 @property (nonatomic,strong)NSString *ReadFlag;
 @property (nonatomic,strong)NSString *Title;
 
-+(id)loadWithJSOn:(NSDictionary *)json;
 @end
