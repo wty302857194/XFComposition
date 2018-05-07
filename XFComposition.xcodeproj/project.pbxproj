@@ -64,6 +64,8 @@
 		32F7E756209323FD0016C1A6 /* TYVolunteerCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32F7E754209323FD0016C1A6 /* TYVolunteerCollectionViewCell.xib */; };
 		32F7E75A209341470016C1A6 /* VolunteerActiveiTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32F7E758209341470016C1A6 /* VolunteerActiveiTableViewCell.m */; };
 		32F7E75B209341470016C1A6 /* VolunteerActiveiTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32F7E759209341470016C1A6 /* VolunteerActiveiTableViewCell.xib */; };
+		3F3D577D209C373600D415AC /* ActionSheetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3D577B209C373600D415AC /* ActionSheetView.m */; };
+		3F3D577E209C373600D415AC /* ActionSheetItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3D577C209C373600D415AC /* ActionSheetItem.m */; };
 		4ABBA26F2080DBF60002E08D /* RegistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ABBA26D2080DBF60002E08D /* RegistViewController.m */; };
 		4ABBA2702080DBF60002E08D /* RegistViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4ABBA26E2080DBF60002E08D /* RegistViewController.xib */; };
 		4ABBA2732080E0150002E08D /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ABBA2722080E0150002E08D /* BaseViewController.m */; };
@@ -713,6 +715,10 @@
 		32F7E757209341470016C1A6 /* VolunteerActiveiTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VolunteerActiveiTableViewCell.h; sourceTree = "<group>"; };
 		32F7E758209341470016C1A6 /* VolunteerActiveiTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VolunteerActiveiTableViewCell.m; sourceTree = "<group>"; };
 		32F7E759209341470016C1A6 /* VolunteerActiveiTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VolunteerActiveiTableViewCell.xib; sourceTree = "<group>"; };
+		3F3D5779209C373500D415AC /* ActionSheetItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetItem.h; sourceTree = "<group>"; };
+		3F3D577A209C373500D415AC /* ActionSheetView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetView.h; sourceTree = "<group>"; };
+		3F3D577B209C373600D415AC /* ActionSheetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetView.m; sourceTree = "<group>"; };
+		3F3D577C209C373600D415AC /* ActionSheetItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetItem.m; sourceTree = "<group>"; };
 		4ABBA26C2080DBF60002E08D /* RegistViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegistViewController.h; sourceTree = "<group>"; };
 		4ABBA26D2080DBF60002E08D /* RegistViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RegistViewController.m; sourceTree = "<group>"; };
 		4ABBA26E2080DBF60002E08D /* RegistViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegistViewController.xib; sourceTree = "<group>"; };
@@ -1925,6 +1931,17 @@
 			path = LeftMenuVC;
 			sourceTree = "<group>";
 		};
+		3F3D5778209C371100D415AC /* ActionSheet */ = {
+			isa = PBXGroup;
+			children = (
+				3F3D5779209C373500D415AC /* ActionSheetItem.h */,
+				3F3D577C209C373600D415AC /* ActionSheetItem.m */,
+				3F3D577A209C373500D415AC /* ActionSheetView.h */,
+				3F3D577B209C373600D415AC /* ActionSheetView.m */,
+			);
+			path = ActionSheet;
+			sourceTree = "<group>";
+		};
 		4ABBA2792080E6120002E08D /* LCCategory */ = {
 			isa = PBXGroup;
 			children = (
@@ -2333,6 +2350,7 @@
 			isa = PBXGroup;
 			children = (
 				32CBFA8220883C57004CB00F /* utilities */,
+				3F3D5778209C371100D415AC /* ActionSheet */,
 				587AA2B3206A10650034B766 /* Lib */,
 				F6CFB3BA1F76436E00ADED2F /* BookTextView.h */,
 				F6CFB3BB1F76436E00ADED2F /* BookTextView.m */,
@@ -4575,6 +4593,7 @@
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = X225TLXQ76;
 						ProvisioningStyle = Automatic;
+
 					};
 					F612EBDB1F4FB341000E7432 = {
 						CreatedOnToolsVersion = 8.3.3;
@@ -4930,6 +4949,7 @@
 				F6CFB3C71F7644EA00ADED2F /* ConfigAttributedString.m in Sources */,
 				F6BC3E421F5D63D70047A7AA /* HomeBookRequst.m in Sources */,
 				F662D1CF1FA8091100BAEB18 /* GetActivePageModel.m in Sources */,
+				3F3D577D209C373600D415AC /* ActionSheetView.m in Sources */,
 				F6E3BA6F1F5E66660060DEDD /* HomePagViewController.m in Sources */,
 				58520A52206602AE00944E0D /* haocihaojumodel.m in Sources */,
 				32CBFA7D20877C36004CB00F /* BaseRequest.m in Sources */,
@@ -5106,6 +5126,7 @@
 				F6D637CF1F7D284900FF6FA4 /* IQKeyboardManager.m in Sources */,
 				F6C091991F8A5B8800F89A9B /* RingCreatnoteView.m in Sources */,
 				F61E18731FA2C10400FF11E1 /* MywritingModel.m in Sources */,
+				3F3D577E209C373600D415AC /* ActionSheetItem.m in Sources */,
 				F6B130C91F60705200994571 /* MicoSecondCell.m in Sources */,
 				F649DD5A1F556F8200879744 /* MyFourTableViewCell.m in Sources */,
 				F6BCCC9D1FB056B4007A4CED /* ActiveDatilFristModel.m in Sources */,
@@ -5435,6 +5456,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+
 				DEVELOPMENT_TEAM = X225TLXQ76;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/XFComposition/PrefixHeader.pch";
@@ -5443,8 +5465,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.house365.Rent;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "399220a6-d791-412c-961d-4f6c04a784e5";
+				PROVISIONING_PROFILE_SPECIFIER = "Rent-dev";
 			};
 			name = Debug;
 		};
@@ -5456,6 +5478,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+
 				DEVELOPMENT_TEAM = X225TLXQ76;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/XFComposition/PrefixHeader.pch";
@@ -5464,8 +5487,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.house365.Rent;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "399220a6-d791-412c-961d-4f6c04a784e5";
+				PROVISIONING_PROFILE_SPECIFIER = "Rent-dev";
 			};
 			name = Release;
 		};
