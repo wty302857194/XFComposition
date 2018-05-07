@@ -17,6 +17,7 @@ typedef void (^XFResponseBlock)(NSString* requestName, id responseData , BOOL is
 #define XFReq_User_DeleteMe            @"彻底删除"
 #define XFReq_User_AddMessage          @"发送消息"
 #define XFReq_User_GetUserList         @"获得收件人列表"
+#define XFReq_User_SetUserIcon         @"设置用户头像"
 
 
 
@@ -39,6 +40,9 @@ typedef void (^XFResponseBlock)(NSString* requestName, id responseData , BOOL is
 -(void)XFRequstsetMessageDeleteMe:(NSString*)MsgId userid:(NSString*)userid :(XFResponseBlock)block;
 // 获得收件人列表
 -(void)XFRequstGetUserList:(NSString*)ParentId userid:(NSString*)userid EnName:(NSString*)EnName seachName:(NSString*)seachName :(XFResponseBlock)block;
+// 设置用户头像
+-(void)XFRequstSetUserIcon:(NSString*)userid images:(NSArray*)images :(XFResponseBlock)block;
+
 +(NSString*)encodedParams:(NSDictionary*)params;
 
 @end
