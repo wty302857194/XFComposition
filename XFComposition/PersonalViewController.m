@@ -15,6 +15,7 @@
 #import "ICSDrawerController.h"
 #import "PerCenterViewController1.h"
 #import "PerLeftViewController.h"
+#import <CoreText/CoreText.h>
 
 #import "RealnameViewController.h"
 #import "ChangePassWordViewController.h"
@@ -192,6 +193,28 @@
             PerLeftViewController *leftVC = [[PerLeftViewController alloc] init];
             
             PerCenterViewController1 *plainVC = [PerCenterViewController1 defaultPlainViewController];
+            NSMutableAttributedString * noteStr = [[NSMutableAttributedString alloc]initWithString:@"收信箱(全部消息)"];
+            NSRange range = [@"收信箱(全部消息)" rangeOfString:@"(全部消息)"];
+            
+            [noteStr addAttribute:(NSString *)kCTFontAttributeName
+                            value:(id)CFBridgingRelease(CTFontCreateWithName((CFStringRef)[UIFont systemFontOfSize:12].fontName,
+                                                                             [UIFont systemFontOfSize:12].pointSize,
+                                                                             NULL))
+                            range:range];
+            
+            UIView * view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 300 , 44)];
+            UILabel * label = [[UILabel alloc]initWithFrame:view.frame];
+            label.font = [UIFont systemFontOfSize:16];
+            label.textColor = [UIColor whiteColor];
+            label.textAlignment = NSTextAlignmentCenter;
+            label.attributedText = noteStr;
+            [view addSubview:label];
+            view.frame = CGRectMake((kScreenWidth-300)/2, 20, 300, 44);
+            
+            //坐标系转换到titleview
+            
+            view.frame = [self.view.window convertRect:view.frame toView:self.navigationItem.titleView];
+            plainVC.drawer.navigationItem.titleView = view;
             plainVC.flagStr = @"1";
             plainVC.typeStr = @"0";
 

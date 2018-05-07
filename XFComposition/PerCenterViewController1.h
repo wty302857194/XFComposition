@@ -13,6 +13,7 @@
 @property (nonatomic,strong)NSString *typeStr;
 @property (nonatomic,strong)NSString *flagStr;
 @property (nonatomic,weak) ICSDrawerController *drawer;
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 + (instancetype)defaultPlainViewController;
 @end

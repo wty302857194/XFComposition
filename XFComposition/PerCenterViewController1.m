@@ -17,7 +17,7 @@
     NSInteger index;
 }
 
-@property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) IBOutlet UIView *footView;
 @property (strong, nonatomic) NSMutableArray * dataArray;
 @end
 
@@ -30,6 +30,8 @@
     [_tableView registerClass:[PerCenterCell class] forCellReuseIdentifier:@"PerCenterCell"];
     _dataArray = [NSMutableArray array];
     _tableView.estimatedRowHeight=450.0f;
+    self.tableView.mj_footer.hidden = YES;
+    self.tableView.contentInset = UIEdgeInsetsMake(1, 0, 0, 0);
 
     [self getMessagelist];
 }
@@ -49,15 +51,37 @@
         index = 1;
         [[XFRequestManager sharedInstance] XFRequstGetMessageList:[NSString stringWithFormat:@"%ld",(long)index] withPageSize:@"10" withtype:self.typeStr withflag:self.flagStr withuserid:[XFUserInfo getUserInfo].Loginid :^(NSString *requestName, id  responseData,BOOL isSuccess) {
             
-            [weakSelf.dataArray removeAllObjects];
+            if (isSuccess) {
+                [weakSelf.dataArray removeAllObjects];
+                
+                weakSelf.dataArray = responseData;
+                
+                if (weakSelf.dataArray.count >= 10) {
+                    self.tableView.mj_footer.hidden = NO;
 
-            weakSelf.dataArray = responseData;
-            
-            [weakSelf.tableView reloadData];
-            
-            [weakSelf.tableView.mj_header endRefreshing];
-            [weakSelf.tableView.mj_footer endRefreshing];
-            
+                }else{
+                    
+                    self.tableView.mj_footer.hidden = YES;
+
+                }
+                
+                [weakSelf.tableView reloadData];
+                
+                [weakSelf.tableView.mj_header endRefreshing];
+                [weakSelf.tableView.mj_footer endRefreshing];
+            }else{
+                
+                [SVProgressHUD showInfoWithStatus:responseData];
+                
+                
+            }
+        
+            if (weakSelf.dataArray.count == 0) {
+                weakSelf.tableView.tableFooterView = _footView;
+            }else{
+                
+                weakSelf.tableView.tableFooterView = nil;
+            }
         }];
     }];
     
@@ -65,13 +89,29 @@
         index ++ ;
     
         [[XFRequestManager sharedInstance] XFRequstGetMessageList:[NSString stringWithFormat:@"%ld",(long)index] withPageSize:@"10" withtype:self.typeStr withflag:self.flagStr withuserid:[XFUserInfo getUserInfo].Loginid :^(NSString *requestName, id  responseData,BOOL isSuccess){
-            NSArray *array= (NSArray*)responseData;
-            if (array.count == 0) {
-                [SVProgressHUD showInfoWithStatus:@"没有更多数据"];
-            }
-            [weakSelf.dataArray addObjectsFromArray:responseData];
             
-            [weakSelf.tableView reloadData];
+            if (isSuccess) {
+                NSArray *array= (NSArray*)responseData;
+                if (array.count >= 10) {
+                    self.tableView.mj_footer.hidden = NO;
+                    
+                }else{
+                    
+                    self.tableView.mj_footer.hidden = YES;
+                    
+                }
+                if (array.count == 0) {
+                    [SVProgressHUD showInfoWithStatus:@"没有更多数据"];
+                }
+                [weakSelf.dataArray addObjectsFromArray:responseData];
+                
+                [weakSelf.tableView reloadData];
+            }else{
+                
+                [SVProgressHUD showInfoWithStatus:responseData];
+                
+                
+            }
             [weakSelf.tableView.mj_header endRefreshing];
             [weakSelf.tableView.mj_footer endRefreshing];
         }];
@@ -94,11 +134,72 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     MessageDetailViewController * vc = [[MessageDetailViewController alloc]init];
-    GetMessageListModel *Model = self.dataArray[indexPath.row];
-    vc.msgId = Model.ID;
+    GetMessageListModel * model = self.dataArray[indexPath.row];
+    [[XFRequestManager sharedInstance] XFRequstsetMessageRed:model.ID userid:[XFUserInfo getUserInfo].Loginid repondeBlock:^(NSString *requestName, id responseData, BOOL isSuccess) {
+        
+    }];
+    vc.msgId = model.ID;
     [self.navigationController pushViewController:vc animated:YES];
+}
+- (NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath{
+      GetMessageListModel * model = self.dataArray[indexPath.row];
+    // 添加一个删除按钮
+    UITableViewRowAction *deleteRowAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"删除"handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
+
+        [[XFRequestManager sharedInstance] XFRequstsetMessageDeleteMe:model.ID userid:[XFUserInfo  getUserInfo].Loginid :^(NSString *requestName, id responseData, BOOL isSuccess) {
+            
+            if (isSuccess) {
+                [SVProgressHUD showInfoWithStatus:@"删除成功"];
+                
+                [_dataArray removeObject:model];
+                
+                [_tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+
+            }else{
+                
+                [SVProgressHUD showInfoWithStatus:@"删除失败"];
+
+            }
+        }] ;
+    
+    }];
+    
+    UITableViewRowAction *topRowAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"移到垃圾箱"handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
+        
+        [[XFRequestManager sharedInstance] XFRequstsetMessageUpdataMe:model.ID userid:[XFUserInfo getUserInfo].Loginid :^(NSString *requestName, id responseData, BOOL isSuccess) {
+            if (isSuccess) {
+                
+                [_dataArray removeObject:model];
+                
+                [_tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+                
+            }else{
+                
+                
+            }
+        }];
+        
+    }];
+    topRowAction.backgroundColor = [UIColor blueColor];
+    
+    // 添加一个更多按钮
+    UITableViewRowAction *moreRowAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"标记已读"handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
+        [[XFRequestManager sharedInstance] XFRequstsetMessageRed:model.ID userid:[XFUserInfo getUserInfo].Loginid repondeBlock:^(NSString *requestName, id responseData, BOOL isSuccess) {
+            if (isSuccess) {
+                model.ReadFlag = @"1";
+                [_tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+            }
+        }];
+        
+    }];
+    moreRowAction.backgroundEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
+    
+    // 将设置好的按钮放到数组中返回
+    return @[deleteRowAction, topRowAction, moreRowAction];
+    
     
 }
+
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     

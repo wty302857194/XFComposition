@@ -23,7 +23,7 @@
                         type:(NetworkRequestType)type
                      imgData:(NSArray *)imgData
                  resultBlock:(NetworkRequestResultBlock)resultBlock {
-           
+
     if (!self.isConnected) {
         CTCellularData *cellularData = [[CTCellularData alloc]init];
         cellularData.cellularDataRestrictionDidUpdateNotifier =  ^(CTCellularDataRestrictedState state){
