@@ -19,17 +19,18 @@
         [self.contentView sd_addSubviews:@[imgView,label,self.titleLabel]];
         
         
-        label.sd_layout.rightSpaceToView(self.contentView, WidthFrame -120).topSpaceToView(self.contentView, 5).heightIs(30).widthIs(0);
+        imgView.sd_layout.leftSpaceToView(self.contentView, 20).centerYEqualToView(self.contentView).heightIs(5).widthIs(5);
+        imgView.image = [UIImage imageNamed:@"pic_star"];
         
-        label.textAlignment = NSTextAlignmentRight;
-        label.text = @"用户名：";
+        
+        label.sd_layout.leftSpaceToView(imgView, 5).topSpaceToView(self.contentView, 5).heightIs(30).widthIs(105);
+        label.textAlignment = NSTextAlignmentLeft;
+        label.text = @"用户名";
         label.font  = [UIFont systemFontOfSize:14];
-        [label setSingleLineAutoResizeWithMaxWidth:0];
-        imgView.sd_layout.rightSpaceToView(label, 0).topSpaceToView(self.contentView, 15).heightIs(10).widthIs(10);
-        imgView.backgroundColor = [UIColor lightGrayColor];
-        self.titleLabel.sd_layout.leftSpaceToView(label, 0).topSpaceToView(self.contentView, 5).heightIs(30).widthIs(0);
+//        [label setSingleLineAutoResizeWithMaxWidth:0];
         
-//        self.titleLabel.text = @"teacher2";
+        
+        self.titleLabel.sd_layout.leftSpaceToView(label, 0).centerYEqualToView(label).rightSpaceToView(self.contentView, 20).heightIs(30);
         self.titleLabel.font  = [UIFont systemFontOfSize:14];
         
         
