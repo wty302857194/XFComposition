@@ -61,7 +61,7 @@
         _tableView.delegate = self;
         _tableView.dataSource = self;
 //        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;//分割线
-        [_tableView registerClass:[MarktaskCell class] forCellReuseIdentifier:@"cell"];
+        [_tableView registerNib:[UINib nibWithNibName:@"MarktaskCell" bundle:nil] forCellReuseIdentifier:@"MarktaskCell"];
         
     }
     return _tableView;
@@ -140,6 +140,28 @@
 }
 //作品批阅
 -(void)markTask:(UIButton *)bt{
+    
+    if (bt.tag == 0) {
+       __block NSString * textStr = nil;
+        UIAlertController * alertController = [UIAlertController alertControllerWithTitle: @"登陆" message: @"输入用户名密码" preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+            textStr = textField.text;
+            textField.secureTextEntry = YES;
+
+        }];
+        
+        UIAlertAction * cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            
+        }];
+        UIAlertAction * sureAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            
+        }];
+        
+        [alertController addAction:cancelAction];
+        [alertController addAction:sureAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+    }
+    
     GetTeacherNeedActiveModel *model = self.activeArray[bt.tag-1000];
     WorkMarkViewController *vc = [[WorkMarkViewController alloc]init];
     vc.activeId = model.ID;
@@ -157,16 +179,14 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     
-    GetTeacherNeedActiveModel *Model = self.activeArray[indexPath.row];
-    return [self.tableView cellHeightForIndexPath:indexPath model:Model keyPath:@"model" cellClass:[MarktaskCell class] contentViewWidth:[self cellContentViewWith]];
+    return 120;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    MarktaskCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    MarktaskCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MarktaskCell"];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.delegate = self;
-    cell.bt.tag = 1000+indexPath.row;
     GetTeacherNeedActiveModel *Model = self.activeArray[indexPath.row];
     cell.model = Model;
     return  cell;
