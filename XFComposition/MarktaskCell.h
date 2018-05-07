@@ -16,6 +16,5 @@
 @end
 @interface MarktaskCell : UITableViewCell
 @property (nonatomic,strong)GetTeacherNeedActiveModel *model;
-@property (nonatomic,strong)UIButton *bt;
 @property (nonatomic,weak)id<MarktaskCellDelegate>delegate;
 @end
