@@ -31,6 +31,8 @@
 #import "ReadinotesViewController.h"
 #import "BookRankViewController.h"
 #import "BookDetailViewController.h"
+#import "CommentViewController.h"
+
 
 @interface TYCollectionHeaderView : UICollectionReusableView
 @end
@@ -501,17 +503,6 @@ xuexiao：0    //学校"
         cell.nameLabel.text = [NSString stringWithFormat:@"《%@》",model1.BookName];
         return cell;
     }else if (indexPath.section == 3){
-//        HomePaSixCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Read45" forIndexPath:indexPath];
-//        BookModel *model1 = self.tuijianbookArray[indexPath.row];
-//
-//        [cell.imageView1 sd_setImageWithURL:[NSURL URLWithString:model1.BookPic] placeholderImage:[UIImage imageNamed:@"icon_02"] options:SDWebImageRefreshCached];
-//        //        [cell.imageView1 sd_setImageWithURL:[NSURL URLWithString:str]];
-//        cell.label1.text = [NSString stringWithFormat:@"《%@》",model1.BookName];
-//        cell.label2.text = [NSString stringWithFormat:@"出版社:%@",model1.BookPublic];
-//        cell.label3.text = [NSString stringWithFormat:@"添加时间:%@",model1.BookAddTime];
-//        cell.label4.text = [NSString stringWithFormat:@"作者:%@",model1.BookAuthor];
-//        cell.label5.text = model1.BookPublic;
-//        cell.label6.text = [NSString stringWithFormat:@"阅读人数:%@",model1.BookIntroduction];
         if (self.tuijianbookArray.count == 0) {
             MicReplaceCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MicReplaceCell" forIndexPath:indexPath];
             return cell;
@@ -542,12 +533,11 @@ xuexiao：0    //学校"
         cell.label6.text = [NSString stringWithFormat:@"阅读人数:%@",model1.BookIntroduction];
         return cell;
     }else if (indexPath.section == 5){
-//        ReadSixCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Read6" forIndexPath:indexPath];
-//        return  cell;
+
     }else if (indexPath.section == 6){
         ReadSenvenCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Read79" forIndexPath:indexPath];
         GetBookBjModel *model = self.booBJArray[indexPath.row];
-        cell.textLable.text = model.deptname;
+        cell.textLable.text = model.title;
         cell.schoolLabel.text = model.username;
         return  cell;
     }else if (indexPath.section == 7){
@@ -557,7 +547,6 @@ xuexiao：0    //学校"
         return cell;
     }else if (indexPath.section == 8){
         ReadTenCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Read10" forIndexPath:indexPath];
-//        GetReadStartModel *model = self.readpaihangArray1[indexPath.row];
         cell.model = self.readpaihangArray1[indexPath.row];
         
         return  cell;
@@ -698,7 +687,13 @@ referenceSizeForHeaderInSection:(NSInteger)section {
                 headerView.lab.text = @"读书排行";
             }
             headerView.moreMessageBlock = ^{//更多
-                
+                if (indexPath.section == 7||indexPath.section == 6) {
+                    ReadinotesViewController *vc = [[ReadinotesViewController alloc]init];
+                    [self.navigationController pushViewController:vc animated:YES];
+                }else {
+                    BookRankViewController *vc = [[BookRankViewController alloc]init];
+                    [self.navigationController pushViewController:vc animated:YES];
+                }
             };
             return headerView;
         }
@@ -710,15 +705,16 @@ referenceSizeForHeaderInSection:(NSInteger)section {
     if (bt.tag == 1000 || bt.tag == 1001 || bt.tag == 1002 || bt.tag == 1003  ) {
         BookRecViewController *vc = [[BookRecViewController alloc]init];
         [self.navigationController pushViewController:vc animated:YES];
-    }else if (bt.tag ==1004){
-        
-        ReadinotesViewController *vc = [[ReadinotesViewController alloc]init];
-        [self.navigationController pushViewController:vc animated:YES];
-    }else if (bt.tag ==1006){
-        
-        BookRankViewController *vc = [[BookRankViewController alloc]init];
-        [self.navigationController pushViewController:vc animated:YES];
     }
+//    else if (bt.tag ==1004){
+//
+//        ReadinotesViewController *vc = [[ReadinotesViewController alloc]init];
+//        [self.navigationController pushViewController:vc animated:YES];
+//    }else if (bt.tag ==1006){
+//
+//        BookRankViewController *vc = [[BookRankViewController alloc]init];
+//        [self.navigationController pushViewController:vc animated:YES];
+//    }
 
 }
 #pragma mark UICollectionView被选中时调用的方法
@@ -739,24 +735,29 @@ referenceSizeForHeaderInSection:(NSInteger)section {
             vc.bookid = model1.ID;
             [self.navigationController pushViewController:vc animated:YES];
             
-        }else if (indexPath.section == 2){
+        }else if (indexPath.section == 2) {
             BookModel *model1 = self.xuexiaobookArray[indexPath.item];
             
             vc.bookid = model1.ID;
             [self.navigationController pushViewController:vc animated:YES];
             
-        }else if (indexPath.section == 3){
+        }else if (indexPath.section == 3) {
             BookModel *model1 = self.xianfengbookArray[indexPath.item];
             
             vc.bookid = model1.ID;
             [self.navigationController pushViewController:vc animated:YES];
             
-        }else if (indexPath.section == 4){
+        }else if (indexPath.section == 4) {
             BookModel *model1 = self.remenbookArray[indexPath.item];
             
             vc.bookid = model1.ID;
             [self.navigationController pushViewController:vc animated:YES];
-            
+        }else if (indexPath.section == 6) {
+            GetBookBjModel *model = self.booBJArray[indexPath.row];
+            CommentViewController *commentVC = [[CommentViewController alloc] init];
+            commentVC.commentId = model.bookId;
+            [self.navigationController pushViewController:commentVC animated:YES];
+
         }
     }
 }

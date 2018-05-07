@@ -38,6 +38,8 @@ typedef void(^TYMessageBlock)(NSString *contentStr);
     
     _namelab = [[UILabel alloc] init];
     _namelab.text = @"书名：";
+    _namelab.font = [UIFont systemFontOfSize:15];
+
     [self addSubview:_namelab];
     [_namelab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.mas_centerY);
@@ -71,6 +73,9 @@ typedef void(^TYMessageBlock)(NSString *contentStr);
 @property (nonatomic,strong) UIView *topView;
 @property (nonatomic,strong) TopMenuView *menuView;
 @property (nonatomic,strong)UIButton *selectBtn;
+@property (nonatomic,copy) NSString *bookStr;
+@property (nonatomic,copy) NSString *messageStr;
+@property (nonatomic,copy) NSString *isDaoDu;
 //@property (nonatomic,strong)MenuView *menuView;
 //@property (nonatomic,strong)MenuView *menuView2;
 @property (nonatomic,strong)NSMutableArray *menuarray;
@@ -109,20 +114,23 @@ typedef void(^TYMessageBlock)(NSString *contentStr);
         
         TYChooseView *leftView = [[TYChooseView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth/2.f, 50)];
         leftView.namelab.text = @"书名：";
+         __weak typeof(self) weakSelf = self;
         leftView.messageBlock = ^(NSString *contentStr) {
-            
+            weakSelf.bookStr = contentStr;
         };
         [_topView addSubview:leftView];
         
         TYChooseView *rightView = [[TYChooseView alloc] initWithFrame:CGRectMake(kScreenWidth/2.f, 0, kScreenWidth/2.f, 50)];
         rightView.namelab.text = @"作者：";
         rightView.messageBlock = ^(NSString *contentStr) {
-            
+            weakSelf.messageStr = contentStr;
         };
         [_topView addSubview:rightView];
         
         UILabel *daDuLab = [[UILabel alloc] init];
         daDuLab.text = @"有导读视频";
+        daDuLab.font = [UIFont systemFontOfSize:15];
+
         [_topView addSubview:daDuLab];
         [daDuLab mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(leftView.mas_bottom).offset(10);
@@ -132,6 +140,7 @@ typedef void(^TYMessageBlock)(NSString *contentStr);
         UIButton *tag_btn = [UIButton buttonWithType:UIButtonTypeCustom];
         [tag_btn setBackgroundImage:[UIImage imageNamed:@"ic_first_icon"] forState:UIControlStateNormal];
         [tag_btn setBackgroundImage:[UIImage imageNamed:@"ic_first_icon_"] forState:UIControlStateSelected];
+        [tag_btn addTarget:self action:@selector(isVedio:) forControlEvents:UIControlEventTouchUpInside];
         [_topView addSubview:tag_btn];
         [tag_btn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(daDuLab.mas_centerY);
@@ -144,6 +153,8 @@ typedef void(^TYMessageBlock)(NSString *contentStr);
         searchBtn.layer.masksToBounds = YES;
         searchBtn.backgroundColor = navigation_barColor(1);
         [searchBtn setTitle:@"搜索" forState:UIControlStateNormal];
+        searchBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+
         [searchBtn addTarget:self action:@selector(secrchClick) forControlEvents:UIControlEventTouchUpInside];
         [_topView addSubview:searchBtn];
         [searchBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -162,6 +173,7 @@ typedef void(^TYMessageBlock)(NSString *contentStr);
             UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
             btn.frame = CGRectMake(i*kScreenWidth/2.f, CGRectGetMaxY(lineLab.frame), kScreenWidth/2.f, 50);
             [btn setTitleColor:hexColor(323232) forState:UIControlStateNormal];
+            btn.titleLabel.font = [UIFont systemFontOfSize:15];
             if (i == 0) {
                 [btn setTitle:@"先锋推荐" forState:UIControlStateNormal];
             }else {
@@ -181,8 +193,18 @@ typedef void(^TYMessageBlock)(NSString *contentStr);
     }
     return _topView;
 }
+- (void)isVedio:(UIButton *)btn {
+    btn.selected=!btn.selected;
+    if(btn.isSelected) {
+        self.isDaoDu = @"1";
+    }else {
+        self.isDaoDu = @"0";
+    }
+}
 - (void)secrchClick {
     
+    [self GetBookList:self.quxianStr :self.gradeStr];
+
 }
 - (void)menuSelect:(UIButton *)btn {
     if (!self.menuView.isHidden) {
@@ -243,40 +265,6 @@ typedef void(^TYMessageBlock)(NSString *contentStr);
     }
     return _collectionView;
 }
-//-(MenuView *)menuView{
-//    if (!_menuView) {
-//
-//        __weak typeof (self) weakSelf = self;
-//        _menuView = [[MenuView alloc]initWithFrame:CGRectMake(0, 0+30, WidthFrame, 30*self.menuarray.count) cellarray:self.menuarray block:^(NSInteger index) {
-//            weakSelf.isShow1 = NO;
-//            weakSelf.quxianStr = weakSelf.strArray1[index];
-////            [self.shiBt setTitle:nil forState:UIControlStateNormal];
-////            [self.shiBt setTitle:self.menuarray[index] forState:UIControlStateNormal];
-//            [weakSelf GetBookList:weakSelf.quxianStr :weakSelf.gradeStr];
-//
-//        }];
-//        [self.collectionView addSubview:_menuView];
-//    }
-//    return _menuView;
-//}
-//-(MenuView *)menuView2{
-//    if (!_menuView2) {
-//
-//        __weak typeof (self) weakSelf = self;
-//        _menuView2 = [[MenuView alloc]initWithFrame:CGRectMake(0, 0+30, WidthFrame, 30*self.menuarray2.count) cellarray:self.menuarray2 block:^(NSInteger index) {
-//            weakSelf.isShow2 = NO;
-//
-//            weakSelf.gradeStr = weakSelf.strArray2[index];
-////            [self.gradeBt setTitle:nil forState:UIControlStateNormal];
-////            [self.gradeBt setTitle:self.menuarray2[index] forState:UIControlStateNormal];
-//
-//            [weakSelf GetBookList:weakSelf.quxianStr :weakSelf.gradeStr];
-//        }];
-//        [self.collectionView addSubview:_menuView2];
-//    }
-//    return _menuView2;
-//}
-
 
 -(NSMutableArray *)menuarray{
     if (!_menuarray) {
@@ -338,6 +326,7 @@ typedef void(^TYMessageBlock)(NSString *contentStr);
     [self.view addSubview:self.topView];
     [self.view addSubview:self.collectionView];
     
+    self.isDaoDu = @"0";
     self.page = 1;
     self.quxianStr = @"";
     self.gradeStr = @"";
@@ -404,7 +393,10 @@ typedef void(^TYMessageBlock)(NSString *contentStr);
         [self.gradeArray removeAllObjects];
         [self.menuarray2 removeAllObjects];
         [self.strArray2 removeAllObjects];
-        for (NSDictionary *dic in json[@"ret_data"]) {
+        NSMutableArray *arr = [json[@"ret_data"] mutableCopy];
+        NSDictionary *dataDic = @{@"BookTypeName":@"全部年级",@"Itemlist":@[],@"id":@"0"};
+        [arr insertObject:dataDic atIndex:0];
+        for (NSDictionary *dic in arr) {
             GetBookTypeModel *model = [GetBookTypeModel loadWithJSOn:dic];
 
             [self.gradeArray addObject:model];
@@ -415,9 +407,9 @@ typedef void(^TYMessageBlock)(NSString *contentStr);
 }
 //获取图书列表
 -(void)GetBookList :(NSString *)quxian :(NSString *)grade{
-    
+    self.page = 1;
     GetBookListRequst *requst = [[GetBookListRequst alloc]init];
-    [requst GetBookListRequstWithPageIndex:@"1" withPageSize:@"20" withchaperid:grade withauthor:@"" withkeyword:@"" withbooktype:@"0" withisdaodu:@"0" withistuijian:@"0" withishost:@"0" withquxian:quxian withxuexiao:@"" :^(NSDictionary *json) {
+    [requst GetBookListRequstWithPageIndex:@"1" withPageSize:@"20" withchaperid:grade withauthor:self.messageStr?:@"" withkeyword:self.bookStr?:@"" withbooktype:@"0" withisdaodu:self.isDaoDu withistuijian:@"0" withishost:@"0" withquxian:quxian withxuexiao:@"" :^(NSDictionary *json) {
         
         [self.bookArray removeAllObjects];
         for (NSDictionary *dic in json[@"ret_data"][@"pageInfo"]) {
@@ -435,7 +427,6 @@ typedef void(^TYMessageBlock)(NSString *contentStr);
     self.page +=1;
     GetBookListRequst *requst = [[GetBookListRequst alloc]init];
     [requst GetBookListRequstWithPageIndex:[NSString stringWithFormat:@"%ld",(long)self.page] withPageSize:@"20" withchaperid:grade withauthor:@"" withkeyword:@"" withbooktype:@"0" withisdaodu:@"0" withistuijian:@"0" withishost:@"0" withquxian:quxian withxuexiao:@"" :^(NSDictionary *json) {
-        
         
         for (NSDictionary *dic in json[@"ret_data"][@"pageInfo"]) {
             BookModel *model = [BookModel loadWithJSOn:dic];
