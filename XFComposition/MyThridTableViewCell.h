@@ -13,4 +13,6 @@
 @property (nonatomic,strong)UILabel *label;
 
 @property (nonatomic,strong)UILabel *label2;//小圆点
+
+@property (nonatomic,strong)UILabel *lineLabel;//线
 @end

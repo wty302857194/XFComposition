@@ -11,11 +11,11 @@
 
 
 
-#define itemHeigth  30 //cell 高度
+#define itemHeigth  60 //cell 高度
 @interface MenuView()<UITableViewDelegate,UITableViewDataSource>
 
 
-@property (nonatomic,strong)NSArray *itemsArray;
+
 @property (nonatomic,strong)NSMutableSet *choseSet;
 @end
 
@@ -54,11 +54,11 @@
     _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
     _tableView.delegate = self;
     _tableView.dataSource = self;
-    _tableView.scrollEnabled =NO;
-    _tableView.layer.borderWidth = 2;
-    _tableView.layer.borderColor = [[UIColor colorWithHexString:@"CED3D3"] CGColor];
-    _tableView.layer.cornerRadius = 4;
-    _tableView.layer.masksToBounds=YES;
+//    _tableView.scrollEnabled =NO;
+//    _tableView.layer.borderWidth = 2;
+//    _tableView.layer.borderColor = [[UIColor colorWithHexString:@"CED3D3"] CGColor];
+//    _tableView.layer.cornerRadius = 4;
+//    _tableView.layer.masksToBounds=YES;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     [self addSubview:_tableView];
@@ -70,13 +70,15 @@
     MenuTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     cell.label.text = self.itemsArray[indexPath.row];
     if ([self.choseSet containsObject:@(indexPath.row)]) {
-        cell.label.backgroundColor = [UIColor colorWithHexString:@"F19833"];
-        cell.label.textColor = [UIColor whiteColor];
+//        cell.label.backgroundColor = [UIColor colorWithHexString:@"F19833"];
+//        cell.label.textColor = [UIColor whiteColor];
         
     }else {
         cell.label.backgroundColor = [UIColor whiteColor];
         cell.label.textColor = [UIColor blackColor];
     }
+    cell.label.backgroundColor = [UIColor whiteColor];
+    cell.label.textColor = [UIColor blackColor];
 //    cell.textLabel.text = self.itemsArray[indexPath.row];
     
     return cell;

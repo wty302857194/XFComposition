@@ -24,6 +24,8 @@
 @property (nonatomic,strong)UITableView *tableView;
 @property (nonatomic,strong)NSArray *btTitleArray;
 @property (nonatomic,strong)UITextField *textfield;
+@property (nonatomic,strong)UIButton *originButton;
+@property (nonatomic,strong)MenuView *menuView;
 @property (nonatomic,strong)MenuView *menuView1;
 @property (nonatomic,strong)MenuView *menuView2;
 @property (nonatomic,strong)MenuView *menuView3;
@@ -50,6 +52,8 @@
 @property (nonatomic,strong)NSString *saveId;
 
 @property (nonatomic,strong)NSMutableArray *xuanzhongArray;
+
+@property (nonatomic,strong)NSMutableArray *buttons;
 @end
 
 @implementation MyWritingsViewController
@@ -64,7 +68,12 @@
     
 }
 -(void)creatHeadView{
-    self.textfield = [[UITextField alloc]initWithFrame:CGRectMake(20, 5+64, WidthFrame-155, 30)];
+    
+    UIView *searchView = [[UIView alloc] initWithFrame:CGRectMake(0, SafeAreaTopHeight, WidthFrame, 75)];
+    searchView.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:searchView];
+    
+    self.textfield = [[UITextField alloc]initWithFrame:CGRectMake(20, 15, WidthFrame-155, 45)];
     self.textfield.placeholder = @"作品名称";
     self.textfield.layer.cornerRadius = 6;
     self.textfield.layer.masksToBounds = YES;
@@ -74,46 +83,66 @@
     self.textfield.font = [UIFont systemFontOfSize:14];
     self.textfield.leftViewMode=UITextFieldViewModeAlways;
     [self.textfield setBorderStyle:UITextBorderStyleRoundedRect];
-    [self.view addSubview:self.textfield];
+    [searchView addSubview:self.textfield];
     
     UIButton *selectbt = [UIButton buttonWithType:UIButtonTypeCustom];
-    selectbt.frame = CGRectMake(CGRectGetMaxX(self.textfield.frame)+10, 5+64, 50, 30);
+    selectbt.frame = CGRectMake(CGRectGetMaxX(self.textfield.frame)+10, 15, 50, 45);
     [selectbt setTitle:@"搜索" forState:UIControlStateNormal];
     selectbt.titleLabel.font = [UIFont systemFontOfSize:16];
     [selectbt setBackgroundColor:[UIColor colorWithHexString:@"3691CE"]];
     selectbt.layer.cornerRadius =6;
     selectbt.layer.masksToBounds = YES;
-    [self.view addSubview:selectbt];
+    [searchView addSubview:selectbt];
     
     UIButton *shanchubt = [UIButton buttonWithType:UIButtonTypeCustom];
-    shanchubt.frame = CGRectMake(CGRectGetMaxX(selectbt.frame)+5, 5+64, 50, 30);
+    shanchubt.frame = CGRectMake(CGRectGetMaxX(selectbt.frame)+5, 15, 50, 45);
     [shanchubt setTitle:@"删除" forState:UIControlStateNormal];
     shanchubt.titleLabel.font = [UIFont systemFontOfSize:16];
-
     [shanchubt addTarget:self action:@selector(duoxuanshanchu) forControlEvents:UIControlEventTouchUpInside];
     [shanchubt setBackgroundColor:[UIColor colorWithHexString:@"E63E32"]];
     shanchubt.layer.cornerRadius =6;
     shanchubt.layer.masksToBounds = YES;
-    [self.view addSubview:shanchubt];
+    [searchView addSubview:shanchubt];
+    
+    
     NSArray *array = [[NSArray alloc]init];
     array = @[@"全部分类",@"习作状态",@"是否热点",@"是否推荐"];
+    //四个字的宽
+    CGSize sizeValue = [@"全部分类" boundingRectWithSize:CGSizeMake(WidthFrame, 30) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16]} context:nil].size;
     
     for (int i = 0; i<4; i++) {
         UIButton *bt = [UIButton buttonWithType:UIButtonTypeCustom];
-        bt.frame = CGRectMake(WidthFrame/4*i, CGRectGetMaxY(self.textfield.frame)+10, WidthFrame/4, 40);
+        bt.frame = CGRectMake(WidthFrame/4*i, CGRectGetMaxY(searchView.frame)+7, WidthFrame/4, 60);
+        bt.backgroundColor = [UIColor whiteColor];
         bt.tag = 1000+i;
         [bt setTitle:array[i] forState:UIControlStateNormal];
         [bt setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [bt setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
+        [bt setImage:[UIImage imageNamed:@"ic_open_down2"] forState:UIControlStateNormal];
+        [bt setImage:[UIImage imageNamed:@"ic_colse_down2"] forState:UIControlStateSelected];
+        
+        [bt setImageEdgeInsets:UIEdgeInsetsMake(0, sizeValue.width+16, 0, 0)];
+        [bt setTitleEdgeInsets:UIEdgeInsetsMake(0, -16-8, 0, 0)];
+        bt.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+        bt.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+        
         bt.titleLabel.font = [UIFont systemFontOfSize:16];
         [bt addTarget:self action:@selector(showMenu:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:bt];
+        
+        
+        UILabel *lineLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetWidth(bt.frame)-1, 5, 1, 30)];
+        lineLabel.backgroundColor = [UIColor colorWithHexString:@"d9d9d9"];
+        [bt addSubview:lineLabel];
+        
+        [self.buttons addObject:bt];
     }
     
 }
 
 -(UITableView *)tableView{
     if (!_tableView) {
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 64+80, WidthFrame, HeightFrame-64-80) style:UITableViewStyleGrouped];
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, SafeAreaTopHeight+150, WidthFrame, HeightFrame-64-80) style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -172,14 +201,75 @@
     }
     return _menuarray3;
 }
+-(MenuView *)menuView{
+    if (!_menuView) {
+        __weak typeof (self) weakSelf = self;
+        _menuView = [[MenuView alloc]initWithFrame:CGRectMake(0,SafeAreaTopHeight+150,WidthFrame,HeightFrame-SafeAreaTopHeight-150) cellarray:@[] block:^(NSInteger index) {
+            weakSelf.isShow1 = NO;
+            weakSelf.originButton.selected = NO;
+            self.page = 1;
+            switch (self.originButton.tag-1000) {
+                case 0:{
+                    if (index == 0) {
+                        self.gardeid = @"0";
+                    }else if (index == 1){
+                        self.gardeid = @"5";
+                    }else if (index == 2){
+                        self.gardeid = @"7";
+                    }else if (index == 3){
+                        self.gardeid = @"4";
+                    }
+                }
+                    break;
+                case 1:{
+                    if (index == 0) {
+                        self.typeid = @"-1";
+                    }else if (index == 1){
+                        self.typeid = @"0";
+                    }else if (index == 2){
+                        self.typeid = @"1";
+                    }
+                }
+                    break;
+                case 2:{
+                    if (index == 0) {
+                        self.ishost = @"-1";
+                    }else if (index == 1){
+                        self.ishost = @"0";
+                    }else if (index == 2){
+                        self.ishost = @"1";
+                    }
+                }
+                    break;
+                case 3:{
+                    if (index == 0) {
+                        self.istuijian = @"-1";
+                    }else if (index == 1){
+                        self.istuijian = @"0";
+                    }else if (index == 2){
+                        self.istuijian = @"1";
+                    }
+                }
+                    break;
+                    
+                default:
+                    break;
+            }
+            [weakSelf requst:self.typeid :self.gardeid :self.ishost :self.istuijian];
+            
+        }];
+        
+        [self.view addSubview:_menuView];
+    }
+    return _menuView;
+}
+
 -(MenuView *)menuView1{
     if (_menuView1) {
         return _menuView1;
     }
-    
-    
     __weak typeof (self) weakSelf = self;
-    _menuView1 = [[MenuView alloc]initWithFrame:CGRectMake(5,64+80,WidthFrame/4-10,30*self.menuarray1.count) cellarray:self.menuarray1 block:^(NSInteger index) {
+    _menuView1 = [[MenuView alloc]initWithFrame:CGRectMake(5,64+80,WidthFrame,HeightFrame-64-150) cellarray:self.menuarray1 block:^(NSInteger index) {
         weakSelf.isShow1 = NO;
         self.page = 1;
         if (index == 0) {
@@ -269,10 +359,16 @@
     }
     return _xuanzhongArray;
 }
+-(NSMutableArray *)buttons{
+    if (!_buttons) {
+        _buttons = [NSMutableArray array];
+    }
+    return _buttons;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"我的习作";
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = UIColorFromRGBA(227, 240, 248, 1);
     self.page = 1;
     self.typeid = @"-1";
     self.gardeid = @"0";
@@ -358,7 +454,6 @@
 #pragma header高度
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    
     return 0.01;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
@@ -397,6 +492,44 @@
 }
 
 -(void)showMenu :(UIButton *)bt{
+    NSArray *bigArr = @[@[@"全部分类",@"微课习作",@"活动习作",@"独立习作"],@[@"习作状态",@"可编辑",@"不可编辑"],@[@"是否热点",@"非热点",@"热点"],@[@"是否推荐",@"非推荐",@"推荐"]];
+    NSArray *smallArr = [bigArr objectAtIndex:bt.tag-1000];
+    
+    bt.selected = !bt.selected;
+    if (bt == self.originButton) {
+        if (bt.selected) {
+            [self.menuView showView];
+        }else{
+            [self.menuView dismissView];
+        }
+    }else{
+        _originButton.selected = NO;
+        if (bt.selected) {
+            [self.menuView showView];
+        }else{
+            [self.menuView dismissView];
+        }
+        _originButton = bt;
+        
+        self.menuView.itemsArray = smallArr;
+        [self.menuView.tableView reloadData];
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    return;
+    
+    
+    
+    
     
     if (bt.tag == 1000) {
         self.menuarray1 = @[@"全部分类",@"微课习作",@"活动习作",@"独立习作"];
@@ -439,6 +572,12 @@
         
     }
 
+}
+-(void)hiddenAllMenuView{
+    [self.menuView1 dismissView];
+    [self.menuView2 dismissView];
+    [self.menuView3 dismissView];
+    [self.menuView4 dismissView];
 }
 //多删
 -(void)duoxuanshanchu{

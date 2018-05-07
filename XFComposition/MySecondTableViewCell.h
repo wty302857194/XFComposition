@@ -11,4 +11,7 @@
 @interface MySecondTableViewCell : UITableViewCell
 @property (nonatomic,strong)UILabel *integralLabel;
 @property (nonatomic,strong)UILabel *coinLabel;
+@property (nonatomic,strong)UILabel *lineLabel;
+@property (nonatomic,strong)UILabel *VlineLabel;
+
 @end

@@ -78,6 +78,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
    
+    self.extendedLayoutIncludesOpaqueBars = YES;
+    if (@available(iOS 11.0, *)) {
+        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    } else {
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
+    
     self.navigationItem.title = @"我的";
     self.navigationController.delegate = self;
     [self.navigationController setNavigationBarHidden:YES animated:YES];
@@ -109,9 +116,10 @@
 }
 -(UITableView *)tableView{
     if (!_tableView) {
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, WidthFrame, HeightFrame)];
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, WidthFrame, HeightFrame-SafeAreaTopHeight)];
         _tableView.delegate = self;
         _tableView.dataSource = self;
+        _tableView.separatorStyle =UITableViewCellSeparatorStyleNone;
         [_tableView registerClass:[MyFristTableViewCell class] forCellReuseIdentifier:@"cellFrist"];
         [_tableView registerClass:[MySecondTableViewCell class] forCellReuseIdentifier:@"cellSecond"];
         [_tableView registerClass:[MyThridTableViewCell class] forCellReuseIdentifier:@"cellThrid"];
@@ -163,9 +171,7 @@
         cell.label.text = self.userInfo.userName;
         NSString *str = [NSString stringWithFormat:@"%@%@",HTurl,self.userInfo.userFace];
         [cell.photoImageView sd_setImageWithURL:[NSURL URLWithString:str]];
-
-        
-//        NSLog(@"图片%@",self.userInfo.userName);
+        [cell.label setSingleLineAutoResizeWithMaxWidth:0];
         return cell;
     }else if (indexPath.section == 1){
         MySecondTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellSecond" forIndexPath:indexPath];
@@ -216,11 +222,11 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
-        return 120;
+        return 200;
     }else if (indexPath.section == 1){
-        return 40;
+        return 90;
     }else if (indexPath.section == 2){
-        return 45;
+        return 70;
     }else {
         return 50;
     }

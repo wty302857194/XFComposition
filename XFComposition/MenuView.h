@@ -11,6 +11,7 @@
 typedef void (^menuBlock)(NSInteger);
 
 @interface MenuView : UIView
+@property (nonatomic,strong)NSArray *itemsArray;
 @property(nonatomic,copy)menuBlock myblock;
 @property (nonatomic,strong)UITableView *tableView;
 
