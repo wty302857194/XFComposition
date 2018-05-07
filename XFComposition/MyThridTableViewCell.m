@@ -19,7 +19,8 @@
         self.imgView = [[UIImageView alloc]initWithFrame:CGRectMake(20, 5, 30, 30)];
         self.label = [[UILabel alloc]init];
         self.label2 = [[UILabel alloc]init];
-        [self.contentView sd_addSubviews:@[self.imgView,self.label,self.label2]];
+        self.lineLabel = [[UILabel alloc] init];
+        [self.contentView sd_addSubviews:@[self.imgView,self.label,self.label2,self.lineLabel]];
         
         
         
@@ -37,9 +38,17 @@
         [self.label2 setFont:[UIFont fontWithName:@"Helvetica-Bold" size:11]];//加粗
         
         
-        UIImageView *img2 = [[UIImageView alloc]initWithFrame:CGRectMake(WidthFrame-20-10, 5 , 20, 30)];;
-        img2.image = [UIImage imageNamed:@"right-arrow-"];
+        UIImageView *img2 = [[UIImageView alloc]init];
         [self.contentView addSubview:img2];
+        img2.sd_layout.centerYEqualToView(self.label).rightSpaceToView(self.contentView, 20).widthIs(22).heightIs(22);
+        img2.image = [UIImage imageNamed:@"right-arrow-"];
+        
+        
+        
+        self.lineLabel.sd_layout.bottomSpaceToView(self.contentView, 1).leftSpaceToView(self.contentView, 0).rightSpaceToView(self.contentView, 0).heightIs(1);
+        self.lineLabel.backgroundColor = UIColorFromRGB(0xd9d9d9);
+        
+        
         
     }
     return self;

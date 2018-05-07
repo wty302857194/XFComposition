@@ -13,21 +13,21 @@
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         UIImageView *imgView1 = [[UIImageView alloc]init];
         imgView1.image = [UIImage imageNamed:@"icon_jifen"];
-        imgView1.size = CGSizeMake(15, 15);
-        imgView1.center = CGPointMake(WidthFrame/4, 12.5);
+        imgView1.size = CGSizeMake(30, 30);
+        imgView1.center = CGPointMake(WidthFrame/4, 30);
 //        imgView1.backgroundColor = [UIColor blueColor];
         [self.contentView addSubview:imgView1];
         
         UIImageView *imgView2 = [[UIImageView alloc]init];
         imgView2.image = [UIImage imageNamed:@"icon_xianfengbi"];
-        imgView2.size = CGSizeMake(15, 15);
+        imgView2.size = CGSizeMake(30, 30);
 //        imgView2.backgroundColor = [UIColor blueColor];
-        imgView2.center = CGPointMake(WidthFrame/4*3, 12.5);
+        imgView2.center = CGPointMake(WidthFrame/4*3, 30);
         [self.contentView addSubview:imgView2];
         
         self.integralLabel = [[UILabel alloc]init];
         self.integralLabel.size = CGSizeMake(WidthFrame/2, 15);
-        self.integralLabel.center = CGPointMake(WidthFrame/4, 27.5);
+        self.integralLabel.center = CGPointMake(WidthFrame/4, 57);
         self.integralLabel.text = @"积分：10";
         self.integralLabel.font = [UIFont systemFontOfSize:10];
         self.integralLabel.textAlignment = NSTextAlignmentCenter;
@@ -35,11 +35,25 @@
         
         self.coinLabel = [[UILabel alloc]init];
         self.coinLabel.size = CGSizeMake(WidthFrame/2, 15);
-        self.coinLabel.center = CGPointMake(WidthFrame/4*3, 27.5);
+        self.coinLabel.center = CGPointMake(WidthFrame/4*3, 57);
         self.coinLabel.text = @"先锋币：15";
         self.coinLabel.font = [UIFont systemFontOfSize:10];
         self.coinLabel.textAlignment = NSTextAlignmentCenter;
         [self.contentView addSubview:self.coinLabel];
+        
+        if (!self.lineLabel) {
+            self.lineLabel = [[UILabel alloc] init];
+            [self.contentView addSubview:self.lineLabel];
+        }
+        self.lineLabel.sd_layout.bottomSpaceToView(self.contentView, 1).leftSpaceToView(self.contentView, 0).rightSpaceToView(self.contentView, 0).heightIs(1);
+        self.lineLabel.backgroundColor = UIColorFromRGB(0xd9d9d9);
+        
+        if (!self.VlineLabel) {
+            self.VlineLabel = [[UILabel alloc] init];
+            [self.contentView addSubview:self.VlineLabel];
+        }
+    self.VlineLabel.sd_layout.centerXEqualToView(self.contentView).centerYEqualToView(self.contentView).heightIs(75).widthIs(1);
+        self.VlineLabel.backgroundColor = UIColorFromRGB(0xd9d9d9);
         
     }
     return self;

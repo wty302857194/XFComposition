@@ -21,17 +21,16 @@
 //        _label = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(self.frame)+2, CGRectGetMaxY(self.frame)+2, WidthFrame/5-5, 25)];
         _label = [[UILabel alloc]init];
         [self.contentView addSubview:_label];
-        _label.sd_layout.leftSpaceToView(self.contentView, 3).topSpaceToView(self.contentView, 3).rightSpaceToView(self.contentView, 3).bottomSpaceToView(self.contentView, 3);
+        _label.sd_layout.leftSpaceToView(self.contentView, 15).topSpaceToView(self.contentView, 3).rightSpaceToView(self.contentView, 15).bottomSpaceToView(self.contentView, 3);
         _label.font = [UIFont systemFontOfSize:12];
-        _label.textAlignment = NSTextAlignmentCenter;
+        _label.textAlignment = NSTextAlignmentLeft;
         _label.layer.cornerRadius = 4;
         _label.layer.masksToBounds = YES;
         
-//        [self.contentView addSubview:self.label];
         
         UILabel *lineLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(_label.frame)+1, WidthFrame, 1)];
         lineLabel.backgroundColor = [UIColor lightGrayColor];
-//        [self.contentView addSubview:lineLabel];
+        [self.contentView addSubview:lineLabel];
     }
     return self;
 }

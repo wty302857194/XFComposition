@@ -37,7 +37,7 @@
 
 - (UITableView *)tableView{
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame: CGRectMake(0, 0, WidthFrame, HeightFrame) style:UITableViewStyleGrouped];
+        _tableView = [[UITableView alloc] initWithFrame: CGRectMake(0, 0, WidthFrame, HeightFrame) style:UITableViewStylePlain];
         _tableView.backgroundColor = [UIColor whiteColor];
         _tableView.delegate = self;
         _tableView.dataSource = self;
@@ -58,7 +58,7 @@
 -(NSArray *)titleArray2{
     if (!_titleArray2) {
         _titleArray2 = [NSArray array];
-        _titleArray2 = @[@"未读消息",@"我的积分",@"我的先锋币",@"实名认证",@"密码修改"];
+        _titleArray2 = @[@"未读消息",@"我的积分",@"我的先锋币",@"完善个人信息",@"密码修改"];
     }
     return _titleArray2;
 }
