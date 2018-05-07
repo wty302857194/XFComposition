@@ -10,7 +10,14 @@
 typedef void (^XFResponseBlock)(NSString* requestName, id responseData , BOOL isSuccess);
 
 #define XFReq_User_getMessageDetail    @"消息详情"
+#define XFReq_User_MessageList         @"消息列表"
+
 #define XFReq_User_messageLook         @"消息已读"
+#define XFReq_User_UpdataMe            @"移到垃圾箱"
+#define XFReq_User_DeleteMe            @"彻底删除"
+#define XFReq_User_AddMessage          @"发送消息"
+#define XFReq_User_GetUserList         @"获得收件人列表"
+
 
 
 @interface XFRequestManager : NSObject
@@ -26,6 +33,12 @@ typedef void (^XFResponseBlock)(NSString* requestName, id responseData , BOOL is
 // 我的消息
 -(void)XFRequstGetMessageList:(NSString *)PageIndex withPageSize :(NSString *)PageSize withtype :(NSString *)type withflag :(NSString *)flag withuserid :(NSString *)userid :(XFResponseBlock)block;
 
+// 移到垃圾箱
+-(void)XFRequstsetMessageUpdataMe:(NSString*)MsgId userid:(NSString*)userid :(XFResponseBlock)block;
+// 彻底删除
+-(void)XFRequstsetMessageDeleteMe:(NSString*)MsgId userid:(NSString*)userid :(XFResponseBlock)block;
+// 获得收件人列表
+-(void)XFRequstGetUserList:(NSString*)ParentId userid:(NSString*)userid EnName:(NSString*)EnName seachName:(NSString*)seachName :(XFResponseBlock)block;
 +(NSString*)encodedParams:(NSDictionary*)params;
 
 @end

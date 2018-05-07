@@ -47,7 +47,7 @@ static XFRequestManager *instance = nil;
                                  @"userid":userid,
                                  @"MsgId":MsgId,
                                  };
-    [self printUrl:_requestName parameters:parameters];
+    [self printUrl:XFReq_User_getMessageDetail parameters:parameters];
     [xfrequst requestWithURLString:APIurl parameters:parameters type:NetworkRequestTypePost imgData:nil resultBlock:^(id responseObject, NSError *error, NSURLSessionDataTask *task) {
         
         if ([responseObject[@"ret_code"] integerValue] == 0) {
@@ -74,17 +74,18 @@ static XFRequestManager *instance = nil;
                                  @"userid":userid,
                                  @"MsgId":MsgId,
                                  };
-    [self printUrl:_requestName parameters:parameters];
+    [self printUrl:XFReq_User_messageLook parameters:parameters];
     [xfrequst requestWithURLString:APIurl parameters:parameters type:NetworkRequestTypePost imgData:nil resultBlock:^(id responseObject, NSError *error, NSURLSessionDataTask *task) {
-        
+        NSLog(@"%@%@",XFReq_User_messageLook,responseObject);
+
         if ([responseObject[@"ret_code"] integerValue] == 0) {
             NSString *msg = responseObject[@"ret_msg"];
 
-            block(XFReq_User_getMessageDetail, msg ,YES);
+            block(XFReq_User_messageLook, msg ,YES);
         }else{
             
             NSString *msg = responseObject[@"ret_msg"];
-            block(XFReq_User_getMessageDetail, msg,NO);
+            block(XFReq_User_messageLook, msg,NO);
         }
         
         
@@ -111,16 +112,96 @@ static XFRequestManager *instance = nil;
         if ([responseObject[@"ret_code"] integerValue] == 0) {
 
             NSMutableArray * array =  [FMBean objectsWithArray:responseObject[@"ret_data"][@"pageInfo"] classType:[GetMessageListModel class]];
-            block(XFReq_User_getMessageDetail, array ,YES);
+            block(XFReq_User_MessageList, array ,YES);
         }else{
             
             NSString *msg = responseObject[@"ret_msg"];
-            block(XFReq_User_getMessageDetail, msg,NO);
+            block(XFReq_User_MessageList, msg,NO);
         }
         
         
     }];
     
+    
+}
+-(void)XFRequstGetUserList:(NSString*)ParentId userid:(NSString*)userid EnName:(NSString*)EnName seachName:(NSString*)seachName :(XFResponseBlock)block{
+    
+    
+    NSDictionary *parameters = @{@"Action":@"GetUserList",
+                                 @"Token":@"0A66A4FD-146F-4542-8D7B-33CDEC2981F9",
+                                 @"ParentId":ParentId,
+                                 @"EnName":EnName,
+                                 @"seachName":seachName,
+                                 @"userid":userid
+                                 };
+    
+    
+    [xfrequst requestWithURLString:APIurl parameters:parameters type:NetworkRequestTypePost imgData:nil resultBlock:^(id responseObject, NSError *error, NSURLSessionDataTask *task) {
+        NSLog(@"%@%@",XFReq_User_GetUserList,responseObject);
+
+        if ([responseObject[@"ret_code"] integerValue] == 0) {
+            
+            NSMutableArray * array =  [FMBean objectsWithArray:responseObject[@"ret_data"][@"pageInfo"] classType:[GetMessageListModel class]];
+            block(XFReq_User_GetUserList, array ,YES);
+        }else{
+            
+            NSString *msg = responseObject[@"ret_msg"];
+            block(XFReq_User_GetUserList, msg,NO);
+        }
+        
+    }];
+    
+}
+-(void)XFRequstsetMessageUpdataMe:(NSString *)MsgId userid:(NSString *)userid :(XFResponseBlock)block{
+    NSDictionary *parameters = @{@"Action":@"UpdataMe",
+                                 @"Token":@"0A66A4FD-146F-4542-8D7B-33CDEC2981F9",
+                                 @"MsgId":MsgId,
+                                 @"userid":userid
+                                 };
+    
+    
+    [xfrequst requestWithURLString:APIurl parameters:parameters type:NetworkRequestTypePost imgData:nil resultBlock:^(id responseObject, NSError *error, NSURLSessionDataTask *task) {
+        
+        NSLog(@"%@%@",XFReq_User_UpdataMe,responseObject);
+
+        if ([responseObject[@"ret_code"] integerValue] == 0) {
+            NSString *msg = responseObject[@"ret_msg"];
+
+            block(XFReq_User_UpdataMe, msg ,YES);
+        }else{
+            
+            NSString *msg = responseObject[@"ret_msg"];
+            block(XFReq_User_UpdataMe, msg,NO);
+        }
+        
+    }];
+    
+}
+-(void)XFRequstsetMessageDeleteMe:(NSString *)MsgId userid:(NSString *)userid :(XFResponseBlock)block{
+    
+    NSDictionary *parameters = @{@"Action":@"DeleteMe",
+                                 @"Token":@"0A66A4FD-146F-4542-8D7B-33CDEC2981F9",
+                                 @"MsgId":MsgId,
+                                 @"userid":userid
+                                 };
+    
+    
+    [xfrequst requestWithURLString:APIurl parameters:parameters type:NetworkRequestTypePost imgData:nil resultBlock:^(id responseObject, NSError *error, NSURLSessionDataTask *task) {
+        
+        NSLog(@"%@%@",XFReq_User_DeleteMe,responseObject);
+
+        if ([responseObject[@"ret_code"] integerValue] == 0) {
+            
+            NSString *msg = responseObject[@"ret_msg"];
+            
+            block(XFReq_User_DeleteMe, msg ,YES);
+        }else{
+            
+            NSString *msg = responseObject[@"ret_msg"];
+            block(XFReq_User_DeleteMe, msg,NO);
+        }
+        
+    }];
     
 }
 -(void)printUrl:(NSString*)requstName parameters:(NSDictionary*)parameters{

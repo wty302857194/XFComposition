@@ -75,6 +75,9 @@
 		3FA5D978209FE42A0029E276 /* PerCenterViewController1.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA5D976209FE42A0029E276 /* PerCenterViewController1.m */; };
 		3FA5D979209FE42A0029E276 /* PerCenterViewController1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FA5D977209FE42A0029E276 /* PerCenterViewController1.xib */; };
 		3FA5D981209FEB070029E276 /* GetMessageListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA5D97F209FEB050029E276 /* GetMessageListModel.m */; };
+		3FA5D98620A02F060029E276 /* SendMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA5D98420A02F060029E276 /* SendMessageViewController.m */; };
+		3FA5D98720A02F060029E276 /* SendMessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FA5D98520A02F060029E276 /* SendMessageViewController.xib */; };
+		3FA5D98B20A031460029E276 /* PlaceholderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA5D98A20A031460029E276 /* PlaceholderTextView.m */; };
 		4ABBA26F2080DBF60002E08D /* RegistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ABBA26D2080DBF60002E08D /* RegistViewController.m */; };
 		4ABBA2702080DBF60002E08D /* RegistViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4ABBA26E2080DBF60002E08D /* RegistViewController.xib */; };
 		4ABBA2732080E0150002E08D /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ABBA2722080E0150002E08D /* BaseViewController.m */; };
@@ -221,7 +224,6 @@
 		F62A25971F73ACF3004E095D /* RingdetailHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = F62A25961F73ACF3004E095D /* RingdetailHeadView.m */; };
 		F62DC71C1F9F132200D3E035 /* ICSDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = F62DC7191F9F132200D3E035 /* ICSDrawerController.m */; };
 		F62DC71D1F9F132200D3E035 /* ICSDropShadowView.m in Sources */ = {isa = PBXBuildFile; fileRef = F62DC71B1F9F132200D3E035 /* ICSDropShadowView.m */; };
-		F62DC7201F9F14B600D3E035 /* PerCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F62DC71F1F9F14B600D3E035 /* PerCenterViewController.m */; };
 		F62DC7231F9F160D00D3E035 /* PerLeftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F62DC7221F9F160D00D3E035 /* PerLeftViewController.m */; };
 		F62DC7281F9F1CF500D3E035 /* PerLeftFristCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F62DC7271F9F1CF500D3E035 /* PerLeftFristCell.m */; };
 		F62DC72B1F9F1D3C00D3E035 /* PerLeftSecondCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F62DC72A1F9F1D3C00D3E035 /* PerLeftSecondCell.m */; };
@@ -745,6 +747,11 @@
 		3FA5D97B209FE9C50029E276 /* AllBean.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AllBean.h; sourceTree = "<group>"; };
 		3FA5D97F209FEB050029E276 /* GetMessageListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetMessageListModel.m; sourceTree = "<group>"; };
 		3FA5D982209FEF760029E276 /* GetMessageListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetMessageListModel.h; sourceTree = "<group>"; };
+		3FA5D98320A02F060029E276 /* SendMessageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SendMessageViewController.h; sourceTree = "<group>"; };
+		3FA5D98420A02F060029E276 /* SendMessageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SendMessageViewController.m; sourceTree = "<group>"; };
+		3FA5D98520A02F060029E276 /* SendMessageViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendMessageViewController.xib; sourceTree = "<group>"; };
+		3FA5D98920A031460029E276 /* PlaceholderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaceholderTextView.h; sourceTree = "<group>"; };
+		3FA5D98A20A031460029E276 /* PlaceholderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaceholderTextView.m; sourceTree = "<group>"; };
 		4ABBA26C2080DBF60002E08D /* RegistViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegistViewController.h; sourceTree = "<group>"; };
 		4ABBA26D2080DBF60002E08D /* RegistViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RegistViewController.m; sourceTree = "<group>"; };
 		4ABBA26E2080DBF60002E08D /* RegistViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegistViewController.xib; sourceTree = "<group>"; };
@@ -1059,8 +1066,6 @@
 		F62DC7191F9F132200D3E035 /* ICSDrawerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICSDrawerController.m; sourceTree = "<group>"; };
 		F62DC71A1F9F132200D3E035 /* ICSDropShadowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICSDropShadowView.h; sourceTree = "<group>"; };
 		F62DC71B1F9F132200D3E035 /* ICSDropShadowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICSDropShadowView.m; sourceTree = "<group>"; };
-		F62DC71E1F9F14B600D3E035 /* PerCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PerCenterViewController.h; sourceTree = "<group>"; };
-		F62DC71F1F9F14B600D3E035 /* PerCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PerCenterViewController.m; sourceTree = "<group>"; };
 		F62DC7211F9F160D00D3E035 /* PerLeftViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PerLeftViewController.h; sourceTree = "<group>"; };
 		F62DC7221F9F160D00D3E035 /* PerLeftViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PerLeftViewController.m; sourceTree = "<group>"; };
 		F62DC7261F9F1CF500D3E035 /* PerLeftFristCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PerLeftFristCell.h; sourceTree = "<group>"; };
@@ -2001,6 +2006,15 @@
 			name = data;
 			sourceTree = "<group>";
 		};
+		3FA5D98820A031460029E276 /* PlaceholderTextView */ = {
+			isa = PBXGroup;
+			children = (
+				3FA5D98920A031460029E276 /* PlaceholderTextView.h */,
+				3FA5D98A20A031460029E276 /* PlaceholderTextView.m */,
+			);
+			path = PlaceholderTextView;
+			sourceTree = "<group>";
+		};
 		4ABBA2792080E6120002E08D /* LCCategory */ = {
 			isa = PBXGroup;
 			children = (
@@ -2411,6 +2425,7 @@
 		F612EC041F4FBA83000E7432 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				3FA5D98820A031460029E276 /* PlaceholderTextView */,
 				32CBFA8220883C57004CB00F /* utilities */,
 				3F3D5778209C371100D415AC /* ActionSheet */,
 				587AA2B3206A10650034B766 /* Lib */,
@@ -2749,11 +2764,12 @@
 				F6A717521FA01E3A0046C235 /* PersonalViewController.m */,
 				F6A717551FA020C90046C235 /* V */,
 				F6A717541FA020C20046C235 /* M */,
-				F62DC71E1F9F14B600D3E035 /* PerCenterViewController.h */,
-				F62DC71F1F9F14B600D3E035 /* PerCenterViewController.m */,
 				3FA5D975209FE42A0029E276 /* PerCenterViewController1.h */,
 				3FA5D976209FE42A0029E276 /* PerCenterViewController1.m */,
 				3FA5D977209FE42A0029E276 /* PerCenterViewController1.xib */,
+				3FA5D98320A02F060029E276 /* SendMessageViewController.h */,
+				3FA5D98420A02F060029E276 /* SendMessageViewController.m */,
+				3FA5D98520A02F060029E276 /* SendMessageViewController.xib */,
 				F62DC72D1F9F2EA200D3E035 /* V */,
 				F62DC72C1F9F2E9C00D3E035 /* M */,
 				F62DC7211F9F160D00D3E035 /* PerLeftViewController.h */,
@@ -4708,6 +4724,7 @@
 				32F7E75B209341470016C1A6 /* VolunteerActiveiTableViewCell.xib in Resources */,
 				32A7A0F2209ADD5900C19895 /* TYOnlyActivetyTableViewCell.xib in Resources */,
 				32B38F52208880B000616A7B /* LeftDetailViewController.xib in Resources */,
+				3FA5D98720A02F060029E276 /* SendMessageViewController.xib in Resources */,
 				F6B130D41F607E9200994571 /* Mic01.png in Resources */,
 				4ABBA2702080DBF60002E08D /* RegistViewController.xib in Resources */,
 				322B15822088D3A5009FCC96 /* UpCompositionTableViewCell.xib in Resources */,
@@ -4893,6 +4910,7 @@
 				F62DC71D1F9F132200D3E035 /* ICSDropShadowView.m in Sources */,
 				F6C091791F89C63100F89A9B /* ReadnotesViewController.m in Sources */,
 				F6A717671FA065A50046C235 /* RealnameViewController.m in Sources */,
+				3FA5D98620A02F060029E276 /* SendMessageViewController.m in Sources */,
 				F6A717721FA082050046C235 /* RealnameThridCell.m in Sources */,
 				F6CFB3C91F7644EA00ADED2F /* ParagraphAttributes.m in Sources */,
 				F6D42FA31FB2E62000410A08 /* CompositMenuView.m in Sources */,
@@ -5113,6 +5131,7 @@
 				F6C0917E1F89C8B200F89A9B /* ReadnotesCell.m in Sources */,
 				F6502D8F1F53F57B0078ADD9 /* HomePageReadTableViewCell.m in Sources */,
 				F623E2BF1F8727510024876A /* GetBlogContentInfoRequst.m in Sources */,
+				3FA5D98B20A031460029E276 /* PlaceholderTextView.m in Sources */,
 				F62A25971F73ACF3004E095D /* RingdetailHeadView.m in Sources */,
 				F6DC7CC81F91C25B0050D1DF /* BookRankViewController.m in Sources */,
 				F6FFD40F1F90E8CD0029B762 /* CommentFrsitCell.m in Sources */,
@@ -5214,7 +5233,6 @@
 				F6B3C0EA1F5DA43D00C0D821 /* MJRefreshHeader.m in Sources */,
 				F6D637CA1F7D284900FF6FA4 /* IQUIScrollView+Additions.m in Sources */,
 				323738162092BFA700015514 /* TYTableView.m in Sources */,
-				F62DC7201F9F14B600D3E035 /* PerCenterViewController.m in Sources */,
 				F648B8211F8629420050D729 /* CustomDatePicker.m in Sources */,
 				04A07A271F6B62070026DD6E /* NSObject+MJClass.m in Sources */,
 				F6F68CC41F98DC56002B3BA2 /* AFURLSessionManager.m in Sources */,

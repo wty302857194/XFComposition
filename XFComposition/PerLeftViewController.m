@@ -11,11 +11,18 @@
 #import "PerLeftSecondCell.h"
 #import "PerCenterViewController1.h"
 
-
+#import <CoreText/CoreText.h>
+#import "SendMessageViewController.h"
 #import "GetMessageListRequst.h"
 #import "GetMessageListModel.h"
 #import "GetMessageWaitNumRequst.h"
 @interface PerLeftViewController ()<UITableViewDataSource,UITableViewDelegate>
+{
+    
+    NSString * navStr;
+    NSString * navStr2;
+    
+}
 @property (nonatomic,strong) UITableView *tabelView;
 @property (nonatomic,strong)NSArray *array1;
 @property (nonatomic,strong)NSArray *array2;
@@ -24,8 +31,8 @@
 @property (nonatomic,strong)NSArray *colorArray;
 @property (nonatomic,strong)NSArray *imageArray;
 @property (nonatomic,strong) XFUserInfo *xf;
-@property (nonatomic,strong)NSString *str1;
-@property (nonatomic,strong)NSString *str2;
+@property (nonatomic,strong)NSString *typeStr;
+@property (nonatomic,strong)NSString *flagStr;
 @property (nonatomic,strong)NSMutableArray *array;
 @property (nonatomic,assign)NSInteger msg;
 
@@ -103,7 +110,7 @@
     __weak typeof (self) weakSelf = self;
     
     GetMessageListRequst *requst = [[GetMessageListRequst alloc]init];
-    [requst GetMessageListRequstwithPageIndex:@"1" withPageSize:@"20" withtype:self.str1 withflag:self.str2 withuserid:self.xf.Loginid :^(NSDictionary *json) {
+    [requst GetMessageListRequstwithPageIndex:@"1" withPageSize:@"20" withtype:self.typeStr withflag:self.flagStr withuserid:self.xf.Loginid :^(NSDictionary *json) {
         [weakSelf.array removeAllObjects];
         for (NSDictionary *dic in json[@"ret_data"][@"pageInfo"]) {
             GetMessageListModel *model = [[GetMessageListModel alloc] initWithDictionary:dic];
@@ -128,8 +135,10 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.tabelView];
     self.xf = [XFUserInfo getUserInfo];
-    self.str1 = @"0";
-    self.str2 = @"0";
+    self.typeStr = @"0";
+    self.flagStr = @"1";
+    navStr2 = @"全部消息";
+    navStr = @"收信箱";
     [self GetMessagelist];
     [self GetMessageWait];
 }
@@ -198,30 +207,61 @@
     
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-            self.str2 = @"1";
+            self.flagStr = @"1";
         }else if (indexPath.row == 2){
-            self.str2 = @"2";
+            self.flagStr = @"2";
         }else if (indexPath.row == 3){
-            self.str2 = @"3";
+            self.flagStr = @"3";
         }else if (indexPath.row == 4){
-            self.str2 = @"4";
+            self.flagStr = @"4";
+        }else if (indexPath.row == 1){
+            
+            SendMessageViewController *vc = [[SendMessageViewController alloc]init];
+            [self.navigationController pushViewController:vc animated:YES];
         }
-        
+        navStr = _array1[indexPath.row];
     }else if (indexPath.section == 1){
-        self.str1 = self.typeArray[indexPath.row];
+        self.typeStr = self.typeArray[indexPath.row];
+        navStr2 = _array2 [indexPath.row];
     }
-    
-    [self GetMessagelist];
+    if (indexPath.section == 0&&indexPath.row == 1) {
+        return;
+    }
     [self.drawer reloadCenterViewControllerUsingBlock:^{
         
         //执行点击事件，如果传值可以将plainViewController作成单例传值
         
         PerCenterViewController1 *plainVC = [PerCenterViewController1 defaultPlainViewController];
 //        plainVC.messgeArray = self.array;
-        plainVC.flagStr = self.str2;
-         plainVC.typeStr = self.str1;
+        NSMutableAttributedString * noteStr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"%@(%@)",navStr,navStr2]];
+        NSRange range = [[NSString stringWithFormat:@"%@(%@)",navStr,navStr2] rangeOfString:[NSString stringWithFormat:@"(%@)",navStr2]];
+        
+        [noteStr addAttribute:(NSString *)kCTFontAttributeName
+                        value:(id)CFBridgingRelease(CTFontCreateWithName((CFStringRef)[UIFont systemFontOfSize:12].fontName,
+                                                                         [UIFont systemFontOfSize:12].pointSize,
+                                                                         NULL))
+                        range:range];
+        
+        UIView * view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 300 , 44)];
+        UILabel * label = [[UILabel alloc]initWithFrame:view.frame];
+        label.font = [UIFont systemFontOfSize:16];
+        label.textColor = [UIColor whiteColor];
+        label.textAlignment = NSTextAlignmentCenter;
+        label.attributedText = noteStr;
+        [view addSubview:label];
+        view.frame = CGRectMake((kScreenWidth-300)/2, 20, 300, 44);
+        
+        //坐标系转换到titleview
+        
+        view.frame = [self.view.window convertRect:view.frame toView:self.navigationItem.titleView];
+         plainVC.drawer.navigationItem.titleView = view;
+         plainVC.flagStr = self.flagStr;
+         plainVC.typeStr = self.typeStr;
+        
+        [plainVC.tableView.mj_header beginRefreshing];
         
     }];
 }

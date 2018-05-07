@@ -154,7 +154,8 @@ typedef NS_ENUM(NSUInteger, ICSDrawerControllerState)
     
     [self setupGestureRecognizers];
     
-    self.navigationItem.title = @"收信箱";
+    
+//    self.navigationItem.title = @"收信箱";
 
 }
 

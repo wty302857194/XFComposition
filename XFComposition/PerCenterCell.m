@@ -44,7 +44,9 @@
         self.label5.textColor = [UIColor lightGrayColor];
         [self.label5 setSingleLineAutoResizeWithMaxWidth:0];
         self.label5.font = [UIFont systemFontOfSize:12];
-        
+        UIImageView * image = [[UIImageView alloc]initWithFrame:CGRectMake(0, 100 -0.5, kScreenWidth, 0.5)];
+        image.backgroundColor = RGB_COLOR(229, 229, 229);
+        [self.contentView addSubview:image];
         
     }
     return self;

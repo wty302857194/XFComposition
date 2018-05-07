@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PerCenterViewController1">
             <connections>
+                <outlet property="footView" destination="mMT-fx-JzR" id="mUZ-1B-R4L"/>
                 <outlet property="tableView" destination="RwR-oS-0ae" id="ihD-gW-pbb"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -21,7 +22,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="RwR-oS-0ae">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="RwR-oS-0ae">
                     <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
@@ -39,6 +40,29 @@
             </constraints>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
             <point key="canvasLocation" x="22" y="50"/>
+        </view>
+        <view contentMode="scaleToFill" id="mMT-fx-JzR">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="暂无记录" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QR9-Ml-Kno">
+                    <rect key="frame" x="0.0" y="220" width="375" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="GoB-bg-F5t"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="QR9-Ml-Kno" firstAttribute="trailing" secondItem="b8d-YM-M5t" secondAttribute="trailing" id="YbZ-CT-cwP"/>
+                <constraint firstItem="QR9-Ml-Kno" firstAttribute="leading" secondItem="b8d-YM-M5t" secondAttribute="leading" id="hmE-7f-9pb"/>
+                <constraint firstItem="QR9-Ml-Kno" firstAttribute="top" secondItem="b8d-YM-M5t" secondAttribute="top" constant="200" id="lwT-ZF-QyE"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="b8d-YM-M5t"/>
+            <point key="canvasLocation" x="22.5" y="-683.5"/>
         </view>
     </objects>
 </document>

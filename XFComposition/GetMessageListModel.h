@@ -9,10 +9,10 @@
 #import <Foundation/Foundation.h>
 
 @interface GetMessageListModel : FMBean
-@property (nonatomic,strong)NSString *DateTime;
-@property (nonatomic,strong)NSString *ID;
-@property (nonatomic,strong)NSString *MesType;
-@property (nonatomic,strong)NSString *ReadFlag;
-@property (nonatomic,strong)NSString *Title;
+@property (nonatomic,copy)NSString *DateTime;
+@property (nonatomic,copy)NSString *ID;
+@property (nonatomic,copy)NSString *MesType;
+@property (nonatomic,copy)NSString *ReadFlag;
+@property (nonatomic,copy)NSString *Title;
 
 @end
