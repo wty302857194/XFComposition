@@ -228,6 +228,10 @@
     vc.bookID = self.bookid;
     vc.userId = self.xf.Loginid;
     vc.bjID = @"";
+     __weak typeof(self) weakSelf = self;
+    vc.markprogressBlock = ^{
+        [weakSelf GetBookInfo];
+    };
     [self.navigationController pushViewController:vc animated:YES];
     
 }
@@ -246,6 +250,11 @@
     [self.navigationController pushViewController:vc animated:YES];
     vc.bookFlag = @"0";
 }
+
+- (void)moreMessage:(UIButton *)btn {
+    
+}
+
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 5;
@@ -384,6 +393,8 @@
     UIButton *bt = [UIButton buttonWithType:UIButtonTypeCustom];
     bt.frame = CGRectMake(WidthFrame-60, 2, 40, 20);
     bt.titleLabel.font = [UIFont systemFontOfSize:12];
+    [bt addTarget:self action:@selector(moreMessage:) forControlEvents:UIControlEventTouchUpInside];
+    bt.tag = section;
     bt.layer.cornerRadius = 10;
     bt.layer.masksToBounds = YES;
     [bt setTitle:@"更多" forState:UIControlStateNormal];

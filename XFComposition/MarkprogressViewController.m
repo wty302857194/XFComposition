@@ -178,6 +178,9 @@
 
         if ([json[@"ret_code"] isEqualToString:@"0"]) {
             [SVProgressHUD showSuccessWithStatus:@"标记成功"];
+            if (self.markprogressBlock) {
+                self.markprogressBlock();
+            }
             [self onBack];
         }else{
             [SVProgressHUD showErrorWithStatus:@"标记失败"];

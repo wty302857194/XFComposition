@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-
+typedef void(^MarkprogressBlock) ();
 @interface MarkprogressViewController : UIViewController
 @property (nonatomic,strong)NSString *PageStr;
 @property (nonatomic,strong)NSString *bookID;
 @property (nonatomic,strong)NSString *userId;
-
+@property (nonatomic,copy) MarkprogressBlock markprogressBlock;
 @property (nonatomic,strong)NSString *bjID;
 @end
