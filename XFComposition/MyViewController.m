@@ -11,8 +11,8 @@
 #import "MySecondTableViewCell.h"
 #import "MyThridTableViewCell.h"
 #import "MyFourTableViewCell.h"
-//#import "UIImageView+WebCache.h"
-
+#import <AVFoundation/AVFoundation.h>
+#import <AssetsLibrary/AssetsLibrary.h>
 #import "PersonalViewController.h"
 #import "MyMicroViewController.h"
 #import "MyWritingsViewController.h"
@@ -23,12 +23,15 @@
 #import "MarktaskViewController.h"
 #import "MytestpaperViewController.h"
 #import "MyringViewController.h"
-
+#import "ActionSheetView.h"
 #import "LoginRequest.h"
 #import "GetUserInfoRequst.h"
 #import "GetMessageWaitNumRequst.h"
 #import "PersonModel.h"
-@interface MyViewController ()<UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource>
+#import <Photos/Photos.h>
+#import "TZImagePickerController.h"
+
+@interface MyViewController ()<UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource,UINavigationControllerDelegate,UIImagePickerControllerDelegate,TZImagePickerControllerDelegate>
 @property (nonatomic,strong)UITableView *tableView;
 
 @property (nonatomic,strong)NSArray *array1;
@@ -232,102 +235,226 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    
-    if ([self.userInfo.dutyId isEqualToString:@"1"]) {
-        switch (indexPath.row) {
-            case 0:{//个人中心
-                PersonalViewController *vc = [[PersonalViewController alloc]init];
-                [self.navigationController pushViewController:vc animated:YES];
+    if (indexPath.section == 0) {
+        __weak __typeof(self)wself = self;
+
+        ActionSheetView * actionSheet = [[ActionSheetView alloc] initWithCancleTitle:@"取消" otherTitles:@"拍照",@"从手机相册选择" ,nil];
+        
+        [actionSheet show];
+        actionSheet.actionSheetBlock = ^(ActionSheetItem *sheetItem) {
+            [wself actionSheet:sheetItem.index];
+            
+        };
+    }else{
+        
+        if ([self.userInfo.dutyId isEqualToString:@"1"]) {
+            switch (indexPath.row) {
+                case 0:{//个人中心
+                    PersonalViewController *vc = [[PersonalViewController alloc]init];
+                    [self.navigationController pushViewController:vc animated:YES];
+                }
+                    break;
+                case 1:{//我的习作
+                    MyWritingsViewController *vc = [[MyWritingsViewController alloc]init];
+                    vc.myWritingUserid = self.userInfo.Loginid;
+                    [self.navigationController pushViewController:vc animated:YES];
+                }
+                    break;
+                case 2:{//申请批阅
+                    ApplyMarkViewController *vc = [[ApplyMarkViewController alloc]init];
+                    vc.applyMarkUserid = self.userInfo.Loginid;
+                    [self.navigationController pushViewController:vc animated:YES];
+                }
+                    break;
+                case 3:{//做题笔记
+                    TakenotesViewController *vc = [[TakenotesViewController alloc]init];
+                    vc.takenotesuserId = self.userInfo.Loginid;
+                    [self.navigationController pushViewController:vc animated:YES];
+                }
+                    break;
+                case 4:{//读书笔记
+                    ReadnotesViewController *vc = [[ReadnotesViewController alloc]init];
+                    vc.readnotesUserid = self.userInfo.Loginid;
+                    [self.navigationController pushViewController:vc animated:YES];
+                }
+                    break;
+                case 5:{//我的推荐
+                    MyrecommendBookViewController *vc = [[MyrecommendBookViewController alloc]init];
+                    vc.MyrecommenuserId = self.userInfo.Loginid;
+                    [self.navigationController pushViewController:vc animated:YES];
+                }
+                    break;
+                case 6:{//我的微课
+                    MyMicroViewController *vc = [[MyMicroViewController alloc]init];
+                    vc.userID = self.userInfo.Loginid;
+                    [self.navigationController pushViewController:vc animated:YES];
+                }
+                    break;
+                default:
+                    break;
             }
-                break;
-            case 1:{//我的习作
-                MyWritingsViewController *vc = [[MyWritingsViewController alloc]init];
-                vc.myWritingUserid = self.userInfo.Loginid;
-                [self.navigationController pushViewController:vc animated:YES];
+            
+        }else if ([self.userInfo.dutyId isEqualToString:@"0"]){
+            switch (indexPath.row) {
+                case 0:{//个人中心
+                    PersonalViewController *vc = [[PersonalViewController alloc]init];
+                    [self.navigationController pushViewController:vc animated:YES];
+                }
+                    break;
+                case 1:{//批阅任务
+                    MarktaskViewController *vc = [[MarktaskViewController alloc]init];
+                    vc.marktaskUserID = self.userInfo.Loginid;
+                    [self.navigationController pushViewController:vc animated:YES];
+                }
+                    break;
+                case 2:{//我的试卷
+                    MytestpaperViewController *vc = [[MytestpaperViewController alloc]init];
+                    vc.testpaperuserId = self.userInfo.Loginid;
+                    [self.navigationController pushViewController:vc animated:YES];
+                }
+                    break;
+                case 3:{//读书笔记
+                    ReadnotesViewController *vc = [[ReadnotesViewController alloc]init];
+                    vc.readnotesUserid = self.userInfo.Loginid;
+                    [self.navigationController pushViewController:vc animated:YES];
+                }
+                    break;
+                case 4:{//我的推荐
+                    MyrecommendBookViewController *vc = [[MyrecommendBookViewController alloc]init];
+                    vc.MyrecommenuserId = self.userInfo.Loginid;
+                    [self.navigationController pushViewController:vc animated:YES];
+                }
+                    break;
+                case 5:{//我的微课
+                    MyMicroViewController *vc = [[MyMicroViewController alloc]init];
+                    vc.userID = self.userInfo.Loginid;
+                    [self.navigationController pushViewController:vc animated:YES];
+                }
+                    break;
+                case 6:{
+                    
+                }
+                    break;
+                    
+                default:
+                    break;
             }
-                break;
-            case 2:{//申请批阅
-                ApplyMarkViewController *vc = [[ApplyMarkViewController alloc]init];
-                vc.applyMarkUserid = self.userInfo.Loginid;
-                [self.navigationController pushViewController:vc animated:YES];
-            }
-                break;
-            case 3:{//做题笔记
-                TakenotesViewController *vc = [[TakenotesViewController alloc]init];
-                vc.takenotesuserId = self.userInfo.Loginid;
-                [self.navigationController pushViewController:vc animated:YES];
-            }
-                break;
-            case 4:{//读书笔记
-                ReadnotesViewController *vc = [[ReadnotesViewController alloc]init];
-                vc.readnotesUserid = self.userInfo.Loginid;
-                [self.navigationController pushViewController:vc animated:YES];
-            }
-                break;
-            case 5:{//我的推荐
-                MyrecommendBookViewController *vc = [[MyrecommendBookViewController alloc]init];
-                vc.MyrecommenuserId = self.userInfo.Loginid;
-                [self.navigationController pushViewController:vc animated:YES];
-            }
-                break;
-            case 6:{//我的微课
-                MyMicroViewController *vc = [[MyMicroViewController alloc]init];
-                vc.userID = self.userInfo.Loginid;
-                [self.navigationController pushViewController:vc animated:YES];
-            }
-                break;
-            default:
-                break;
+            
         }
         
-    }else if ([self.userInfo.dutyId isEqualToString:@"0"]){
-        switch (indexPath.row) {
-            case 0:{//个人中心
-                PersonalViewController *vc = [[PersonalViewController alloc]init];
-                [self.navigationController pushViewController:vc animated:YES];
-            }
-                break;
-            case 1:{//批阅任务
-                MarktaskViewController *vc = [[MarktaskViewController alloc]init];
-                vc.marktaskUserID = self.userInfo.Loginid;
-                [self.navigationController pushViewController:vc animated:YES];
-            }
-                break;
-            case 2:{//我的试卷
-                MytestpaperViewController *vc = [[MytestpaperViewController alloc]init];
-                vc.testpaperuserId = self.userInfo.Loginid;
-                [self.navigationController pushViewController:vc animated:YES];
-            }
-                break;
-            case 3:{//读书笔记
-                ReadnotesViewController *vc = [[ReadnotesViewController alloc]init];
-                vc.readnotesUserid = self.userInfo.Loginid;
-                [self.navigationController pushViewController:vc animated:YES];
-            }
-                break;
-            case 4:{//我的推荐
-                MyrecommendBookViewController *vc = [[MyrecommendBookViewController alloc]init];
-                vc.MyrecommenuserId = self.userInfo.Loginid;
-                [self.navigationController pushViewController:vc animated:YES];
-            }
-                break;
-            case 5:{//我的微课
-                MyMicroViewController *vc = [[MyMicroViewController alloc]init];
-                vc.userID = self.userInfo.Loginid;
-                [self.navigationController pushViewController:vc animated:YES];
-            }
-                break;
-            case 6:{
-                
-            }
-                break;
-                
-            default:
-                break;
-        }
+    }
     
+    
+}
+- (void)actionSheet:(NSInteger)buttonIndex{
+    switch (buttonIndex) {
+        case 1:{
+            //从相机选择
+            BOOL isSourceTypePhotoLibrary = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
+            if (isSourceTypePhotoLibrary)
+            {
+                AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+                if (authStatus == AVAuthorizationStatusDenied)
+                {
+                    [SVProgressHUD showInfoWithStatus:@"您没有摄像头权限,请先去设置!"];
+                }
+                else
+                {
+                    UIImagePickerController *imgPicker = [[UIImagePickerController alloc] init];
+                    imgPicker.allowsEditing = YES;
+                    imgPicker.delegate = self;
+                    imgPicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+                    [self presentViewController:imgPicker animated:YES completion:nil];
+                }
+            }
+            break;
+        }
+        case 2:{
+            //从图片库选择
+            BOOL isSourceTypePhotoLibrary = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary];
+            if (isSourceTypePhotoLibrary)
+            {
+                PHAuthorizationStatus status = [PHPhotoLibrary authorizationStatus];
+                if (status == PHAuthorizationStatusRestricted ||
+                    status == PHAuthorizationStatusDenied) {
+                    //无权限
+                    [SVProgressHUD showInfoWithStatus:@"您没有相册权限,请先去设置!"];
+                }
+                else
+                {
+                    //处理点击从相册选取
+                    TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:1 delegate:self];
+                    imagePickerVc.allowCrop = YES;
+                    imagePickerVc.needCircleCrop = YES;
+                    
+                    imagePickerVc.circleCropRadius = (kScreenWidth - 80)/2;
+                    
+                    __weak __typeof(self)wself = self;
+                    [imagePickerVc setDidFinishPickingPhotosHandle:^(NSArray<UIImage *> *photos,NSArray *assets,BOOL isSelectOriginalPhoto) {
+                        UIImage *img = [photos objectAtIndex:0];
+                        //                        self.avatarCell.avatarImg.image = img;
+                        
+                        NSData *imageData = nil;
+                        //判断图片是不是png格式的文件
+                        if (UIImagePNGRepresentation(img)) {
+                            //返回为png图像。
+                            imageData = UIImagePNGRepresentation(img);
+                        }else {
+                            //返回为JPEG图像。
+                            imageData = UIImageJPEGRepresentation(img, 0.1);
+                        }
+                        [wself uploadImage:imageData];
+                    }];
+                    [self presentViewController:imagePickerVc animated:YES completion:nil];
+                }
+            }
+            break;
+        }
+        default:
+            break;
     }
 }
+
+#pragma mark -
+#pragma mark UIimagePickerDelegate
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
+{
+    UIImage *img = nil;
+    if (info[UIImagePickerControllerEditedImage]) {
+        img = info[UIImagePickerControllerEditedImage];
+    }
+    else {
+        img = info[UIImagePickerControllerOriginalImage];
+    }
+    //    self.avatarCell.avatarImg.image = img;
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    
+    NSData *imageData = nil;
+    //判断图片是不是png格式的文件
+    if (UIImagePNGRepresentation(img)) {
+        imageData = UIImagePNGRepresentation(img);
+    }else {
+        imageData = UIImageJPEGRepresentation(img, 0.1);
+    }
+    [self uploadImage:imageData];
+}
+
+- (void)uploadImage:(NSData*)imageData
+{
+    [[XFRequestManager sharedInstance] XFRequstSetUserIcon:[XFUserInfo getUserInfo].Loginid  images:@[imageData] :^(NSString *requestName, id responseData, BOOL isSuccess) {
+        
+        if (isSuccess) {
+            
+        }
+        
+    }];
+}
+
 -(void)logOut{
     [XFUserInfo deleteUserInfo];
     self.tabBarController.selectedIndex=0;

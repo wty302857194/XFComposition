@@ -21,8 +21,7 @@
         self.textLabel = [[UILabel alloc]init];
         self.bt = [UIButton buttonWithType:UIButtonTypeCustom];
         
-        [self.contentView sd_addSubviews:@[lable1,self.titieLabel,self.TextLabel,self.bt]];
-        
+      
         lable1.sd_layout.leftSpaceToView(self.contentView, 20).topSpaceToView(self.contentView, 25).heightIs(10).widthIs(10);
         lable1.backgroundColor = [UIColor colorWithHexString:@"7DCDF3"];
         lable1.layer.cornerRadius = 5;
@@ -46,6 +45,30 @@
         self.layer.masksToBounds = YES;
         
         [self setupAutoHeightWithBottomView:self.bt bottomMargin:10];
+        
+        UIButton * firstbtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        firstbtn.sd_layout.leftSpaceToView(self.contentView, WidthFrame/3).topSpaceToView(self.TextLabel, 10).widthIs(WidthFrame/3).heightIs(30);
+        [firstbtn setBackgroundColor:[UIColor colorWithHexString:@"338ED0"]];
+        [firstbtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        firstbtn.titleLabel.font = [UIFont systemFontOfSize:15];
+        [firstbtn setTitle:@"添加标准" forState:UIControlStateNormal];
+        [firstbtn addTarget:self action:@selector(piyue:) forControlEvents:UIControlEventTouchUpInside];
+        firstbtn.layer.cornerRadius = 6;
+        self.layer.masksToBounds = YES;
+        
+        UIButton * secondBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        secondBtn.sd_layout.leftSpaceToView(self.contentView, WidthFrame/3).topSpaceToView(self.TextLabel, 10).widthIs(WidthFrame/3).heightIs(30);
+        [secondBtn setBackgroundColor:[UIColor colorWithHexString:@"338ED0"]];
+        [secondBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        secondBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+        [secondBtn setTitle:@"查看标准" forState:UIControlStateNormal];
+        [secondBtn addTarget:self action:@selector(piyue:) forControlEvents:UIControlEventTouchUpInside];
+        secondBtn.layer.cornerRadius = 6;
+        self.layer.masksToBounds = YES;
+        
+        [self.contentView sd_addSubviews:@[lable1,self.titieLabel,self.TextLabel,self.bt]];
+        
+        
     }
     return self;
 }
@@ -58,12 +81,13 @@
     _model = model;
     self.titieLabel.text = _model.ActiveName;
     
-    NSString *str1 = [self htmlEntityDecode:_model.ActiveInfo];
+    NSString *str1 = _model.ActiveInfo.stringByRemovingPercentEncoding  ;
     NSAttributedString * attributeStr = [self attributedStringWithHTMLString:str1];
     self.TextLabel.attributedText = attributeStr;
 //    self.TextLabel.text = [NSString stringWithFormat:@"活动简介：%@",[self htmlEntityDecode:[_model.ActiveInfo stringByRemovingPercentEncoding]]];
     
 }
+
 //将 &lt 等类似的字符转化为HTML中的“<”等
 - (NSString *)htmlEntityDecode:(NSString *)string
 {
