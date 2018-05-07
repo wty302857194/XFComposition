@@ -11,6 +11,10 @@
 #import "GetReadStartRequst.h"
 #import "GetReadStartModel.h"
 @interface BookRankViewController ()<UITableViewDelegate,UITableViewDataSource>
+{
+    UIButton *_selectBtn;
+    UILabel *line_lab;
+}
 @property (nonatomic,strong)NSArray *btArray;
 @property (nonatomic,strong)NSMutableArray *tabBtnArray;
 @property (nonatomic,strong)UITableView *tableView;
@@ -20,17 +24,7 @@
 @end
 
 @implementation BookRankViewController
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:YES];
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
-    [self leftBarButton];
-}
--(void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:YES];
-    
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
-    
-}
+
 -(NSArray *)btArray{
     if (!_btArray) {
         _btArray = @[@"阅读之星排行",@"区排行",@"校排行",@"班级排行"];
@@ -43,46 +37,44 @@
     }
     return _rankArray;
 }
--(void)creatHeadView{
-    UIScrollView *scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, WidthFrame , 40)];
-    [self.view addSubview:scrollView];
-    self.tabBtnArray = [[NSMutableArray alloc]init];
-    scrollView.showsHorizontalScrollIndicator = NO;
-    CGFloat z= 0.0;
+-(void)creatHeadView {
+    UIView *topView = [[UIView alloc] initWithFrame:CGRectMake(0, kLayoutViewMarginTop, kScreenWidth, 40)];
+    topView.backgroundColor = hexColor(1d7db7);
+    [self.view addSubview:topView];
+    
+    float btn_width = kScreenWidth/self.btArray.count;
     for (int i = 0; i<self.btArray.count; i++) {
-        
         UIButton *bt = [UIButton buttonWithType:UIButtonTypeCustom];
+        bt.frame = CGRectMake(btn_width*i, 0, btn_width, topView.height);
         [bt addTarget:self action:@selector(click:) forControlEvents:UIControlEventTouchUpInside];
         [bt setTitle:self.btArray[i] forState:UIControlStateNormal];
-        bt.tag = 1000+i;
-        
-        [bt setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        bt.titleLabel.font = [UIFont systemFontOfSize:14];
-        CGSize titleSize = [self.btArray[i] sizeWithAttributes:@{NSFontAttributeName: [UIFont fontWithName:bt.titleLabel.font.fontName size:bt.titleLabel.font.pointSize]}];
-        
-        
-        titleSize.width +=20;
-        CGFloat flo = titleSize.width;
-        
-        
-        
-        bt.frame = CGRectMake(20+z, 0, titleSize.width, 40);
-        z= flo +z+15;
-        
-        scrollView.contentSize = CGSizeMake((titleSize.width+30)*(self.btArray.count+1), 40);
-        [scrollView addSubview:bt];
-        [self.tabBtnArray addObject:bt];
+        bt.tag = 2000+i;
+        [bt setBackgroundColor:hexColor(1d7db7)];
+        [bt setTitleColor:hexColor(9ea1a2) forState:UIControlStateNormal];
+        bt.titleLabel.font = [UIFont systemFontOfSize:13.0];
         if (i == 0) {
-            [bt setTitleColor: UIColorFromRGBA(30, 144, 255, 1.0f) forState:UIControlStateNormal];
+            [bt setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            _selectBtn = bt;
         }
+        [topView addSubview:bt];
     }
     
+    line_lab = [[UILabel alloc] init];
+    [line_lab setBackgroundColor:[UIColor whiteColor]];
+    [topView addSubview:line_lab];
+    [line_lab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(topView.mas_bottom);
+        make.centerX.equalTo(_selectBtn.mas_centerX);
+        make.height.mas_equalTo(1);
+        make.width.equalTo(_selectBtn.mas_width);
+    }];
 }
 -(UITableView *)tableView{
     if (!_tableView) {
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 40, WidthFrame, HeightFrame-64-40) style:UITableViewStyleGrouped];
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, kLayoutViewMarginTop+40, WidthFrame, HeightFrame-kLayoutViewMarginTop-40) style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
+        _tableView.tableFooterView = [UIView new];
         [_tableView registerClass:[BookRankTableViewCell class] forCellReuseIdentifier:@"cell"];
         
     }
@@ -91,7 +83,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"读书排行";
-//    self.navigationController.navigationBar.barTintColor = [UIColor colorWithHexString:@"3690CE"];
     self.view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.tableView];
     [self creatHeadView];
@@ -107,13 +98,11 @@
     self.tableView.mj_header = header;
     
     [self.tableView.mj_header beginRefreshing];
-//    self.tableView.mj_footer=[MJRefreshBackNormalFooter   footerWithRefreshingBlock:^{
-//        
-//        
-//        [self requstMore];
-//        [self.tableView.mj_footer endRefreshing];
-//    }];
 
+    GO_BACK;
+}
+-(void)goBackNV {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 //获取阅读排行
 -(void)ReadStartRequst :(NSString *)flag{
@@ -148,35 +137,20 @@
     }];
 
 }
--(void)click:(UIButton *)bt{
-    for (UIButton *button in self.tabBtnArray){
-        if (button.tag == bt.tag){
-            [button setTitleColor:UIColorFromRGBA(30, 144, 255, 1.0f) forState:UIControlStateNormal];
-            
-        }else{
-            [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-            
-        }
+-(void)click:(UIButton *)bt {
+    if (bt == _selectBtn) {
+        return;
     }
-    if (bt.tag == 1000) {
-        self.strFlag = @"0";
-        self.pagesize = 15;
-        [self ReadStartRequst:@"0"];
-    }else if (bt.tag == 1001){
-        self.strFlag = @"2";
-        self.pagesize = 15;
-        [self ReadStartRequst:@"2"];
-    }else if (bt.tag == 1002){
-        self.strFlag = @"1";
-        self.pagesize = 15;
-        [self ReadStartRequst:@"1"];
-        
-    }else if (bt.tag == 1003){
-        self.strFlag = @"3";
-        self.pagesize = 15;
-        [self ReadStartRequst:@"3"];
-    }
+    [bt setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [_selectBtn setTitleColor:hexColor(9ea1a2) forState:UIControlStateNormal];
     
+    self.pagesize = 15;
+    self.strFlag = [NSString stringWithFormat:@"%lD",bt.tag-2000];
+    [self ReadStartRequst:self.strFlag];
+    [UIView animateWithDuration:0.1 animations:^{
+        line_lab.center = CGPointMake(bt.centerX, line_lab.centerY);
+    }];
+    _selectBtn = bt;
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -234,16 +208,6 @@
     return width;
 }
 
--(void)leftBarButton{
-    UIBarButtonItem *item=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"left-arrow_s"] style: UIBarButtonItemStylePlain target:self action:@selector(onBack)];
-    
-    self.navigationItem.leftBarButtonItem=item;
-    
-}
--(void)onBack{
-    [self.navigationController popViewControllerAnimated:YES];
-    
-    
-}
+
 
 @end

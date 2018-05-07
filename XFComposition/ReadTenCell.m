@@ -59,8 +59,8 @@
 - (void)setModel:(GetReadStartModel *)model
 {
     _model = model;
-    self.nameLab.text = model.conname?:@"";
-    self.schoolLab.text = model.readpaihangid?:@"";
+    self.nameLab.text = model.readpaihangid?:@"";
+    self.schoolLab.text = model.conname?:@"";
     self.numLab.text = [NSString stringWithFormat:@"阅读数：%@",model.num];
 }
 

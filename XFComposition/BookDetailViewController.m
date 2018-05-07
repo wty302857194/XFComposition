@@ -40,18 +40,17 @@
 @end
 
 @implementation BookDetailViewController
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:YES];
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
-    [self GetBookInfo];
-    [self leftBarButton];
-}
--(void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:YES];
-    
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
-    
-}
+//-(void)viewWillAppear:(BOOL)animated{
+//    [super viewWillAppear:YES];
+//    [self.navigationController setNavigationBarHidden:NO animated:YES];
+//
+//}
+//-(void)viewWillDisappear:(BOOL)animated{
+//    [super viewWillDisappear:YES];
+//
+//    [self.navigationController setNavigationBarHidden:NO animated:YES];
+//
+//}
 -(XFUserInfo *)xf{
     if (!_xf) {
         _xf = [[XFUserInfo alloc]init];
@@ -60,7 +59,7 @@
 }
 -(UITableView *)tableView{
     if (!_tableView) {
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, WidthFrame, HeightFrame-64-60) style:UITableViewStyleGrouped];
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, WidthFrame, HeightFrame-60) style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         [_tableView registerClass:[BookDetailFristCell class] forCellReuseIdentifier:@"cell1"];
@@ -93,14 +92,14 @@
 }
 -(void)creatView{
     UIButton *messagebt = [UIButton buttonWithType:UIButtonTypeCustom];
-    messagebt.frame = CGRectMake(0, HeightFrame-64-60, WidthFrame/2, 60);
+    messagebt.frame = CGRectMake(0, HeightFrame-60, WidthFrame/2, 60);
     [messagebt setTitle:@"留言" forState:UIControlStateNormal];
     [messagebt setBackgroundColor:[UIColor colorWithHexString:@"F3A832"]];
     [messagebt addTarget:self action:@selector(leaVmessge) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:messagebt];
     
     UIButton *tjbt = [UIButton buttonWithType:UIButtonTypeCustom];
-    tjbt.frame = CGRectMake(WidthFrame/2, HeightFrame-64-60, WidthFrame/2, 60);
+    tjbt.frame = CGRectMake(WidthFrame/2, HeightFrame-60, WidthFrame/2, 60);
     [tjbt setTitle:@"图书推荐" forState:UIControlStateNormal];
     [tjbt setBackgroundColor:[UIColor colorWithHexString:@"3690CE"]];
     [tjbt addTarget:self action:@selector(Recommend) forControlEvents:UIControlEventTouchUpInside];
@@ -115,6 +114,9 @@
     self.xf = [XFUserInfo getUserInfo];
     [self.view addSubview:self.tableView];
     [self creatView];
+    
+    [self GetBookInfo];
+    
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         
        
@@ -128,6 +130,10 @@
     self.tableView.mj_header = header;
     
     [self.tableView.mj_header beginRefreshing];
+    GO_BACK;
+}
+- (void)goBackNV {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 //图书信息
 -(void)GetBookInfo{
@@ -218,11 +224,12 @@
 //标记进度
 -(void)biaojijindu{
     MarkprogressViewController *vc = [[MarkprogressViewController alloc]init];
-    [self.navigationController pushViewController:vc animated:YES];
     vc.PageStr = self.bookinfoModel.bookpages;
     vc.bookID = self.bookid;
     vc.userId = self.xf.Loginid;
     vc.bjID = @"";
+    [self.navigationController pushViewController:vc animated:YES];
+    
 }
 
 //留言
@@ -269,7 +276,7 @@
     if (section == 0) {
         return 0.01;
     }
-    return 25;
+    return 35;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     
@@ -310,20 +317,15 @@
         BookDetailSecondCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell2" forIndexPath:indexPath];
         cell.model = self.bookinfoModel;
         
-//        int a ;
-//        int b ;
-//        NSString *sa = self.bookinfoModel.BookMyMaxPage;
-//        NSString *sb = self.bookinfoModel.bookpages;
-        
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return  cell;
     }else if (indexPath.section == 2){
         BookDetailThirdCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell3" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.titleLabel.text = [NSString stringWithFormat:@"《%@》测试",self.bookinfoModel.bookname];
+        cell.titleLabel.text = [NSString stringWithFormat:@"%@测试",self.bookinfoModel.bookname];
           cell.delegate = self;
         
-        NSString *str = [NSString stringWithFormat:@"%@%@",HTurl,self.bookinfoModel.bookpic];
+        NSString *str = [NSString stringWithFormat:@"%@",self.bookinfoModel.bookpic];
         [cell.imgView sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"icon_02"] options:SDWebImageRefreshCached];
         cell.model = self.subjectModel;
         return cell;
@@ -361,23 +363,28 @@
 #pragma mark - headeView内容
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, WidthFrame, 25)];
-//    view.backgroundColor = [UIColor whiteColor];
+    UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 35)];
+    backView.backgroundColor = hexColor(f4f5f6);
+    
+    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 10, WidthFrame, 25)];
+    view.backgroundColor = [UIColor whiteColor];
+    [backView addSubview:view];
+    
     UILabel *leftLable = [[UILabel alloc]init];
-    leftLable.frame = CGRectMake(20, 2, 2, 20);
+    leftLable.frame = CGRectMake(20, 2, 5, 20);
     leftLable.backgroundColor = [UIColor colorWithHexString:@"3893CF"];
     [view addSubview:leftLable];
     UILabel *titleLabel = [[UILabel alloc]init];
     
     [view addSubview:titleLabel];
     titleLabel.font = [UIFont systemFontOfSize:13];
-    titleLabel.sd_layout.leftSpaceToView(view, 25).topSpaceToView(view, 5).heightIs(20).widthIs(0);
+    titleLabel.sd_layout.leftSpaceToView(leftLable, 10).topSpaceToView(view, 5).heightIs(20).widthIs(0);
     [titleLabel setSingleLineAutoResizeWithMaxWidth:0];
     
     UIButton *bt = [UIButton buttonWithType:UIButtonTypeCustom];
     bt.frame = CGRectMake(WidthFrame-60, 2, 40, 20);
     bt.titleLabel.font = [UIFont systemFontOfSize:12];
-    bt.layer.cornerRadius = 6;
+    bt.layer.cornerRadius = 10;
     bt.layer.masksToBounds = YES;
     [bt setTitle:@"更多" forState:UIControlStateNormal];
     [bt setBackgroundColor:[UIColor colorWithHexString:@"3691CE"]];
@@ -395,33 +402,22 @@
         bt.layer.masksToBounds = YES;
         bt.layer.cornerRadius = 6;
         bt.titleLabel.font = [UIFont systemFontOfSize:12];
-        return view;
+        return backView;
     }else if (section == 2){
         titleLabel.text = @"阅读测试";
         
-        return view;
+        return backView;
     }else if (section == 3){
         titleLabel.text = @"教师读书分享";
         
         [view addSubview:bt];
-        return view;
+        return backView;
     }else if (section == 4){
         titleLabel.text = @"学生阅读分享";
         [view addSubview:bt];
-        return view;
+        return backView;
     }
     return nil;
-}
--(void)leftBarButton{
-    UIBarButtonItem *item=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"left-arrow_s"] style: UIBarButtonItemStylePlain target:self action:@selector(onBack)];
-    
-    self.navigationItem.leftBarButtonItem=item;
-    
-}
--(void)onBack{
-    [self.navigationController popViewControllerAnimated:YES];
-    
-    
 }
 - (CGFloat)cellContentViewWith
 {

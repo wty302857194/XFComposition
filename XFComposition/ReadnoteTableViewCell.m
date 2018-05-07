@@ -28,9 +28,9 @@
         self.label2 = [[UILabel alloc]init];
         self.label3 = [[UILabel alloc]init];
         self.bt = [UIButton buttonWithType:UIButtonTypeCustom];
+        UIImageView *line_Img = [[UIImageView alloc] init];
         
-        
-        [self.contentView sd_addSubviews:@[self.imgView,self.titileLabel,self.timeLable,self.label1,self.label2,self.label3,self.bt]];
+        [self.contentView sd_addSubviews:@[line_Img,self.imgView,self.titileLabel,self.timeLable,self.label1,self.label2,self.label3,self.bt]];
         
         self.imgView.sd_layout.leftSpaceToView(self.contentView, 10).topSpaceToView(self.contentView, 10).widthIs(60).heightIs(80);
         self.imgView.layer.cornerRadius = 6;
@@ -41,12 +41,15 @@
         self.titileLabel.font = [UIFont systemFontOfSize:15];
         
         
-        self.timeLable.sd_layout.rightSpaceToView(self.contentView, 20).topSpaceToView(self.contentView, 9).heightIs(20).widthIs(0);
+        self.timeLable.sd_layout.rightSpaceToView(self.imgView, 20).topSpaceToView(self.contentView, 9).heightIs(20).widthIs(0);
         [self.timeLable setSingleLineAutoResizeWithMaxWidth:0];
         self.timeLable.font = [UIFont systemFontOfSize:11];
         self.timeLable.textColor = [UIColor colorWithHexString:@"6C6E6E"];
-
-        self.label1.sd_layout.leftSpaceToView(self.imgView, 10).topSpaceToView(self.titileLabel, 5).heightIs(20).widthIs(0);
+        
+        line_Img.sd_layout.leftSpaceToView(self.contentView, 10).topSpaceToView(self.titileLabel, 5).heightIs(1).rightSpaceToView(self.contentView, 20);
+        line_Img.image = [UIImage imageNamed:@"xuxian"];
+        
+        self.label1.sd_layout.leftSpaceToView(self.imgView, 10).topSpaceToView(line_Img, 5).heightIs(20).widthIs(0);
         [self.label1 setSingleLineAutoResizeWithMaxWidth:0];
         self.label1.font = [UIFont systemFontOfSize:12];
         self.label1.textColor = [UIColor colorWithHexString:@"6C6E6E"];
@@ -60,13 +63,13 @@
         self.label3.font = [UIFont systemFontOfSize:12];
         self.label3.textColor = [UIColor colorWithHexString:@"6C6E6E"];
         
-        self.bt.sd_layout.rightSpaceToView(self.contentView, 40).topSpaceToView(self.contentView, 35).widthIs(40).heightIs(30);
+        self.bt.sd_layout.rightSpaceToView(self.contentView, 40).topSpaceToView(line_Img, 20).widthIs(40).heightIs(30);
         [self.bt setTitle:@"评论" forState:UIControlStateNormal];
         self.bt.titleLabel.font = [UIFont systemFontOfSize:12];
         [self.bt setBackgroundColor:[UIColor lightGrayColor]];
         self.bt.titleLabel.textColor = [UIColor colorWithHexString:@"6C6E6E"];
         [self.bt addTarget:self action:@selector(pinglun:) forControlEvents:UIControlEventTouchUpInside];
-        
+        //  没有 图片
     }
     return self;
 }
@@ -79,7 +82,7 @@
 -(void)setModel:(GetBookBjModel *)model{
 
     _model = model;
-    NSString *str = [NSString stringWithFormat:@"%@%@",HTurl,_model.bookpic];
+    NSString *str = [NSString stringWithFormat:@"%@",_model.bookpic];
     [self.imgView sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"icon_02"] options:SDWebImageRefreshCached];
     self.titileLabel.text = _model.title;
     self.timeLable.text = _model.addtime;

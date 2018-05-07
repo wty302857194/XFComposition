@@ -102,7 +102,7 @@
         self.label5.font = [UIFont systemFontOfSize:12];
         self.label5.text = @"总页数：";
         
-        self.bt1.sd_layout.leftSpaceToView(self.imgView, 20).topSpaceToView(self.label5, 5).heightIs(25).widthIs(40);
+        self.bt1.sd_layout.leftSpaceToView(self.imgView, 20).topSpaceToView(self.label5, 5).heightIs(25).widthIs(60);
         [self.bt1 setTitle:@"想读" forState:UIControlStateNormal];
         self.bt1.titleLabel.font = [UIFont systemFontOfSize:13];
         [self.bt1 setBackgroundColor:[UIColor colorWithHexString:@"3690CE"]];
@@ -111,7 +111,7 @@
         self.bt1.tag = 1000;
         [self.bt1 addTarget:self action:@selector(click1) forControlEvents:UIControlEventTouchUpInside];
         
-        self.bt2.sd_layout.leftSpaceToView(self.bt1, 20).topSpaceToView(self.label5, 5).heightIs(25).widthIs(40);
+        self.bt2.sd_layout.leftSpaceToView(self.bt1, 20).topSpaceToView(self.label5, 5).heightIs(25).widthIs(60);
         [self.bt2 setTitle:@"在读" forState:UIControlStateNormal];
         self.bt2.titleLabel.font = [UIFont systemFontOfSize:13];
         [self.bt2 setBackgroundColor:[UIColor colorWithHexString:@"46A4C6"]];
@@ -120,7 +120,7 @@
         self.bt1.tag = 1001;
         [self.bt2 addTarget:self action:@selector(click2) forControlEvents:UIControlEventTouchUpInside];
         
-        self.bt3.sd_layout.leftSpaceToView(self.bt2, 20).topSpaceToView(self.label5, 5).heightIs(25).widthIs(40);
+        self.bt3.sd_layout.leftSpaceToView(self.bt2, 20).topSpaceToView(self.label5, 5).heightIs(25).widthIs(60);
         [self.bt3 setTitle:@"已读" forState:UIControlStateNormal];
         self.bt3.titleLabel.font = [UIFont systemFontOfSize:13];
         [self.bt3 setBackgroundColor:[UIColor colorWithHexString:@"D99E3F"]];
@@ -157,12 +157,12 @@
 -(void)setModel:(GetBookInfoModel *)model{
     
     _model = model;
-    self.titleLabel.text = [NSString stringWithFormat:@"《%@》",_model.bookname];
+    self.titleLabel.text = [NSString stringWithFormat:@"%@",_model.bookname];
     self.label2.text = [NSString stringWithFormat:@"作   者：%@",_model.bookauthor];
     self.label3.text = [NSString stringWithFormat:@"出 版 社：%@",_model.bookpublish];
     self.label4.text = [NSString stringWithFormat:@"出版日期：%@",_model.bookpublish];
     self.label5.text = [NSString stringWithFormat:@"总 页 数：%@",_model.bookpages];
-    NSString *str = [NSString stringWithFormat:@"%@%@",HTurl,_model.bookpic];
+    NSString *str = [NSString stringWithFormat:@"%@",_model.bookpic];
     [self.imgView sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"icon_02"] options:SDWebImageRefreshCached];
     self.neirongLabel.text =self.model.bookinfo;
     
