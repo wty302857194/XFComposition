@@ -95,6 +95,7 @@
 		3FA5D9BC20A03EF00029E276 /* TZProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA5D9A920A03EEF0029E276 /* TZProgressView.m */; };
 		3FA5D9BD20A03EF00029E276 /* TZVideoPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA5D9AB20A03EEF0029E276 /* TZVideoPlayerController.m */; };
 		3FA5D9BE20A03EF00029E276 /* UIView+Layout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA5D9AD20A03EEF0029E276 /* UIView+Layout.m */; };
+		3FA5D9C020A056C90029E276 /* MarktaskCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FA5D9BF20A056C90029E276 /* MarktaskCell.xib */; };
 		4ABBA26F2080DBF60002E08D /* RegistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ABBA26D2080DBF60002E08D /* RegistViewController.m */; };
 		4ABBA2702080DBF60002E08D /* RegistViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4ABBA26E2080DBF60002E08D /* RegistViewController.xib */; };
 		4ABBA2732080E0150002E08D /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ABBA2722080E0150002E08D /* BaseViewController.m */; };
@@ -800,6 +801,7 @@
 		3FA5D9AB20A03EEF0029E276 /* TZVideoPlayerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TZVideoPlayerController.m; sourceTree = "<group>"; };
 		3FA5D9AC20A03EEF0029E276 /* UIView+Layout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Layout.h"; sourceTree = "<group>"; };
 		3FA5D9AD20A03EEF0029E276 /* UIView+Layout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Layout.m"; sourceTree = "<group>"; };
+		3FA5D9BF20A056C90029E276 /* MarktaskCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MarktaskCell.xib; sourceTree = "<group>"; };
 		4ABBA26C2080DBF60002E08D /* RegistViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegistViewController.h; sourceTree = "<group>"; };
 		4ABBA26D2080DBF60002E08D /* RegistViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RegistViewController.m; sourceTree = "<group>"; };
 		4ABBA26E2080DBF60002E08D /* RegistViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegistViewController.xib; sourceTree = "<group>"; };
@@ -3891,6 +3893,7 @@
 			children = (
 				F6C741C71F95B4E1006CF76D /* MarktaskCell.h */,
 				F6C741C81F95B4E1006CF76D /* MarktaskCell.m */,
+				3FA5D9BF20A056C90029E276 /* MarktaskCell.xib */,
 			);
 			name = V;
 			sourceTree = "<group>";
@@ -4811,6 +4814,7 @@
 				04A07A211F6B62070026DD6E /* Info.plist in Resources */,
 				323738182092C01900015514 /* TYTableView.xib in Resources */,
 				32F7E75B209341470016C1A6 /* VolunteerActiveiTableViewCell.xib in Resources */,
+				3FA5D9C020A056C90029E276 /* MarktaskCell.xib in Resources */,
 				32A7A0F2209ADD5900C19895 /* TYOnlyActivetyTableViewCell.xib in Resources */,
 				3FA5D9B620A03EF00029E276 /* TZImagePickerController.bundle in Resources */,
 				32B38F52208880B000616A7B /* LeftDetailViewController.xib in Resources */,
