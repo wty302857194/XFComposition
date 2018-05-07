@@ -18,28 +18,28 @@
         self.imgView = [[UIImageView alloc]initWithFrame:CGRectMake(5, 10, WidthFrame/4-20, 100)];
         [backView addSubview:self.imgView];
         
-        self.titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(WidthFrame/4-5, 0, WidthFrame/4-5, 40)];
-        self.titleLabel.font = [UIFont systemFontOfSize:14];
-        self.titleLabel.numberOfLines = 2;
+        self.titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(WidthFrame/4-5, 0, WidthFrame/4-5, 20)];
+        self.titleLabel.font = [UIFont systemFontOfSize:13];
+//        self.titleLabel.numberOfLines = 2;
         self.titleLabel.textColor = [UIColor colorWithHexString:@"4EA9A4"];
         [backView addSubview:self.titleLabel];
-        self.timeLabel = [[UILabel alloc]initWithFrame:CGRectMake(WidthFrame/4-5, 40, WidthFrame/4-5, 20)];
+        self.timeLabel = [[UILabel alloc]initWithFrame:CGRectMake(WidthFrame/4-5, CGRectGetMaxY(self.titleLabel.frame), WidthFrame/4-5, 20)];
         self.timeLabel.font = [UIFont systemFontOfSize:11];
         [backView addSubview:self.timeLabel];
         
-        self.chubanLabel = [[UILabel alloc]initWithFrame:CGRectMake(WidthFrame/4-5, 60, WidthFrame/4-5, 20)];
+        self.chubanLabel = [[UILabel alloc]initWithFrame:CGRectMake(WidthFrame/4-5, CGRectGetMaxY(self.timeLabel.frame), WidthFrame/4-5, 20)];
         self.chubanLabel.font = [UIFont systemFontOfSize:11];
         [backView addSubview:self.chubanLabel];
         
-        self.authorLabel = [[UILabel alloc]initWithFrame:CGRectMake(WidthFrame/4-5, 80, WidthFrame/4-5, 20)];
+        self.authorLabel = [[UILabel alloc]initWithFrame:CGRectMake(WidthFrame/4-5, CGRectGetMaxY(self.chubanLabel.frame), WidthFrame/4-5, 20)];
         self.authorLabel.font = [UIFont systemFontOfSize:11];
         [backView addSubview:self.authorLabel];
         
-        self.gradeLabel = [[UILabel alloc]initWithFrame:CGRectMake(WidthFrame/4-5, 100, WidthFrame/4-5, 20)];
+        self.gradeLabel = [[UILabel alloc]initWithFrame:CGRectMake(WidthFrame/4-5, CGRectGetMaxY(self.authorLabel.frame), WidthFrame/4-5, 20)];
         self.gradeLabel.font = [UIFont systemFontOfSize:11];
         [backView addSubview:self.gradeLabel];
         
-        self.numLabel = [[UILabel alloc]initWithFrame:CGRectMake(WidthFrame/4-5, 120, WidthFrame/4-5, 20)];
+        self.numLabel = [[UILabel alloc]initWithFrame:CGRectMake(WidthFrame/4-5, CGRectGetMaxY(self.gradeLabel.frame), WidthFrame/4-5, 20)];
         self.numLabel.font = [UIFont systemFontOfSize:11];
         [backView addSubview:self.numLabel];
         

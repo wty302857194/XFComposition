@@ -63,9 +63,11 @@
             }else if([self.data_index isEqualToString:@"1001"]) {
                 MicroClassTypeModel *model = self.dataArr[indexPath.row];
                 lab.text = model.tizainame?:@"";
-            }else {
+            }else if([self.data_index isEqualToString:@"1002"]){
                 MicroClassGradeModel *model = self.dataArr[indexPath.row];
                 lab.text = model.gradename?:@"";
+            }else {
+                lab.text = self.dataArr[indexPath.row]?:@"";
             }
         }
     }
@@ -98,10 +100,13 @@
         MicroClassTypeModel *model = self.dataArr[indexPath.row];
         index_id = model.zaitiid?:@"";
         data_name = model.tizainame?:@"";
-    }else {
+    }else if([self.data_index isEqualToString:@"1002"]){
         MicroClassGradeModel *model = self.dataArr[indexPath.row];
         index_id = model.gid?:@"";
         data_name = model.gradename?:@"";
+    }else {
+        index_id = [NSString stringWithFormat:@"%ld",(long)indexPath.row];
+        data_name = self.dataArr[indexPath.row];
     }
     if (self.selectTypeBlock) {
         self.selectTypeBlock(data_name,index_id,self.data_index,indexPath.row);
