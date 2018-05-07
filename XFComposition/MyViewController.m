@@ -26,6 +26,7 @@
 
 #import "LoginRequest.h"
 #import "GetUserInfoRequst.h"
+#import "GetMessageWaitNumRequst.h"
 #import "PersonModel.h"
 @interface MyViewController ()<UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong)UITableView *tableView;
@@ -38,8 +39,7 @@
 @property (nonatomic,strong)NSArray *teacherarray2;
 @property (nonatomic,strong)NSArray *teacherarray3;
 @property (nonatomic,strong)PersonModel *model;
-@property (nonatomic,copy)NSString *yonghuid;
-//@property (nonatomic,strong)XFUserInfo *xf;
+@property (nonatomic,assign)NSInteger msg;
 @end
 
 
@@ -66,42 +66,15 @@
 -(XFUserInfo *)userInfo{
     if (!_userInfo) {
         _userInfo = [[XFUserInfo alloc]init];
+        _userInfo = [XFUserInfo getUserInfo];
     }
     return _userInfo;
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
-    
-    self.userInfo = [XFUserInfo getUserInfo];
-    _yonghuid = self.userInfo.Loginid;
     [self getInfo];
-    
-    
-//    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-//        
-//        
-//        [self.tableView.mj_header endRefreshing];
-//    }];
-//    header.lastUpdatedTimeLabel.hidden = YES;
-//    header.stateLabel.hidden = YES;
-//    self.tableView.mj_header = header;
-//    
-//    [self.tableView.mj_header beginRefreshing];
-    //接受成功消息
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(walkVCClick:) name:@"buttonLoseResponse" object:nil];
-    
-    //用户信息判断
-    
-//    if ([xf.userId isEqualToString:@"175773"] ) {
-//        
-//    }
-    
+    [self GetMessageWaitNum];
 }
-//-(void)walkVCClick:(NSString *)str{
-//    
-//    
-//}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
    
@@ -109,16 +82,6 @@
     self.navigationController.delegate = self;
     [self.navigationController setNavigationBarHidden:YES animated:YES];
     [self.view addSubview:self.tableView];
-  
-    
-    
- 
-    
-  
-  
-   
-    
-    
 }
 
 -(void)Login{
@@ -128,7 +91,6 @@
     [request LoginRequstphoneText:[defaults stringForKey:@"ZhangHao"] password:[defaults stringForKey:@"MiMa"] :^(NSDictionary *dic) {
         
         weakSelf.userInfo = [XFUserInfo loadWithJSOn:dic];
-//        NSLog(@"model名字 %@",model.userName);
         [XFUserInfo saveUserInfo:self.userInfo];
         dispatch_async(dispatch_get_main_queue(), ^{
             [weakSelf.tableView reloadData];
@@ -159,7 +121,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
-    return 6;
+    return 4;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
@@ -169,16 +131,10 @@
         return 1;
     }else if (section == 2){
         if ([self.userInfo.dutyId isEqualToString:@"1"]) {
-            return 4;
+            return 7;
         }
-        return  3;
-    }else if (section == 3){
-        return 2;
-    }
-    else if (section == 4){
-        return 2;
-    }
-    else {
+        return  6;
+    }else {
         return 1;
     }
     
@@ -186,15 +142,17 @@
 
 -(void)getInfo{
        GetUserInfoRequst *requst = [[GetUserInfoRequst alloc]init];
-   
-        [requst GetUserInfoRequstwithuserid:_yonghuid :^(NSDictionary *json) {
-            //        self.model = [[PersonModel alloc]init];
+        [requst GetUserInfoRequstwithuserid:self.userInfo.Loginid :^(NSDictionary *json) {
             self.model = [PersonModel loadWithJSOn:json[@"ret_data"]];
-            
             [self.tableView reloadData];
         }];
- 
-   
+}
+-(void)GetMessageWaitNum{
+    GetMessageWaitNumRequst *requst = [[GetMessageWaitNumRequst alloc]init];
+    [requst GetMessageWaitNumRequstWithuserid:self.userInfo.Loginid :^(NSDictionary *json) {
+        self.msg = [json[@"ret_data"] integerValue];
+        [self.tableView reloadData];
+    }];
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -216,7 +174,28 @@
         cell.integralLabel.text = [NSString stringWithFormat:@"积分 : %@",self.model.jifenSoft];
         cell.coinLabel.text = [NSString stringWithFormat:@"先锋币 : %@ ", [NSString stringWithFormat:@"%ld",(long)self.model.xfbnSoft]];
         return  cell;
-    }else if (indexPath.section == 5){
+    }else if (indexPath.section ==2){
+        if ([self.userInfo.dutyId isEqualToString:@"1"]) {//学生
+            self.teacherarray1 = @[@"个人中心",@"我的习作",@"申请批阅",@"做题笔记",@"读书笔记",@"我的推荐",@"我的微课"];
+            self.array1 = @[@"icon_01",@"icon_03",@"icon_03",@"icon_04",@"icon_05",@"icon_02",@"icon_06"];
+        }else if ([self.userInfo.dutyId isEqualToString:@"0"]){
+            
+            self.teacherarray1 = @[@"个人中心",@"批阅任务",@"我的试卷",@"读书笔记",@"我的推荐",@"我的微课"];
+            self.array1 = @[@"icon_01",@"icon_03",@"icon_04",@"icon_05",@"icon_02",@"icon_06"];
+        }
+        
+        
+        MyThridTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellThrid" forIndexPath:indexPath];
+        cell.label.text = self.teacherarray1[indexPath.row];
+        if (indexPath.row == 0 && (self.msg > 0)) {
+            cell.label2.hidden = NO;
+            cell.label2.text = [NSString stringWithFormat:@"%ld",(long)self.msg];
+        }else{
+            cell.label2.hidden = YES;
+        }
+        cell.imageView.image = [UIImage imageNamed:self.array1[indexPath.row]];
+        return cell;
+    }else if (indexPath.section == 3){
         
         UITableViewCell *cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"cell"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -230,41 +209,6 @@
         [cell addSubview:loginbutton];
         
         return cell;
-    }else if (indexPath.section ==2){
-        
-        
-        if ([self.userInfo.dutyId isEqualToString:@"1"]) {
-            self.teacherarray1 = @[@"个人中心",@"推荐图书",@"我的习作",@"申请批阅"];
-            self.array1 = @[@"icon_01",@"icon_02",@"icon_03",@"icon_03"];
-        }else if ([self.userInfo.dutyId isEqualToString:@"0"]){
-            
-            self.teacherarray1 = @[@"个人中心",@"推荐图书",@"批阅任务"];
-            self.array1 = @[@"icon_01",@"icon_02",@"icon_03"];
-        }
-        
-        MyThridTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellThrid" forIndexPath:indexPath];
-        cell.label.text = self.teacherarray1[indexPath.row];
-        cell.imageView.image = [UIImage imageNamed:self.array1[indexPath.row]];
-        return cell;
-    
-    }else if (indexPath.section ==3){
-        if ([self.userInfo.dutyId isEqualToString:@"1"]) {
-            self.teacherarray2 = @[@"做题笔记",@"读书笔记"];
-        }else {
-            
-            self.teacherarray2 = @[@"我的试卷",@"读书笔记"];
-        }
-        
-        MyThridTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellThrid" forIndexPath:indexPath];
-        cell.label.text = self.teacherarray2[indexPath.row];
-        cell.imageView.image = [UIImage imageNamed:self.array2[indexPath.row]];
-        return cell;
-    }else if (indexPath.section ==4){
-        NSArray *arry3 = @[@"我的微课",@"我的圈子"];
-        MyThridTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellThrid" forIndexPath:indexPath];
-        cell.label.text = arry3[indexPath.row];
-        cell.imageView.image = [UIImage imageNamed:self.array3[indexPath.row]];
-        return cell;
     }
     
     return nil;
@@ -276,10 +220,6 @@
     }else if (indexPath.section == 1){
         return 40;
     }else if (indexPath.section == 2){
-        return 45;
-    }else if (indexPath.section == 3){
-        return 45;
-    }else if (indexPath.section == 4){
         return 45;
     }else {
         return 50;
@@ -294,83 +234,96 @@
     
     
     if ([self.userInfo.dutyId isEqualToString:@"1"]) {
-        if (indexPath.section == 2) {
-            if (indexPath.row == 0) {
-
+        switch (indexPath.row) {
+            case 0:{//个人中心
                 PersonalViewController *vc = [[PersonalViewController alloc]init];
                 [self.navigationController pushViewController:vc animated:YES];
-            }else if (indexPath.row == 1) {
-                MyrecommendBookViewController *vc = [[MyrecommendBookViewController alloc]init];
-                vc.MyrecommenuserId = self.userInfo.Loginid;
-                [self.navigationController pushViewController:vc animated:YES];
-            }else if (indexPath.row == 2) {
+            }
+                break;
+            case 1:{//我的习作
                 MyWritingsViewController *vc = [[MyWritingsViewController alloc]init];
                 vc.myWritingUserid = self.userInfo.Loginid;
                 [self.navigationController pushViewController:vc animated:YES];
-            }else if (indexPath.row == 3){
+            }
+                break;
+            case 2:{//申请批阅
                 ApplyMarkViewController *vc = [[ApplyMarkViewController alloc]init];
                 vc.applyMarkUserid = self.userInfo.Loginid;
                 [self.navigationController pushViewController:vc animated:YES];
             }
-            
-        }else if (indexPath.section == 3){
-            if (indexPath.row == 0) {
+                break;
+            case 3:{//做题笔记
                 TakenotesViewController *vc = [[TakenotesViewController alloc]init];
                 vc.takenotesuserId = self.userInfo.Loginid;
                 [self.navigationController pushViewController:vc animated:YES];
-            }else if (indexPath.row == 1) {
+            }
+                break;
+            case 4:{//读书笔记
                 ReadnotesViewController *vc = [[ReadnotesViewController alloc]init];
                 vc.readnotesUserid = self.userInfo.Loginid;
                 [self.navigationController pushViewController:vc animated:YES];
             }
-            
-        }else if (indexPath.section == 4) {
-            if (indexPath.row == 0) {
-                MyMicroViewController *vc = [[MyMicroViewController alloc]init];
-                vc.userID = self.userInfo.Loginid;
-                [self.navigationController pushViewController:vc animated:YES];
-            }else if (indexPath.row == 1){
-                MyringViewController *vc = [[MyringViewController alloc]init];
-                vc.Myringuserid = self.userInfo.Loginid;
-                [self.navigationController pushViewController:vc animated:YES];
-                
-            }
-        }
-    }else if ([self.userInfo.dutyId isEqualToString:@"0"]){
-        if (indexPath.section == 2) {
-            if (indexPath.row == 0) {
-                
-                PersonalViewController *vc = [[PersonalViewController alloc]init];
-                [self.navigationController pushViewController:vc animated:YES];
-            }else if (indexPath.row == 1) {
+                break;
+            case 5:{//我的推荐
                 MyrecommendBookViewController *vc = [[MyrecommendBookViewController alloc]init];
                 vc.MyrecommenuserId = self.userInfo.Loginid;
                 [self.navigationController pushViewController:vc animated:YES];
-            }else if (indexPath.row == 2) {
+            }
+                break;
+            case 6:{//我的微课
+                MyMicroViewController *vc = [[MyMicroViewController alloc]init];
+                vc.userID = self.userInfo.Loginid;
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+                break;
+            default:
+                break;
+        }
+        
+    }else if ([self.userInfo.dutyId isEqualToString:@"0"]){
+        switch (indexPath.row) {
+            case 0:{//个人中心
+                PersonalViewController *vc = [[PersonalViewController alloc]init];
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+                break;
+            case 1:{//批阅任务
                 MarktaskViewController *vc = [[MarktaskViewController alloc]init];
                 vc.marktaskUserID = self.userInfo.Loginid;
                 [self.navigationController pushViewController:vc animated:YES];
             }
-        }else if (indexPath.section == 3){
-            if (indexPath.row == 0) {
+                break;
+            case 2:{//我的试卷
                 MytestpaperViewController *vc = [[MytestpaperViewController alloc]init];
                 vc.testpaperuserId = self.userInfo.Loginid;
                 [self.navigationController pushViewController:vc animated:YES];
-            }else if (indexPath.row == 1) {
+            }
+                break;
+            case 3:{//读书笔记
                 ReadnotesViewController *vc = [[ReadnotesViewController alloc]init];
                 vc.readnotesUserid = self.userInfo.Loginid;
                 [self.navigationController pushViewController:vc animated:YES];
             }
-        }else if (indexPath.section == 4){
-            if (indexPath.row == 0) {
+                break;
+            case 4:{//我的推荐
+                MyrecommendBookViewController *vc = [[MyrecommendBookViewController alloc]init];
+                vc.MyrecommenuserId = self.userInfo.Loginid;
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+                break;
+            case 5:{//我的微课
                 MyMicroViewController *vc = [[MyMicroViewController alloc]init];
                 vc.userID = self.userInfo.Loginid;
                 [self.navigationController pushViewController:vc animated:YES];
-            }else if (indexPath.row == 1){
-                MyringViewController *vc = [[MyringViewController alloc]init];
-                vc.Myringuserid = self.userInfo.Loginid;
-                [self.navigationController pushViewController:vc animated:YES];
             }
+                break;
+            case 6:{
+                
+            }
+                break;
+                
+            default:
+                break;
         }
     
     }
