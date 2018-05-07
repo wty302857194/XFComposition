@@ -15,21 +15,22 @@
         UIImageView *imgView = [[UIImageView alloc]init];
         UILabel *label = [[UILabel alloc]init];
         self.Textfield = [[UITextField alloc]init];
-        
         [self.contentView sd_addSubviews:@[imgView,label,self.Textfield]];
         
-        label.sd_layout.rightSpaceToView(self.contentView, WidthFrame -120).topSpaceToView(self.contentView, 5).heightIs(30).widthIs(0);
-        label.text = @"真实姓名：";
         
-        label.textAlignment = NSTextAlignmentRight;
+        imgView.sd_layout.leftSpaceToView(self.contentView, 20).centerYEqualToView(self.contentView).heightIs(5).widthIs(5);
+        imgView.image = [UIImage imageNamed:@"pic_star"];
+        
+        
+        label.sd_layout.leftSpaceToView(imgView, 5).topSpaceToView(self.contentView, 5).heightIs(30).widthIs(105);
+        label.textAlignment = NSTextAlignmentLeft;
+        label.text = @"真实姓名";
         label.font  = [UIFont systemFontOfSize:14];
-        [label setSingleLineAutoResizeWithMaxWidth:0];
-        imgView.sd_layout.rightSpaceToView(label, 0).topSpaceToView(self.contentView, 15).heightIs(10).widthIs(10);
-        imgView.backgroundColor = [UIColor lightGrayColor];
+//        [label setSingleLineAutoResizeWithMaxWidth:0];
         
         
-        self.Textfield.sd_layout.leftSpaceToView(label, 0).topSpaceToView(self.contentView, 5).heightIs(30).widthIs(WidthFrame-140);
-        self.Textfield.text = @"teacher2";
+        self.Textfield.sd_layout.leftSpaceToView(label, 0).centerYEqualToView(label).rightSpaceToView(self.contentView, 20).heightIs(30);
+//        self.Textfield.text = @"teacher2";
         self.Textfield.font  = [UIFont systemFontOfSize:14];
         self.Textfield.layer.cornerRadius = 4;
         self.Textfield.layer.masksToBounds = YES;
@@ -37,7 +38,7 @@
         self.Textfield.layer.borderWidth = 1;
         self.Textfield.clearButtonMode=YES;
         self.Textfield.leftViewMode=UITextFieldViewModeAlways;
-        [self.Textfield setBorderStyle:UITextBorderStyleRoundedRect];
+        [self.Textfield setBorderStyle:UITextBorderStyleNone];
         
     }
     return self;

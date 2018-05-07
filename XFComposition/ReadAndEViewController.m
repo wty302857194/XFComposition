@@ -105,10 +105,10 @@ typedef void(^MoreMessageBlock)();
     return self;
 }
 - (void)setUI {
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 30)];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, self.height)];
     [self addSubview:view];
     
-    UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 0, kScreenWidth-20, 30)];
+    UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(20, 0, kScreenWidth-40, view.height)];
     imgView.image = [UIImage imageNamed:@"bg_read_title"];
     [view addSubview:imgView];
     
@@ -144,13 +144,8 @@ typedef void(^MoreMessageBlock)();
 @end
 @interface ReadAndEViewController ()<UICollectionViewDelegate,UICollectionViewDataSource> {
     UIView *alpha_view;
-    NSString *_istuijian;      // 是否推荐
-    NSString *_ishost;        //是否热门
-    NSString *_quxian;      //区县
-    NSString *_xuexiao;
 }
 @property (nonatomic,strong)UICollectionView *collectionView;
-
 @property (nonatomic,strong)NSMutableArray *tuijianbookArray;
 @property (nonatomic,strong)NSMutableArray *xuexiaobookArray;
 @property (nonatomic,strong)NSMutableArray *xianfengbookArray;
@@ -253,17 +248,17 @@ typedef void(^MoreMessageBlock)();
     [self.view addSubview:self.collectionView];
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
 
-        [self bookRequst:self.tuijianbookArray :@"4" :@"0" :@"0" :@"21440" :@"0" :@"0"];
-        [self bookRequst:self.xuexiaobookArray :@"4" :@"0" :@"0" :@"21440" :@"0" :@"0"];
-//        [self bookRequst:@"1" :self.xuexiaobookArray :@"4"];
-//        [self bookRequst:@"1" :self.xianfengbookArray :@"2"];
-//        [self bookRequst:@"2" :self.remenbookArray :@"2"];
+        [self bookRequst:self.tuijianbookArray :@"8" :@"0" :@"0" :@"0" :@"0" :@"1"];
+        [self bookRequst:self.xianfengbookArray :@"4" :@"0" :@"0" :@"211440" :@"0" :@"0"];
+        [self bookRequst:self.xuexiaobookArray :@"8" :@"0" :@"0" :@"0" :@"1" :@"0"];
+        [self bookRequst:self.remenbookArray :@"2" :@"0" :@"1" :@"0" :@"0" :@"0"];
+
         [self readBJRequst];
         [self GetBookpaihangRequst:@"0" :self.weekArray];//周排行
         [self GetBookpaihangRequst:@"1" :self.monthArray];//月排行
         
         [self ReadStartRequst:@"0" :@"4" :self.readpaihangArray1];//阅读排行
-        [self ReadStartRequst:@"1" :@"4" :self.readpaihangArray2];
+//        [self ReadStartRequst:@"1" :@"4" :self.readpaihangArray2];
 //        [self getReadBoBao:@"1"];//阅读播报
 //        [self getReadBoBao:@"2"];//阅读播报
         [self.collectionView.mj_header endRefreshing];
@@ -448,10 +443,10 @@ xuexiao：0    //学校"
         }
         return self.xuexiaobookArray.count;
     }else if (section == 3){
-        if (self.xianfengbookArray.count == 0) {
+        if (self.tuijianbookArray.count == 0) {
             return 0;
         }
-        return self.xianfengbookArray.count;
+        return self.tuijianbookArray.count;
     }else if (section == 4){
         if (self.remenbookArray.count ==0) {
             return 0;
@@ -464,7 +459,7 @@ xuexiao：0    //学校"
     }else if (section == 7){
         return 1;//10大排行
     }else if (section == 8){
-        return 1;//读书排行
+        return self.readpaihangArray1.count;//读书排行
     }
     return 0;
 }
@@ -485,17 +480,6 @@ xuexiao：0    //学校"
         return cell;
     }
     else if (indexPath.section == 1){
-//        if (self.tuijianbookArray.count == 0) {
-//            MicReplaceCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MicReplaceCell" forIndexPath:indexPath];
-//            return cell;
-//        }
-//        ReadSecondCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Read23" forIndexPath:indexPath];
-//        BookModel *model1 = self.tuijianbookArray[indexPath.row];
-//
-//        NSString *str = [NSString stringWithFormat:@"%@%@",HTurl,model1.BookPic];
-//        [cell.imgView sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"icon_02"] options:SDWebImageRefreshCached];
-//        cell.nameLabel.text = [NSString stringWithFormat:@"《%@》",model1.BookName];
-//        return cell;
         if (self.tuijianbookArray.count == 0) {
             MicReplaceCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MicReplaceCell" forIndexPath:indexPath];
             return cell;
@@ -503,9 +487,7 @@ xuexiao：0    //学校"
         HomePaSixCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Read45" forIndexPath:indexPath];
         BookModel *model1 = self.xianfengbookArray[indexPath.row];
         cell.model = model1;
-        
         return cell;
-        
     }
     else if (indexPath.section == 2){
         if (self.xuexiaobookArray.count == 0) {
@@ -519,21 +501,27 @@ xuexiao：0    //学校"
         cell.nameLabel.text = [NSString stringWithFormat:@"《%@》",model1.BookName];
         return cell;
     }else if (indexPath.section == 3){
+//        HomePaSixCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Read45" forIndexPath:indexPath];
+//        BookModel *model1 = self.tuijianbookArray[indexPath.row];
+//
+//        [cell.imageView1 sd_setImageWithURL:[NSURL URLWithString:model1.BookPic] placeholderImage:[UIImage imageNamed:@"icon_02"] options:SDWebImageRefreshCached];
+//        //        [cell.imageView1 sd_setImageWithURL:[NSURL URLWithString:str]];
+//        cell.label1.text = [NSString stringWithFormat:@"《%@》",model1.BookName];
+//        cell.label2.text = [NSString stringWithFormat:@"出版社:%@",model1.BookPublic];
+//        cell.label3.text = [NSString stringWithFormat:@"添加时间:%@",model1.BookAddTime];
+//        cell.label4.text = [NSString stringWithFormat:@"作者:%@",model1.BookAuthor];
+//        cell.label5.text = model1.BookPublic;
+//        cell.label6.text = [NSString stringWithFormat:@"阅读人数:%@",model1.BookIntroduction];
         if (self.tuijianbookArray.count == 0) {
             MicReplaceCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MicReplaceCell" forIndexPath:indexPath];
             return cell;
         }
-        HomePaSixCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Read45" forIndexPath:indexPath];
-        BookModel *model1 = self.xianfengbookArray[indexPath.row];
+        ReadSecondCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Read23" forIndexPath:indexPath];
+        BookModel *model1 = self.tuijianbookArray[indexPath.row];
         
-        [cell.imageView1 sd_setImageWithURL:[NSURL URLWithString:model1.BookPic] placeholderImage:[UIImage imageNamed:@"icon_02"] options:SDWebImageRefreshCached];
-        //        [cell.imageView1 sd_setImageWithURL:[NSURL URLWithString:str]];
-        cell.label1.text = [NSString stringWithFormat:@"《%@》",model1.BookName];
-        cell.label2.text = [NSString stringWithFormat:@"出版社:%@",model1.BookPublic];
-        cell.label3.text = [NSString stringWithFormat:@"添加时间:%@",model1.BookAddTime];
-        cell.label4.text = [NSString stringWithFormat:@"作者:%@",model1.BookAuthor];
-        cell.label5.text = model1.BookPublic;
-        cell.label6.text = [NSString stringWithFormat:@"阅读人数:%@",model1.BookIntroduction];
+        [cell.imgView sd_setImageWithURL:[NSURL URLWithString:model1.BookPic] placeholderImage:[UIImage imageNamed:@"icon_02"] options:SDWebImageRefreshCached];
+        cell.nameLabel.text = [NSString stringWithFormat:@"《%@》",model1.BookName];
+        return cell;
 
         return cell;
     }else if (indexPath.section == 4){
@@ -569,9 +557,9 @@ xuexiao：0    //学校"
         return cell;
     }else if (indexPath.section == 8){
         ReadTenCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Read10" forIndexPath:indexPath];
+//        GetReadStartModel *model = self.readpaihangArray1[indexPath.row];
+        cell.model = self.readpaihangArray1[indexPath.row];
         
-        cell.array1 = self.readpaihangArray1;
-        cell.array2 = self.readpaihangArray2;
         return  cell;
     }
     return nil;
@@ -591,7 +579,9 @@ xuexiao：0    //学校"
         
     }
     else if (indexPath.section == 3){
-        return CGSizeMake(WidthFrame/2-15, 110);
+//        return CGSizeMake(WidthFrame/2-15, 110);
+        return CGSizeMake((WidthFrame-20-30)/4, HeightFrame/6+20);
+
         
     }else if (indexPath.section == 4){
         return CGSizeMake(WidthFrame/2-15, 110);
@@ -601,13 +591,15 @@ xuexiao：0    //学校"
         return CGSizeMake(WidthFrame, 40);//横幅
         
     }else if (indexPath.section == 6){
-        return CGSizeMake(WidthFrame/2-30, 20);
+        return CGSizeMake(WidthFrame-40, 30);
         
     }else if (indexPath.section == 7){
         return CGSizeMake(WidthFrame-40, 230);
         
     }else if (indexPath.section == 8){
-        return CGSizeMake(WidthFrame-40, 80);
+//        return CGSizeMake(WidthFrame-40, 80);
+        return CGSizeMake(WidthFrame-40, 30);
+
         
     }
     return CGSizeZero;
@@ -629,7 +621,7 @@ xuexiao：0    //学校"
     
     }
     else if (section == 6 || section == 8){
-        return UIEdgeInsetsMake(5, 20, 5, 20);
+        return UIEdgeInsetsMake(0, 20, 0, 20);
     }
     return UIEdgeInsetsMake(0, 0, 5, 0);
     
@@ -653,7 +645,7 @@ referenceSizeForHeaderInSection:(NSInteger)section {
         return CGSizeMake(WidthFrame, 40);
     }
     else{
-        return CGSizeMake(WidthFrame, 25);
+        return CGSizeMake(WidthFrame, 30);
     }
 }
 

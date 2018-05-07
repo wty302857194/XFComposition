@@ -7,10 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GetReadStartModel.h"
 
 @interface ReadTenCell : UICollectionViewCell
-@property (nonatomic,strong)UITableView *tableView1;
-@property (nonatomic,strong)UITableView *tableView2;
-@property (nonatomic,strong)NSMutableArray *array1;
-@property (nonatomic,strong)NSMutableArray *array2;
+//@property (nonatomic,strong)UITableView *tableView1;
+//@property (nonatomic,strong)UITableView *tableView2;
+@property (nonatomic,strong)GetReadStartModel *model;
+//@property (nonatomic,strong)NSMutableArray *array2;
+
+@property (nonatomic,strong) UILabel *nameLab;
+@property (nonatomic,strong) UILabel *schoolLab;
+@property (nonatomic,strong) UILabel *numLab;
+
 @end

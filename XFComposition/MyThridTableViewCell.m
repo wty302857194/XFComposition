@@ -17,16 +17,27 @@
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         
         self.imgView = [[UIImageView alloc]initWithFrame:CGRectMake(20, 5, 30, 30)];
-        [self.contentView addSubview:self.imgView];
-        
         self.label = [[UILabel alloc]init];
-        [self.contentView addSubview:self.label];
+        self.label2 = [[UILabel alloc]init];
+        [self.contentView sd_addSubviews:@[self.imgView,self.label,self.label2]];
+        
+        
+        
         self.label.font = [UIFont systemFontOfSize:13];
-        self.label.sd_layout.leftSpaceToView(self.imgView, 20).topSpaceToView(self.contentView, 15).heightIs(30);
+        self.label.sd_layout.leftSpaceToView(self.imgView, 20).centerYEqualToView(self.contentView).heightIs(30);
         [self.label setSingleLineAutoResizeWithMaxWidth:0];
         
-        UIImageView *img2 = [[UIImageView alloc]initWithFrame:CGRectMake(WidthFrame-20-10, 5 , 20, 30)];;
         
+        self.label2.sd_layout.leftSpaceToView(self.label, 20).centerYEqualToView(self.label).heightIs(20).widthIs(20);
+        self.label2.layer.cornerRadius = 10;
+        self.label2.layer.masksToBounds = YES;
+        self.label2.textColor = [UIColor whiteColor];
+        self.label2.backgroundColor = [UIColor redColor];
+        self.label2.textAlignment = NSTextAlignmentCenter;
+        [self.label2 setFont:[UIFont fontWithName:@"Helvetica-Bold" size:11]];//加粗
+        
+        
+        UIImageView *img2 = [[UIImageView alloc]initWithFrame:CGRectMake(WidthFrame-20-10, 5 , 20, 30)];;
         img2.image = [UIImage imageNamed:@"right-arrow-"];
         [self.contentView addSubview:img2];
         

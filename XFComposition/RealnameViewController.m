@@ -65,7 +65,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.title = @"实名认证";
+    self.navigationItem.title = @"完善个人信息";
     self.view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.tableView];
 }
@@ -118,7 +118,7 @@
             RealnameFristCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell1" forIndexPath:indexPath];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.titleLabel.text = self.Model.userId;
-            [cell.titleLabel setSingleLineAutoResizeWithMaxWidth:0];
+//            [cell.titleLabel setSingleLineAutoResizeWithMaxWidth:0];
             return cell;
         }else if (indexPath.row == 1){
             RealnameSecondCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell2" forIndexPath:indexPath];
@@ -139,16 +139,18 @@
         RealnameFourCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell4" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.label.text = self.titleArray[indexPath.row];
-        [cell.label setSingleLineAutoResizeWithMaxWidth:0];
+//        [cell.label setSingleLineAutoResizeWithMaxWidth:0];
         
         if (indexPath.row == 0) {
             self.textfield2 = [[UITextField alloc]init];
             self.textfield2 = cell.textField;
             self.textfield2.text = self.Model.sid;
+            self.textfield2.placeholder = @"请输入手机号";
         }else if (indexPath.row == 1){
             self.textfield3 = [[UITextField alloc]init];
             self.textfield3 = cell.textField;
             self.textfield3.text = self.Model.useremail;
+            self.textfield2.placeholder = @"请输入邮箱";
         }else if (indexPath.row == 2){
             self.textfield4 = [[UITextField alloc]init];
             self.textfield4 = cell.textField;
@@ -157,11 +159,13 @@
             }else{
                     self.textfield4.text = self.Model.birthDay;
             }
+            self.textfield2.placeholder = @"请输入生日";
         
         }else if (indexPath.row == 3){
             self.textfield5 = [[UITextField alloc]init];
             self.textfield5 = cell.textField;
             self.textfield5.text = self.Model.signatrueName;
+            self.textfield2.placeholder = @"请输入QQ号";
         }
         return cell;
     }
@@ -174,14 +178,14 @@
 #pragma header高度
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    if (section == 0) {
-        return 40;
-    }
+//    if (section == 0) {
+//        return 40;
+//    }
     return 0.01;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     if (section == 1) {
-        return 80;
+        return 100;
     }
     return 0.01;
 }
@@ -189,7 +193,7 @@
     if (section == 0) {
         UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, WidthFrame, 40)];
         UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(20, 0, WidthFrame-40, 40)];
-        label.text = @"修改你的基本资料";
+//        label.text = @"修改你的基本资料";
         label.font = [UIFont systemFontOfSize:14];
         [view addSubview:label];
         return view;
@@ -198,9 +202,9 @@
 }
 -(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
     if (section == 1) {
-        UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, WidthFrame, 40)];
+        UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, WidthFrame, 100)];
         UIButton *bt = [UIButton buttonWithType:UIButtonTypeCustom];
-        bt.frame = CGRectMake(WidthFrame/4, 45, WidthFrame/2, 30);
+        bt.frame = CGRectMake(30, 50, WidthFrame-60, 50);
         bt.layer.cornerRadius = 4;
         bt.layer.masksToBounds = YES;
         bt.backgroundColor = [UIColor colorWithHexString:@"338CCB"];
