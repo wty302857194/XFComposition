@@ -31,7 +31,7 @@
 + (void)deleteUserInfo;
 
 // 获取用户信息
-+ (id)getUserInfo;
++ (XFUserInfo*)getUserInfo;
 //
 // 是否已登录
 + (BOOL)isLogin;

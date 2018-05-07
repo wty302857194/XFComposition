@@ -9,20 +9,20 @@
 #import "GetMessageListModel.h"
 
 @implementation GetMessageListModel
-+(id)loadWithJSOn:(NSDictionary *)json{
-    return [[self alloc]initWithJSON:json];
+
+-(id)initWithDictionary:(NSDictionary*)dict
+{
+    
+    if (self = [super init])
+    {
+        DTAPI_DICT_ASSIGN_STRING(DateTime, @"");
+        DTAPI_DICT_ASSIGN_STRING(ID, @"");
+        DTAPI_DICT_ASSIGN_STRING(MesType, @"");
+        DTAPI_DICT_ASSIGN_STRING(ReadFlag, @"");
+        DTAPI_DICT_ASSIGN_STRING(Title, @"");
+    }
+   
+    return self;
     
 }
--(id)initWithJSON:(NSDictionary *)dic{
-    if (self = [super init]) {
-        self.DateTime = dic[@"DateTime"];
-        self.ID = dic[@"ID"];
-        self.MesType = dic[@"MesType"];
-        self.ReadFlag = dic[@"ReadFlag"];
-        self.Title = dic[@"Title"];
-        
-    }
-    return self;
-}
-
 @end

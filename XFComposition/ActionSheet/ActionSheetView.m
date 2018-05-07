@@ -40,7 +40,7 @@ static CGFloat CancleMargin = 6.0;//取消按钮上面的间隔
         [self addGestureRecognizer:tap];
         
         // sheet
-        _sheetView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 0)];
+        _sheetView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 0)];
         _sheetView.backgroundColor = ActionSheetColor(236,239,240);
         _sheetView.alpha = 0.9;
         [[UIApplication sharedApplication].keyWindow addSubview:_sheetView];
@@ -88,12 +88,12 @@ static CGFloat CancleMargin = 6.0;//取消按钮上面的间隔
     for (ActionSheetItem *item in _items) {
         UIButton *btn = nil;
         if (item.index == 0) {//取消按钮
-            btn = [[UIButton alloc] initWithFrame:CGRectMake(0, _sheetView.frame.size.height - BtnHeight, ScreenWidth, BtnHeight)];
+            btn = [[UIButton alloc] initWithFrame:CGRectMake(0, _sheetView.frame.size.height - BtnHeight, kScreenWidth, BtnHeight)];
             
         } else {
-            btn = [[UIButton alloc] initWithFrame:CGRectMake(0, BtnHeight * (item.index - 1) , ScreenWidth, BtnHeight)];
+            btn = [[UIButton alloc] initWithFrame:CGRectMake(0, BtnHeight * (item.index - 1) , kScreenWidth, BtnHeight)];
             // 最上面画分割线
-            UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 0.5)];
+            UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 0.5)];
             line.backgroundColor = ActionSheetSeparatorColor;
 
             [btn addSubview:line];
@@ -115,11 +115,11 @@ static CGFloat CancleMargin = 6.0;//取消按钮上面的间隔
     self.sheetView.hidden = NO;
     
     CGRect sheetViewF = self.sheetView.frame;
-    sheetViewF.origin.y = ScreenHeight;
+    sheetViewF.origin.y = kScreenWidth;
     self.sheetView.frame = sheetViewF;
     
     CGRect newSheetViewF = self.sheetView.frame;
-    newSheetViewF.origin.y =ScreenHeight - self.sheetView.frame.size.height;
+    newSheetViewF.origin.y =kScreenWidth - self.sheetView.frame.size.height;
     
     [UIView animateWithDuration:0.3 animations:^{
         
@@ -133,7 +133,7 @@ static CGFloat CancleMargin = 6.0;//取消按钮上面的间隔
 // 显示黑色遮罩
 - (void)coverClick{
     CGRect sheetViewF = self.sheetView.frame;
-    sheetViewF.origin.y = ScreenHeight;
+    sheetViewF.origin.y = kScreenWidth;
     
     [UIView animateWithDuration:0.2 animations:^{
         self.sheetView.frame = sheetViewF;

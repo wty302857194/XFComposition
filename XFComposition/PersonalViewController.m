@@ -13,7 +13,7 @@
 #import "PersonModel.h"
 
 #import "ICSDrawerController.h"
-#import "PerCenterViewController.h"
+#import "PerCenterViewController1.h"
 #import "PerLeftViewController.h"
 
 #import "RealnameViewController.h"
@@ -191,7 +191,10 @@
         if (indexPath.row == 0) {
             PerLeftViewController *leftVC = [[PerLeftViewController alloc] init];
             
-            PerCenterViewController *plainVC = [PerCenterViewController defaultPlainViewController];
+            PerCenterViewController1 *plainVC = [PerCenterViewController1 defaultPlainViewController];
+            plainVC.flagStr = @"1";
+            plainVC.typeStr = @"0";
+
             ICSDrawerController *drawer = [[ICSDrawerController alloc] initWithLeftViewController:leftVC centerViewController:plainVC];
             [self.navigationController pushViewController:drawer animated:YES];
         }else if (indexPath.row == 4){
@@ -206,7 +209,7 @@
         if (indexPath.row == 0) {
             PerLeftViewController *leftVC = [[PerLeftViewController alloc] init];
             
-            PerCenterViewController *plainVC = [PerCenterViewController defaultPlainViewController];
+            PerCenterViewController1 *plainVC = [PerCenterViewController1 defaultPlainViewController];
             ICSDrawerController *drawer = [[ICSDrawerController alloc] initWithLeftViewController:leftVC centerViewController:plainVC];
             [self.navigationController pushViewController:drawer animated:YES];
         }else if (indexPath.row == 3){

@@ -37,7 +37,11 @@
 #import "Global.h"
 #import "UIViewController+CWLateralSlide.h"
 #import "UIButton+ImageTitleStyle.h"
-
+#import "XFRequestManager.h"
+#import "FMBean.h"
+#import "DTApiBaseBean.h"
+#import "PublicDefine.h"
+#import "AllBean.h"
 #define kSeverTime  20
 
 
@@ -47,7 +51,6 @@
 #define kScreenSize     [UIScreen mainScreen].bounds.size
 #define kScreenWidth    [UIScreen mainScreen].bounds.size.width
 #define kScreenHeight   [UIScreen mainScreen].bounds.size.height
-
 
 
 #define kStatusFrame    [[UIApplication sharedApplication] statusBarFrame]

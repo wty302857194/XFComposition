@@ -66,6 +66,15 @@
 		32F7E75B209341470016C1A6 /* VolunteerActiveiTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32F7E759209341470016C1A6 /* VolunteerActiveiTableViewCell.xib */; };
 		3F3D577D209C373600D415AC /* ActionSheetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3D577B209C373600D415AC /* ActionSheetView.m */; };
 		3F3D577E209C373600D415AC /* ActionSheetItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3D577C209C373600D415AC /* ActionSheetItem.m */; };
+		3F3D5781209C40FA00D415AC /* XFRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3D5780209C40FA00D415AC /* XFRequestManager.m */; };
+		3F3D5784209C451E00D415AC /* MessageDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3D5783209C451E00D415AC /* MessageDetail.m */; };
+		3F3D578A209C528700D415AC /* MessageDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3D5788209C528700D415AC /* MessageDetailViewController.m */; };
+		3F3D578B209C528700D415AC /* MessageDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F3D5789209C528700D415AC /* MessageDetailViewController.xib */; };
+		3F3D5790209C5B3B00D415AC /* FMBean.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3D578F209C5B3B00D415AC /* FMBean.m */; };
+		3F3D5793209C5C7300D415AC /* DTApiBaseBean.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3D5792209C5C7300D415AC /* DTApiBaseBean.m */; };
+		3FA5D978209FE42A0029E276 /* PerCenterViewController1.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA5D976209FE42A0029E276 /* PerCenterViewController1.m */; };
+		3FA5D979209FE42A0029E276 /* PerCenterViewController1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FA5D977209FE42A0029E276 /* PerCenterViewController1.xib */; };
+		3FA5D981209FEB070029E276 /* GetMessageListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA5D97F209FEB050029E276 /* GetMessageListModel.m */; };
 		4ABBA26F2080DBF60002E08D /* RegistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ABBA26D2080DBF60002E08D /* RegistViewController.m */; };
 		4ABBA2702080DBF60002E08D /* RegistViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4ABBA26E2080DBF60002E08D /* RegistViewController.xib */; };
 		4ABBA2732080E0150002E08D /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ABBA2722080E0150002E08D /* BaseViewController.m */; };
@@ -218,7 +227,6 @@
 		F62DC72B1F9F1D3C00D3E035 /* PerLeftSecondCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F62DC72A1F9F1D3C00D3E035 /* PerLeftSecondCell.m */; };
 		F62DC7301F9F2ECF00D3E035 /* PerCenterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F62DC72F1F9F2ECF00D3E035 /* PerCenterCell.m */; };
 		F62DC7331F9F346500D3E035 /* GetMessageListRequst.m in Sources */ = {isa = PBXBuildFile; fileRef = F62DC7321F9F346500D3E035 /* GetMessageListRequst.m */; };
-		F62DC7361F9F37FE00D3E035 /* GetMessageListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F62DC7351F9F37FE00D3E035 /* GetMessageListModel.m */; };
 		F648B8211F8629420050D729 /* CustomDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = F648B81E1F8629420050D729 /* CustomDatePicker.m */; };
 		F648B8221F8629420050D729 /* JXAlertview.m in Sources */ = {isa = PBXBuildFile; fileRef = F648B8201F8629420050D729 /* JXAlertview.m */; };
 		F649DD431F5516DD00879744 /* FristCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F649DD421F5516DD00879744 /* FristCollectionViewCell.m */; };
@@ -719,6 +727,24 @@
 		3F3D577A209C373500D415AC /* ActionSheetView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetView.h; sourceTree = "<group>"; };
 		3F3D577B209C373600D415AC /* ActionSheetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetView.m; sourceTree = "<group>"; };
 		3F3D577C209C373600D415AC /* ActionSheetItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetItem.m; sourceTree = "<group>"; };
+		3F3D577F209C40FA00D415AC /* XFRequestManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XFRequestManager.h; sourceTree = "<group>"; };
+		3F3D5780209C40FA00D415AC /* XFRequestManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XFRequestManager.m; sourceTree = "<group>"; };
+		3F3D5782209C451E00D415AC /* MessageDetail.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageDetail.h; sourceTree = "<group>"; };
+		3F3D5783209C451E00D415AC /* MessageDetail.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageDetail.m; sourceTree = "<group>"; };
+		3F3D5787209C528700D415AC /* MessageDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageDetailViewController.h; sourceTree = "<group>"; };
+		3F3D5788209C528700D415AC /* MessageDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageDetailViewController.m; sourceTree = "<group>"; };
+		3F3D5789209C528700D415AC /* MessageDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageDetailViewController.xib; sourceTree = "<group>"; };
+		3F3D578E209C5B3A00D415AC /* FMBean.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMBean.h; sourceTree = "<group>"; };
+		3F3D578F209C5B3B00D415AC /* FMBean.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMBean.m; sourceTree = "<group>"; };
+		3F3D5791209C5C7300D415AC /* DTApiBaseBean.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTApiBaseBean.h; sourceTree = "<group>"; };
+		3F3D5792209C5C7300D415AC /* DTApiBaseBean.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTApiBaseBean.m; sourceTree = "<group>"; };
+		3FA5D975209FE42A0029E276 /* PerCenterViewController1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PerCenterViewController1.h; sourceTree = "<group>"; };
+		3FA5D976209FE42A0029E276 /* PerCenterViewController1.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PerCenterViewController1.m; sourceTree = "<group>"; };
+		3FA5D977209FE42A0029E276 /* PerCenterViewController1.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PerCenterViewController1.xib; sourceTree = "<group>"; };
+		3FA5D97A209FE98B0029E276 /* PublicDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PublicDefine.h; sourceTree = "<group>"; };
+		3FA5D97B209FE9C50029E276 /* AllBean.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AllBean.h; sourceTree = "<group>"; };
+		3FA5D97F209FEB050029E276 /* GetMessageListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetMessageListModel.m; sourceTree = "<group>"; };
+		3FA5D982209FEF760029E276 /* GetMessageListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetMessageListModel.h; sourceTree = "<group>"; };
 		4ABBA26C2080DBF60002E08D /* RegistViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegistViewController.h; sourceTree = "<group>"; };
 		4ABBA26D2080DBF60002E08D /* RegistViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RegistViewController.m; sourceTree = "<group>"; };
 		4ABBA26E2080DBF60002E08D /* RegistViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegistViewController.xib; sourceTree = "<group>"; };
@@ -1045,8 +1071,6 @@
 		F62DC72F1F9F2ECF00D3E035 /* PerCenterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PerCenterCell.m; sourceTree = "<group>"; };
 		F62DC7311F9F346500D3E035 /* GetMessageListRequst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetMessageListRequst.h; sourceTree = "<group>"; };
 		F62DC7321F9F346500D3E035 /* GetMessageListRequst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetMessageListRequst.m; sourceTree = "<group>"; };
-		F62DC7341F9F37FE00D3E035 /* GetMessageListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetMessageListModel.h; sourceTree = "<group>"; };
-		F62DC7351F9F37FE00D3E035 /* GetMessageListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetMessageListModel.m; sourceTree = "<group>"; };
 		F648B81D1F8629420050D729 /* CustomDatePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomDatePicker.h; sourceTree = "<group>"; };
 		F648B81E1F8629420050D729 /* CustomDatePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomDatePicker.m; sourceTree = "<group>"; };
 		F648B81F1F8629420050D729 /* JXAlertview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JXAlertview.h; sourceTree = "<group>"; };
@@ -1942,6 +1966,41 @@
 			path = ActionSheet;
 			sourceTree = "<group>";
 		};
+		3F3D5786209C521600D415AC /* messageDetail */ = {
+			isa = PBXGroup;
+			children = (
+				3F3D5787209C528700D415AC /* MessageDetailViewController.h */,
+				3F3D5788209C528700D415AC /* MessageDetailViewController.m */,
+				3F3D5789209C528700D415AC /* MessageDetailViewController.xib */,
+			);
+			name = messageDetail;
+			sourceTree = "<group>";
+		};
+		3F3D578C209C52DF00D415AC /* XFRequest */ = {
+			isa = PBXGroup;
+			children = (
+				3F3D577F209C40FA00D415AC /* XFRequestManager.h */,
+				3F3D5780209C40FA00D415AC /* XFRequestManager.m */,
+			);
+			name = XFRequest;
+			sourceTree = "<group>";
+		};
+		3F3D578D209C530400D415AC /* data */ = {
+			isa = PBXGroup;
+			children = (
+				3F3D5791209C5C7300D415AC /* DTApiBaseBean.h */,
+				3F3D5792209C5C7300D415AC /* DTApiBaseBean.m */,
+				3F3D578E209C5B3A00D415AC /* FMBean.h */,
+				3F3D578F209C5B3B00D415AC /* FMBean.m */,
+				3F3D5782209C451E00D415AC /* MessageDetail.h */,
+				3F3D5783209C451E00D415AC /* MessageDetail.m */,
+				3FA5D982209FEF760029E276 /* GetMessageListModel.h */,
+				3FA5D97F209FEB050029E276 /* GetMessageListModel.m */,
+				3FA5D97B209FE9C50029E276 /* AllBean.h */,
+			);
+			name = data;
+			sourceTree = "<group>";
+		};
 		4ABBA2792080E6120002E08D /* LCCategory */ = {
 			isa = PBXGroup;
 			children = (
@@ -2270,6 +2329,7 @@
 				F612EBF91F4FB398000E7432 /* MainViewControllers */,
 				F612EC031F4FBA38000E7432 /* Vendors */,
 				F612EC281F4FEC99000E7432 /* PrefixHeader.pch */,
+				3FA5D97A209FE98B0029E276 /* PublicDefine.h */,
 				F612EC2A1F4FEF78000E7432 /* Macro */,
 				F612EBCF1F4FB341000E7432 /* Main.storyboard */,
 				F6B130D31F607E9200994571 /* Mic01.png */,
@@ -2314,6 +2374,8 @@
 		F612EBF91F4FB398000E7432 /* MainViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				3F3D578C209C52DF00D415AC /* XFRequest */,
+				3F3D578D209C530400D415AC /* data */,
 				F612EC131F4FCD81000E7432 /* Controllers */,
 				F612EC121F4FBC3B000E7432 /* Views */,
 				F612EC041F4FBA83000E7432 /* Tools */,
@@ -2672,6 +2734,7 @@
 		F62A257F1F7358B9004E095D /* My */ = {
 			isa = PBXGroup;
 			children = (
+				3F3D5786209C521600D415AC /* messageDetail */,
 				F612EC221F4FD7DD000E7432 /* MyViewController.h */,
 				F612EC231F4FD7DD000E7432 /* MyViewController.m */,
 				F6A717811FA0B3970046C235 /* ChangePassWordViewController.h */,
@@ -2688,6 +2751,9 @@
 				F6A717541FA020C20046C235 /* M */,
 				F62DC71E1F9F14B600D3E035 /* PerCenterViewController.h */,
 				F62DC71F1F9F14B600D3E035 /* PerCenterViewController.m */,
+				3FA5D975209FE42A0029E276 /* PerCenterViewController1.h */,
+				3FA5D976209FE42A0029E276 /* PerCenterViewController1.m */,
+				3FA5D977209FE42A0029E276 /* PerCenterViewController1.xib */,
 				F62DC72D1F9F2EA200D3E035 /* V */,
 				F62DC72C1F9F2E9C00D3E035 /* M */,
 				F62DC7211F9F160D00D3E035 /* PerLeftViewController.h */,
@@ -2827,8 +2893,6 @@
 			children = (
 				F62DC7311F9F346500D3E035 /* GetMessageListRequst.h */,
 				F62DC7321F9F346500D3E035 /* GetMessageListRequst.m */,
-				F62DC7341F9F37FE00D3E035 /* GetMessageListModel.h */,
-				F62DC7351F9F37FE00D3E035 /* GetMessageListModel.m */,
 			);
 			name = M;
 			sourceTree = "<group>";
@@ -4661,9 +4725,11 @@
 				3256A5FD2098A7EB00A19946 /* TYAllListViewController.xib in Resources */,
 				322B157C2088D0AD009FCC96 /* UpCompositionViewController.xib in Resources */,
 				F6038CF01F590601008FE507 /* sj.png in Resources */,
+				3FA5D979209FE42A0029E276 /* PerCenterViewController1.xib in Resources */,
 				F6038CE81F58E96A008FE507 /* mp322.png in Resources */,
 				32CBFA8C20886B5C004CB00F /* LeftMenuViewController.xib in Resources */,
 				32426A4C208638FF00B5227B /* HomeTableViewCell.xib in Resources */,
+				3F3D578B209C528700D415AC /* MessageDetailViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4837,7 +4903,6 @@
 				F6FFD3D01F9044B20029B762 /* MarkprogressViewController.m in Sources */,
 				F662D1DE1FA8698600BAEB18 /* getBookSubjectResultRequst.m in Sources */,
 				F604BDD11FAC09E0005A24A4 /* WedpCell.m in Sources */,
-				F62DC7361F9F37FE00D3E035 /* GetMessageListModel.m in Sources */,
 				F6DC7CD01F91FC910050D1DF /* ApplyMarkViewController.m in Sources */,
 				F623F3EF1F67787800D421D4 /* MicroSecondCell.m in Sources */,
 				F6FCBDAF1F99930E0022F448 /* MBProgressHUD.m in Sources */,
@@ -4933,6 +4998,7 @@
 				F6D637CD1F7D284900FF6FA4 /* IQUIViewController+Additions.m in Sources */,
 				F6CD74C31F720C1400EBE579 /* RecruiteacherFristCell.m in Sources */,
 				F6C741C41F95B26A006CF76D /* MarktaskViewController.m in Sources */,
+				3FA5D978209FE42A0029E276 /* PerCenterViewController1.m in Sources */,
 				F6BDDAFA1FA1E7D400C78F6D /* MarkTestThridCell.m in Sources */,
 				F69C8F8E1F88BB930091F31C /* MenuTableViewCell.m in Sources */,
 				F69C8F821F887A780091F31C /* MywritingCell.m in Sources */,
@@ -4964,6 +5030,7 @@
 				F6BC3E2B1F5D23710047A7AA /* NSData+ImageContentType.m in Sources */,
 				F69C99891F8E44FE00F0C7D6 /* BookRecHeaderView.m in Sources */,
 				4ABBA2772080E02A0002E08D /* LoginViewController.m in Sources */,
+				3F3D5790209C5B3B00D415AC /* FMBean.m in Sources */,
 				F6D5048B1FB1678000EEC233 /* ActivityController.m in Sources */,
 				F6C091901F8A4A3600F89A9B /* GetGroupInfoModel.m in Sources */,
 				F6BDDAE81FA1ABF500C78F6D /* GetActiveSubectByGuiZeRequst.m in Sources */,
@@ -5062,6 +5129,7 @@
 				F623E2C21F8727630024876A /* GetBlogInfoRequst.m in Sources */,
 				F62DC71C1F9F132200D3E035 /* ICSDrawerController.m in Sources */,
 				3237381B2092C26900015514 /* ListSelectView.m in Sources */,
+				3FA5D981209FEB070029E276 /* GetMessageListModel.m in Sources */,
 				F612EBCE1F4FB341000E7432 /* ViewController.m in Sources */,
 				F6CF09D11FA9F07500D885D8 /* GetTitleBackinfoModel.m in Sources */,
 				F6AF70801F9DA49C008E4220 /* MarkProgressFristCell.m in Sources */,
@@ -5178,6 +5246,7 @@
 				32426A4B208638FF00B5227B /* HomeTableViewCell.m in Sources */,
 				F6DAD9D81F976A0B00249DAD /* GetMyPageSubjectListRequst.m in Sources */,
 				F6B3C0E91F5DA43D00C0D821 /* MJRefreshFooter.m in Sources */,
+				3F3D5781209C40FA00D415AC /* XFRequestManager.m in Sources */,
 				F6D637951F7CA60100FF6FA4 /* BookRecViewController.m in Sources */,
 				F621C2041FA6B4C800801521 /* SVIndefiniteAnimatedView.m in Sources */,
 				F6D637C91F7D284900FF6FA4 /* IQNSArray+Sort.m in Sources */,
@@ -5193,6 +5262,7 @@
 				F6BC3E341F5D23710047A7AA /* UIImage+GIF.m in Sources */,
 				F6D42FA61FB2EB9B00410A08 /* CompositMenuCell.m in Sources */,
 				4ABBA2A52080E6120002E08D /* UIScrollView+LCRefresh.m in Sources */,
+				3F3D5784209C451E00D415AC /* MessageDetail.m in Sources */,
 				4ABBA2A42080E6120002E08D /* UIScrollView+LCAdd.m in Sources */,
 				F649DD541F554A7D00879744 /* MySecondTableViewCell.m in Sources */,
 				F6C227AB1F9B2A2A00464BD6 /* CorrectViewController.m in Sources */,
@@ -5245,6 +5315,7 @@
 				F69C99781F8E1D1400F0C7D6 /* GetReadStartModel.m in Sources */,
 				F6C741D41F95DD79006CF76D /* WorkMarkViewController.m in Sources */,
 				F61E18791FA2DDCB00FF11E1 /* PreviewTestViewController.m in Sources */,
+				3F3D578A209C528700D415AC /* MessageDetailViewController.m in Sources */,
 				F6E187D51FA46239003F06B3 /* GetActivePageViewRequst.m in Sources */,
 				F69C99601F8DC9ED00F0C7D6 /* DeleteBlogRequst.m in Sources */,
 				F6E3BA181F5E3BC20060DEDD /* DianPingModel.m in Sources */,
@@ -5258,6 +5329,7 @@
 				04A07A281F6B62070026DD6E /* NSObject+MJCoding.m in Sources */,
 				F621C20E1FA73E0500801521 /* GetPageSubjectRequst.m in Sources */,
 				F6FFD4011F90B5F60029B762 /* ReadinotesViewController.m in Sources */,
+				3F3D5793209C5C7300D415AC /* DTApiBaseBean.m in Sources */,
 				F6CF09CE1FA9DE0500D885D8 /* PostbackmyCell.m in Sources */,
 				F6D42FAD1FB2F65900410A08 /* GetLabelTypeTreelistAllModel.m in Sources */,
 				F6AA9A071F61023E006897B1 /* SynchroClassViewController.m in Sources */,
