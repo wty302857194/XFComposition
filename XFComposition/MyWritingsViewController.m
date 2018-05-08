@@ -258,6 +258,7 @@
             [weakSelf requst:self.typeid :self.gardeid :self.ishost :self.istuijian];
             
         }];
+        _menuView.tableView.backgroundColor = [UIColor clearColor];
         
         [self.view addSubview:_menuView];
     }
@@ -613,8 +614,13 @@
     
     [requst GetBlogContentInfoRequstWithNoticeID:[NSString stringWithFormat:@"%ld",(long)model.ID] :^(NSDictionary *json) {
         
-        
         if ([json[@"ret_msg"] isEqualToString:@"成功"]) {
+            
+            
+            
+            
+            
+            
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.contentView showView];
             });
