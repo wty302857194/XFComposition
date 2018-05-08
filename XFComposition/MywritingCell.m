@@ -49,7 +49,8 @@
         
         self.label1.sd_layout.leftSpaceToView(self.bt1, 10).topSpaceToView(backView, 10).rightSpaceToView(backView, 20).heightIs(30);
         [self.label1 addTarget:self action:@selector(showView :) forControlEvents:UIControlEventTouchUpInside];
-        self.label1.titleLabel.textAlignment = NSTextAlignmentLeft;
+        self.label1.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+//        self.label1.titleLabel.textAlignment = NSTextAlignmentLeft;
         [self.label1 setTitleColor:[UIColor colorWithHexString:@"3D9CD4"] forState:UIControlStateNormal];
 
     
@@ -150,7 +151,7 @@
         
         [self.label1 setTitle:@"暂无" forState:UIControlStateNormal];
     }else{
-        [self.label1 setTitle:_model.BlogTitle forState:UIControlStateNormal];
+        [self.label1 setTitle:[NSString stringWithFormat:@"《%@》",_model.BlogTitle] forState:UIControlStateNormal];
         
     }
     self.label2.text = @"微课习作";
