@@ -10,4 +10,14 @@
 
 @interface MyWritingDetailModel : NSObject
 
+@property (nonatomic, assign) NSInteger BlogID;
+@property (nonatomic, copy) NSString *CreateTime;
+@property (nonatomic, copy) NSString *FixPicUrl;
+@property (nonatomic, assign) NSInteger ID;
+@property (nonatomic, copy) NSString *PicUrl;
+@property (nonatomic, assign) NSInteger Sort;
+@property (nonatomic, assign) NSInteger UserID;
+
+-(instancetype)initWithDic:(NSDictionary *)dict;
+
 @end

@@ -24,7 +24,12 @@
 //                                 @"NoticeID":NoticeID,
 //                                 };
     //新版
-    NSDictionary *parameters = @{@"Action":@"GetBlogInfo",
+//    NSDictionary *parameters = @{@"Action":@"GetBlogInfo",
+//                                 @"Token":@"0A66A4FD-146F-4542-8D7B-33CDEC2981F9",
+//                                 @"blogid":NoticeID,
+//                                 };
+    
+    NSDictionary *parameters = @{@"Action":@"GetWritePic",
                                  @"Token":@"0A66A4FD-146F-4542-8D7B-33CDEC2981F9",
                                  @"blogid":NoticeID,
                                  };

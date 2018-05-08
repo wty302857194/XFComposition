@@ -10,4 +10,6 @@
 
 @interface MyWritingDetailViewController : UIViewController
 
+@property (nonatomic,strong) NSArray *dataArr;
+
 @end

@@ -10,4 +10,17 @@
 
 @implementation MyWritingDetailModel
 
+
+-(instancetype)initWithDic:(NSDictionary *)dict{
+    self = [super init];
+    if (self) {
+        [self setValuesForKeysWithDictionary:dict];
+    }
+    return self;
+}
+-(void)setValue:(id)value forUndefinedKey:(NSString *)key{
+    
+}
+
+
 @end
