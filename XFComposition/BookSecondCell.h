@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface BookSecondCell : UITableViewCell
-@property (nonatomic,strong)UITextView *textView;
+@property (nonatomic,strong)FSTextView *textView;
 @end

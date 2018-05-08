@@ -240,8 +240,9 @@
 //图书推荐
 -(void)Recommend{
     BookEditViewController *vc = [[BookEditViewController alloc]init];
-    [self.navigationController pushViewController:vc animated:YES];
     vc.bookFlag = @"0";
+    [self.navigationController pushViewController:vc animated:YES];
+    
 }
 
 - (void)moreMessage:(UIButton *)btn {

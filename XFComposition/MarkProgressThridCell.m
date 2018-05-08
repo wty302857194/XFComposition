@@ -16,7 +16,7 @@
         self.textView = [[UITextView alloc]initWithFrame:CGRectMake(20, 10, WidthFrame-40, HeightFrame-244)];
         self.textView.layer.borderWidth = 0.5;
         self.textView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
-        self.textView.layer.cornerRadius = 6;
+        self.textView.layer.cornerRadius = 5;
         self.textView.layer.masksToBounds = YES;
 
         [self.contentView addSubview:self.textView];
