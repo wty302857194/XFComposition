@@ -21,6 +21,7 @@
 		04A07A2E1F6B65A80026DD6E /* XFBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A07A2D1F6B65A80026DD6E /* XFBaseModel.m */; };
 		2F4FC65A20A17C34009A1E4C /* MyWritingDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F4FC65820A17C34009A1E4C /* MyWritingDetailViewController.m */; };
 		2F4FC65B20A17C34009A1E4C /* MyWritingDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F4FC65920A17C34009A1E4C /* MyWritingDetailViewController.xib */; };
+		2F4FC65E20A189EF009A1E4C /* MyWritingDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F4FC65D20A189EF009A1E4C /* MyWritingDetailModel.m */; };
 		320D1BD0208611B700F7D45A /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 320D1BCE208611B700F7D45A /* HomeViewController.m */; };
 		320D1BD1208611B700F7D45A /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 320D1BCF208611B700F7D45A /* HomeViewController.xib */; };
 		320D1BD62086132E00F7D45A /* HomeHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 320D1BD52086132E00F7D45A /* HomeHeaderView.m */; };
@@ -674,6 +675,8 @@
 		2F4FC65720A17C34009A1E4C /* MyWritingDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyWritingDetailViewController.h; sourceTree = "<group>"; };
 		2F4FC65820A17C34009A1E4C /* MyWritingDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyWritingDetailViewController.m; sourceTree = "<group>"; };
 		2F4FC65920A17C34009A1E4C /* MyWritingDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyWritingDetailViewController.xib; sourceTree = "<group>"; };
+		2F4FC65C20A189EF009A1E4C /* MyWritingDetailModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyWritingDetailModel.h; sourceTree = "<group>"; };
+		2F4FC65D20A189EF009A1E4C /* MyWritingDetailModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyWritingDetailModel.m; sourceTree = "<group>"; };
 		3084EAC2F37884539B99B88E /* Pods_XFComposition.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_XFComposition.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		320D1BCD208611B700F7D45A /* HomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		320D1BCE208611B700F7D45A /* HomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
@@ -3204,6 +3207,8 @@
 				F69C8F761F885ED70091F31C /* MymicroModel.m */,
 				F69C8F781F886D120091F31C /* OmitFavClassRequst.h */,
 				F69C8F791F886D120091F31C /* OmitFavClassRequst.m */,
+				2F4FC65C20A189EF009A1E4C /* MyWritingDetailModel.h */,
+				2F4FC65D20A189EF009A1E4C /* MyWritingDetailModel.m */,
 			);
 			name = M;
 			sourceTree = "<group>";
@@ -5120,6 +5125,7 @@
 				F6B3C0F31F5DA43D00C0D821 /* MJRefreshStateHeader.m in Sources */,
 				F6E187CC1FA460BF003F06B3 /* PanduanCell.m in Sources */,
 				F68866F21F87A70800ED580C /* MyMicroRequst.m in Sources */,
+				2F4FC65E20A189EF009A1E4C /* MyWritingDetailModel.m in Sources */,
 				F662D1D51FA825AE00BAEB18 /* MytestGroupCell.m in Sources */,
 				3FA5D9B720A03EF00029E276 /* TZImagePickerController.m in Sources */,
 				F68866E61F87764800ED580C /* TeacherApplyVolRequst.m in Sources */,
