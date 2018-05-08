@@ -15,7 +15,7 @@
 
 @interface LeavmessageViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong)UITableView *tableView;
-@property (nonatomic,strong)UITextView *MessgetextView;
+@property (nonatomic,strong)FSTextView *MessgetextView;
 @property (nonatomic,strong)NSMutableArray *messgeArray;
 @property (nonatomic,assign)NSInteger page;
 @end
@@ -35,7 +35,7 @@
 }
 -(UITableView *)tableView{
     if (!_tableView) {
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, WidthFrame, HeightFrame-64) style:UITableViewStyleGrouped];
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, kLayoutViewMarginTop, WidthFrame, HeightFrame-kLayoutViewMarginTop) style:UITableViewStyleGrouped];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         [_tableView registerClass:[LeaVmessgeTableViewCell class] forCellReuseIdentifier:@"cell"];
@@ -166,11 +166,12 @@
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, WidthFrame, 160)];
-    self.MessgetextView = [[UITextView alloc]initWithFrame:CGRectMake(20, 5, WidthFrame-40, 120)];
+    self.MessgetextView = [[FSTextView alloc]initWithFrame:CGRectMake(20, 5, WidthFrame-40, 120)];
     self.MessgetextView.layer.borderWidth = 0.5;
     self.MessgetextView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
     self.MessgetextView.layer.cornerRadius = 6;
     self.MessgetextView.layer.masksToBounds = YES;
+    self.MessgetextView.placeholder = @"请输入内容";
     [view addSubview:self.MessgetextView];
     
     UIButton *bt = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -197,12 +198,9 @@
 }
 
 -(void)leftBarButton{
-    UIBarButtonItem *item=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"left-arrow_s"] style: UIBarButtonItemStylePlain target:self action:@selector(onBack)];
-    
-    self.navigationItem.leftBarButtonItem=item;
-    
+    GO_BACK;
 }
--(void)onBack{
+-(void)goBackNV{
     [self.navigationController popViewControllerAnimated:YES];
     
     

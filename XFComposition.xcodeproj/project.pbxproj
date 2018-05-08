@@ -24,6 +24,7 @@
 		320D1BD62086132E00F7D45A /* HomeHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 320D1BD52086132E00F7D45A /* HomeHeaderView.m */; };
 		320D1BDB2086287A00F7D45A /* WaterWaveView.m in Sources */ = {isa = PBXBuildFile; fileRef = 320D1BD92086287800F7D45A /* WaterWaveView.m */; };
 		320D1BDD20862AA700F7D45A /* HomeHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 320D1BDC20862AA700F7D45A /* HomeHeaderView.xib */; };
+		322B04C220A1450E00D6CCF9 /* FSTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 322B04C120A1450E00D6CCF9 /* FSTextView.m */; };
 		322B15732088AB3C009FCC96 /* CompositionLibraryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 322B15712088AB3C009FCC96 /* CompositionLibraryTableViewCell.m */; };
 		322B15742088AB3C009FCC96 /* CompositionLibraryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 322B15722088AB3C009FCC96 /* CompositionLibraryTableViewCell.xib */; };
 		322B15772088B0DA009FCC96 /* UIView+IBExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 322B15752088B0D8009FCC96 /* UIView+IBExtension.m */; };
@@ -677,6 +678,8 @@
 		320D1BD92086287800F7D45A /* WaterWaveView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaterWaveView.m; sourceTree = "<group>"; };
 		320D1BDA2086287A00F7D45A /* WaterWaveView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaterWaveView.h; sourceTree = "<group>"; };
 		320D1BDC20862AA700F7D45A /* HomeHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeHeaderView.xib; sourceTree = "<group>"; };
+		322B04C020A1450E00D6CCF9 /* FSTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTextView.h; sourceTree = "<group>"; };
+		322B04C120A1450E00D6CCF9 /* FSTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTextView.m; sourceTree = "<group>"; };
 		322B15702088AB3C009FCC96 /* CompositionLibraryTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CompositionLibraryTableViewCell.h; sourceTree = "<group>"; };
 		322B15712088AB3C009FCC96 /* CompositionLibraryTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CompositionLibraryTableViewCell.m; sourceTree = "<group>"; };
 		322B15722088AB3C009FCC96 /* CompositionLibraryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CompositionLibraryTableViewCell.xib; sourceTree = "<group>"; };
@@ -1962,6 +1965,15 @@
 			path = WaterWaveView;
 			sourceTree = "<group>";
 		};
+		322B04BF20A1450E00D6CCF9 /* FSTextView */ = {
+			isa = PBXGroup;
+			children = (
+				322B04C020A1450E00D6CCF9 /* FSTextView.h */,
+				322B04C120A1450E00D6CCF9 /* FSTextView.m */,
+			);
+			path = FSTextView;
+			sourceTree = "<group>";
+		};
 		322B157D2088D383009FCC96 /* UpComposition */ = {
 			isa = PBXGroup;
 			children = (
@@ -2514,6 +2526,7 @@
 		F612EC041F4FBA83000E7432 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				322B04BF20A1450E00D6CCF9 /* FSTextView */,
 				3FA5D99020A03EEF0029E276 /* TZImagePickerController */,
 				3FA5D98820A031460029E276 /* PlaceholderTextView */,
 				32CBFA8220883C57004CB00F /* utilities */,
@@ -4762,9 +4775,8 @@
 				TargetAttributes = {
 					F612EBC21F4FB341000E7432 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = X225TLXQ76;
+						DevelopmentTeam = RGN8U623GW;
 						ProvisioningStyle = Automatic;
-
 					};
 					F612EBDB1F4FB341000E7432 = {
 						CreatedOnToolsVersion = 8.3.3;
@@ -4986,6 +4998,7 @@
 				F6D7C7F31F8F447300A08DC1 /* BookDetailThirdCell.m in Sources */,
 				F6C741E71F95FCBF006CF76D /* MytestpaperCell.m in Sources */,
 				F6BC3E371F5D23710047A7AA /* UIImageView+HighlightedWebCache.m in Sources */,
+				322B04C220A1450E00D6CCF9 /* FSTextView.m in Sources */,
 				58E291E1206A1F1E0016DACD /* fenxiangViewController.m in Sources */,
 				F6D637D01F7D284900FF6FA4 /* IQKeyboardReturnKeyHandler.m in Sources */,
 				F6BC3D271F5CE1F30047A7AA /* HomeRequst.m in Sources */,
@@ -5655,17 +5668,16 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-
-				DEVELOPMENT_TEAM = X225TLXQ76;
+				DEVELOPMENT_TEAM = RGN8U623GW;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/XFComposition/PrefixHeader.pch";
 				INFOPLIST_FILE = XFComposition/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.house365.Rent;
+				PRODUCT_BUNDLE_IDENTIFIER = com.grasp.test1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "399220a6-d791-412c-961d-4f6c04a784e5";
-				PROVISIONING_PROFILE_SPECIFIER = "Rent-dev";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Debug;
 		};
@@ -5677,17 +5689,16 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-
-				DEVELOPMENT_TEAM = X225TLXQ76;
+				DEVELOPMENT_TEAM = RGN8U623GW;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/XFComposition/PrefixHeader.pch";
 				INFOPLIST_FILE = XFComposition/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.house365.Rent;
+				PRODUCT_BUNDLE_IDENTIFIER = com.grasp.test1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "399220a6-d791-412c-961d-4f6c04a784e5";
-				PROVISIONING_PROFILE_SPECIFIER = "Rent-dev";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Release;
 		};

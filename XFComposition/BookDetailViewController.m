@@ -10,6 +10,7 @@
 #import "MarkprogressViewController.h"
 #import "LeavmessageViewController.h"
 #import "BookEditViewController.h"
+#import "ReadinotesViewController.h"
 
 #import "BookDetailFristCell.h"
 #import "BookDetailSecondCell.h"
@@ -42,12 +43,6 @@
 @implementation BookDetailViewController
 //-(void)viewWillAppear:(BOOL)animated{
 //    [super viewWillAppear:YES];
-//    [self.navigationController setNavigationBarHidden:NO animated:YES];
-//
-//}
-//-(void)viewWillDisappear:(BOOL)animated{
-//    [super viewWillDisappear:YES];
-//
 //    [self.navigationController setNavigationBarHidden:NO animated:YES];
 //
 //}
@@ -109,7 +104,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"图书详情";
-//    self.navigationController.navigationBar.barTintColor = [UIColor colorWithHexString:@"3690CE"];
     
     self.xf = [XFUserInfo getUserInfo];
     [self.view addSubview:self.tableView];
@@ -239,10 +233,9 @@
 //留言
 -(void)leaVmessge{
     LeavmessageViewController *vc = [[LeavmessageViewController alloc]init];
-    [self.navigationController pushViewController:vc animated:YES];
     vc.leavMessgeId = self.bookid;
     vc.userID = self.xf.Loginid;
-
+    [self.navigationController pushViewController:vc animated:YES];
 }
 //图书推荐
 -(void)Recommend{
@@ -252,7 +245,14 @@
 }
 
 - (void)moreMessage:(UIButton *)btn {
-    
+    ReadinotesViewController *vc = [[ReadinotesViewController alloc]init];
+
+    if (btn.tag == 3) {//老师
+        vc.isTeacher = @"2";
+    }else {//学生
+        vc.isTeacher = @"1";
+    }
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
