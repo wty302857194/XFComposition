@@ -59,6 +59,7 @@
 		32B38F51208880B000616A7B /* LeftDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32B38F4F208880B000616A7B /* LeftDetailViewController.m */; };
 		32B38F52208880B000616A7B /* LeftDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32B38F50208880B000616A7B /* LeftDetailViewController.xib */; };
 		32BB21C02089C53700107075 /* UpCompositionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 32BB21BF2089C53700107075 /* UpCompositionModel.m */; };
+		32C1369120A1C52800287915 /* RegistTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32C1369020A1C52800287915 /* RegistTableViewController.m */; };
 		32CBFA7D20877C36004CB00F /* BaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CBFA7B20877C33004CB00F /* BaseRequest.m */; };
 		32CBFA81208782A3004CB00F /* HomeLessonModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CBFA80208782A3004CB00F /* HomeLessonModel.m */; };
 		32CBFA8520883C58004CB00F /* Global.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CBFA8420883C57004CB00F /* Global.m */; };
@@ -739,6 +740,8 @@
 		32B38F50208880B000616A7B /* LeftDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LeftDetailViewController.xib; sourceTree = "<group>"; };
 		32BB21BE2089C53700107075 /* UpCompositionModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UpCompositionModel.h; sourceTree = "<group>"; };
 		32BB21BF2089C53700107075 /* UpCompositionModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UpCompositionModel.m; sourceTree = "<group>"; };
+		32C1368F20A1C52700287915 /* RegistTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistTableViewController.h; sourceTree = "<group>"; };
+		32C1369020A1C52800287915 /* RegistTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistTableViewController.m; sourceTree = "<group>"; };
 		32CBFA7B20877C33004CB00F /* BaseRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseRequest.m; sourceTree = "<group>"; };
 		32CBFA7C20877C35004CB00F /* BaseRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseRequest.h; sourceTree = "<group>"; };
 		32CBFA7F208782A3004CB00F /* HomeLessonModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeLessonModel.h; sourceTree = "<group>"; };
@@ -2303,11 +2306,11 @@
 				4ABBA2742080E02A0002E08D /* LoginViewController.h */,
 				4ABBA2752080E02A0002E08D /* LoginViewController.m */,
 				4ABBA2762080E02A0002E08D /* LoginViewController.xib */,
-				4ABBA2712080E0150002E08D /* BaseViewController.h */,
-				4ABBA2722080E0150002E08D /* BaseViewController.m */,
 				4ABBA26C2080DBF60002E08D /* RegistViewController.h */,
 				4ABBA26D2080DBF60002E08D /* RegistViewController.m */,
 				4ABBA26E2080DBF60002E08D /* RegistViewController.xib */,
+				32C1368F20A1C52700287915 /* RegistTableViewController.h */,
+				32C1369020A1C52800287915 /* RegistTableViewController.m */,
 				F6D3FA941F663DBF002B257C /* M */,
 			);
 			name = LoginController;
@@ -2593,6 +2596,9 @@
 				F612EC011F4FB562000E7432 /* NavimainViewController.m */,
 				F6B130AF1F6034C900994571 /* BasenaviViewController.h */,
 				F6B130B01F6034C900994571 /* BasenaviViewController.m */,
+				4ABBA2712080E0150002E08D /* BaseViewController.h */,
+				4ABBA2722080E0150002E08D /* BaseViewController.m */,
+				3262C5BA2091F6870063DE19 /* TYStoryboard.storyboard */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -4156,7 +4162,6 @@
 				F6A604671F7A2B3D00794B20 /* BookwritingController.m */,
 				3262C5B52091F5EE0063DE19 /* BookWritingTableViewController.h */,
 				3262C5B62091F5EE0063DE19 /* BookWritingTableViewController.m */,
-				3262C5BA2091F6870063DE19 /* TYStoryboard.storyboard */,
 				3262C5BC2091FD8E0063DE19 /* AddPhotoViewController.h */,
 				3262C5BD2091FD8E0063DE19 /* AddPhotoViewController.m */,
 				3262C5BF2091FE0D0063DE19 /* AddPhotoCollectionViewCell.h */,
@@ -5518,6 +5523,7 @@
 				F6B3C0ED1F5DA43D00C0D821 /* MJRefreshAutoStateFooter.m in Sources */,
 				5863268C207DE21200904265 /* canyuViewController.m in Sources */,
 				F6B77D301F6F9F2400E159CE /* FristFootView.m in Sources */,
+				32C1369120A1C52800287915 /* RegistTableViewController.m in Sources */,
 				F649DD511F554A4F00879744 /* MyFristTableViewCell.m in Sources */,
 				F6B8DB851F7267510087666D /* ApplyViewController.m in Sources */,
 				F6D637A41F7D245600FF6FA4 /* AddwritingView.m in Sources */,
