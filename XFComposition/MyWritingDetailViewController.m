@@ -7,9 +7,14 @@
 //
 
 #import "MyWritingDetailViewController.h"
+#import "MyWritingDetailCell.h"
 
-@interface MyWritingDetailViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface MyWritingDetailViewController ()<UITableViewDelegate,UITableViewDataSource>{
+    
+    
+}
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) NSMutableDictionary *heightDic;
 
 @end
 
@@ -19,28 +24,42 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    
 }
 
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 1;
+    return self.dataArr.count;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    id cellData = [self.dataArr objectAtIndex:indexPath.row];
+    CGFloat height = [[self.heightDic objectForKey:[NSString stringWithFormat:@"%ld",indexPath.row]] floatValue];
+    if (height <= 0) {
+        height = [MyWritingDetailCell cellHeight:cellData];
+        [self.heightDic setObject:[NSString stringWithFormat:@"%.f",height] forKey:[NSString stringWithFormat:@"%ld",indexPath.row]];
+    }
     
-    return 10;
+    return height;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    
-    return nil;
-    
+    MyWritingDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyWritingDetailCell"];
+    if (!cell) {
+        cell = [[NSBundle mainBundle] loadNibNamed:@"MyWritingDetailCell" owner:nil options:nil].firstObject;
+    }
+    id cellData = [self.dataArr objectAtIndex:indexPath.row];
+    [cell reloadCellData:cellData];
+    return cell;
 }
 
+
+-(NSMutableDictionary *)heightDic{
+    if (!_heightDic) {
+        _heightDic = [NSMutableDictionary dictionary];
+    }
+    return _heightDic;
+}
 
 
 - (void)didReceiveMemoryWarning {

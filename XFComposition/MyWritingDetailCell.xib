@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="175" id="KGk-i7-Jjw" customClass="MyWritingDetailCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="240"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="239.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BES-92-htI">
+                        <rect key="frame" x="15" y="25" width="140" height="178.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="140" id="sj6-2R-PlS"/>
+                        </constraints>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vve-Tm-lzv">
+                        <rect key="frame" x="165" y="25" width="140" height="178.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="140" id="Mcd-Xm-xUa"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="原图" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yng-9u-00N">
+                        <rect key="frame" x="15" y="218.5" width="140" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="JgA-DG-D4F"/>
+                            <constraint firstAttribute="width" constant="140" id="TFs-HY-Wiu"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="批阅图片" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V28-Vo-NGN">
+                        <rect key="frame" x="165" y="218.5" width="140" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="Rwk-h2-dOD"/>
+                            <constraint firstAttribute="width" constant="140" id="wTt-4C-oCL"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="V28-Vo-NGN" firstAttribute="top" secondItem="vve-Tm-lzv" secondAttribute="bottom" constant="15" id="FPE-UR-BPo"/>
+                    <constraint firstItem="BES-92-htI" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="Fh7-hX-ekW"/>
+                    <constraint firstAttribute="bottom" secondItem="yng-9u-00N" secondAttribute="bottom" id="MYq-xm-BNy"/>
+                    <constraint firstItem="BES-92-htI" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="25" id="UBo-M4-Cb4"/>
+                    <constraint firstAttribute="trailing" secondItem="vve-Tm-lzv" secondAttribute="trailing" constant="15" id="hRi-38-8dh"/>
+                    <constraint firstItem="yng-9u-00N" firstAttribute="centerX" secondItem="BES-92-htI" secondAttribute="centerX" id="hn4-Fs-1pl"/>
+                    <constraint firstItem="yng-9u-00N" firstAttribute="top" secondItem="BES-92-htI" secondAttribute="bottom" constant="15" id="k9o-gZ-Co5"/>
+                    <constraint firstItem="V28-Vo-NGN" firstAttribute="centerX" secondItem="vve-Tm-lzv" secondAttribute="centerX" id="lpZ-8r-Kpd"/>
+                    <constraint firstItem="vve-Tm-lzv" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="25" id="ter-3W-wEP"/>
+                    <constraint firstAttribute="bottom" secondItem="V28-Vo-NGN" secondAttribute="bottom" id="xai-p9-PE1"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="editLabel" destination="V28-Vo-NGN" id="mnR-XH-VJi"/>
+                <outlet property="editPicImg" destination="vve-Tm-lzv" id="5Ny-BV-dmO"/>
+                <outlet property="originLabel" destination="yng-9u-00N" id="bxp-7G-eV6"/>
+                <outlet property="originPicImg" destination="BES-92-htI" id="2FC-9W-AZ3"/>
+            </connections>
+            <point key="canvasLocation" x="32" y="127"/>
+        </tableViewCell>
+    </objects>
+</document>

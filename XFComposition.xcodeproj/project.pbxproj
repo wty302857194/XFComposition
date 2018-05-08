@@ -22,6 +22,8 @@
 		2F4FC65A20A17C34009A1E4C /* MyWritingDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F4FC65820A17C34009A1E4C /* MyWritingDetailViewController.m */; };
 		2F4FC65B20A17C34009A1E4C /* MyWritingDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F4FC65920A17C34009A1E4C /* MyWritingDetailViewController.xib */; };
 		2F4FC65E20A189EF009A1E4C /* MyWritingDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F4FC65D20A189EF009A1E4C /* MyWritingDetailModel.m */; };
+		2F4FC66220A18F1A009A1E4C /* MyWritingDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F4FC66020A18F1A009A1E4C /* MyWritingDetailCell.m */; };
+		2F4FC66320A18F1B009A1E4C /* MyWritingDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F4FC66120A18F1A009A1E4C /* MyWritingDetailCell.xib */; };
 		320D1BD0208611B700F7D45A /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 320D1BCE208611B700F7D45A /* HomeViewController.m */; };
 		320D1BD1208611B700F7D45A /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 320D1BCF208611B700F7D45A /* HomeViewController.xib */; };
 		320D1BD62086132E00F7D45A /* HomeHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 320D1BD52086132E00F7D45A /* HomeHeaderView.m */; };
@@ -678,6 +680,9 @@
 		2F4FC65920A17C34009A1E4C /* MyWritingDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyWritingDetailViewController.xib; sourceTree = "<group>"; };
 		2F4FC65C20A189EF009A1E4C /* MyWritingDetailModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyWritingDetailModel.h; sourceTree = "<group>"; };
 		2F4FC65D20A189EF009A1E4C /* MyWritingDetailModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyWritingDetailModel.m; sourceTree = "<group>"; };
+		2F4FC65F20A18F1A009A1E4C /* MyWritingDetailCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyWritingDetailCell.h; sourceTree = "<group>"; };
+		2F4FC66020A18F1A009A1E4C /* MyWritingDetailCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyWritingDetailCell.m; sourceTree = "<group>"; };
+		2F4FC66120A18F1A009A1E4C /* MyWritingDetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyWritingDetailCell.xib; sourceTree = "<group>"; };
 		3084EAC2F37884539B99B88E /* Pods_XFComposition.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_XFComposition.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		320D1BCD208611B700F7D45A /* HomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		320D1BCE208611B700F7D45A /* HomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
@@ -3224,6 +3229,9 @@
 			children = (
 				F68866ED1F879EEA00ED580C /* MyMicroCell.h */,
 				F68866EE1F879EEA00ED580C /* MyMicroCell.m */,
+				2F4FC65F20A18F1A009A1E4C /* MyWritingDetailCell.h */,
+				2F4FC66020A18F1A009A1E4C /* MyWritingDetailCell.m */,
+				2F4FC66120A18F1A009A1E4C /* MyWritingDetailCell.xib */,
 			);
 			name = V;
 			sourceTree = "<group>";
@@ -4834,6 +4842,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F612EBD61F4FB341000E7432 /* LaunchScreen.storyboard in Resources */,
+				2F4FC66320A18F1B009A1E4C /* MyWritingDetailCell.xib in Resources */,
 				F612EBD31F4FB341000E7432 /* Assets.xcassets in Resources */,
 				2F4FC65B20A17C34009A1E4C /* MyWritingDetailViewController.xib in Resources */,
 				320D1BDD20862AA700F7D45A /* HomeHeaderView.xib in Resources */,
@@ -5190,6 +5199,7 @@
 				58A49AB02079F2C1008405EA /* CompositionViewController.m in Sources */,
 				3256A5E2209344AC00A19946 /* VolunteerNewsTableViewCell.m in Sources */,
 				F6BC20921F94E438000686CC /* GetMybookListRequst.m in Sources */,
+				2F4FC66220A18F1A009A1E4C /* MyWritingDetailCell.m in Sources */,
 				F6D637D11F7D284900FF6FA4 /* IQTextView.m in Sources */,
 				F6D637D51F7D284900FF6FA4 /* IQUIView+IQKeyboardToolbar.m in Sources */,
 				F6502D951F540C9D0078ADD9 /* HomePageAllTableViewCell.m in Sources */,
