@@ -11,6 +11,8 @@
 
 @interface MyWritingDetailCell : UITableViewCell
 
+@property (nonatomic, copy) void(^buttonActionBlock)(NSInteger tag);
+
 -(void)reloadCellData:(id)cellData;
 
 +(CGFloat)cellHeight:(id)cellData;

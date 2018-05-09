@@ -176,7 +176,7 @@
     
     
     self.label6.text = [NSString stringWithFormat:@"%@",_model.BlogViewTimes];
-    self.label7.text = [NSString stringWithFormat:@"%@",_model.PyNum];
+    self.label7.text = [NSString stringWithFormat:@"%@",_model.BlogAttr1];
 }
 
 -(void)label :(UILabel *)label :(NSString *)str{
