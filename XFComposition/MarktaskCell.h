@@ -11,7 +11,7 @@
 @class MarktaskCell;
 @protocol MarktaskCellDelegate <NSObject>
 
--(void)markTask :(UIButton *)bt;
+-(void)markTask:(UIButton *)bt withModel:(GetTeacherNeedActiveModel*)model;
 
 @end
 @interface MarktaskCell : UITableViewCell

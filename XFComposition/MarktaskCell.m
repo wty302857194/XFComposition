@@ -66,8 +66,8 @@
 - (IBAction)button_action:(id)sender {
     
     UIButton * btn = (UIButton*)sender;
-    if ([self.delegate respondsToSelector:@selector(markTask :)]) {
-        [self.delegate markTask:btn];
+    if ([self.delegate respondsToSelector:@selector(markTask: withModel:)]) {
+        [self.delegate markTask:btn withModel:_model];
     }
 }
 @end

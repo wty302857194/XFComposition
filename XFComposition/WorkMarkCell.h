@@ -11,12 +11,11 @@
 @class WorkMarkCellDelegate;
 @protocol WorkMarkCellDelegate <NSObject>
 
--(void)dianping :(UIButton *)bt;
+-(void)dianping :(UIButton *)bt withModel:(GetTeachNeedCheckListModel*)model;
 
 @end
 
 @interface WorkMarkCell : UITableViewCell
 @property (nonatomic,strong)GetTeachNeedCheckListModel *model;
-@property (nonatomic,strong)UIButton *bt;
 @property (nonatomic,weak)id<WorkMarkCellDelegate>delegate;
 @end

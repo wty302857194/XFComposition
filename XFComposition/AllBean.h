@@ -13,5 +13,6 @@
 #import "MessageDetail.h"
 #import "DTApiBaseBean.h"
 #import "GetMessageListModel.h"
+#import "StandardInfo.h"
 
 #endif /* AllBean_h */

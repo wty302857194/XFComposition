@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PicListViewController">
+            <connections>
+                <outlet property="collectionView" destination="tV8-xN-R6R" id="S8b-67-oCU"/>
+                <outlet property="inputTextView" destination="Vgo-bk-IwZ" id="VtZ-wI-JFg"/>
+                <outlet property="tableView" destination="YSG-Dg-aSE" id="hd9-Gz-TjV"/>
+                <outlet property="view" destination="MQi-nn-Foz" id="G7j-VB-hg1"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="MQi-nn-Foz">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="tV8-xN-R6R">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="300"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="300" id="z0H-RH-jVN"/>
+                    </constraints>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="DUP-lT-Iau">
+                        <size key="itemSize" width="50" height="50"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="wla-FY-mkp"/>
+                        <outlet property="delegate" destination="-1" id="8WE-GA-et5"/>
+                    </connections>
+                </collectionView>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="YSG-Dg-aSE">
+                    <rect key="frame" x="0.0" y="301" width="370" height="366"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <view key="tableHeaderView" contentMode="scaleToFill" id="KcZ-A8-DZQ">
+                        <rect key="frame" x="0.0" y="0.0" width="370" height="99"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vgo-bk-IwZ" customClass="PlaceholderTextView">
+                                <rect key="frame" x="8" y="0.0" width="362" height="99"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="delegate" destination="-1" id="T90-AG-fNy"/>
+                                </connections>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <viewLayoutGuide key="safeArea" id="3TG-1g-Ps6"/>
+                    </view>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="ntN-87-GsD"/>
+                        <outlet property="delegate" destination="-1" id="xln-1l-jad"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="tV8-xN-R6R" firstAttribute="leading" secondItem="pf8-ct-87p" secondAttribute="leading" id="9YW-0v-bcj"/>
+                <constraint firstItem="tV8-xN-R6R" firstAttribute="top" secondItem="MQi-nn-Foz" secondAttribute="top" id="oug-oq-KC5"/>
+                <constraint firstItem="tV8-xN-R6R" firstAttribute="trailing" secondItem="pf8-ct-87p" secondAttribute="trailing" id="zsQ-qd-FDm"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="pf8-ct-87p"/>
+            <point key="canvasLocation" x="24.5" y="-49.5"/>
+        </view>
+    </objects>
+</document>
