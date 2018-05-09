@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-@class UpCompositionModel;
+@class UpCompositionModel,VolunteerModel;
 
 @interface UpCompositionTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *imgView;
@@ -16,4 +16,5 @@
 @property (weak, nonatomic) IBOutlet UILabel *contentLab;
 
 @property (nonatomic,strong) UpCompositionModel *model;
+@property (nonatomic,strong) VolunteerModel *volunteerModel;
 @end

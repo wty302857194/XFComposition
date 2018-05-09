@@ -9,5 +9,5 @@
 #import <Foundation/Foundation.h>
 typedef void (^GetDeptSchoolListblcok)(NSDictionary *);
 @interface GetDeptSchoolListRequst : NSObject
--(void)GetDeptSchoolListRequstWithblock :(GetDeptSchoolListblcok)block;
+-(void)GetDeptSchoolListRequstWithblock :(NSString *)deptid :(GetDeptSchoolListblcok)block;
 @end

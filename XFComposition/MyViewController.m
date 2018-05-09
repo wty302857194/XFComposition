@@ -30,7 +30,7 @@
 #import "PersonModel.h"
 #import <Photos/Photos.h>
 #import "TZImagePickerController.h"
-
+#import "UploadPicRequst.h"
 @interface MyViewController ()<UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource,UINavigationControllerDelegate,UIImagePickerControllerDelegate,TZImagePickerControllerDelegate>
 @property (nonatomic,strong)UITableView *tableView;
 
@@ -452,12 +452,20 @@
 
 - (void)uploadImage:(NSData*)imageData
 {
-    [[XFRequestManager sharedInstance] XFRequstSetUserIcon:[XFUserInfo getUserInfo].Loginid  images:@[imageData] :^(NSString *requestName, id responseData, BOOL isSuccess) {
+    UploadPicRequst *requst = [[UploadPicRequst alloc]init];
+    
+    XFUserInfo *userInfo = [XFUserInfo getUserInfo];
+    
+    [requst UploadPicRequstWithfileValue:imageData withuserid:userInfo.Loginid withtypeid:@"4" :^(NSDictionary *json) {
         
-        if (isSuccess) {
+        NSLog(@"%@",json);
+        if (json) {
             
+            self.userInfo.userFace = json[@"ret_data"]?:@"";
+            [_tableView reloadData];
+        }else {
+            [Global promptMessage:@"网络不好" inView:self.view];
         }
-        
     }];
 }
 

@@ -12,43 +12,48 @@
 #import "GetWritePicModel.h"
 
 #import "CorrectViewController.h"
-
+#import "PlaceholderTextView.h"
 #import "GetWritePicRemarkRequst.h"
 #import "GetWritePicRemarkModel.h"
 #import "KKImageEditorViewController.h"
-@interface PicListViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,KKImageEditorDelegate>
-@property (nonatomic,strong)UICollectionView *collectionView;
+@interface PicListViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,KKImageEditorDelegate,UITextViewDelegate,UITableViewDelegate,UITableViewDataSource>
+@property (nonatomic,strong)  IBOutlet UICollectionView *collectionView;
 @property (nonatomic,strong)NSMutableArray *picArray;
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic,strong)NSMutableArray *remarkArray;
+@property (strong, nonatomic) IBOutlet PlaceholderTextView *inputTextView;
 @end
 
 @implementation PicListViewController
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
+    IQKeyboardManager *manager = [IQKeyboardManager sharedManager];
+    
+    manager.enableAutoToolbar = YES;//这个是它自带键盘工具条开关
     [self leftBarButton];
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:YES];
+    IQKeyboardManager *manager = [IQKeyboardManager sharedManager];
+    
+    manager.enableAutoToolbar = NO;//这个是它自带键盘工具条开关
     [self.navigationController setNavigationBarHidden:YES animated:YES];
     
 }
--(UICollectionView *)collectionView{
-    if (!_collectionView) {
-        UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+//-(UICollectionView *)collectionView{
+//    if (!_collectionView) {
+//        UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
         //设置collectionView滚动方向
-        //    [layout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
-        
-        _collectionView = [[UICollectionView alloc]initWithFrame:self.view.bounds collectionViewLayout:layout];
-        
-        _collectionView.delegate = self;
-        _collectionView.dataSource = self;
-        _collectionView.backgroundColor = [UIColor whiteColor];
-        [_collectionView registerClass:[PicListCell class] forCellWithReuseIdentifier:@"cell"];
-        
-    }
-    return _collectionView;
-}
+//        [layout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
+//
+//        _collectionView = [[UICollectionView alloc]initWithFrame:self.view.bounds collectionViewLayout:layout];
+//;
+//        [_collectionView registerClass:[PicListCell class] forCellWithReuseIdentifier:@"cell"];
+//
+//    }
+//    return _collectionView;
+//}
 -(NSMutableArray *)picArray{
     if (!_picArray) {
         _picArray = [[NSMutableArray alloc]init];
@@ -66,8 +71,15 @@
     [super viewDidLoad];
     self.navigationItem.title = @"我的作文";
     self.view.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:self.collectionView];
+    
+    self.inputTextView.font = [UIFont systemFontOfSize:13];
+    self.inputTextView.delegate = self;
+    self.inputTextView.PlaceholderLabel.text = @"请输入总评";
+    self.inputTextView.placeholderColor =hexColor(cccccc) ;
+    self.inputTextView.placeholderFont = [UIFont systemFontOfSize:13];
+    self.inputTextView.textColor =hexColor(666666);
     [self getWritPic];
+    
 }
 -(void)getWritPic{
     GetWritePicRequst *requst = [[GetWritePicRequst alloc]init];
@@ -81,6 +93,19 @@
             [self.collectionView reloadData];
         });
     }];
+    
+}
+#pragma mark UITableViewDelegate
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    
+    
+    return 2;
+}
+
+-(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    
+    return nil;
     
 }
 #pragma mark collectionView代理方法

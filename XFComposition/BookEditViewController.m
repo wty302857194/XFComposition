@@ -11,6 +11,7 @@
 #import "BookSecondCell.h"
 #import "BookThridCell.h"
 #import "MenuView.h"
+#import "ListSelectView.h"
 
 #import "SaveBookRequst.h"//保存图书
 #import "GetBookTypeRequst.h"//全部年级获取
@@ -18,7 +19,9 @@
 #import "UploadPicRequst.h"
 #import "GetBookInfoRequst.h"
 #import "GetBookInfoModel.h"
-@interface BookEditViewController ()<UITableViewDelegate,UITableViewDataSource,BookThridCellDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
+@interface BookEditViewController ()<UITableViewDelegate,UITableViewDataSource,BookThridCellDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate> {
+    NSString *_categoryStr;
+}
 @property (nonatomic,strong)UITableView *tableView;
 @property (nonatomic,strong)NSArray *titleArray;
 @property (nonatomic,strong)GetBookInfoModel *bookinfoModel;
@@ -137,6 +140,7 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = @"图书编辑";
+    _categoryStr = @"";
     [self.view addSubview:self.tableView];
    
     self.xf = [XFUserInfo getUserInfo];
@@ -163,18 +167,15 @@
     GetBookTypeRequst *requst = [[GetBookTypeRequst alloc]init];
     [requst GetBookTypeRequst:^(NSDictionary *json) {
         [self.gradeArray removeAllObjects];
-        for (NSDictionary *dic in json[@"ret_data"]) {
-            GetBookTypeModel *model = [GetBookTypeModel loadWithJSOn:dic];
-            
-            [self.gradeArray addObject:model];
-            
-        }
         [self.menuarray removeAllObjects];
         [self.strArray removeAllObjects];
-        for (GetBookTypeModel *model in self.gradeArray) {
+        for (NSDictionary *dic in json[@"ret_data"]) {
+            GetBookTypeModel *model = [GetBookTypeModel loadWithJSOn:dic];
+            [self.gradeArray addObject:model];
             [self.menuarray addObject:model.BookTypeName];
             [self.strArray addObject:model.BookTypeid];
         }
+        _categoryStr = self.menuarray[0];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
         });
@@ -327,16 +328,17 @@
             self.textFiled4.placeholder = @"请输入图书页数";
 
             if ([self.bookFlag isEqualToString:@"1"]) {
-                self.textFiled4.text = self.bookinfoModel.BookBuyAddress;
+                self.textFiled4.text = self.bookinfoModel.bookpages;
             }
         }else if (indexPath.row == 4){
             self.textFiled5 = [[UITextField alloc]init];
             self.textFiled5 = cell.textfield;
+            self.textFiled5.enabled  = NO;
             self.textFiled5.placeholder = @"请输入图书类别";
             
 
             if ([self.bookFlag isEqualToString:@"1"]) {
-                self.textFiled5.text = [NSString stringWithFormat:@"%@",self.bookinfoModel.bookpages];
+                self.textFiled5.text = [NSString stringWithFormat:@"%@",_categoryStr];
             }
         }
 //        else if (indexPath.row == 5){
@@ -435,6 +437,24 @@
 
     }
     return nil;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if(indexPath.section == 0&&indexPath.row == 4) {
+        __weak typeof(self) weakSelf = self;
+        ListSelectView *select_view = [[ListSelectView alloc] initWithFrame:CGRectMake(0, kLayoutViewMarginTop, kScreenWidth, kScreenHeight-kLayoutViewMarginTop)];
+        select_view.choose_type = MORECHOOSETITLETYPE;
+        select_view.isShowCancelBtn = NO;
+        select_view.isShowSureBtn = NO;
+        select_view.isShowTitle = NO;
+        [select_view addTitleArray:self.menuarray andTitleString:@"温馨提示" animated:YES completionHandler:^(NSString * _Nullable string, NSInteger index) {
+            _categoryStr = string;
+            [weakSelf.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:4 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+        } withSureButtonBlock:^{
+            NSLog(@"sure btn");
+        }];
+        [self.view addSubview:select_view];
+    }
 }
 -(void)showmenu{
     _isShow = !_isShow;

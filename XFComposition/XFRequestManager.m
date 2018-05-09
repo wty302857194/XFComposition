@@ -233,6 +233,92 @@ static XFRequestManager *instance = nil;
     
     
 }
+-(void)XFRequstAddStandard:(NSString*)StandardId objectId:(NSString*)ObjectId addUser:(NSString*)AddUser modelId:(NSString*)ModelId standardText:(NSString*)StandardText :(XFResponseBlock)block{
+    NSDictionary *parameters = @{@"Action":@"SubmitStandardInfo",
+                             @"Token":@"0A66A4FD-146F-4542-8D7B-33CDEC2981F9",
+                                 @"StandardId":StandardId,
+                                 @"ObjectId":ObjectId,
+                                 @"AddUser":AddUser,
+                                 @"ModelId":ModelId,
+                                 @"StandardText":StandardText
+                                 };
+    
+    
+    [xfrequst requestWithURLString:APIurl parameters:parameters type:NetworkRequestTypePost imgData:nil resultBlock:^(id responseObject, NSError *error, NSURLSessionDataTask *task) {
+        
+        NSLog(@"%@%@",XFReq_User_AddStander,responseObject);
+        
+        if ([responseObject[@"ret_code"] integerValue] == 0) {
+            
+            NSString *msg = responseObject[@"ret_msg"];
+            
+            block(XFReq_User_AddStander, msg ,YES);
+        }else{
+            
+            NSString *msg = responseObject[@"ret_msg"];
+            block(XFReq_User_AddStander, msg,NO);
+        }
+        
+    }];
+    
+    
+}
+-(void)XFRequstDeleteStandard:(NSString *)StandardId :(XFResponseBlock)block{
+    NSDictionary *parameters = @{@"Action":@"DeleteStandardInfo",
+                                 @"Token":@"0A66A4FD-146F-4542-8D7B-33CDEC2981F9",
+                                 @"StandardId":StandardId
+                                 };
+    
+    
+    [xfrequst requestWithURLString:APIurl parameters:parameters type:NetworkRequestTypePost imgData:nil resultBlock:^(id responseObject, NSError *error, NSURLSessionDataTask *task) {
+        
+        NSLog(@"%@%@",XFReq_User_DeleteStandard,responseObject);
+        
+        if ([responseObject[@"ret_code"] integerValue] == 0) {
+            
+            NSString *msg = responseObject[@"ret_msg"];
+            
+            block(XFReq_User_DeleteStandard, msg ,YES);
+        }else{
+            
+            NSString *msg = responseObject[@"ret_msg"];
+            block(XFReq_User_DeleteStandard, msg,NO);
+        }
+        
+    }];
+    
+    
+    
+}
+-(void)XFRequstGetStandard:(NSString *)ObjectId addUser:(NSString *)AddUser modelId:(NSString *)ModelId :(XFResponseBlock)block{
+    
+    NSDictionary *parameters = @{@"Action":@"GetStandardInfo",
+                                 @"Token":@"0A66A4FD-146F-4542-8D7B-33CDEC2981F9",
+                                 @"ObjectId":ObjectId,
+                                 @"AddUser":AddUser,
+                                 @"ModelId":ModelId,
+                                 };
+    
+    
+    [xfrequst requestWithURLString:APIurl parameters:parameters type:NetworkRequestTypePost imgData:nil resultBlock:^(id responseObject, NSError *error, NSURLSessionDataTask *task) {
+        
+        NSLog(@"%@%@",XFReq_User_GetStandard
+              ,responseObject);
+       
+        if ([responseObject[@"ret_code"] integerValue] == 0) {
+            
+            NSMutableArray * array  =[FMBean objectsWithArray:responseObject[@"ret_data"] classType:[StandardInfo class]];
+            block(XFReq_User_GetStandard, array ,YES);
+        }else{
+            
+            NSString *msg = responseObject[@"ret_msg"];
+            block(XFReq_User_GetStandard, msg,NO);
+        }
+        
+    }];
+    
+    
+}
 -(void)printUrl:(NSString*)requstName parameters:(NSDictionary*)parameters{
     
     
