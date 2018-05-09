@@ -24,6 +24,8 @@
 		2F4FC65E20A189EF009A1E4C /* MyWritingDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F4FC65D20A189EF009A1E4C /* MyWritingDetailModel.m */; };
 		2F4FC66220A18F1A009A1E4C /* MyWritingDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F4FC66020A18F1A009A1E4C /* MyWritingDetailCell.m */; };
 		2F4FC66320A18F1B009A1E4C /* MyWritingDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F4FC66120A18F1A009A1E4C /* MyWritingDetailCell.xib */; };
+		2F4FC66720A1A9D4009A1E4C /* PhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F4FC66520A1A9D4009A1E4C /* PhotoViewController.m */; };
+		2F4FC66820A1A9D4009A1E4C /* PhotoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F4FC66620A1A9D4009A1E4C /* PhotoViewController.xib */; };
 		320D1BD0208611B700F7D45A /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 320D1BCE208611B700F7D45A /* HomeViewController.m */; };
 		320D1BD1208611B700F7D45A /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 320D1BCF208611B700F7D45A /* HomeViewController.xib */; };
 		320D1BD62086132E00F7D45A /* HomeHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 320D1BD52086132E00F7D45A /* HomeHeaderView.m */; };
@@ -682,6 +684,9 @@
 		2F4FC65F20A18F1A009A1E4C /* MyWritingDetailCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyWritingDetailCell.h; sourceTree = "<group>"; };
 		2F4FC66020A18F1A009A1E4C /* MyWritingDetailCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyWritingDetailCell.m; sourceTree = "<group>"; };
 		2F4FC66120A18F1A009A1E4C /* MyWritingDetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyWritingDetailCell.xib; sourceTree = "<group>"; };
+		2F4FC66420A1A9D4009A1E4C /* PhotoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhotoViewController.h; sourceTree = "<group>"; };
+		2F4FC66520A1A9D4009A1E4C /* PhotoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhotoViewController.m; sourceTree = "<group>"; };
+		2F4FC66620A1A9D4009A1E4C /* PhotoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoViewController.xib; sourceTree = "<group>"; };
 		3084EAC2F37884539B99B88E /* Pods_XFComposition.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_XFComposition.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		320D1BCD208611B700F7D45A /* HomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		320D1BCE208611B700F7D45A /* HomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
@@ -3180,6 +3185,9 @@
 				2F4FC65720A17C34009A1E4C /* MyWritingDetailViewController.h */,
 				2F4FC65820A17C34009A1E4C /* MyWritingDetailViewController.m */,
 				2F4FC65920A17C34009A1E4C /* MyWritingDetailViewController.xib */,
+				2F4FC66420A1A9D4009A1E4C /* PhotoViewController.h */,
+				2F4FC66520A1A9D4009A1E4C /* PhotoViewController.m */,
+				2F4FC66620A1A9D4009A1E4C /* PhotoViewController.xib */,
 				F69C8F7F1F88731B0091F31C /* V */,
 				F69C8F7E1F8873160091F31C /* M */,
 				F6DC7CCE1F91FC910050D1DF /* ApplyMarkViewController.h */,
@@ -4796,7 +4804,7 @@
 				TargetAttributes = {
 					F612EBC21F4FB341000E7432 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = RGN8U623GW;
+						DevelopmentTeam = 5K5GGEWVU3;
 						ProvisioningStyle = Automatic;
 					};
 					F612EBDB1F4FB341000E7432 = {
@@ -4845,6 +4853,7 @@
 				F612EBD11F4FB341000E7432 /* Main.storyboard in Resources */,
 				F6038CE91F58E96A008FE507 /* mp321.png in Resources */,
 				3FA5D9AE20A03EF00029E276 /* LICENSE in Resources */,
+				2F4FC66820A1A9D4009A1E4C /* PhotoViewController.xib in Resources */,
 				F6F42F7D1F6DF083003014F6 /* CLAVPlayerView.xib in Resources */,
 				3256A5E3209344AC00A19946 /* VolunteerNewsTableViewCell.xib in Resources */,
 				04A07A211F6B62070026DD6E /* Info.plist in Resources */,
@@ -5206,6 +5215,7 @@
 				4ABBA2A12080E6120002E08D /* UIFont+LCAdd.m in Sources */,
 				F6A604621F79F25900794B20 /* GetActiveApplyTeacherList.m in Sources */,
 				4ABBA29C2080E6120002E08D /* NSObject+LCRuntime.m in Sources */,
+				2F4FC66720A1A9D4009A1E4C /* PhotoViewController.m in Sources */,
 				F621C2111FA74EE000801521 /* PublicTextTitleRequst.m in Sources */,
 				F6C741CF1F95D488006CF76D /* GetTeacherNeedActiveModel.m in Sources */,
 				F6DAD9DB1F976D3200249DAD /* GetMyPageSubjectListModel.m in Sources */,
@@ -5694,7 +5704,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = RGN8U623GW;
+				DEVELOPMENT_TEAM = 5K5GGEWVU3;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/XFComposition/PrefixHeader.pch";
 				INFOPLIST_FILE = XFComposition/Info.plist;
@@ -5715,7 +5725,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = RGN8U623GW;
+				DEVELOPMENT_TEAM = 5K5GGEWVU3;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/XFComposition/PrefixHeader.pch";
 				INFOPLIST_FILE = XFComposition/Info.plist;
