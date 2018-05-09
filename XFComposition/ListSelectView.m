@@ -8,7 +8,7 @@
 
 #import "ListSelectView.h"
 
-@interface ListSelectView()<UITableViewDelegate,UITableViewDataSource>{
+@interface ListSelectView()<UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate>{
     CGFloat kSingleTitleHeight;
     CGFloat kSingleBtnHeight;
 }
@@ -189,7 +189,10 @@
     }
     
     
-    [self lc_addTapGestureWithTarget:self action:@selector(topCancelButtonAction)];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(topCancelButtonAction)];
+    tap.delegate = self;
+    self.userInteractionEnabled = YES;
+    [self addGestureRecognizer:tap];
 }
 #pragma mark - setup methods
 
@@ -356,5 +359,14 @@
     animation.duration  = .25f;
     animation.fillMode  = kCAFillModeBackwards;
     [self.layer addAnimation:animation forKey:nil];
+}
+
+
+-(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+{
+    if ([touch.view isDescendantOfView:self.table_view]) {
+        return NO;
+    }
+    return YES;
 }
 @end

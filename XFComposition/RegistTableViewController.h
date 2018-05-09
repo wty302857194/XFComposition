@@ -9,11 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface RegistTableViewController : UITableViewController
-@property (weak, nonatomic) IBOutlet UITextField *nameTF;
-@property (weak, nonatomic) IBOutlet UIView *pswTF;
-@property (weak, nonatomic) IBOutlet UISwitch *mySwitch;
-@property (weak, nonatomic) IBOutlet UILabel *quLab;
-@property (weak, nonatomic) IBOutlet UILabel *schoolLab;
-@property (weak, nonatomic) IBOutlet UIButton *studentBtn;
-@property (weak, nonatomic) IBOutlet UIButton *teacherBtn;
+
 @end
