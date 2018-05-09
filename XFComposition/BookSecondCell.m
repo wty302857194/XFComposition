@@ -19,7 +19,7 @@
         label.textAlignment = NSTextAlignmentRight;
         [self.contentView addSubview:label];
         
-        self.textView = [[UITextView alloc]initWithFrame:CGRectMake(100, 5, WidthFrame-120, 100)];
+        self.textView = [[FSTextView alloc]initWithFrame:CGRectMake(100, 5, WidthFrame-120, 100)];
         self.textView.layer.borderWidth = 0.5;
         self.textView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
         self.textView.layer.cornerRadius = 6;

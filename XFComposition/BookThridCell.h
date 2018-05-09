@@ -15,5 +15,7 @@
 @end
 @interface BookThridCell : UITableViewCell
 @property (nonatomic,strong)UIButton *shangchuanbt;
+@property (nonatomic,strong)UIButton *addImgBtn;
+
 @property (nonatomic,strong)id<BookThridCellDelegate>delegate;
 @end

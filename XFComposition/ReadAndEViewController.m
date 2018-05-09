@@ -687,7 +687,7 @@ referenceSizeForHeaderInSection:(NSInteger)section {
                 headerView.lab.text = @"读书排行";
             }
             headerView.moreMessageBlock = ^{//更多
-                if (indexPath.section == 7||indexPath.section == 6) {
+                if (indexPath.section == 6) {
                     ReadinotesViewController *vc = [[ReadinotesViewController alloc]init];
                     [self.navigationController pushViewController:vc animated:YES];
                 }else {
@@ -730,7 +730,7 @@ referenceSizeForHeaderInSection:(NSInteger)section {
         BookDetailViewController *vc = [[BookDetailViewController alloc]init];
         
         if (indexPath.section == 1) {
-            BookModel *model1 = self.tuijianbookArray[indexPath.item];
+            BookModel *model1 = self.xianfengbookArray[indexPath.item];
             
             vc.bookid = model1.ID;
             [self.navigationController pushViewController:vc animated:YES];
@@ -742,7 +742,7 @@ referenceSizeForHeaderInSection:(NSInteger)section {
             [self.navigationController pushViewController:vc animated:YES];
             
         }else if (indexPath.section == 3) {
-            BookModel *model1 = self.xianfengbookArray[indexPath.item];
+            BookModel *model1 = self.tuijianbookArray[indexPath.item];
             
             vc.bookid = model1.ID;
             [self.navigationController pushViewController:vc animated:YES];

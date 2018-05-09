@@ -7,6 +7,8 @@
 //
 
 #import "LoginViewController.h"
+#import "RegistTableViewController.h"
+#import "NavimainViewController.h"
 
 #import "LoginRequest.h"
 //#import "LoginModel.h"
@@ -76,22 +78,23 @@
             tabbarVC.selectedViewController = tabbarVC.viewControllers[3];
             
         }else{
-            
-            
             [SVProgressHUD showErrorWithStatus:@"账户或密码错误"];
-            
         }
     }];
 }
 
 - (IBAction)registButtonAction:(id)sender {
-    RegistViewController *vc = [[RegistViewController alloc]init];
-    vc.title = @"注册";
+//    RegistViewController *vc = [[RegistViewController alloc]init];
+//    vc.title = @"注册";
+//
+//    UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:vc];
+//
+//    [self presentViewController:nav animated:YES completion:nil];
     
-    UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:vc];
-    
-    [self presentViewController:nav animated:YES completion:nil];
-}
+    UIStoryboard *generalStoryboard = [UIStoryboard storyboardWithName:@"TYStoryboard" bundle:nil];
+    RegistTableViewController *loginVC = [generalStoryboard instantiateViewControllerWithIdentifier:@"RegistTableViewController"];
+    NavimainViewController *nav = [[NavimainViewController alloc] initWithRootViewController:loginVC];
+    [self presentViewController:nav animated:YES completion:nil];}
 
     
 /*

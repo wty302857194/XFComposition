@@ -7,7 +7,7 @@
 //
 
 #import "MyWritingsViewController.h"
-
+#import "MyWritingDetailViewController.h"
 #import "MywritingCell.h"
 
 #import "MenuView.h"
@@ -20,6 +20,10 @@
 #import "MywritingModel.h"
 #import "MicroAddcommentRequst.h"
 #import "DeleteBlogRequst.h"
+#import "MyWritingDetailModel.h"
+
+
+
 @interface MyWritingsViewController ()<UITableViewDelegate,UITableViewDataSource,MywritingCellDelegate,ShowMywritingDelegate>
 @property (nonatomic,strong)UITableView *tableView;
 @property (nonatomic,strong)NSArray *btTitleArray;
@@ -52,6 +56,7 @@
 @property (nonatomic,strong)NSString *saveId;
 
 @property (nonatomic,strong)NSMutableArray *xuanzhongArray;
+@property (nonatomic,strong)NSMutableArray *detailArr;
 
 @property (nonatomic,strong)NSMutableArray *buttons;
 @end
@@ -258,6 +263,7 @@
             [weakSelf requst:self.typeid :self.gardeid :self.ishost :self.istuijian];
             
         }];
+        _menuView.tableView.backgroundColor = [UIColor clearColor];
         
         [self.view addSubview:_menuView];
     }
@@ -358,6 +364,12 @@
         _xuanzhongArray = [NSMutableArray array];
     }
     return _xuanzhongArray;
+}
+-(NSMutableArray *)detailArr{
+    if (!_detailArr) {
+        _detailArr = [NSMutableArray array];
+    }
+    return _detailArr;
 }
 -(NSMutableArray *)buttons{
     if (!_buttons) {
@@ -613,16 +625,35 @@
     
     [requst GetBlogContentInfoRequstWithNoticeID:[NSString stringWithFormat:@"%ld",(long)model.ID] :^(NSDictionary *json) {
         
-        
         if ([json[@"ret_msg"] isEqualToString:@"成功"]) {
+            
+            [self.detailArr removeAllObjects];
+            NSArray *datas = [json objectForKey:@"ret_data"];
+            if ([datas isKindOfClass:[NSArray class]] && (datas.count > 0)) {
+                for (NSDictionary *dict in datas) {
+                    if ([dict isKindOfClass:[NSDictionary class]]) {
+                        MyWritingDetailModel *model = [[MyWritingDetailModel alloc] initWithDic:dict];
+                        [self.detailArr addObject:model];
+                    }
+                }
+            }
+            
+            MyWritingDetailViewController *detailVC = [[MyWritingDetailViewController alloc] init];
+            detailVC.dataArr = self.detailArr;
+            [self.navigationController pushViewController:detailVC animated:YES];
+            
+//            [self.imgView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",HTurl,lessonModel.MicroclassInfoAttr1?:@""]] placeholderImage:[UIImage imageNamed:@"icon_02"]];
+            
+            //老版
+            /*
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.contentView showView];
             });
-            
             NSString *str1 = [self htmlEntityDecode:json[@"ret_data"]];
             NSAttributedString * attributeStr = [self attributedStringWithHTMLString:str1];
             self.contentView.textview.attributedText = attributeStr;
             self.contentView.titletextfield.text = model.BlogTitle;
+             */
             
         }
     }];

@@ -99,15 +99,15 @@ typedef void(^TYMessageBlock)(NSString *contentStr);
 @end
 
 @implementation BookRecViewController
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:YES];
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
-}
--(void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:YES];
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
-    
-}
+//-(void)viewWillAppear:(BOOL)animated{
+//    [super viewWillAppear:YES];
+//    [self.navigationController setNavigationBarHidden:NO animated:YES];
+//}
+//-(void)viewWillDisappear:(BOOL)animated{
+//    [super viewWillDisappear:YES];
+//    [self.navigationController setNavigationBarHidden:YES animated:YES];
+//    
+//}
 - (UIView *)topView {
     if (!_topView) {
         _topView = [[UIView alloc] initWithFrame:CGRectMake(0, kLayoutViewMarginTop, kScreenWidth, topViewHeight)];

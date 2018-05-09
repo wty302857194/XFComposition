@@ -181,7 +181,7 @@
             if (self.markprogressBlock) {
                 self.markprogressBlock();
             }
-            [self onBack];
+            [self goBackNV];
         }else{
             [SVProgressHUD showErrorWithStatus:@"标记失败"];
         }
@@ -191,12 +191,9 @@
 
 
 -(void)leftBarButton{
-    UIBarButtonItem *item=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"left-arrow_s"] style: UIBarButtonItemStylePlain target:self action:@selector(onBack)];
-    
-    self.navigationItem.leftBarButtonItem=item;
-    
+    GO_BACK;
 }
--(void)onBack{
+-(void)goBackNV {
     [self.navigationController popViewControllerAnimated:YES];
     
     

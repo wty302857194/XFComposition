@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface ReadinotesViewController : UIViewController
-
+@property (nonatomic,copy) NSString *isTeacher;//"2"是老师,"1"是学生
 @end

@@ -18,14 +18,14 @@
         [self.contentView addSubview:self.label];
         
         self.textfield = [[UITextField alloc]initWithFrame:CGRectMake(100, 5, WidthFrame-120, 30)];
-        self.textfield.layer.borderWidth = 1;
-        self.textfield.layer.borderColor = [[UIColor lightGrayColor] CGColor];
-        self.textfield.layer.cornerRadius = 6;
-        self.textfield.layer.masksToBounds = YES;
+//        self.textfield.layer.borderWidth = 1;
+//        self.textfield.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+//        self.textfield.layer.cornerRadius = 6;
+//        self.textfield.layer.masksToBounds = YES;
         self.textfield.clearButtonMode=YES;
         self.textfield.font = [UIFont systemFontOfSize:14];
-        self.textfield.leftViewMode=UITextFieldViewModeAlways;
-        [self.textfield setBorderStyle:UITextBorderStyleRoundedRect];
+//        self.textfield.leftViewMode=UITextFieldViewModeAlways;
+//        [self.textfield setBorderStyle:UITextBorderStyleRoundedRect];
         [self.contentView addSubview:self.textfield];
     }
     return self;

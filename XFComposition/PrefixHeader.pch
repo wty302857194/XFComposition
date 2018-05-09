@@ -44,6 +44,7 @@
 #import "AllBean.h"
 #import "XFTipView.h"
 #import "IQKeyboardManager.h"
+#import "FSTextView.h"
 #define kSeverTime  20
 
 

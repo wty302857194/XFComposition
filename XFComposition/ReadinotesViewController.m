@@ -125,7 +125,7 @@
         [bt setBackgroundColor:hexColor(1d7db7)];
         [bt setTitleColor:hexColor(9ea1a2) forState:UIControlStateNormal];
         bt.titleLabel.font = [UIFont systemFontOfSize:13.0];
-        if (i == 0) {
+        if (i == ([self.isTeacher?:@"1" integerValue]-1)) {
             [bt setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             _selectBtn = bt;
         }
@@ -150,7 +150,7 @@
     self.page = 1;
     [self creatHeadView];
     [self.view addSubview:self.tableView];
-    [self GetStudendAndTeacherBj:@"1"];
+    [self GetStudendAndTeacherBj:self.isTeacher?:@"1"];
     
     self.tableView.mj_footer=[MJRefreshBackNormalFooter   footerWithRefreshingBlock:^{
         

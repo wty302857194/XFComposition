@@ -28,7 +28,7 @@
 @property (nonatomic,strong)UITextField *textFiled4;
 @property (nonatomic,strong)UITextField *textFiled5;
 @property (nonatomic,strong)UITextField *textFiled6;
-@property (nonatomic,strong)UITextView *textview;
+@property (nonatomic,strong)FSTextView *textview;
 
 
 @property (nonatomic,strong)MenuView *menuView;
@@ -58,11 +58,10 @@
 }
 -(UITableView *)tableView{
     if (!_tableView) {
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, WidthFrame, HeightFrame) style:UITableViewStyleGrouped];
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, WidthFrame, HeightFrame) style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.backgroundColor = [UIColor whiteColor];
-        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_tableView registerClass:[BookFristCell class] forCellReuseIdentifier:@"cell1"];
         [_tableView registerClass:[BookSecondCell class] forCellReuseIdentifier:@"cell2"];
         [_tableView registerClass:[BookThridCell class] forCellReuseIdentifier:@"cell3"];
@@ -111,7 +110,7 @@
 -(NSArray *)titleArray{
     if (!_titleArray) {
         _titleArray = [NSArray array];
-        _titleArray = @[@"图书名称：",@"出 版 社：",@"图书作者：",@"图书地址：",@"图书页数：",@"图书类别："];
+        _titleArray = @[@"图书名称：",@"出 版 社：",@"图书作者：",@"图书页数：",@"图书类别："];
     }
     return _titleArray;
 }
@@ -303,57 +302,71 @@
         if (indexPath.row == 0) {
             self.textFiled1 = [[UITextField alloc]init];
             self.textFiled1 = cell.textfield;
+            self.textFiled1.placeholder = @"请输入图书名称";
             if ([self.bookFlag isEqualToString:@"1"]) {
                 self.textFiled1.text = self.bookinfoModel.bookname;
             }
         }else if (indexPath.row == 1){
             self.textFiled2 = [[UITextField alloc]init];
             self.textFiled2 = cell.textfield;
+            self.textFiled2.placeholder = @"请输入出版社";
             if ([self.bookFlag isEqualToString:@"1"]) {
                 self.textFiled2.text = self.bookinfoModel.bookpublish;
             }
         }else if (indexPath.row == 2){
             self.textFiled3 = [[UITextField alloc]init];
             self.textFiled3 = cell.textfield;
+            self.textFiled3.placeholder = @"请输入图书作者";
+
             if ([self.bookFlag isEqualToString:@"1"]) {
                 self.textFiled3.text = self.bookinfoModel.bookauthor;
             }
         }else if (indexPath.row == 3){
             self.textFiled4 = [[UITextField alloc]init];
             self.textFiled4 = cell.textfield;
+            self.textFiled4.placeholder = @"请输入图书页数";
+
             if ([self.bookFlag isEqualToString:@"1"]) {
                 self.textFiled4.text = self.bookinfoModel.BookBuyAddress;
             }
         }else if (indexPath.row == 4){
             self.textFiled5 = [[UITextField alloc]init];
             self.textFiled5 = cell.textfield;
+            self.textFiled5.placeholder = @"请输入图书类别";
+            
+
             if ([self.bookFlag isEqualToString:@"1"]) {
                 self.textFiled5.text = [NSString stringWithFormat:@"%@",self.bookinfoModel.bookpages];
             }
-        }else if (indexPath.row == 5){
-            
-            self.textFiled6 = [[UITextField alloc]init];
-            self.textFiled6 = cell.textfield;
-            UIButton *bt = [UIButton buttonWithType:UIButtonTypeCustom];
-            bt.frame = CGRectMake(100, 5, WidthFrame-120, 30);
-            [bt addTarget:self action:@selector(showmenu) forControlEvents:UIControlEventTouchUpInside];
-            if ([self.bookFlag isEqualToString:@"1"]) {
-                if (self.menuarray.count>0) {
-                    self.textFiled6.text = self.menuarray[0];
-                    self.bookTypeId = self.strArray[0];
-                }
-                
-            }
-            [cell addSubview:bt];
-            
         }
+//        else if (indexPath.row == 5){
+//
+//            self.textFiled6 = [[UITextField alloc]init];
+//            self.textFiled6 = cell.textfield;
+//            self.textFiled6.placeholder = @"请输入图书介绍";
+//
+//            UIButton *bt = [UIButton buttonWithType:UIButtonTypeCustom];
+//            bt.frame = CGRectMake(100, 5, WidthFrame-120, 30);
+//            [bt addTarget:self action:@selector(showmenu) forControlEvents:UIControlEventTouchUpInside];
+//            if ([self.bookFlag isEqualToString:@"1"]) {
+//                if (self.menuarray.count>0) {
+//                    self.textFiled6.text = self.menuarray[0];
+//                    self.bookTypeId = self.strArray[0];
+//                }
+//
+//            }
+//            [cell addSubview:bt];
+//
+//        }
         return cell;
     }else if (indexPath.section == 1){
     
         BookSecondCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell2" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        self.textview = [[UITextView alloc]init];
+        self.textview = [[FSTextView alloc]init];
         self.textview = cell.textView;
+        self.textview.placeholder = @"请输入图书介绍";
+
         if ([self.bookFlag isEqualToString:@"1"]) {
             self.textview.text = self.bookinfoModel.bookinfo;
         }
@@ -369,6 +382,7 @@
             NSString *str = [NSString stringWithFormat:@"%@%@",HTurl,self.bookinfoModel.bookpic];
             
             NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:str]];
+            
             [self.picBt  setBackgroundImage:[UIImage imageWithData:data] forState:UIControlStateNormal];
         }
 
@@ -398,14 +412,25 @@
         view.backgroundColor = [UIColor whiteColor];
         
         UIButton *bt = [UIButton buttonWithType:UIButtonTypeCustom];
-        [bt setTitle:@"保存信息" forState:UIControlStateNormal];
+        [bt setTitle:@"保存标记" forState:UIControlStateNormal];
         [bt setBackgroundColor:[UIColor colorWithHexString:@"3691CE"]];
         bt.titleLabel.font = [UIFont systemFontOfSize:14];
         bt.layer.cornerRadius = 4;
         bt.layer.masksToBounds = YES;
-        bt.frame = CGRectMake(WidthFrame/4, 10, WidthFrame/2, 30);
+        bt.frame = CGRectMake(10, 10,(WidthFrame-30)/2.f, 30);
         [bt addTarget:self action:@selector(baocun :) forControlEvents:UIControlEventTouchUpInside];
         [view addSubview:bt];
+        
+        
+        UIButton *cancel_btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [cancel_btn setTitle:@"取 消" forState:UIControlStateNormal];
+        [cancel_btn setBackgroundColor:[UIColor colorWithHexString:@"e38f24"]];
+        cancel_btn.titleLabel.font = [UIFont systemFontOfSize:14];
+        cancel_btn.layer.cornerRadius = 4;
+        cancel_btn.layer.masksToBounds = YES;
+        cancel_btn.frame = CGRectMake(10+10+(WidthFrame-30)/2.f, 10,(WidthFrame-30)/2.f, 30);
+        [cancel_btn addTarget:self action:@selector(goBackNV) forControlEvents:UIControlEventTouchUpInside];
+        [view addSubview:cancel_btn];
         return view;
 
     }
@@ -423,15 +448,10 @@
 }
 
 -(void)leftBarButton{
-    UIBarButtonItem *item=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"left-arrow_s"] style: UIBarButtonItemStylePlain target:self action:@selector(onBack)];
-    
-    self.navigationItem.leftBarButtonItem=item;
-    
+    GO_BACK;
 }
--(void)onBack{
+-(void)goBackNV {
     [self.navigationController popViewControllerAnimated:YES];
-    
-    
 }
 
 @end
