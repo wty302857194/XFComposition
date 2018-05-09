@@ -22,7 +22,7 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *accountField;
 @property (weak, nonatomic) IBOutlet UITextField *passworldField;
-@property (weak, nonatomic) IBOutlet UIButton *backButton;
+//@property (weak, nonatomic) IBOutlet UIButton *backButton;
 @property (weak, nonatomic) IBOutlet UIButton *loginButton;
 
 @end
@@ -34,16 +34,16 @@
     // Do any additional setup after loading the view from its nib.
     
     
-    if (IS_IPHONE_X) {
-        [self.backButton mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(kNavBottom-40);
-            make.left.mas_equalTo(15);
-            make.height.mas_equalTo(40);
-            make.width.mas_equalTo(60);
-        }];
-    }
-    
-    [self.loginButton lc_borderWithColor:[UIColor clearColor] radiuce:3];
+//    if (IS_IPHONE_X) {
+//        [self.backButton mas_remakeConstraints:^(MASConstraintMaker *make) {
+//            make.top.mas_equalTo(kNavBottom-40);
+//            make.left.mas_equalTo(15);
+//            make.height.mas_equalTo(40);
+//            make.width.mas_equalTo(60);
+//        }];
+//    }
+//
+//    [self.loginButton lc_borderWithColor:[UIColor clearColor] radiuce:3];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -84,27 +84,12 @@
 }
 
 - (IBAction)registButtonAction:(id)sender {
-//    RegistViewController *vc = [[RegistViewController alloc]init];
-//    vc.title = @"注册";
-//
-//    UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:vc];
-//
-//    [self presentViewController:nav animated:YES completion:nil];
     
     UIStoryboard *generalStoryboard = [UIStoryboard storyboardWithName:@"TYStoryboard" bundle:nil];
     RegistTableViewController *loginVC = [generalStoryboard instantiateViewControllerWithIdentifier:@"RegistTableViewController"];
     NavimainViewController *nav = [[NavimainViewController alloc] initWithRootViewController:loginVC];
-    [self presentViewController:nav animated:YES completion:nil];}
-
+    [self presentViewController:nav animated:YES completion:nil];
     
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
 }
-*/
 
 @end
