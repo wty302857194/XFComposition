@@ -27,6 +27,7 @@
 #import "WriteListModel.h"
 
 #import "UploadPicRequst.h"
+#import "NewMicrodetailController.h"
 
 @interface HomeViewController ()<UITableViewDelegate,UITableViewDataSource,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 {
@@ -313,7 +314,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     WriteListModel *model = _homeLessonArr[indexPath.row];
-    MicrodetailController *vc = [[MicrodetailController alloc]init];
+//    MicrodetailController *vc = [[MicrodetailController alloc]init];
+//    vc.classId = model.ID;
+//    [self.navigationController pushViewController:vc animated:YES];
+    NewMicrodetailController *vc = [[NewMicrodetailController alloc]init];
     vc.classId = model.ID;
     [self.navigationController pushViewController:vc animated:YES];
 }

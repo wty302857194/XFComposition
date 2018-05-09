@@ -146,6 +146,32 @@
 		58A49AB02079F2C1008405EA /* CompositionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A49AAF2079F2C1008405EA /* CompositionViewController.m */; };
 		58E291E1206A1F1E0016DACD /* fenxiangViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E291E0206A1F1E0016DACD /* fenxiangViewController.m */; };
 		B6F16DB8290F62883631B0B6 /* Pods_XFComposition.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3084EAC2F37884539B99B88E /* Pods_XFComposition.framework */; };
+		BA647D2C20A28BC6007AAC98 /* NewMicoFourthCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BA647D2A20A28BC6007AAC98 /* NewMicoFourthCell.m */; };
+		BA647D2D20A28BC6007AAC98 /* NewMicoFourthCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA647D2B20A28BC6007AAC98 /* NewMicoFourthCell.xib */; };
+		BA647D3120A2A7CF007AAC98 /* NewMicoFiveCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BA647D2F20A2A7CF007AAC98 /* NewMicoFiveCell.m */; };
+		BA647D3220A2A7CF007AAC98 /* NewMicoFiveCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA647D3020A2A7CF007AAC98 /* NewMicoFiveCell.xib */; };
+		BA90668620A2E40800631F42 /* CourseCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BA90668420A2E40800631F42 /* CourseCollectionViewCell.m */; };
+		BA90668720A2E40800631F42 /* CourseCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA90668520A2E40800631F42 /* CourseCollectionViewCell.xib */; };
+		BA90668B20A2F2C300631F42 /* CommentViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BA90668920A2F2C300631F42 /* CommentViewCell.m */; };
+		BA90668C20A2F2C300631F42 /* CommentViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA90668A20A2F2C300631F42 /* CommentViewCell.xib */; };
+		BA9C1CB320A2CCC000BFBE23 /* NewMicoSixthCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BA9C1CB120A2CCC000BFBE23 /* NewMicoSixthCell.m */; };
+		BA9C1CB420A2CCC000BFBE23 /* NewMicoSixthCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA9C1CB220A2CCC000BFBE23 /* NewMicoSixthCell.xib */; };
+		BA9C1CB820A2CF0600BFBE23 /* NewMicoSeventhCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BA9C1CB620A2CF0600BFBE23 /* NewMicoSeventhCell.m */; };
+		BA9C1CB920A2CF0600BFBE23 /* NewMicoSeventhCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA9C1CB720A2CF0600BFBE23 /* NewMicoSeventhCell.xib */; };
+		BAB44C8B20A1A89A002455D8 /* NewMicrodetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = BAB44C7120A1A89A002455D8 /* NewMicrodetailController.m */; };
+		BAB44C8C20A1A89A002455D8 /* CompositionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BAB44C7420A1A89A002455D8 /* CompositionCell.xib */; };
+		BAB44C8D20A1A89A002455D8 /* CompositionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BAB44C7520A1A89A002455D8 /* CompositionCell.m */; };
+		BAB44C8E20A1A89A002455D8 /* NewMicoThirdCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BAB44C7820A1A89A002455D8 /* NewMicoThirdCell.m */; };
+		BAB44C8F20A1A89A002455D8 /* NewMicoFristCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BAB44C7920A1A89A002455D8 /* NewMicoFristCell.xib */; };
+		BAB44C9020A1A89A002455D8 /* NewMicoThirdCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BAB44C7A20A1A89A002455D8 /* NewMicoThirdCell.xib */; };
+		BAB44C9120A1A89A002455D8 /* NewMicoSecondCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BAB44C7B20A1A89A002455D8 /* NewMicoSecondCell.m */; };
+		BAB44C9220A1A89A002455D8 /* NewMicoFristCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BAB44C7E20A1A89A002455D8 /* NewMicoFristCell.m */; };
+		BAB44C9320A1A89A002455D8 /* NewMicoSecondCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BAB44C7F20A1A89A002455D8 /* NewMicoSecondCell.xib */; };
+		BAB44C9420A1A89A002455D8 /* PlaybackControls.m in Sources */ = {isa = PBXBuildFile; fileRef = BAB44C8120A1A89A002455D8 /* PlaybackControls.m */; };
+		BAB44C9520A1A89A002455D8 /* UIViewController+PlayerRotation.m in Sources */ = {isa = PBXBuildFile; fileRef = BAB44C8220A1A89A002455D8 /* UIViewController+PlayerRotation.m */; };
+		BAB44C9620A1A89A002455D8 /* VideoPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = BAB44C8520A1A89A002455D8 /* VideoPlayer.m */; };
+		BAB44C9720A1A89A002455D8 /* VideoSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = BAB44C8620A1A89A002455D8 /* VideoSlider.m */; };
+		BAB44C9820A1A89A002455D8 /* PlayerConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = BAB44C8920A1A89A002455D8 /* PlayerConfiguration.m */; };
 		F602ADB21F58095600C152C4 /* MicroClassViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F602ADB11F58095600C152C4 /* MicroClassViewController.m */; };
 		F6038CE81F58E96A008FE507 /* mp322.png in Resources */ = {isa = PBXBuildFile; fileRef = F6038CE61F58E96A008FE507 /* mp322.png */; };
 		F6038CE91F58E96A008FE507 /* mp321.png in Resources */ = {isa = PBXBuildFile; fileRef = F6038CE71F58E96A008FE507 /* mp321.png */; };
@@ -928,6 +954,48 @@
 		58E291E5206A27370016DACD /* custom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = custom.png; path = "../../../../Downloads/ShareTest-master/ShareTest/custom.png"; sourceTree = "<group>"; };
 		58E291E6206A27370016DACD /* shareImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = shareImage.png; path = "../../../../Downloads/ShareTest-master/ShareTest/shareImage.png"; sourceTree = "<group>"; };
 		6E5ED5FF21E6705D17491C80 /* Pods-XFComposition.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XFComposition.debug.xcconfig"; path = "Pods/Target Support Files/Pods-XFComposition/Pods-XFComposition.debug.xcconfig"; sourceTree = "<group>"; };
+		BA647D2920A28BC6007AAC98 /* NewMicoFourthCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewMicoFourthCell.h; sourceTree = "<group>"; };
+		BA647D2A20A28BC6007AAC98 /* NewMicoFourthCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewMicoFourthCell.m; sourceTree = "<group>"; };
+		BA647D2B20A28BC6007AAC98 /* NewMicoFourthCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewMicoFourthCell.xib; sourceTree = "<group>"; };
+		BA647D2E20A2A7CF007AAC98 /* NewMicoFiveCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewMicoFiveCell.h; sourceTree = "<group>"; };
+		BA647D2F20A2A7CF007AAC98 /* NewMicoFiveCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewMicoFiveCell.m; sourceTree = "<group>"; };
+		BA647D3020A2A7CF007AAC98 /* NewMicoFiveCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewMicoFiveCell.xib; sourceTree = "<group>"; };
+		BA90668320A2E40800631F42 /* CourseCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CourseCollectionViewCell.h; sourceTree = "<group>"; };
+		BA90668420A2E40800631F42 /* CourseCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CourseCollectionViewCell.m; sourceTree = "<group>"; };
+		BA90668520A2E40800631F42 /* CourseCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CourseCollectionViewCell.xib; sourceTree = "<group>"; };
+		BA90668820A2F2C300631F42 /* CommentViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommentViewCell.h; sourceTree = "<group>"; };
+		BA90668920A2F2C300631F42 /* CommentViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommentViewCell.m; sourceTree = "<group>"; };
+		BA90668A20A2F2C300631F42 /* CommentViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentViewCell.xib; sourceTree = "<group>"; };
+		BA9C1CB020A2CCC000BFBE23 /* NewMicoSixthCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewMicoSixthCell.h; sourceTree = "<group>"; };
+		BA9C1CB120A2CCC000BFBE23 /* NewMicoSixthCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewMicoSixthCell.m; sourceTree = "<group>"; };
+		BA9C1CB220A2CCC000BFBE23 /* NewMicoSixthCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewMicoSixthCell.xib; sourceTree = "<group>"; };
+		BA9C1CB520A2CF0600BFBE23 /* NewMicoSeventhCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewMicoSeventhCell.h; sourceTree = "<group>"; };
+		BA9C1CB620A2CF0600BFBE23 /* NewMicoSeventhCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewMicoSeventhCell.m; sourceTree = "<group>"; };
+		BA9C1CB720A2CF0600BFBE23 /* NewMicoSeventhCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewMicoSeventhCell.xib; sourceTree = "<group>"; };
+		BAB44C7120A1A89A002455D8 /* NewMicrodetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewMicrodetailController.m; sourceTree = "<group>"; };
+		BAB44C7220A1A89A002455D8 /* NewMicrodetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewMicrodetailController.h; sourceTree = "<group>"; };
+		BAB44C7420A1A89A002455D8 /* CompositionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CompositionCell.xib; sourceTree = "<group>"; };
+		BAB44C7520A1A89A002455D8 /* CompositionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompositionCell.m; sourceTree = "<group>"; };
+		BAB44C7620A1A89A002455D8 /* NewMicoSecondCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewMicoSecondCell.h; sourceTree = "<group>"; };
+		BAB44C7720A1A89A002455D8 /* NewMicoFristCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewMicoFristCell.h; sourceTree = "<group>"; };
+		BAB44C7820A1A89A002455D8 /* NewMicoThirdCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewMicoThirdCell.m; sourceTree = "<group>"; };
+		BAB44C7920A1A89A002455D8 /* NewMicoFristCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewMicoFristCell.xib; sourceTree = "<group>"; };
+		BAB44C7A20A1A89A002455D8 /* NewMicoThirdCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewMicoThirdCell.xib; sourceTree = "<group>"; };
+		BAB44C7B20A1A89A002455D8 /* NewMicoSecondCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewMicoSecondCell.m; sourceTree = "<group>"; };
+		BAB44C7C20A1A89A002455D8 /* CompositionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompositionCell.h; sourceTree = "<group>"; };
+		BAB44C7D20A1A89A002455D8 /* NewMicoThirdCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewMicoThirdCell.h; sourceTree = "<group>"; };
+		BAB44C7E20A1A89A002455D8 /* NewMicoFristCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewMicoFristCell.m; sourceTree = "<group>"; };
+		BAB44C7F20A1A89A002455D8 /* NewMicoSecondCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewMicoSecondCell.xib; sourceTree = "<group>"; };
+		BAB44C8120A1A89A002455D8 /* PlaybackControls.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaybackControls.m; sourceTree = "<group>"; };
+		BAB44C8220A1A89A002455D8 /* UIViewController+PlayerRotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+PlayerRotation.m"; sourceTree = "<group>"; };
+		BAB44C8320A1A89A002455D8 /* VideoSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoSlider.h; sourceTree = "<group>"; };
+		BAB44C8420A1A89A002455D8 /* PlayerConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerConfiguration.h; sourceTree = "<group>"; };
+		BAB44C8520A1A89A002455D8 /* VideoPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoPlayer.m; sourceTree = "<group>"; };
+		BAB44C8620A1A89A002455D8 /* VideoSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoSlider.m; sourceTree = "<group>"; };
+		BAB44C8720A1A89A002455D8 /* UIViewController+PlayerRotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+PlayerRotation.h"; sourceTree = "<group>"; };
+		BAB44C8820A1A89A002455D8 /* PlaybackControls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaybackControls.h; sourceTree = "<group>"; };
+		BAB44C8920A1A89A002455D8 /* PlayerConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerConfiguration.m; sourceTree = "<group>"; };
+		BAB44C8A20A1A89A002455D8 /* VideoPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoPlayer.h; sourceTree = "<group>"; };
 		F602ADB01F58095600C152C4 /* MicroClassViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MicroClassViewController.h; sourceTree = "<group>"; };
 		F602ADB11F58095600C152C4 /* MicroClassViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MicroClassViewController.m; sourceTree = "<group>"; };
 		F6038CE61F58E96A008FE507 /* mp322.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mp322.png; sourceTree = "<group>"; };
@@ -2275,6 +2343,79 @@
 			path = ImageEdit;
 			sourceTree = "<group>";
 		};
+		BAB44C6F20A1A89A002455D8 /* 视频详情 */ = {
+			isa = PBXGroup;
+			children = (
+				BAB44C7020A1A89A002455D8 /* Controller */,
+				BAB44C7320A1A89A002455D8 /* View */,
+				BAB44C8020A1A89A002455D8 /* Player */,
+			);
+			path = "视频详情";
+			sourceTree = "<group>";
+		};
+		BAB44C7020A1A89A002455D8 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				BAB44C7220A1A89A002455D8 /* NewMicrodetailController.h */,
+				BAB44C7120A1A89A002455D8 /* NewMicrodetailController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		BAB44C7320A1A89A002455D8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				BAB44C7720A1A89A002455D8 /* NewMicoFristCell.h */,
+				BAB44C7E20A1A89A002455D8 /* NewMicoFristCell.m */,
+				BAB44C7920A1A89A002455D8 /* NewMicoFristCell.xib */,
+				BAB44C7620A1A89A002455D8 /* NewMicoSecondCell.h */,
+				BAB44C7B20A1A89A002455D8 /* NewMicoSecondCell.m */,
+				BAB44C7F20A1A89A002455D8 /* NewMicoSecondCell.xib */,
+				BAB44C7D20A1A89A002455D8 /* NewMicoThirdCell.h */,
+				BAB44C7820A1A89A002455D8 /* NewMicoThirdCell.m */,
+				BAB44C7A20A1A89A002455D8 /* NewMicoThirdCell.xib */,
+				BAB44C7C20A1A89A002455D8 /* CompositionCell.h */,
+				BAB44C7520A1A89A002455D8 /* CompositionCell.m */,
+				BAB44C7420A1A89A002455D8 /* CompositionCell.xib */,
+				BA647D2920A28BC6007AAC98 /* NewMicoFourthCell.h */,
+				BA647D2A20A28BC6007AAC98 /* NewMicoFourthCell.m */,
+				BA647D2B20A28BC6007AAC98 /* NewMicoFourthCell.xib */,
+				BA647D2E20A2A7CF007AAC98 /* NewMicoFiveCell.h */,
+				BA647D2F20A2A7CF007AAC98 /* NewMicoFiveCell.m */,
+				BA647D3020A2A7CF007AAC98 /* NewMicoFiveCell.xib */,
+				BA9C1CB020A2CCC000BFBE23 /* NewMicoSixthCell.h */,
+				BA9C1CB120A2CCC000BFBE23 /* NewMicoSixthCell.m */,
+				BA9C1CB220A2CCC000BFBE23 /* NewMicoSixthCell.xib */,
+				BA9C1CB520A2CF0600BFBE23 /* NewMicoSeventhCell.h */,
+				BA9C1CB620A2CF0600BFBE23 /* NewMicoSeventhCell.m */,
+				BA9C1CB720A2CF0600BFBE23 /* NewMicoSeventhCell.xib */,
+				BA90668320A2E40800631F42 /* CourseCollectionViewCell.h */,
+				BA90668420A2E40800631F42 /* CourseCollectionViewCell.m */,
+				BA90668520A2E40800631F42 /* CourseCollectionViewCell.xib */,
+				BA90668820A2F2C300631F42 /* CommentViewCell.h */,
+				BA90668920A2F2C300631F42 /* CommentViewCell.m */,
+				BA90668A20A2F2C300631F42 /* CommentViewCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		BAB44C8020A1A89A002455D8 /* Player */ = {
+			isa = PBXGroup;
+			children = (
+				BAB44C8820A1A89A002455D8 /* PlaybackControls.h */,
+				BAB44C8120A1A89A002455D8 /* PlaybackControls.m */,
+				BAB44C8420A1A89A002455D8 /* PlayerConfiguration.h */,
+				BAB44C8920A1A89A002455D8 /* PlayerConfiguration.m */,
+				BAB44C8A20A1A89A002455D8 /* VideoPlayer.h */,
+				BAB44C8520A1A89A002455D8 /* VideoPlayer.m */,
+				BAB44C8320A1A89A002455D8 /* VideoSlider.h */,
+				BAB44C8620A1A89A002455D8 /* VideoSlider.m */,
+				BAB44C8720A1A89A002455D8 /* UIViewController+PlayerRotation.h */,
+				BAB44C8220A1A89A002455D8 /* UIViewController+PlayerRotation.m */,
+			);
+			path = Player;
+			sourceTree = "<group>";
+		};
 		C832E0DA6E9F482F5506A0D6 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -2600,6 +2741,7 @@
 		F612EC1A1F4FD5BF000E7432 /* SonControllers */ = {
 			isa = PBXGroup;
 			children = (
+				BAB44C6F20A1A89A002455D8 /* 视频详情 */,
 				F62A25801F7358C6004E095D /* HomePage */,
 				F62A257A1F7344D5004E095D /* CompositionLibrary */,
 				F6CD74B41F71F8E700EBE579 /* Volunteer */,
@@ -4830,6 +4972,7 @@
 			files = (
 				F612EBD61F4FB341000E7432 /* LaunchScreen.storyboard in Resources */,
 				F612EBD31F4FB341000E7432 /* Assets.xcassets in Resources */,
+				BA9C1CB420A2CCC000BFBE23 /* NewMicoSixthCell.xib in Resources */,
 				2F4FC65B20A17C34009A1E4C /* MyWritingDetailViewController.xib in Resources */,
 				320D1BDD20862AA700F7D45A /* HomeHeaderView.xib in Resources */,
 				4ABBA2782080E02A0002E08D /* LoginViewController.xib in Resources */,
@@ -4841,11 +4984,15 @@
 				04A07A211F6B62070026DD6E /* Info.plist in Resources */,
 				323738182092C01900015514 /* TYTableView.xib in Resources */,
 				32F7E75B209341470016C1A6 /* VolunteerActiveiTableViewCell.xib in Resources */,
+				BAB44C8F20A1A89A002455D8 /* NewMicoFristCell.xib in Resources */,
 				3FA5D9C020A056C90029E276 /* MarktaskCell.xib in Resources */,
+				BAB44C8C20A1A89A002455D8 /* CompositionCell.xib in Resources */,
 				32A7A0F2209ADD5900C19895 /* TYOnlyActivetyTableViewCell.xib in Resources */,
+				BA647D2D20A28BC6007AAC98 /* NewMicoFourthCell.xib in Resources */,
 				3FA5D9B620A03EF00029E276 /* TZImagePickerController.bundle in Resources */,
 				32B38F52208880B000616A7B /* LeftDetailViewController.xib in Resources */,
 				3FA5D98720A02F060029E276 /* SendMessageViewController.xib in Resources */,
+				BA9C1CB920A2CF0600BFBE23 /* NewMicoSeventhCell.xib in Resources */,
 				F6B130D41F607E9200994571 /* Mic01.png in Resources */,
 				4ABBA2702080DBF60002E08D /* RegistViewController.xib in Resources */,
 				322B15822088D3A5009FCC96 /* UpCompositionTableViewCell.xib in Resources */,
@@ -4855,16 +5002,21 @@
 				F621C2061FA6B4C800801521 /* SVProgressHUD.bundle in Resources */,
 				F6B3C0F41F5DA43D00C0D821 /* MJRefresh.bundle in Resources */,
 				32F7E756209323FD0016C1A6 /* TYVolunteerCollectionViewCell.xib in Resources */,
+				BA647D3220A2A7CF007AAC98 /* NewMicoFiveCell.xib in Resources */,
 				320D1BD1208611B700F7D45A /* HomeViewController.xib in Resources */,
 				F6D637D61F7D284900FF6FA4 /* IQKeyboardManager.bundle in Resources */,
 				3284728320909C8D00A1F3D0 /* TopMenuView.xib in Resources */,
 				3262C5BB2091F6870063DE19 /* TYStoryboard.storyboard in Resources */,
 				3256A5FD2098A7EB00A19946 /* TYAllListViewController.xib in Resources */,
+				BA90668C20A2F2C300631F42 /* CommentViewCell.xib in Resources */,
+				BAB44C9020A1A89A002455D8 /* NewMicoThirdCell.xib in Resources */,
 				3FA5D9AF20A03EF00029E276 /* README.md in Resources */,
 				322B157C2088D0AD009FCC96 /* UpCompositionViewController.xib in Resources */,
+				BA90668720A2E40800631F42 /* CourseCollectionViewCell.xib in Resources */,
 				F6038CF01F590601008FE507 /* sj.png in Resources */,
 				3FA5D979209FE42A0029E276 /* PerCenterViewController1.xib in Resources */,
 				F6038CE81F58E96A008FE507 /* mp322.png in Resources */,
+				BAB44C9320A1A89A002455D8 /* NewMicoSecondCell.xib in Resources */,
 				32CBFA8C20886B5C004CB00F /* LeftMenuViewController.xib in Resources */,
 				32426A4C208638FF00B5227B /* HomeTableViewCell.xib in Resources */,
 				3F3D578B209C528700D415AC /* MessageDetailViewController.xib in Resources */,
@@ -4978,6 +5130,7 @@
 				F6C741E21F95F8FC006CF76D /* MytestpaperViewController.m in Sources */,
 				F6502D831F539F460078ADD9 /* HomePageHeadView.m in Sources */,
 				F6BDDAEE1FA1C49900C78F6D /* MarkTestCell.m in Sources */,
+				BA9C1CB820A2CF0600BFBE23 /* NewMicoSeventhCell.m in Sources */,
 				F6AB073C1F788A8600B5304A /* GetActiveWriteList.m in Sources */,
 				F6C227B31F9B2C5E00464BD6 /* toolbarView.m in Sources */,
 				F6A717641FA040630046C235 /* PersonModel.m in Sources */,
@@ -5128,6 +5281,7 @@
 				2F4FC65E20A189EF009A1E4C /* MyWritingDetailModel.m in Sources */,
 				F662D1D51FA825AE00BAEB18 /* MytestGroupCell.m in Sources */,
 				3FA5D9B720A03EF00029E276 /* TZImagePickerController.m in Sources */,
+				BA647D3120A2A7CF007AAC98 /* NewMicoFiveCell.m in Sources */,
 				F68866E61F87764800ED580C /* TeacherApplyVolRequst.m in Sources */,
 				F6AA99FE1F60D258006897B1 /* MicoClassModel.m in Sources */,
 				F6B8DB821F7256090087666D /* SubmissionHeadView.m in Sources */,
@@ -5152,7 +5306,9 @@
 				F69C8F821F887A780091F31C /* MywritingCell.m in Sources */,
 				F6FFD4041F90BB760029B762 /* ReadnoteTableViewCell.m in Sources */,
 				F6C227B91F9B43B300464BD6 /* GetWritePicModel.m in Sources */,
+				BAB44C8B20A1A89A002455D8 /* NewMicrodetailController.m in Sources */,
 				F6C091811F8A0AB800F89A9B /* GetDinaPinListRequst.m in Sources */,
+				BAB44C9620A1A89A002455D8 /* VideoPlayer.m in Sources */,
 				F6ACDA031FAB134F009F897B /* MemberViewController.m in Sources */,
 				F6BC3E351F5D23710047A7AA /* UIImage+MultiFormat.m in Sources */,
 				589BF89B2062587F00BA0D88 /* JGInfiniteScrollView.m in Sources */,
@@ -5219,6 +5375,7 @@
 				F6AF708E1F9DC214008E4220 /* CreatcircleFristCell.m in Sources */,
 				32B38F51208880B000616A7B /* LeftDetailViewController.m in Sources */,
 				F649DD431F5516DD00879744 /* FristCollectionViewCell.m in Sources */,
+				BAB44C8D20A1A89A002455D8 /* CompositionCell.m in Sources */,
 				F6A7175E1FA039540046C235 /* GetMessageWaitNumRequst.m in Sources */,
 				F6D7C7ED1F8F440300A08DC1 /* BookDetailFristCell.m in Sources */,
 				F62DC7301F9F2ECF00D3E035 /* PerCenterCell.m in Sources */,
@@ -5242,6 +5399,7 @@
 				F6AA9A161F613AA9006897B1 /* MicroClassTypeModel.m in Sources */,
 				F68866E01F87671600ED580C /* ApplyActiveSecondCell.m in Sources */,
 				F6BC207B1F94989A000686CC /* TakenotesCell.m in Sources */,
+				BAB44C8E20A1A89A002455D8 /* NewMicoThirdCell.m in Sources */,
 				F60F77921FBA87FB0058C628 /* RBCustomDatePickerView.m in Sources */,
 				F6BDDAF71FA1E7AD00C78F6D /* MarkTestSecondCell.m in Sources */,
 				F6502D861F53C0910078ADD9 /* HomePageCompositionTableViewCell.m in Sources */,
@@ -5249,6 +5407,7 @@
 				32BB21C02089C53700107075 /* UpCompositionModel.m in Sources */,
 				F6BC3E2C1F5D23710047A7AA /* SDImageCache.m in Sources */,
 				F67F9EA31F57D8780070C629 /* VolunteerFrsitHeadView.m in Sources */,
+				BAB44C9420A1A89A002455D8 /* PlaybackControls.m in Sources */,
 				F6BC3E2A1F5D23710047A7AA /* MKAnnotationView+WebCache.m in Sources */,
 				F6134C0A1F68E3BD0028420E /* AddcommentsView.m in Sources */,
 				3FA5D9B020A03EF00029E276 /* NSBundle+TZImagePicker.m in Sources */,
@@ -5266,7 +5425,9 @@
 				F6502D8F1F53F57B0078ADD9 /* HomePageReadTableViewCell.m in Sources */,
 				F623E2BF1F8727510024876A /* GetBlogContentInfoRequst.m in Sources */,
 				3FA5D98B20A031460029E276 /* PlaceholderTextView.m in Sources */,
+				BA647D2C20A28BC6007AAC98 /* NewMicoFourthCell.m in Sources */,
 				F62A25971F73ACF3004E095D /* RingdetailHeadView.m in Sources */,
+				BAB44C9120A1A89A002455D8 /* NewMicoSecondCell.m in Sources */,
 				F6DC7CC81F91C25B0050D1DF /* BookRankViewController.m in Sources */,
 				F6FFD40F1F90E8CD0029B762 /* CommentFrsitCell.m in Sources */,
 				F6BC3E331F5D23710047A7AA /* UIButton+WebCache.m in Sources */,
@@ -5290,6 +5451,7 @@
 				F6A717831FA0B3970046C235 /* ChangePassWordViewController.m in Sources */,
 				04A07A2B1F6B62070026DD6E /* NSString+MJExtension.m in Sources */,
 				F6DC7CD51F91FECB0050D1DF /* ApplyMarkCell.m in Sources */,
+				BAB44C9220A1A89A002455D8 /* NewMicoFristCell.m in Sources */,
 				F6C0918A1F8A2EEE00F89A9B /* GetVoletacherModel.m in Sources */,
 				F6B3C0E61F5DA43D00C0D821 /* MJRefreshAutoFooter.m in Sources */,
 				F6AE29AA1F6AFCAE00633F1C /* MicrobenkexizuoCell.m in Sources */,
@@ -5310,11 +5472,13 @@
 				F6D7C7F01F8F444600A08DC1 /* BookDetailSecondCell.m in Sources */,
 				32B38F4D208875E500616A7B /* LeftMenuModel.m in Sources */,
 				F6502D891F53CC1E0078ADD9 /* HomePageClassroomTableViewCell.m in Sources */,
+				BAB44C9720A1A89A002455D8 /* VideoSlider.m in Sources */,
 				3FA5D9BD20A03EF00029E276 /* TZVideoPlayerController.m in Sources */,
 				F623F3F21F6794DA00D421D4 /* MicrodetailFristHeadView.m in Sources */,
 				F6CD74C01F72048A00EBE579 /* ActivityDetailRequst.m in Sources */,
 				F6E187C31FA4516A003F06B3 /* MarkSDView.m in Sources */,
 				04A07A241F6B62070026DD6E /* MJProperty.m in Sources */,
+				BA90668620A2E40800631F42 /* CourseCollectionViewCell.m in Sources */,
 				F6ACDA081FAB1617009F897B /* MemberCell.m in Sources */,
 				3FA5D9B920A03EF00029E276 /* TZPhotoPickerController.m in Sources */,
 				F6BC3E481F5D697B0047A7AA /* ActiveInfoModel.m in Sources */,
@@ -5337,6 +5501,7 @@
 				F6BC3E3C1F5D43A20047A7AA /* HomeActivityRequst.m in Sources */,
 				F69C99661F8DFD6F00F0C7D6 /* GetBookBjModel.m in Sources */,
 				F612EC071F4FBAA9000E7432 /* UIImage+Extension.m in Sources */,
+				BAB44C9820A1A89A002455D8 /* PlayerConfiguration.m in Sources */,
 				F6CBC96C1F67009900D71A8C /* MicrodetailController.m in Sources */,
 				F6B3C0E81F5DA43D00C0D821 /* MJRefreshComponent.m in Sources */,
 				F69C99751F8E19C600F0C7D6 /* GetReadStartRequst.m in Sources */,
@@ -5391,6 +5556,7 @@
 				F6D7C7DA1F8F020900A08DC1 /* GetBookTypeModel.m in Sources */,
 				F6BDDAE51FA166DD00C78F6D /* FixPawssRequst.m in Sources */,
 				F6B130B91F60383A00994571 /* RingFristCell.m in Sources */,
+				BA9C1CB320A2CCC000BFBE23 /* NewMicoSixthCell.m in Sources */,
 				322B15812088D3A5009FCC96 /* UpCompositionTableViewCell.m in Sources */,
 				F6C091871F8A2C5F00F89A9B /* GetVoleTeacherRequst.m in Sources */,
 				F621C2071FA6B4C800801521 /* SVProgressHUD.m in Sources */,
@@ -5408,6 +5574,7 @@
 				F6C0918D1F8A467D00F89A9B /* GetGroupInfoRequst.m in Sources */,
 				F6AF70861F9DA4CB008E4220 /* MarkProgressThridCell.m in Sources */,
 				F6FFD3E61F90798C0029B762 /* BookEditViewController.m in Sources */,
+				BA90668B20A2F2C300631F42 /* CommentViewCell.m in Sources */,
 				F608E7E21F5FD3D500A788C0 /* VolunteerModel.m in Sources */,
 				F621C20B1FA6C45300801521 /* GetActiveTestModel.m in Sources */,
 				F60F77931FBA87FB0058C628 /* FDAlertView.m in Sources */,
@@ -5462,6 +5629,7 @@
 				3262C5B42090B3FE0063DE19 /* UIButton+ImageTitleStyle.m in Sources */,
 				F6D637D21F7D284900FF6FA4 /* IQBarButtonItem.m in Sources */,
 				F6D637CE1F7D284900FF6FA4 /* IQUIWindow+Hierarchy.m in Sources */,
+				BAB44C9520A1A89A002455D8 /* UIViewController+PlayerRotation.m in Sources */,
 				F69C996F1F8E105F00F0C7D6 /* GetBookPaiHangRequst.m in Sources */,
 				F6D6379E1F7D17C000FF6FA4 /* SaveGJRequst.m in Sources */,
 				F6BC208D1F94E125000686CC /* MyrecommendBookViewController.m in Sources */,
