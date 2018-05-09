@@ -153,9 +153,7 @@
 
     cell.titleLable.text = model.Tiltle;
     cell.bt.tag = 1000+indexPath.row;
-//    cell.botlabel.text = [NSString stringWithFormat:@"{%ld,%ld}",(long)indexPath.section,(long)indexPath.row];
     cell.delegate = self;
-    cell.backgroundColor = [UIColor yellowColor];
     
     return cell;
 }
@@ -168,7 +166,7 @@
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
     
-    return UIEdgeInsetsMake(2, 15, 2, 15);;
+    return UIEdgeInsetsMake(10, 15, 2, 15);;
 }
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -181,12 +179,9 @@
 }
 
 -(void)leftBarButton{
-    UIBarButtonItem *item=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"left-arrow_s"] style: UIBarButtonItemStylePlain target:self action:@selector(onBack)];
-    
-    self.navigationItem.leftBarButtonItem=item;
-    
+    GO_BACK;
 }
--(void)onBack{
+-(void)goBackNV{
     [self.navigationController popViewControllerAnimated:YES];
     
     
