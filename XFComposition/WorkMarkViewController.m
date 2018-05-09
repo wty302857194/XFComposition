@@ -38,17 +38,19 @@
     
 }
 -(void)creatHeadView{
-    
+    UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0,SafeAreaTopHeight, kScreenWidth, 35)];
+    view.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:view];
     UIButton *typeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    typeButton.frame = CGRectMake(20, 5+64, 80, 30);
-    [typeButton setTitle:@"作品状态" forState:UIControlStateNormal];
-    typeButton.titleLabel.font = [UIFont systemFontOfSize:16];
+    typeButton.frame = CGRectMake(14, SafeAreaTopHeight+5, 80, 25);
+    [typeButton setTitle:@"全部" forState:UIControlStateNormal];
+    typeButton.titleLabel.font = [UIFont systemFontOfSize:14];
     [typeButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [typeButton addTarget:self action:@selector(showtype) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:typeButton];
     
-    self.textfield = [[UITextField alloc]initWithFrame:CGRectMake(130, 5+64, WidthFrame-210, 30)];
-    self.textfield.placeholder = @"输入活动名称";
+    self.textfield = [[UITextField alloc]initWithFrame:CGRectMake(102, SafeAreaTopHeight+5, WidthFrame-200, 25)];
+    self.textfield.placeholder = @"关键词";
     self.textfield.layer.cornerRadius = 6;
     self.textfield.layer.masksToBounds = YES;
     self.textfield.layer.borderWidth = 2;
@@ -60,16 +62,16 @@
     [self.view addSubview:self.textfield];
     
     UIButton *selectbt = [UIButton buttonWithType:UIButtonTypeCustom];
-    selectbt.frame = CGRectMake(CGRectGetMaxX(self.textfield.frame)+10, 5+64, 50, 30);
+    selectbt.frame = CGRectMake(CGRectGetMaxX(self.textfield.frame)+10, SafeAreaTopHeight+5, 50, 25);
     [selectbt setTitle:@"搜索" forState:UIControlStateNormal];
     [selectbt addTarget:self action:@selector(sousuo) forControlEvents:UIControlEventTouchUpInside];
-    selectbt.titleLabel.font = [UIFont systemFontOfSize:16];
+    selectbt.titleLabel.font = [UIFont systemFontOfSize:14];
     [selectbt setBackgroundColor:[UIColor colorWithHexString:@"3691CE"]];
     selectbt.layer.cornerRadius =6;
     selectbt.layer.masksToBounds = YES;
     [self.view addSubview:selectbt];
     
-    
+
 }
 -(XFUserInfo *)xf{
     if (!_xf) {
@@ -79,11 +81,11 @@
 }
 -(UITableView *)tableView{
     if (!_tableView) {
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 64+45, WidthFrame, HeightFrame-64-45) style:UITableViewStyleGrouped];
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, SafeAreaTopHeight , WidthFrame, HeightFrame-SafeAreaTopHeight) style:UITableViewStyleGrouped];
         _tableView.delegate = self;
         _tableView.dataSource = self;
-                _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;//分割线
-        [_tableView registerClass:[WorkMarkCell class] forCellReuseIdentifier:@"cell"];
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;//分割线
+        _tableView.backgroundColor = RGB_COLOR(229, 229, 229);
         
     }
     return _tableView;
@@ -92,8 +94,8 @@
     if (!_menuView1) {
         __weak typeof (self) weakSelf = self;
         NSArray *array = [NSArray array];
-        array = @[@"全部状态",@"未评审",@"已评审",@"被退回"];
-        _menuView1 = [[MenuView alloc]initWithFrame:CGRectMake(20, 64+5+30, 80, 30*array.count)cellarray:array block:^(NSInteger i) {
+        array = @[@"全部",@"尚未评审",@"已经评审",@"被退回"];
+        _menuView1 = [[MenuView alloc]initWithFrame:CGRectMake(0, SafeAreaTopHeight+35, kScreenWidth, 60*array.count)cellarray:array block:^(NSInteger i) {
             weakSelf.isShow1 = NO;
             weakSelf.page = 1;
             if (i == 0) {
@@ -121,7 +123,8 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self creatHeadView];
+    [self.tableView registerNib:[UINib nibWithNibName:@"WorkMarkCell" bundle:nil] forCellReuseIdentifier:@"WorkMarkCell"];
+    
     [self.view addSubview:self.tableView];
     self.navigationItem.title = @"作品批阅";
     self.view.backgroundColor = [UIColor whiteColor];
@@ -144,6 +147,7 @@
         [self requstMore];
         [self.tableView.mj_footer endRefreshing];
     }];
+    [self creatHeadView];
 
 }
 //获取制定志愿教师需要批阅的习作列表
@@ -151,13 +155,17 @@
     GetTeachNeedCheckListRequst *requst = [[GetTeachNeedCheckListRequst alloc]init];
     [requst GetTeachNeedCheckListRequstWithuserId:self.xf.Loginid withactiveId:self.activeId withPageIndex:@"1" withPageSize:@"20" withcheckType:checkType withworkName:self.textfield.text :^(NSDictionary *json) {
         [self.WorkArray removeAllObjects];
-        for (NSDictionary *dic in json[@"ret_data"][@"pageInfo"]) {
-            GetTeachNeedCheckListModel *model = [GetTeachNeedCheckListModel loadWithJSOn:dic];
-            [self.WorkArray addObject:model];
+        if ([json[@"ret_code"] integerValue] == 0) {
+            
+            for (NSDictionary *dic in json[@"ret_data"][@"pageInfo"]) {
+                GetTeachNeedCheckListModel *model = [GetTeachNeedCheckListModel loadWithJSOn:dic];
+                [self.WorkArray addObject:model];
+            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.tableView reloadData];
+            });
         }
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.tableView reloadData];
-        });
+        
     }];
 
 }
@@ -166,13 +174,16 @@
     GetTeachNeedCheckListRequst *requst = [[GetTeachNeedCheckListRequst alloc]init];
     [requst GetTeachNeedCheckListRequstWithuserId:self.xf.Loginid withactiveId:self.activeId withPageIndex:[NSString stringWithFormat:@"%ld",(long)self.page] withPageSize:@"20" withcheckType:self.checkType withworkName:self.textfield.text :^(NSDictionary *json) {
         
-        for (NSDictionary *dic in json[@"ret_data"][@"pageInfo"]) {
-            GetTeachNeedCheckListModel *model = [GetTeachNeedCheckListModel loadWithJSOn:dic];
-            [self.WorkArray addObject:model];
+        if ([json[@"ret_code"] integerValue] == 0) {
+            for (NSDictionary *dic in json[@"ret_data"][@"pageInfo"]) {
+                GetTeachNeedCheckListModel *model = [GetTeachNeedCheckListModel loadWithJSOn:dic];
+                [self.WorkArray addObject:model];
+            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.tableView reloadData];
+            });
         }
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.tableView reloadData];
-        });
+      
     }];
 
 }
@@ -187,8 +198,8 @@
 -(void)sousuo{
 
 }
--(void)dianping:(UIButton *)bt{
-    GetTeachNeedCheckListModel *model = self.WorkArray[bt.tag - 1000];
+-(void)dianping:(UIButton *)bt withModel:(GetTeachNeedCheckListModel *)model{
+    
     PicListViewController *vc = [[PicListViewController alloc]init];
     vc.blogid = model.WorkId;
     [self.navigationController pushViewController:vc animated:YES];
@@ -204,17 +215,14 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    
-    GetTeachNeedCheckListModel *Model = self.WorkArray[indexPath.row];
-    return [self.tableView cellHeightForIndexPath:indexPath model:Model keyPath:@"model" cellClass:[WorkMarkCell class] contentViewWidth:[self cellContentViewWith]];
+      return 102;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    WorkMarkCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    WorkMarkCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WorkMarkCell"];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.delegate = self;
-    cell.bt.tag = 1000+indexPath.row;
     GetTeachNeedCheckListModel *Model = self.WorkArray[indexPath.row];
     cell.model = Model;
     return  cell;

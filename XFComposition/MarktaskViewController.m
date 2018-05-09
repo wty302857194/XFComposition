@@ -11,7 +11,12 @@
 #import "GetTeachNeedActiveListRequst.h"
 #import "GetTeacherNeedActiveModel.h"
 #import "WorkMarkViewController.h"
-@interface MarktaskViewController ()<UITableViewDelegate,UITableViewDataSource,MarktaskCellDelegate>
+#import "LookStandarViewController.h"
+@interface MarktaskViewController ()<UITableViewDelegate,UITableViewDataSource,MarktaskCellDelegate,UITextFieldDelegate>{
+    
+    
+    NSString * textStr;
+}
 @property (nonatomic,strong)UITextField *textfield;
 @property (nonatomic,strong)UITableView *tableView;
 @property (nonatomic,strong)NSMutableArray *activeArray;
@@ -30,34 +35,10 @@
     [self.navigationController setNavigationBarHidden:YES animated:YES];
     
 }
--(void)creatHeadView{
-    self.textfield = [[UITextField alloc]initWithFrame:CGRectMake(20, 5+64, WidthFrame-100, 30)];
-    self.textfield.placeholder = @"输入活动名称";
-    self.textfield.layer.cornerRadius = 6;
-    self.textfield.layer.masksToBounds = YES;
-    self.textfield.layer.borderWidth = 2;
-    self.textfield.layer.borderColor = [[UIColor colorWithHexString:@"D4D5D4"] CGColor];
-    self.textfield.clearButtonMode=YES;
-    self.textfield.leftViewMode=UITextFieldViewModeAlways;
-    [self.textfield setBorderStyle:UITextBorderStyleRoundedRect];
-    self.textfield.font = [UIFont systemFontOfSize:14];
-    [self.view addSubview:self.textfield];
-    
-    UIButton *selectbt = [UIButton buttonWithType:UIButtonTypeCustom];
-    selectbt.frame = CGRectMake(CGRectGetMaxX(self.textfield.frame)+10, 5+64, 50, 30);
-    [selectbt setTitle:@"搜索" forState:UIControlStateNormal];
-    [selectbt addTarget:self action:@selector(sousuo) forControlEvents:UIControlEventTouchUpInside];
-    selectbt.titleLabel.font = [UIFont systemFontOfSize:16];
-    [selectbt setBackgroundColor:[UIColor colorWithHexString:@"3691CE"]];
-    selectbt.layer.cornerRadius =6;
-    selectbt.layer.masksToBounds = YES;
-    [self.view addSubview:selectbt];
 
-    
-}
 -(UITableView *)tableView{
     if (!_tableView) {
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 64+45, WidthFrame, HeightFrame-64-45) style:UITableViewStyleGrouped];
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 45, WidthFrame, HeightFrame-45) style:UITableViewStyleGrouped];
         _tableView.delegate = self;
         _tableView.dataSource = self;
 //        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;//分割线
@@ -74,7 +55,6 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self creatHeadView];
     [self.view addSubview:self.tableView];
     self.navigationItem.title = @"批阅任务";
     self.view.backgroundColor = [UIColor whiteColor];
@@ -139,33 +119,76 @@
     
 }
 //作品批阅
--(void)markTask:(UIButton *)bt{
+-(void)markTask:(UIButton *)bt withModel:(GetTeacherNeedActiveModel *)model{
     
     if (bt.tag == 0) {
-       __block NSString * textStr = nil;
-        UIAlertController * alertController = [UIAlertController alertControllerWithTitle: @"登陆" message: @"输入用户名密码" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController * alertController = [UIAlertController alertControllerWithTitle:@"" message: @"添加标准" preferredStyle:UIAlertControllerStyleAlert];
+        
         [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-            textStr = textField.text;
-            textField.secureTextEntry = YES;
+            textField.delegate = self;
 
         }];
         
         UIAlertAction * cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
             
         }];
-        UIAlertAction * sureAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        UIAlertAction * sureAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+            
+            [[XFRequestManager sharedInstance] XFRequstAddStandard:@"0" objectId:model.ID addUser:[XFUserInfo getUserInfo].Loginid modelId:@"7" standardText:textStr :^(NSString *requestName, id responseData, BOOL isSuccess) {
+                
+                if (isSuccess) {
+                    [SVProgressHUD showSuccessWithStatus:@"添加成功"];
+                }else{
+                    [SVProgressHUD showErrorWithStatus:responseData];
+
+                    
+                }
+                
+            }];
             
         }];
         
         [alertController addAction:cancelAction];
         [alertController addAction:sureAction];
         [self presentViewController:alertController animated:YES completion:nil];
+    }else if (bt.tag == 1){
+        
+        
+        [SVProgressHUD showWithStatus:@"正在加载"];
+        [[XFRequestManager sharedInstance] XFRequstGetStandard:model.ID addUser:[XFUserInfo getUserInfo].Loginid modelId:@"7" :^(NSString *requestName, id responseData, BOOL isSuccess) {
+            [SVProgressHUD dismiss];
+            if (isSuccess) {
+                
+                LookStandarViewController * vc = [[LookStandarViewController alloc] init];
+                vc.dataArray = responseData;
+                [self.navigationController pushViewController:vc animated:YES];
+            }else{
+                
+                [SVProgressHUD showInfoWithStatus:responseData];
+
+                
+            }
+            
+        }];
+       
+        
+        
+        
+    }else if (bt.tag == 2){
+        
+        WorkMarkViewController *vc = [[WorkMarkViewController alloc]init];
+        vc.activeId = model.ID;
+        [self.navigationController pushViewController:vc animated:YES];
+        
     }
     
-    GetTeacherNeedActiveModel *model = self.activeArray[bt.tag-1000];
-    WorkMarkViewController *vc = [[WorkMarkViewController alloc]init];
-    vc.activeId = model.ID;
-    [self.navigationController pushViewController:vc animated:YES];
+
+}
+-(void)textFieldDidEndEditing:(UITextField *)textField{
+    
+    textStr = textField.text;
+    
 }
 #pragma mark cell的行数
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
