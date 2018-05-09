@@ -16,4 +16,5 @@
 @property (weak, nonatomic) IBOutlet UILabel *detailLab;
 @property (weak, nonatomic) IBOutlet UILabel *numLab;
 @property (strong, nonatomic) VolunteerModel *model;
+
 @end

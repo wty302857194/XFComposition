@@ -8,6 +8,7 @@
 
 #import "UpCompositionTableViewCell.h"
 #import "UpCompositionModel.h"
+#import "VolunteerModel.h"
 
 @implementation UpCompositionTableViewCell
 
@@ -21,5 +22,17 @@
         self.contentLab.text = model.MicroclassInfoTarget;
     }
 }
+- (void)setVolunteerModel:(VolunteerModel *)volunteerModel {
+    _volunteerModel = volunteerModel;
+    [self.imgView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",HTurl,volunteerModel.activepic?:@""]] placeholderImage:[UIImage imageNamed:@""]];
+    self.titleLab.text = volunteerModel.activename?:@"";
+    self.timeLab.text = [NSString stringWithFormat:@"活动时间：%@-%@",volunteerModel.activestarttime,volunteerModel.activeendtime];
+//    if (volunteerModel.isWeiKe) {
+//        self.contentLab.text = [NSString stringWithFormat:@"课程设计导师：%@",volunteerModel.MicroclassInfoMaster];
+//    }else {
+//        self.contentLab.text = volunteerModel.activeinfo;
+//    }
+    self.contentLab.text = volunteerModel.activeinfo;
 
+}
 @end
