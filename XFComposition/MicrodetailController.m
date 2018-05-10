@@ -565,12 +565,13 @@ referenceSizeForHeaderInSection:(NSInteger)section {
                 //                    }]];
                 //                    [self presentViewController:alert animated:YES completion:nil];
                 //                }
-                if (self.xf.Loginid == NULL) {
-                    [SVProgressHUD showInfoWithStatus:@"您还未登录"];
-                    
-                    
-                    
-                }else{
+//                if (self.xf.Loginid == NULL) {
+//                    [SVProgressHUD showInfoWithStatus:@"您还未登录"];
+//                    
+//                    
+//                    
+//                }else
+                {
                     if (bt.tag ==1001) {
                         
                         

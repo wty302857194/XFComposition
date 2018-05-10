@@ -21,7 +21,7 @@
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GWY-Ai-klt">
                         <rect key="frame" x="0.0" y="0.0" width="110" height="93"/>
-                        <color key="backgroundColor" red="0.27450980392156865" green="0.93657769097222221" blue="0.83529411764705885" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="93" id="5kY-zO-CJt"/>
                         </constraints>
@@ -31,20 +31,25 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="《六年级上册习题》" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S2C-oL-t7g">
-                        <rect key="frame" x="5" y="98" width="105" height="16"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S2C-oL-t7g">
+                        <rect key="frame" x="5" y="98" width="105" height="0.0"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                        <nil key="textColor"/>
+                        <color key="textColor" red="0.039215686274509803" green="0.039215686274509803" blue="0.039215686274509803" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="17-Play-256" translatesAutoresizingMaskIntoConstraints="NO" id="T8I-O2-K0U">
+                        <rect key="frame" x="39" y="30.5" width="32" height="32"/>
+                    </imageView>
                 </subviews>
             </view>
             <constraints>
                 <constraint firstItem="SEy-5g-ep8" firstAttribute="trailing" secondItem="S2C-oL-t7g" secondAttribute="trailing" id="IJd-eD-Ezo"/>
                 <constraint firstItem="GWY-Ai-klt" firstAttribute="top" secondItem="SEy-5g-ep8" secondAttribute="top" id="Qos-cp-Vfc"/>
+                <constraint firstItem="T8I-O2-K0U" firstAttribute="centerX" secondItem="GWY-Ai-klt" secondAttribute="centerX" id="SgR-fu-EKq"/>
                 <constraint firstItem="S2C-oL-t7g" firstAttribute="leading" secondItem="SEy-5g-ep8" secondAttribute="leading" constant="5" id="TjH-PA-Mvn"/>
                 <constraint firstItem="S2C-oL-t7g" firstAttribute="top" secondItem="GWY-Ai-klt" secondAttribute="bottom" constant="5" id="YRT-gc-Bt9"/>
                 <constraint firstItem="SEy-5g-ep8" firstAttribute="trailing" secondItem="GWY-Ai-klt" secondAttribute="trailing" id="bAt-dG-Csn"/>
+                <constraint firstItem="T8I-O2-K0U" firstAttribute="centerY" secondItem="GWY-Ai-klt" secondAttribute="centerY" id="tYl-BS-wxb"/>
                 <constraint firstItem="GWY-Ai-klt" firstAttribute="leading" secondItem="SEy-5g-ep8" secondAttribute="leading" id="xQm-Rc-FRg"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
@@ -56,4 +61,7 @@
             <point key="canvasLocation" x="103" y="181"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="17-Play-256" width="32" height="32"/>
+    </resources>
 </document>

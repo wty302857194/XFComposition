@@ -62,6 +62,7 @@
     [self.navigationController setNavigationBarHidden:YES animated:NO];
 
 }
+
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [self setStatusBarBackgroundColor:nil];

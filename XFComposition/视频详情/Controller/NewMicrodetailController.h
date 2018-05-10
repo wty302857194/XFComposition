@@ -13,3 +13,4 @@
 @property (nonatomic, assign) NSString *classId;
 
 @end
+

@@ -195,6 +195,7 @@
 		BAB44C9620A1A89A002455D8 /* VideoPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = BAB44C8520A1A89A002455D8 /* VideoPlayer.m */; };
 		BAB44C9720A1A89A002455D8 /* VideoSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = BAB44C8620A1A89A002455D8 /* VideoSlider.m */; };
 		BAB44C9820A1A89A002455D8 /* PlayerConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = BAB44C8920A1A89A002455D8 /* PlayerConfiguration.m */; };
+		BADA87CD20A49E840031EA5E /* AlertWriteView.m in Sources */ = {isa = PBXBuildFile; fileRef = BADA87CC20A49E840031EA5E /* AlertWriteView.m */; };
 		F602ADB21F58095600C152C4 /* MicroClassViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F602ADB11F58095600C152C4 /* MicroClassViewController.m */; };
 		F6038CE81F58E96A008FE507 /* mp322.png in Resources */ = {isa = PBXBuildFile; fileRef = F6038CE61F58E96A008FE507 /* mp322.png */; };
 		F6038CE91F58E96A008FE507 /* mp321.png in Resources */ = {isa = PBXBuildFile; fileRef = F6038CE71F58E96A008FE507 /* mp321.png */; };
@@ -1053,6 +1054,8 @@
 		BAB44C8820A1A89A002455D8 /* PlaybackControls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaybackControls.h; sourceTree = "<group>"; };
 		BAB44C8920A1A89A002455D8 /* PlayerConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerConfiguration.m; sourceTree = "<group>"; };
 		BAB44C8A20A1A89A002455D8 /* VideoPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoPlayer.h; sourceTree = "<group>"; };
+		BADA87CB20A49E840031EA5E /* AlertWriteView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlertWriteView.h; sourceTree = "<group>"; };
+		BADA87CC20A49E840031EA5E /* AlertWriteView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlertWriteView.m; sourceTree = "<group>"; };
 		F602ADB01F58095600C152C4 /* MicroClassViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MicroClassViewController.h; sourceTree = "<group>"; };
 		F602ADB11F58095600C152C4 /* MicroClassViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MicroClassViewController.m; sourceTree = "<group>"; };
 		F6038CE61F58E96A008FE507 /* mp322.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mp322.png; sourceTree = "<group>"; };
@@ -2457,6 +2460,8 @@
 				BA90668820A2F2C300631F42 /* CommentViewCell.h */,
 				BA90668920A2F2C300631F42 /* CommentViewCell.m */,
 				BA90668A20A2F2C300631F42 /* CommentViewCell.xib */,
+				BADA87CB20A49E840031EA5E /* AlertWriteView.h */,
+				BADA87CC20A49E840031EA5E /* AlertWriteView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -5021,7 +5026,6 @@
 				TargetAttributes = {
 					F612EBC21F4FB341000E7432 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = X225TLXQ76;
 						DevelopmentTeam = 5K5GGEWVU3;
 						ProvisioningStyle = Automatic;
 					};
@@ -5561,6 +5565,7 @@
 				F6A717831FA0B3970046C235 /* ChangePassWordViewController.m in Sources */,
 				04A07A2B1F6B62070026DD6E /* NSString+MJExtension.m in Sources */,
 				F6DC7CD51F91FECB0050D1DF /* ApplyMarkCell.m in Sources */,
+				BADA87CD20A49E840031EA5E /* AlertWriteView.m in Sources */,
 				BAB44C9220A1A89A002455D8 /* NewMicoFristCell.m in Sources */,
 				F6C0918A1F8A2EEE00F89A9B /* GetVoletacherModel.m in Sources */,
 				F6B3C0E61F5DA43D00C0D821 /* MJRefreshAutoFooter.m in Sources */,
@@ -5967,7 +5972,6 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = X225TLXQ76;
 				DEVELOPMENT_TEAM = 5K5GGEWVU3;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/XFComposition/PrefixHeader.pch";

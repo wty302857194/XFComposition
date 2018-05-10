@@ -37,11 +37,14 @@ static const CGFloat PlaybackControlsAutoHideTimeInterval = 0.3f;
 - (void)setupUI
 {
     self.backgroundColor = [UIColor clearColor];
-//    [self addSubview:self.playButton];
+
     [self addSubview:self.topControlsBar];
     [self addSubview:self.bottomControlsBar];
     [self addSubview:self.activityIndicatorView];
     [self addSubview:self.retryButton];
+    [self addSubview:self.bgImageView];
+    
+    [_bgImageView addSubview:self.bgPlayImgView];
     
     [_topControlsBar addSubview:self.backButton];
     [_topControlsBar addSubview:self.titleLab];
@@ -306,6 +309,16 @@ static const CGFloat PlaybackControlsAutoHideTimeInterval = 0.3f;
 - (void)makeConstraints
 {
     
+    [_bgImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.equalTo(self);
+        make.size.equalTo(self);
+    }];
+    
+    [_bgPlayImgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.equalTo(self);
+        make.size.mas_equalTo(CGSizeMake(60, 60));
+    }];
+    
     [_topControlsBar mas_makeConstraints:^(MASConstraintMaker *make) {
         if (@available(iOS 11.0, *)) {
             make.top.equalTo(self.mas_safeAreaLayoutGuideTop).offset(5);
@@ -337,7 +350,7 @@ static const CGFloat PlaybackControlsAutoHideTimeInterval = 0.3f;
     
     [_retryButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(self);
-        make.size.mas_equalTo(CGSizeMake(80, 80));
+        make.size.mas_equalTo(CGSizeMake(100, 40));
     }];
     
     [_bottomControlsBar mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -419,12 +432,33 @@ static const CGFloat PlaybackControlsAutoHideTimeInterval = 0.3f;
     return _topControlsBar;
 }
 
+/** 背景图片*/
+-(UIImageView *)bgImageView
+{
+    if (!_bgImageView) {
+        _bgImageView = [[UIImageView alloc] init];
+        _bgImageView.userInteractionEnabled = YES;
+        UITapGestureRecognizer *singleTapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(toPlay)];
+        [_bgImageView addGestureRecognizer:singleTapGesture];
+    }
+    return _bgImageView;
+}
+/** 背景上播放图片*/
+- (UIImageView *)bgPlayImgView
+{
+    if (!_bgPlayImgView) {
+        _bgPlayImgView = [[UIImageView alloc] init];
+        _bgPlayImgView.image = [UIImage imageNamed:@"17-Play-256"];
+    }
+    return _bgPlayImgView;
+}
+
 /** 顶部返回按钮 */
 -(UIButton *)backButton
 {
     if (!_backButton) {
         _backButton = [[UIButton alloc] init];
-        [_backButton setImage:[UIImage imageNamed:@"left-arrow"] forState:UIControlStateNormal];
+        [_backButton setImage:[UIImage imageNamed:@"left-arrow_s"] forState:UIControlStateNormal];
         [_backButton setImageEdgeInsets:UIEdgeInsetsMake(14, 0, 14, 28)];
         [_backButton addTarget:self action:@selector(fullScreenAction) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -500,7 +534,10 @@ static const CGFloat PlaybackControlsAutoHideTimeInterval = 0.3f;
 {
     if (!_retryButton) {
         _retryButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_retryButton setImage:[UIImage imageNamed:@"Action_reload_player_100x100_"] forState:UIControlStateNormal];
+        _retryButton.backgroundColor = [UIColor colorWithHexString:@"#646464"];
+        [_retryButton setTitle:@"点击重拾" forState:UIControlStateNormal];
+        _retryButton.layer.cornerRadius = 20;
+        _retryButton.titleLabel.font = [UIFont systemFontOfSize:15];
         [_retryButton addTarget:self action:@selector(retryAction) forControlEvents:UIControlEventTouchUpInside];
         _retryButton.hidden = YES;
     }
@@ -555,6 +592,13 @@ static const CGFloat PlaybackControlsAutoHideTimeInterval = 0.3f;
     }
 }
 
+- (void)toPlay
+{
+    self.bgImageView.hidden = YES;
+    if (_delegate && [_delegate respondsToSelector:@selector(playButtonAction:)]) {
+        [_delegate playButtonAction:NO];
+    }
+}
 /** 播放按钮点击事件 */
 - (void)playAction:(UIButton *)button
 {

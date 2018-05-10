@@ -47,6 +47,10 @@
 @property (nonatomic, strong)UIButton *backButton;
 /** 顶部标题 */
 @property (nonatomic, strong)UILabel *titleLab;
+/** 背景图片 */
+@property (nonatomic, strong)UIImageView *bgImageView;
+/** 背景播放图片 */
+@property (nonatomic, strong)UIImageView *bgPlayImgView;
 /** 播放按钮 */
 @property (nonatomic, strong) UIButton *playButton;
 /** 全屏切换按钮 */

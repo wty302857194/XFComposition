@@ -16,7 +16,7 @@
 @end
 @implementation MicoClassRequst
 -(void)requstGetmicListWithchangId:(NSString *)changId Withmasterid:(NSString *)masterid Withsubjectid:(NSString *)subjectid Withindex:(NSString *)pageindex Withpagesize:(NSString *)pasize Withrecommed:(NSString *)recommed Withprostatic:(NSString *)protatic Withtimespan:(NSString *)timespan :(micClassblcok)block{
-    [SVProgressHUD showWithStatus:@"正在加载..."];
+//    [SVProgressHUD showWithStatus:@"正在加载..."];
     AFNetworkRequest *requst =[[AFNetworkRequest alloc]init];
     requst.datasource = self;
     NSDictionary *parameters = @{@"Action":@"GetMicroClassList",
@@ -36,7 +36,7 @@
         
         
         block(responseObject);
-        [SVProgressHUD dismiss];
+//        [SVProgressHUD dismiss];
         //                NSLog(@"微课堂%@",responseObject);
         
         

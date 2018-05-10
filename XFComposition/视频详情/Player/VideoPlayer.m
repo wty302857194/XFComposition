@@ -168,7 +168,7 @@ typedef NS_ENUM(NSInteger, VideoPlayerState) {
 {
     if (self.playDidEnd && self.playbackControls.videoSlider.value == 1.0) {
         //若播放已结束重新播放
-        [self _replayVideo];
+//        [self _replayVideo];
     }else
     {
         [_player play];
@@ -319,6 +319,8 @@ typedef NS_ENUM(NSInteger, VideoPlayerState) {
 - (void)_setupPlayControls
 {
     [self addSubview:self.playbackControls];
+    self.playbackControls.titleLab.text = _playerConfiguration.title;
+    [self.playbackControls.bgImageView sd_setImageWithURL:[NSURL URLWithString:_playerConfiguration.imageUrl]];
 }
 
 
@@ -382,6 +384,7 @@ typedef NS_ENUM(NSInteger, VideoPlayerState) {
         {
             [_playbackControls _activityIndicatorViewShow:NO];
             [_playbackControls _retryButtonShow:YES];
+            _playbackControls.bottomControlsBar.hidden =YES;
         }
             break;
         default:
@@ -513,6 +516,7 @@ typedef NS_ENUM(NSInteger, VideoPlayerState) {
 /** 重新加载视频 */
 - (void)retryButtonAction
 {
+    _playbackControls.bottomControlsBar.hidden = NO;
     [_playbackControls _retryButtonShow:NO];
     [_playbackControls _activityIndicatorViewShow:YES];
     [self _setupPlayer];

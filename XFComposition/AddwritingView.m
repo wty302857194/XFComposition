@@ -14,39 +14,37 @@
     if (self = [super initWithFrame:frame]) {
         self.backgroundColor = [UIColor colorWithWhite:0.1 alpha:0.7];
         //        self.alpha = 0.01f;
-        UIView *backView = [[UIView alloc]initWithFrame:CGRectMake(0, 100, WidthFrame, 260)];
+        UIView *backView = [[UIView alloc]init];
+        backView.bounds = CGRectMake(0, 0, WidthFrame - 80, 260);
+        backView.center = CGPointMake(self.width/2, self.height/2);
         backView.backgroundColor = [UIColor whiteColor];
         [self addSubview:backView];
-        UIButton *backbt = [[UIButton alloc]initWithFrame:CGRectMake(WidthFrame-50, 5, 40, 20)];
+        
+        UIButton *backbt = [[UIButton alloc]initWithFrame:CGRectMake(backView.width-50, 5, 40, 20)];
         backbt.titleLabel.font = [UIFont systemFontOfSize:8];
         [backbt setTitle:@"返回" forState:UIControlStateNormal];
         [backbt setBackgroundColor:[UIColor blueColor]];
         [backbt addTarget:self action:@selector(dismissView) forControlEvents:UIControlEventTouchUpInside];
         [backView addSubview:backbt];
-        self.titletextfield =  [[UITextField alloc]initWithFrame:CGRectMake(20, 30, WidthFrame-70, 30)];
-        self.titletextfield.placeholder = @"标题";
-        self.titletextfield.layer.cornerRadius =4;
-        self.titletextfield.layer.masksToBounds = YES;
+        
+        
+        self.titletextfield =  [[UITextField alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(backbt.frame), backView.width, 30)];
+        self.titletextfield.font = [UIFont systemFontOfSize:15];
+
+        self.titletextfield.placeholder = @"请输入标题";
+        //设置占位符居中
+        UILabel * placeholderLabel = [self.titletextfield valueForKey:@"_placeholderLabel"];
+        placeholderLabel.textAlignment = NSTextAlignmentCenter;
+        
         self.titletextfield.layer.borderWidth = 0.5;
         self.titletextfield.layer.borderColor = [[UIColor lightGrayColor] CGColor];
-        self.titletextfield.clearButtonMode=UITextFieldViewModeWhileEditing;
-        self.titletextfield.backgroundColor = [UIColor lightGrayColor];
+        self.titletextfield.textAlignment = NSTextAlignmentCenter;
         [backView addSubview:self.titletextfield];
         
-        UIButton *bt = [UIButton buttonWithType:UIButtonTypeCustom];
-        [bt setTitle:@"保存" forState:UIControlStateNormal];
-        bt.frame = CGRectMake(WidthFrame-48, 30, 30, 30);
-        bt.titleLabel.font = [UIFont systemFontOfSize:10];
-        [bt setBackgroundColor:UIColorFromRGBA(64, 224, 208, 1.0f)];
-        bt.layer.cornerRadius =4;
-        bt.layer.masksToBounds = YES;
-        [backView addSubview:bt];
         
-        self.textview = [[UITextView alloc]initWithFrame:CGRectMake(20, 80, WidthFrame-40, 120)];
-        //        self.textview.layer.masksToBounds = YES;
+        self.textview = [[UITextView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.titletextfield.frame), backView.width, 120)];
         self.textview.layer.borderWidth = 0.5;
         self.textview.layer.borderColor = [[UIColor lightGrayColor] CGColor];
-        self.textview.backgroundColor = [UIColor lightGrayColor];
         [backView addSubview:self.textview];
         
         UIButton *bt2 = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -86,5 +84,46 @@
     //    [self removeFromSuperview];
 }
 
+- (void)setPlaceHolder{
+    unsigned int count = 0;
+    
+    Ivar *ivars = class_copyIvarList([UITextView class], &count);
+    
+    for (int i = 0; i < count; i++) {
+        
+        Ivar ivar = ivars[i];
+        
+        const char *name = ivar_getName(ivar);
+        
+        NSString *objcName = [NSString stringWithUTF8String:name];
+        
+        if ([objcName isEqualToString:@"_placeholderLabel"]) {
+            
+            UILabel *placeHolderLabel = [[UILabel alloc] init];
+            
+            placeHolderLabel.text = @"请输入内容";
+            
+            placeHolderLabel.numberOfLines = 0;
+            
+            placeHolderLabel.textColor = [UIColor lightGrayColor];
+            
+            [placeHolderLabel sizeToFit];
+            
+            [self.textview addSubview:placeHolderLabel];
+            
+            placeHolderLabel.font = self.textview.font;
+            
+            [self.textview setValue:placeHolderLabel forKey:@"_placeholderLabel"];
+            
+            break;
+            
+        }
+        
+    }
+    free(ivars);
+}
 
 @end
+
+
+

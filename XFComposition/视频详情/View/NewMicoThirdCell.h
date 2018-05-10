@@ -12,7 +12,7 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraint;
+@property (nonatomic, strong) NSMutableArray *datas;
 
-- (void)resetFrame:(int)count;
 
 @end

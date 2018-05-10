@@ -23,6 +23,8 @@ typedef NS_ENUM(NSUInteger, VideoGravity){
 @property (nonatomic, strong) NSURL *sourceUrl;
 /** 视频占位图片 */
 @property (nonatomic, assign) NSString *imageUrl;
+/** 视频标题 */
+@property (nonatomic, assign) NSString *title;
 /** 是否自动播放 */
 @property (nonatomic, assign) BOOL shouldAutoPlay;
 /** 视频拉伸方式 */

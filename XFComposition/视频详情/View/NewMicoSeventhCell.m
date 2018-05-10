@@ -21,32 +21,46 @@
     [self.courseCollView registerNib:[UINib nibWithNibName:@"CourseCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"CourseCollectionViewCell"];
     
 }
-#pragma mark --delegate
--(CGFloat)cellHeightForIndexPath:(NSIndexPath *)indexPath cellContentViewWidth:(CGFloat)width tableView:(UITableView *)tableView
+
+- (void)setDatas:(NSMutableArray *)datas
 {
-    return 130;
+    _datas = datas;
 }
+
+#pragma mark --delegate
+
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     CourseCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CourseCollectionViewCell" forIndexPath:indexPath];
-    cell.courseLab.text = @"jsskks";
+    cell.dataModel = self.datas[indexPath.row];
     return cell;
 }
 
 - (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 3;
-}
-
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 1;
+    return self.datas.count;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"%zd", indexPath.row);
+    
+    self.showDetailBlock(self.datas[indexPath.row]);
 }
 
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
+{
+    return UIEdgeInsetsMake(10, 20, 0, 20);
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return CGSizeMake((kScreenWidth-80)/3.0, 120);
+}
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
+{
+    return 20;
+}
 
 - (IBAction)showMore:(id)sender {
+    self.showMoreBlock();
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

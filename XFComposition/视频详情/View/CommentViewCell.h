@@ -15,4 +15,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *dateLab;
 @property (weak, nonatomic) IBOutlet UILabel *contentLab;
 
+@property (nonatomic, strong) id data;
+
 @end
