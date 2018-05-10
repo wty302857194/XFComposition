@@ -31,6 +31,8 @@
 #import <Photos/Photos.h>
 #import "TZImagePickerController.h"
 #import "UploadPicRequst.h"
+#import "ReadJianCeViewController.h"
+
 @interface MyViewController ()<UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource,UINavigationControllerDelegate,UIImagePickerControllerDelegate,TZImagePickerControllerDelegate>
 @property (nonatomic,strong)UITableView *tableView;
 
@@ -75,6 +77,17 @@
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
+    
+    if ([self.userInfo.dutyId isEqualToString:@"1"]) {//学生
+        self.teacherarray1 = @[@"个人中心",@"我的习作",@"申请批阅",@"阅读检测",@"我的微课"];
+        self.array1 = @[@"icon_01",@"icon_03",@"icon_03",@"icon_02",@"icon_06"];
+    }else if ([self.userInfo.dutyId isEqualToString:@"0"]){
+        
+        self.teacherarray1 = @[@"个人中心",@"批阅任务",@"我的试卷",@"阅读检测",@"我的微课"];
+        self.array1 = @[@"icon_01",@"icon_03",@"icon_04",@"icon_05",@"icon_06"];
+    }
+    
+    
     [self getInfo];
     [self GetMessageWaitNum];
 }
@@ -91,7 +104,13 @@
     self.navigationItem.title = @"我的";
     self.navigationController.delegate = self;
     [self.navigationController setNavigationBarHidden:YES animated:YES];
+    [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
+    
+    
+    
+    
     [self.view addSubview:self.tableView];
+
 }
 
 -(void)Login{
@@ -141,10 +160,7 @@
     }else if (section == 1){
         return 1;
     }else if (section == 2){
-        if ([self.userInfo.dutyId isEqualToString:@"1"]) {
-            return 7;
-        }
-        return  6;
+        return self.teacherarray1.count;
     }else {
         return 1;
     }
@@ -184,14 +200,14 @@
         cell.coinLabel.text = [NSString stringWithFormat:@"先锋币 : %@ ", [NSString stringWithFormat:@"%ld",(long)self.model.xfbnSoft]];
         return  cell;
     }else if (indexPath.section ==2){
-        if ([self.userInfo.dutyId isEqualToString:@"1"]) {//学生
-            self.teacherarray1 = @[@"个人中心",@"我的习作",@"申请批阅",@"做题笔记",@"读书笔记",@"我的推荐",@"我的微课"];
-            self.array1 = @[@"icon_01",@"icon_03",@"icon_03",@"icon_04",@"icon_05",@"icon_02",@"icon_06"];
-        }else if ([self.userInfo.dutyId isEqualToString:@"0"]){
-            
-            self.teacherarray1 = @[@"个人中心",@"批阅任务",@"我的试卷",@"读书笔记",@"我的推荐",@"我的微课"];
-            self.array1 = @[@"icon_01",@"icon_03",@"icon_04",@"icon_05",@"icon_02",@"icon_06"];
-        }
+//        if ([self.userInfo.dutyId isEqualToString:@"1"]) {//学生
+//            self.teacherarray1 = @[@"个人中心",@"我的习作",@"申请批阅",@"阅读检测",@"我的微课"];
+//            self.array1 = @[@"icon_01",@"icon_03",@"icon_03",@"icon_02",@"icon_06"];
+//        }else if ([self.userInfo.dutyId isEqualToString:@"0"]){
+//            
+//            self.teacherarray1 = @[@"个人中心",@"批阅任务",@"我的试卷",@"阅读检测",@"我的微课"];
+//            self.array1 = @[@"icon_01",@"icon_03",@"icon_04",@"icon_05",@"icon_06"];
+//        }
         
         
         MyThridTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellThrid" forIndexPath:indexPath];
@@ -210,7 +226,7 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         UIButton *loginbutton = [UIButton buttonWithType:UIButtonTypeCustom];
         [loginbutton addTarget:self action:@selector(logOut) forControlEvents:UIControlEventTouchUpInside];
-        [loginbutton setTitle:@"退出" forState:UIControlStateNormal];
+        [loginbutton setTitle:@"退出登录" forState:UIControlStateNormal];
         loginbutton.frame = CGRectMake(WidthFrame/2-50, 10, 100, 30);
         loginbutton.backgroundColor = [UIColor colorWithHexString:@"348DCC"];
         loginbutton.layer.cornerRadius = 6;
@@ -273,24 +289,24 @@
                 }
                     break;
                 case 3:{//做题笔记
-                    TakenotesViewController *vc = [[TakenotesViewController alloc]init];
-                    vc.takenotesuserId = self.userInfo.Loginid;
+                    ReadJianCeViewController *vc = [[ReadJianCeViewController alloc]init];
+                    vc.isTeacher = @"0";
                     [self.navigationController pushViewController:vc animated:YES];
                 }
                     break;
-                case 4:{//读书笔记
-                    ReadnotesViewController *vc = [[ReadnotesViewController alloc]init];
-                    vc.readnotesUserid = self.userInfo.Loginid;
-                    [self.navigationController pushViewController:vc animated:YES];
-                }
-                    break;
-                case 5:{//我的推荐
-                    MyrecommendBookViewController *vc = [[MyrecommendBookViewController alloc]init];
-                    vc.MyrecommenuserId = self.userInfo.Loginid;
-                    [self.navigationController pushViewController:vc animated:YES];
-                }
-                    break;
-                case 6:{//我的微课
+//                case 4:{//读书笔记
+//                    ReadnotesViewController *vc = [[ReadnotesViewController alloc]init];
+//                    vc.readnotesUserid = self.userInfo.Loginid;
+//                    [self.navigationController pushViewController:vc animated:YES];
+//                }
+//                    break;
+//                case 5:{//我的推荐
+//                    MyrecommendBookViewController *vc = [[MyrecommendBookViewController alloc]init];
+//                    vc.MyrecommenuserId = self.userInfo.Loginid;
+//                    [self.navigationController pushViewController:vc animated:YES];
+//                }
+//                    break;
+                case 4:{//我的微课
                     MyMicroViewController *vc = [[MyMicroViewController alloc]init];
                     vc.userID = self.userInfo.Loginid;
                     [self.navigationController pushViewController:vc animated:YES];
@@ -319,19 +335,20 @@
                     [self.navigationController pushViewController:vc animated:YES];
                 }
                     break;
-                case 3:{//读书笔记
-                    ReadnotesViewController *vc = [[ReadnotesViewController alloc]init];
-                    vc.readnotesUserid = self.userInfo.Loginid;
+                case 3:{//阅读评测
+                    ReadJianCeViewController *vc = [[ReadJianCeViewController alloc]init];
+                    vc.isTeacher = @"1";
+                    
                     [self.navigationController pushViewController:vc animated:YES];
                 }
                     break;
-                case 4:{//我的推荐
-                    MyrecommendBookViewController *vc = [[MyrecommendBookViewController alloc]init];
-                    vc.MyrecommenuserId = self.userInfo.Loginid;
-                    [self.navigationController pushViewController:vc animated:YES];
-                }
-                    break;
-                case 5:{//我的微课
+//                case 4:{//我的推荐
+//                    MyrecommendBookViewController *vc = [[MyrecommendBookViewController alloc]init];
+//                    vc.MyrecommenuserId = self.userInfo.Loginid;
+//                    [self.navigationController pushViewController:vc animated:YES];
+//                }
+//                    break;
+                case 4:{//我的微课
                     MyMicroViewController *vc = [[MyMicroViewController alloc]init];
                     vc.userID = self.userInfo.Loginid;
                     [self.navigationController pushViewController:vc animated:YES];
@@ -398,18 +415,16 @@
                     __weak __typeof(self)wself = self;
                     [imagePickerVc setDidFinishPickingPhotosHandle:^(NSArray<UIImage *> *photos,NSArray *assets,BOOL isSelectOriginalPhoto) {
                         UIImage *img = [photos objectAtIndex:0];
-                        //                        self.avatarCell.avatarImg.image = img;
                         
+                        UIImage *image = [Global imageWithImageSimple:img scaledToSize:CGSizeMake(100, 100)];
                         NSData *imageData = nil;
-                        //判断图片是不是png格式的文件
                         if (UIImagePNGRepresentation(img)) {
-                            //返回为png图像。
-                            imageData = UIImagePNGRepresentation(img);
+                            imageData = UIImagePNGRepresentation(image);
                         }else {
-                            //返回为JPEG图像。
-                            imageData = UIImageJPEGRepresentation(img, 0.1);
+                            imageData = UIImageJPEGRepresentation(image, 0.1);
                         }
                         [wself uploadImage:imageData];
+                        
                     }];
                     [self presentViewController:imagePickerVc animated:YES completion:nil];
                 }
@@ -419,35 +434,6 @@
         default:
             break;
     }
-}
-
-#pragma mark -
-#pragma mark UIimagePickerDelegate
-- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
-{
-    [picker dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
-{
-    UIImage *img = nil;
-    if (info[UIImagePickerControllerEditedImage]) {
-        img = info[UIImagePickerControllerEditedImage];
-    }
-    else {
-        img = info[UIImagePickerControllerOriginalImage];
-    }
-    //    self.avatarCell.avatarImg.image = img;
-    [picker dismissViewControllerAnimated:YES completion:nil];
-    
-    NSData *imageData = nil;
-    //判断图片是不是png格式的文件
-    if (UIImagePNGRepresentation(img)) {
-        imageData = UIImagePNGRepresentation(img);
-    }else {
-        imageData = UIImageJPEGRepresentation(img, 0.1);
-    }
-    [self uploadImage:imageData];
 }
 
 - (void)uploadImage:(NSData*)imageData
