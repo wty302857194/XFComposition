@@ -28,8 +28,8 @@
         _label.layer.masksToBounds = YES;
         
         
-        UILabel *lineLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(_label.frame)+1, WidthFrame, 1)];
-        lineLabel.backgroundColor = [UIColor lightGrayColor];
+        UILabel *lineLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(_label.frame)+1, WidthFrame, 0.5)];
+        lineLabel.backgroundColor = hexColor(e5e5e5);
         [self.contentView addSubview:lineLabel];
     }
     return self;

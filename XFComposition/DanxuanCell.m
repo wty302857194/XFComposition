@@ -22,7 +22,7 @@
 -(NSArray *)ABCDarray{
     if (!_ABCDarray) {
         _ABCDarray = [NSArray array];
-        _ABCDarray = @[@"A.",@"B.",@"C.",@"D."];
+        _ABCDarray = @[@"A",@"B",@"C",@"D"];
     }
     return _ABCDarray;
 }
@@ -59,13 +59,17 @@
         UIButton *bt = [UIButton buttonWithType:UIButtonTypeCustom];
         [self.contentView addSubview:bt];
 
-        bt.sd_layout.leftSpaceToView(self.contentView, 20).topSpaceToView(self.titleLabel, 25*i + 10).heightIs(20).widthIs(20);
+        bt.sd_layout.leftSpaceToView(self.contentView, 20).topSpaceToView(self.titleLabel, 30*i + 10).heightIs(20).widthIs(20);
         bt.layer.cornerRadius = 10;
         bt.layer.masksToBounds = YES;
         bt.tag = 1000+i;
-        [bt setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [bt addTarget:self action:@selector(clickBt:) forControlEvents:UIControlEventTouchUpInside];
         bt.titleLabel.font = [UIFont systemFontOfSize:14];
+        [bt setTitleColor:hexColor(009dff) forState:UIControlStateNormal];
+        
+        bt.layer.borderWidth = 1;
+        bt.layer.borderColor = hexColor(999999).CGColor;
+        
         [bt setTitle:self.ABCDarray[i] forState:UIControlStateNormal];
         [self.btarray addObject:bt];
         
@@ -73,8 +77,9 @@
         UILabel *label = [[UILabel alloc]init];
         [self.contentView addSubview:label];
 
-        label.sd_layout.leftSpaceToView(bt, 5).topSpaceToView(self.titleLabel, 25*i + 10).heightIs(20).widthIs(0);
+        label.sd_layout.leftSpaceToView(bt, 5).topSpaceToView(self.titleLabel, 30*i + 10).heightIs(20).widthIs(0);
         label.tag =2000 +i;
+        label.textColor = hexColor(333333);
         [label setSingleLineAutoResizeWithMaxWidth:0];
         label.font = [UIFont systemFontOfSize:14];
         label.text = model.ItemInfo;
@@ -82,14 +87,27 @@
     }
 }
 -(void)clickBt:(UIButton *)bt{
-    for (UIButton *btn in self.btarray) {
+    
+    for (int i = 0; i<self.btarray.count; i++) {
+        UIButton *btn = self.btarray[i];
+        UILabel * label = [self.contentView viewWithTag:btn.tag + 1000];
+
         if (btn.tag == bt.tag) {
-            [btn setBackgroundColor:[UIColor redColor]];
-        }else {
-            [btn setBackgroundColor:[UIColor clearColor]];
+            label.textColor = hexColor(009dff);
+            [btn setBackgroundColor:hexColor(009dff)];
+            [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            btn.layer.borderColor = hexColor(009dff).CGColor;
             
+        }else {
+            [btn setBackgroundColor:[UIColor whiteColor]];
+            [btn setTitleColor:hexColor(009dff) forState:UIControlStateNormal];
+            btn.layer.borderColor = hexColor(999999).CGColor;
+
+            label.textColor = hexColor(333333);
+
         }
     }
+   
     
 }
 @end

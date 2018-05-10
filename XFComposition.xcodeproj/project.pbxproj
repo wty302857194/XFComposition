@@ -91,6 +91,8 @@
 		3F3D5790209C5B3B00D415AC /* FMBean.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3D578F209C5B3B00D415AC /* FMBean.m */; };
 		3F3D5793209C5C7300D415AC /* DTApiBaseBean.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3D5792209C5C7300D415AC /* DTApiBaseBean.m */; };
 		3F4D1F4A20A294D500584C6C /* QYStarReplay.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F4D1F4920A294D500584C6C /* QYStarReplay.m */; };
+		3F4D1F4F20A2F67000584C6C /* bg_home_searchBg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F4D1F4D20A2F66C00584C6C /* bg_home_searchBg@2x.png */; };
+		3F4D1F5020A2F67100584C6C /* bg_home_searchBg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F4D1F4E20A2F66E00584C6C /* bg_home_searchBg@3x.png */; };
 		3FA5D978209FE42A0029E276 /* PerCenterViewController1.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA5D976209FE42A0029E276 /* PerCenterViewController1.m */; };
 		3FA5D979209FE42A0029E276 /* PerCenterViewController1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FA5D977209FE42A0029E276 /* PerCenterViewController1.xib */; };
 		3FA5D981209FEB070029E276 /* GetMessageListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA5D97F209FEB050029E276 /* GetMessageListModel.m */; };
@@ -807,6 +809,8 @@
 		3F3D5792209C5C7300D415AC /* DTApiBaseBean.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTApiBaseBean.m; sourceTree = "<group>"; };
 		3F4D1F4820A294D500584C6C /* QYStarReplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYStarReplay.h; sourceTree = "<group>"; };
 		3F4D1F4920A294D500584C6C /* QYStarReplay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QYStarReplay.m; sourceTree = "<group>"; };
+		3F4D1F4D20A2F66C00584C6C /* bg_home_searchBg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_home_searchBg@2x.png"; sourceTree = "<group>"; };
+		3F4D1F4E20A2F66E00584C6C /* bg_home_searchBg@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_home_searchBg@3x.png"; sourceTree = "<group>"; };
 		3FA5D975209FE42A0029E276 /* PerCenterViewController1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PerCenterViewController1.h; sourceTree = "<group>"; };
 		3FA5D976209FE42A0029E276 /* PerCenterViewController1.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PerCenterViewController1.m; sourceTree = "<group>"; };
 		3FA5D977209FE42A0029E276 /* PerCenterViewController1.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PerCenterViewController1.xib; sourceTree = "<group>"; };
@@ -2501,6 +2505,8 @@
 				F6038CE61F58E96A008FE507 /* mp322.png */,
 				F6038CE71F58E96A008FE507 /* mp321.png */,
 				F612EBD21F4FB341000E7432 /* Assets.xcassets */,
+				3F4D1F4D20A2F66C00584C6C /* bg_home_searchBg@2x.png */,
+				3F4D1F4E20A2F66E00584C6C /* bg_home_searchBg@3x.png */,
 				F612EBD41F4FB341000E7432 /* LaunchScreen.storyboard */,
 				F612EBD71F4FB341000E7432 /* Info.plist */,
 				F612EBC61F4FB341000E7432 /* Supporting Files */,
@@ -4892,6 +4898,7 @@
 				F612EBD61F4FB341000E7432 /* LaunchScreen.storyboard in Resources */,
 				2F4FC66320A18F1B009A1E4C /* MyWritingDetailCell.xib in Resources */,
 				F612EBD31F4FB341000E7432 /* Assets.xcassets in Resources */,
+				3F4D1F4F20A2F67000584C6C /* bg_home_searchBg@2x.png in Resources */,
 				2F4FC65B20A17C34009A1E4C /* MyWritingDetailViewController.xib in Resources */,
 				320D1BDD20862AA700F7D45A /* HomeHeaderView.xib in Resources */,
 				4ABBA2782080E02A0002E08D /* LoginViewController.xib in Resources */,
@@ -4933,6 +4940,7 @@
 				F6038CF01F590601008FE507 /* sj.png in Resources */,
 				3FA5D979209FE42A0029E276 /* PerCenterViewController1.xib in Resources */,
 				F6038CE81F58E96A008FE507 /* mp322.png in Resources */,
+				3F4D1F5020A2F67100584C6C /* bg_home_searchBg@3x.png in Resources */,
 				32CBFA8C20886B5C004CB00F /* LeftMenuViewController.xib in Resources */,
 				32426A4C208638FF00B5227B /* HomeTableViewCell.xib in Resources */,
 				3F3D578B209C528700D415AC /* MessageDetailViewController.xib in Resources */,

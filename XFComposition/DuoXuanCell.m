@@ -19,6 +19,13 @@
     }
     return _array;
 }
+-(NSArray *)ABCDarray{
+    if (!_ABCDarray) {
+        _ABCDarray = [NSArray array];
+        _ABCDarray = @[@"A.",@"B",@"C",@"D"];
+    }
+    return _ABCDarray;
+}
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         
@@ -34,7 +41,7 @@
     }
     
     self.titleLabel = [[UILabel alloc]init];
-    self.titleLabel.frame =CGRectMake(10, 10, 200, 20);
+    self.titleLabel.frame =CGRectMake(10, 10, kScreenWidth - 20, 20);
     [self.contentView addSubview:self.titleLabel];
     
     
@@ -51,31 +58,48 @@
         UIButton *bt = [UIButton buttonWithType:UIButtonTypeCustom];
         [self.contentView addSubview:bt];
         
-        bt.sd_layout.leftSpaceToView(self.contentView, 20).topSpaceToView(self.titleLabel, 25*i + 10).heightIs(20).widthIs(20);
+        bt.sd_layout.leftSpaceToView(self.contentView, 20).topSpaceToView(self.titleLabel, 30*i + 10).heightIs(20).widthIs(20);
         bt.layer.cornerRadius = 10;
         bt.layer.masksToBounds = YES;
         bt.tag = 3000+i;
-        [bt setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         bt.titleLabel.font = [UIFont systemFontOfSize:14];
         [bt addTarget:self action:@selector(clickBt:) forControlEvents:UIControlEventTouchUpInside];
         [bt setTitle:self.ABCDarray[i] forState:UIControlStateNormal];
-        [bt setBackgroundImage:[UIImage imageNamed:@"aixin_n"] forState:UIControlStateNormal];
-        [bt setBackgroundImage:[UIImage imageNamed:@"aixin_s"] forState:UIControlStateSelected];
+        
+        
         
         GetActiveTestModel *model = self.array[i];
         UILabel *label = [[UILabel alloc]init];
         [self.contentView addSubview:label];
         
-        label.sd_layout.leftSpaceToView(bt, 5).topSpaceToView(self.titleLabel, 25*i + 10).heightIs(20).widthIs(0);
+        label.sd_layout.leftSpaceToView(bt, 5).topSpaceToView(self.titleLabel, 30*i + 10).heightIs(20).widthIs(0);
         [label setSingleLineAutoResizeWithMaxWidth:0];
         label.tag =2000 +i;
         label.font = [UIFont systemFontOfSize:14];
         label.text = model.ItemInfo;
-        
+        [bt setBackgroundColor:[UIColor whiteColor]];
+        bt.layer.borderWidth = 1;
+        [bt setTitleColor:hexColor(009dff) forState:UIControlStateNormal];
+        bt.layer.borderColor = hexColor(999999).CGColor;
+        label.textColor = hexColor(333333);
     }
 }
 -(void)clickBt:(UIButton *)bt{
     bt.selected = !bt.selected;
-    
+    UILabel * label = [self.contentView viewWithTag:bt.tag - 1000];
+    if (bt.selected) {
+        label.textColor = hexColor(009dff);
+        [bt setBackgroundColor:hexColor(009dff)];
+        [bt setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        bt.layer.borderColor = hexColor(009dff).CGColor;
+    }else{
+        
+        [bt setBackgroundColor:[UIColor whiteColor]];
+        [bt setTitleColor:hexColor(009dff) forState:UIControlStateNormal];
+        bt.layer.borderColor = hexColor(999999).CGColor;
+        label.textColor = hexColor(333333);
+
+        
+    }
 }
 @end

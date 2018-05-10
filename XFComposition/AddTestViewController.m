@@ -26,7 +26,7 @@
 @property (nonatomic,assign)NSInteger page;
 @property (nonatomic,strong)NSMutableArray *testArray;
 @property (nonatomic,strong)UITextField *textfield;
-
+@property (nonatomic, strong) NSString * typeid;
 @property (nonatomic,strong)NSMutableArray *tabBtnArray;
 
 @property (nonatomic,strong)NSArray *btArray;
@@ -66,27 +66,24 @@
 -(NSArray *)menuarray1{
     if (!_menuarray1) {
         _menuarray1 = [NSArray array];
-        _menuarray1 = @[@"我的题库",@"公共题库"];
+        _menuarray1 = @[@"私人题库",@"公共题库"];
     }
     return _menuarray1;
 }
 -(MenuView *)menuView1{
     if (!_menuView1) {
         __weak typeof (self) weakSelf = self;
-        _menuView1 = [[MenuView alloc]initWithFrame:CGRectMake(100, 64+35, 80, 30*self.menuarray1.count) cellarray:self.menuarray1 block:^(NSInteger index) {
+        _menuView1 = [[MenuView alloc]initWithFrame:CGRectMake(0, SafeAreaTopHeight+52, kScreenWidth, 60*self.menuarray1.count) cellarray:self.menuarray1 block:^(NSInteger index) {
             weakSelf.isShow1 = NO;
             self.page = 1;
             if (index == 0) {
-                [self.bt2 setTitle:@"我的题库" forState: UIControlStateNormal];
-//                self.typeid = @"-1";
+                [self.bt2 setTitle:@"私人题库" forState: UIControlStateNormal];
+                self.typeid = @"0";
             }else if (index == 1){
-//                self.typeid = @"0";
+                self.typeid = @"1";
                 [self.bt2 setTitle:@"公共题库" forState: UIControlStateNormal];
             }
-//            else if (index == 2){
-//                self.typeid = @"1";
-//            }
-//            [weakSelf requst:self.typeid :self.gardeid :self.ishost :self.istuijian];
+            [weakSelf.tableView.mj_header beginRefreshing];
             
         }];
         [self.view addSubview:_menuView1];
@@ -95,27 +92,43 @@
 }
 -(void)creatHeadView{
     
+    UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, SafeAreaTopHeight, kScreenWidth, 50)];
+    view.backgroundColor = [UIColor whiteColor];
+    
+    [self.view addSubview:view];
+    
     self.bt1 = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.bt1.frame = CGRectMake(20, 5+64, 80, 30);
-    [self.bt1 setTitle:@"全部题型" forState:UIControlStateNormal];
-    self.bt1.titleLabel.font = [UIFont systemFontOfSize:16];
-    [self.bt1 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    self.bt1.frame = CGRectMake(0, 10+SafeAreaTopHeight, 80, 30);
+    [self.bt1 setTitle:@"全部题库" forState:UIControlStateNormal];
+    self.bt1.titleLabel.font = [UIFont systemFontOfSize:14];
+    
+    
+    [self.bt1 setTitleColor:hexColor(333333) forState:UIControlStateNormal];
     [self.bt1 addTarget:self action:@selector(showtype :) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.bt1.layer.cornerRadius = 2;
     [self.view addSubview:self.bt1];
     
+    
+    UIImageView * imgeView = [[UIImageView alloc]initWithFrame:CGRectMake(90, 10, 0.5, 20)];
+    imgeView.backgroundColor = hexColor(e5e5e5);
+    [view addSubview:imgeView];
+    
     self.bt2 = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.bt2.frame = CGRectMake(100, 5+64, 80, 30);
-    [self.bt2 setTitle:@"公共试题" forState:UIControlStateNormal];
-    self.bt2.titleLabel.font = [UIFont systemFontOfSize:16];
-    [self.bt2 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    self.bt2.layer.cornerRadius = 2;
+    self.bt2.frame = CGRectMake(100, 10+SafeAreaTopHeight, 80, 30);
+    [self.bt2 setTitle:@"私人题库" forState:UIControlStateNormal];
+    self.bt2.titleLabel.font = [UIFont systemFontOfSize:14];
+    
+    [self.bt2 setTitleColor:hexColor(333333) forState:UIControlStateNormal];
     [self.bt2 addTarget:self action:@selector(ggshiti) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.bt2];
     
-    self.textfield = [[UITextField alloc]initWithFrame:CGRectMake(200, 5+64, WidthFrame-290, 30)];
+    self.textfield = [[UITextField alloc]initWithFrame:CGRectMake(200, 10+SafeAreaTopHeight, WidthFrame-290, 30)];
     self.textfield.placeholder = @"关键词";
     self.textfield.layer.cornerRadius = 6;
     self.textfield.layer.masksToBounds = YES;
-    self.textfield.layer.borderWidth = 2;
+    self.textfield.layer.borderWidth = 0.5;
     self.textfield.font = [UIFont systemFontOfSize:14];
     self.textfield.layer.borderColor = [[UIColor colorWithHexString:@"D4D5D4"] CGColor];
     self.textfield.clearButtonMode=YES;
@@ -124,16 +137,16 @@
     [self.view addSubview:self.textfield];
     
     UIButton *selectbt = [UIButton buttonWithType:UIButtonTypeCustom];
-    selectbt.frame = CGRectMake(CGRectGetMaxX(self.textfield.frame)+10, 5+64, 50, 30);
+    selectbt.frame = CGRectMake(CGRectGetMaxX(self.textfield.frame)+8, 10+SafeAreaTopHeight, 50, 30);
     [selectbt setTitle:@"搜索" forState:UIControlStateNormal];
     [selectbt addTarget:self action:@selector(sousuo) forControlEvents:UIControlEventTouchUpInside];
-    selectbt.titleLabel.font = [UIFont systemFontOfSize:16];
+    selectbt.titleLabel.font = [UIFont systemFontOfSize:14];
     [selectbt setBackgroundColor:[UIColor colorWithHexString:@"3691CE"]];
     selectbt.layer.cornerRadius =6;
     selectbt.layer.masksToBounds = YES;
     [self.view addSubview:selectbt];
     
-    UIScrollView *scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.bt1.frame)+5, WidthFrame , 40)];
+    UIScrollView *scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.bt1.frame)+10, WidthFrame , 40)];
     scrollView.backgroundColor = [UIColor colorWithHexString:@"E8F2FA"];
     self.tabBtnArray = [[NSMutableArray alloc]init];
     scrollView.showsHorizontalScrollIndicator = NO;
@@ -147,25 +160,25 @@
         label.font = [UIFont systemFontOfSize:12];
         label.textAlignment = NSTextAlignmentCenter;
         label.tag = 3000+i;
+        if (self.numArray.count>0) {
+            if ([self.numArray[i] integerValue] == 0) {
+                label.hidden = YES;
+            }else{
 
-        
-//        if (self.numArray.count>0) {
-//            if ([self.numArray[i] integerValue] == 0) {
-//                self.label.hidden = YES;
-//            }else{
-//
-//                self.label.hidden = NO;
-//            }
-//            self.label.text = self.numArray[i];
-//        }else{
-//            self.label.hidden = YES;
-//
-//        }
+                label.hidden = NO;
+            }
+            label.text = self.numArray[i];
+        }else{
+            label.hidden = YES;
+
+        }
         
         UIButton *bt = [UIButton buttonWithType:UIButtonTypeCustom];
         [bt addTarget:self action:@selector(click:) forControlEvents:UIControlEventTouchUpInside];
         [bt setTitle:self.btArray[i] forState:UIControlStateNormal];
         bt.tag = 5000+i;
+        bt.layer.cornerRadius = 2;
+        bt.layer.masksToBounds = YES;
         [bt setBackgroundColor:[UIColor colorWithHexString:@"7DCDF3"]];
         [bt setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         bt.titleLabel.font = [UIFont systemFontOfSize:13.0];
@@ -189,28 +202,28 @@
     
 }
 -(void)creatFooterView{
-    self.numLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, HeightFrame-60, WidthFrame/3, 30)];
+    self.numLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, HeightFrame-60-SafeAreaBottomHeight, WidthFrame/3, 30)];
     self.numLabel.text = [NSString stringWithFormat:@"已选择试题（%@）",self
                           .allCount];
     self.numLabel.font = [UIFont systemFontOfSize:14];
     self.numLabel.backgroundColor = [UIColor whiteColor];
     self.numLabel.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:self.numLabel];
-    self.scoreLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, HeightFrame-30, WidthFrame/3, 30)];
+    self.scoreLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, HeightFrame-30-SafeAreaBottomHeight, WidthFrame/3, 30)];
     
     self.scoreLabel.text = [NSString stringWithFormat:@"总分（%ld）",(long)self.allScore];
     self.scoreLabel.backgroundColor = [UIColor whiteColor];
     self.scoreLabel.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:self.scoreLabel];
     UIButton *messagebt = [UIButton buttonWithType:UIButtonTypeCustom];
-    messagebt.frame = CGRectMake(WidthFrame/3, HeightFrame-60, WidthFrame/3, 60);
+    messagebt.frame = CGRectMake(WidthFrame/3, HeightFrame-60- SafeAreaBottomHeight, WidthFrame/3, 60);
     [messagebt setTitle:@"预览试卷" forState:UIControlStateNormal];
     [messagebt setBackgroundColor:[UIColor colorWithHexString:@"F3A832"]];
     [messagebt addTarget:self action:@selector(yulan) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:messagebt];
     
     UIButton *tjbt = [UIButton buttonWithType:UIButtonTypeCustom];
-    tjbt.frame = CGRectMake(WidthFrame/3*2, HeightFrame-60, WidthFrame/3, 60);
+    tjbt.frame = CGRectMake(WidthFrame/3*2, HeightFrame-60- SafeAreaBottomHeight, WidthFrame/3, 60);
     [tjbt setTitle:@"保存试卷" forState:UIControlStateNormal];
     [tjbt setBackgroundColor:[UIColor colorWithHexString:@"3690CE"]];
     [tjbt addTarget:self action:@selector(baocunshijuan) forControlEvents:UIControlEventTouchUpInside];
@@ -218,7 +231,8 @@
 }
 -(UITableView *)tableView{
     if (!_tableView) {
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0,64+95, WidthFrame, HeightFrame-159) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0,SafeAreaTopHeight+90, WidthFrame, HeightFrame-SafeAreaTopHeight-90-60-SafeAreaBottomHeight) style:UITableViewStylePlain];
+        _tableView.backgroundColor = [UIColor clearColor];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;//分割线
@@ -245,7 +259,7 @@
 }
 -(NSArray *)btArray{
     if (!_btArray) {
-        _btArray = @[@"单选题",@"多选题螺旋爆炸",@"判断题",@"问答题",@"填空题"];
+        _btArray = @[@"单选题",@"多选题",@"判断题",@"问答题",@"填空题"];
     }
     return _btArray;
 }
@@ -290,7 +304,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self creatHeadView];
-    self.typestr = @"1";
+    self.typestr = @"0";
+    self.typeid = @"0";
     self.allCount = @"0";
     self.allScore = 0;
     self.danxuanNub = 0;
@@ -303,7 +318,7 @@
     [self creatFooterView];
     self.xf = [XFUserInfo getUserInfo];
     self.navigationItem.title = @"添加试卷";
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = hexColor(e8f2fa);
     self.page = 1;
     
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
@@ -326,7 +341,7 @@
 -(void)GetMyPageSubjectList :(NSString *)chaperid{
     __weak typeof (self) weakSelf = self;
     GetMyPageSubjectListRequst *requst = [[GetMyPageSubjectListRequst alloc]init];
-    [requst GetMyPageSubjectListRequstwithPageIndex:@"1" withPageSize:@"20" withchaperid:chaperid withkeyword:self.textfield.text withscheckype:@"0" withActiveid:@"0" withuserid:self.xf.Loginid :^(NSDictionary *json) {
+    [requst GetMyPageSubjectListRequstwithPageIndex:@"1" withPageSize:@"20" withchaperid:chaperid withkeyword:self.textfield.text withscheckype:weakSelf.typeid withActiveid:@"0" withuserid:self.xf.Loginid :^(NSDictionary *json) {
         [weakSelf.testArray removeAllObjects];
         for (NSDictionary *dic in json[@"ret_data"][@"pageInfo"]) {
             GetMyPageSubjectListModel *model = [GetMyPageSubjectListModel loadWithJSOn:dic];
@@ -344,7 +359,7 @@
     self.page +=1;
     __weak typeof (self) weakSelf = self;
     GetMyPageSubjectListRequst *requst = [[GetMyPageSubjectListRequst alloc]init];
-    [requst GetMyPageSubjectListRequstwithPageIndex:[NSString stringWithFormat:@"%ld",(long)self.page] withPageSize:@"20" withchaperid:self.typestr withkeyword:self.textfield.text withscheckype:@"0" withActiveid:@"0" withuserid:self.xf.Loginid :^(NSDictionary *json) {
+    [requst GetMyPageSubjectListRequstwithPageIndex:[NSString stringWithFormat:@"%ld",(long)self.page] withPageSize:@"20" withchaperid:self.typestr withkeyword:self.textfield.text withscheckype:weakSelf.typeid withActiveid:@"0" withuserid:self.xf.Loginid :^(NSDictionary *json) {
         
         for (NSDictionary *dic in json[@"ret_data"][@"pageInfo"]) {
             GetMyPageSubjectListModel *model = [GetMyPageSubjectListModel loadWithJSOn:dic];
@@ -352,14 +367,26 @@
         }
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            NSIndexSet *indexSetA = [[NSIndexSet alloc]initWithIndex:0];    //刷新第3段
-            [weakSelf.tableView reloadSections:indexSetA withRowAnimation:UITableViewRowAnimationAutomatic];
+         
+            [weakSelf.tableView reloadData];
         });
     }];
     
 }
 -(void)showtype :(UIButton *)bt{
     
+    for (UIButton *btn in self.tabBtnArray) {
+        if (btn.tag == bt.tag) {
+            [btn setTitleColor:UIColorFromRGBA(30, 144, 255, 1.0f) forState:UIControlStateNormal];
+            
+        }else{
+            [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+            
+        }
+        
+    }
+    _typestr = @"0";
+    [_tableView.mj_header beginRefreshing];
 
 }
 -(void)ggshiti{
@@ -417,36 +444,32 @@
         [self.idsArray addObject:[NSString stringWithFormat:@"%@",Model.SubjectID]];
         self.allScore = self.allScore +[Model.SubjectSocre integerValue];
     }
-//    NSString *idsstr = [self.idsArray componentsJoinedByString:@","];
-
-//    NSLog(@"%@",idsstr);
     self.allCount = [NSString stringWithFormat:@"%lu",(unsigned long)self.idsArray.count];
 
 
     
     self.numArray = @[[NSString stringWithFormat:@"%ld",(long)self.danxuanNub],[NSString stringWithFormat:@"%ld",(long)self.duoxuanNub],[NSString stringWithFormat:@"%ld",(long)self.panduanNub],[NSString stringWithFormat:@"%ld",(long)self.wendaNub],[NSString stringWithFormat:@"%ld",(long)self.tiankongNub]];
     
-//    NSIndexSet *indexSetA = [[NSIndexSet alloc]initWithIndex:0];    //刷新第1段
-//    [self.tableView reloadSections:indexSetA withRowAnimation:UITableViewRowAnimationNone];
+    if (self.numArray.count>0) {
+        for (int i = 0; i< self.numArray.count; i++) {
+            
+            UILabel * label = [self.view viewWithTag:3000+i];
+            
+            if ([self.numArray[i] integerValue] == 0) {
+                label.hidden = YES;
+            }else{
+                
+                label.hidden = NO;
+            }
+            label.text = self.numArray[i];
+        }
+    }else{
+        
+        
+    }
+   
+    [_tableView reloadData];
     
-//    if (self.numArray.count>0) {
-//        if ([self.numArray[i] integerValue] == 0) {
-//            self.label.hidden = YES;
-//        }else{
-//
-//            self.label.hidden = NO;
-//        }
-//        self.label.text = self.numArray[i];
-//    }else{
-//        self.label.hidden = YES;
-//
-//    }
-    
-
-    NSIndexPath *indexPathA = [NSIndexPath indexPathForRow:bt.tag-1000 inSection:0]; //刷新第2段第N行
-
-    [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPathA, nil] withRowAnimation:UITableViewRowAnimationNone];
-//
     self.numLabel.text = [NSString stringWithFormat:@"已选择试题（%@）",self
                           .allCount];
     self.scoreLabel.text = [NSString stringWithFormat:@"总分（%ld）",(long)self.allScore];
@@ -523,7 +546,6 @@
     vc.ids = [self.idsArray componentsJoinedByString:@","];
     [self.navigationController pushViewController:vc animated:YES];
     
-//    [SVProgressHUD showErrorWithStatus:@"该功能暂未开放"];
 }
 //点击各种题型筛选
 -(void)click:(UIButton *)bt{
@@ -562,7 +584,6 @@
 }
 -(void)chakan:(UIButton *)bt{
     GetMyPageSubjectListModel *Model = self.testArray[bt.tag - 2000];
-    NSLog(@"我的ids 单个%@",Model.SubjectID);
     PreviewTestViewController *vc = [[PreviewTestViewController alloc]init];
     vc.ids = [NSString stringWithFormat:@"%@",Model.SubjectID];
     [self.navigationController pushViewController:vc animated:YES];

@@ -251,7 +251,7 @@
             [wself actionSheet:sheetItem.index];
             
         };
-    }else{
+    }else if(indexPath.section == 2) {
         
         if ([self.userInfo.dutyId isEqualToString:@"1"]) {
             switch (indexPath.row) {
