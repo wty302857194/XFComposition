@@ -65,8 +65,6 @@
 @property (nonatomic, assign) NSTimeInterval hideInterval;
 /** 是否处于全屏状态 */
 @property (nonatomic, assign) BOOL isFullScreen;
-/** 全屏状态下状态栏显示方式 */
-@property (nonatomic, assign) StatusBarHideState statusBarHideState;
 /** 加载指示器 */
 @property (nonatomic, strong) UIActivityIndicatorView *activityIndicatorView;
 /** 加载失败重试按钮 */

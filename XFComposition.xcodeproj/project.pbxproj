@@ -163,6 +163,8 @@
 		58A49AB02079F2C1008405EA /* CompositionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A49AAF2079F2C1008405EA /* CompositionViewController.m */; };
 		58E291E1206A1F1E0016DACD /* fenxiangViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E291E0206A1F1E0016DACD /* fenxiangViewController.m */; };
 		B6F16DB8290F62883631B0B6 /* Pods_XFComposition.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3084EAC2F37884539B99B88E /* Pods_XFComposition.framework */; };
+		BA34D9AC20A41DDF00D99165 /* CourseOutlineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BA34D9AA20A41DDF00D99165 /* CourseOutlineCell.m */; };
+		BA34D9AD20A41DDF00D99165 /* CourseOutlineCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA34D9AB20A41DDF00D99165 /* CourseOutlineCell.xib */; };
 		BA647D2C20A28BC6007AAC98 /* NewMicoFourthCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BA647D2A20A28BC6007AAC98 /* NewMicoFourthCell.m */; };
 		BA647D2D20A28BC6007AAC98 /* NewMicoFourthCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA647D2B20A28BC6007AAC98 /* NewMicoFourthCell.xib */; };
 		BA647D3120A2A7CF007AAC98 /* NewMicoFiveCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BA647D2F20A2A7CF007AAC98 /* NewMicoFiveCell.m */; };
@@ -997,6 +999,9 @@
 		58E291E5206A27370016DACD /* custom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = custom.png; path = "../../../../Downloads/ShareTest-master/ShareTest/custom.png"; sourceTree = "<group>"; };
 		58E291E6206A27370016DACD /* shareImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = shareImage.png; path = "../../../../Downloads/ShareTest-master/ShareTest/shareImage.png"; sourceTree = "<group>"; };
 		6E5ED5FF21E6705D17491C80 /* Pods-XFComposition.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XFComposition.debug.xcconfig"; path = "Pods/Target Support Files/Pods-XFComposition/Pods-XFComposition.debug.xcconfig"; sourceTree = "<group>"; };
+		BA34D9A920A41DDF00D99165 /* CourseOutlineCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CourseOutlineCell.h; sourceTree = "<group>"; };
+		BA34D9AA20A41DDF00D99165 /* CourseOutlineCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CourseOutlineCell.m; sourceTree = "<group>"; };
+		BA34D9AB20A41DDF00D99165 /* CourseOutlineCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CourseOutlineCell.xib; sourceTree = "<group>"; };
 		BA647D2920A28BC6007AAC98 /* NewMicoFourthCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewMicoFourthCell.h; sourceTree = "<group>"; };
 		BA647D2A20A28BC6007AAC98 /* NewMicoFourthCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewMicoFourthCell.m; sourceTree = "<group>"; };
 		BA647D2B20A28BC6007AAC98 /* NewMicoFourthCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewMicoFourthCell.xib; sourceTree = "<group>"; };
@@ -2416,6 +2421,9 @@
 				BAB44C7620A1A89A002455D8 /* NewMicoSecondCell.h */,
 				BAB44C7B20A1A89A002455D8 /* NewMicoSecondCell.m */,
 				BAB44C7F20A1A89A002455D8 /* NewMicoSecondCell.xib */,
+				BA34D9A920A41DDF00D99165 /* CourseOutlineCell.h */,
+				BA34D9AA20A41DDF00D99165 /* CourseOutlineCell.m */,
+				BA34D9AB20A41DDF00D99165 /* CourseOutlineCell.xib */,
 				BAB44C7D20A1A89A002455D8 /* NewMicoThirdCell.h */,
 				BAB44C7820A1A89A002455D8 /* NewMicoThirdCell.m */,
 				BAB44C7A20A1A89A002455D8 /* NewMicoThirdCell.xib */,
@@ -5000,7 +5008,6 @@
 					F612EBC21F4FB341000E7432 = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = 5K5GGEWVU3;
-
 						ProvisioningStyle = Automatic;
 					};
 					F612EBDB1F4FB341000E7432 = {
@@ -5045,6 +5052,7 @@
 				F612EBD31F4FB341000E7432 /* Assets.xcassets in Resources */,
 				BA9C1CB420A2CCC000BFBE23 /* NewMicoSixthCell.xib in Resources */,
 				2F4FC65B20A17C34009A1E4C /* MyWritingDetailViewController.xib in Resources */,
+				BA34D9AD20A41DDF00D99165 /* CourseOutlineCell.xib in Resources */,
 				320D1BDD20862AA700F7D45A /* HomeHeaderView.xib in Resources */,
 				4ABBA2782080E02A0002E08D /* LoginViewController.xib in Resources */,
 				F612EBD11F4FB341000E7432 /* Main.storyboard in Resources */,
@@ -5457,6 +5465,7 @@
 				F649DD431F5516DD00879744 /* FristCollectionViewCell.m in Sources */,
 				BAB44C8D20A1A89A002455D8 /* CompositionCell.m in Sources */,
 				F6A7175E1FA039540046C235 /* GetMessageWaitNumRequst.m in Sources */,
+				BA34D9AC20A41DDF00D99165 /* CourseOutlineCell.m in Sources */,
 				F6D7C7ED1F8F440300A08DC1 /* BookDetailFristCell.m in Sources */,
 				F62DC7301F9F2ECF00D3E035 /* PerCenterCell.m in Sources */,
 				F6FFD3EE1F9094190029B762 /* BookSecondCell.m in Sources */,
@@ -5940,7 +5949,6 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5K5GGEWVU3;
-
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/XFComposition/PrefixHeader.pch";
 				INFOPLIST_FILE = XFComposition/Info.plist;

@@ -52,13 +52,13 @@ typedef NS_ENUM(NSInteger, VideoPlayerState) {
 
 @implementation VideoPlayer
 
-- (instancetype)initWithFrame:(CGRect)frame configuration:(PlayerConfiguration *)configuration
+- (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-        _playerConfiguration = configuration;
-        [self _setupPlayer];
-        [self _setupPlayControls];
+        
+        self.backgroundColor = [UIColor blackColor];
+        
         [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationChanged:) name:UIDeviceOrientationDidChangeNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self
@@ -71,6 +71,13 @@ typedef NS_ENUM(NSInteger, VideoPlayerState) {
                                                    object:nil];
     }
     return self;
+}
+
+- (void)setPlayerConfiguration:(PlayerConfiguration *)configuration
+{
+    _playerConfiguration = configuration;
+    [self _setupPlayer];
+    [self _setupPlayControls];
 }
 
 /** 屏幕翻转监听事件 */
@@ -299,7 +306,6 @@ typedef NS_ENUM(NSInteger, VideoPlayerState) {
     self.player = [AVPlayer playerWithPlayerItem:self.playerItem];
     self.playerLayer = [AVPlayerLayer playerLayerWithPlayer:self.player];
     [self _setVideoGravity:_playerConfiguration.videoGravity];
-    self.backgroundColor = [UIColor blackColor];
     
     [self createTimer];
     
@@ -420,8 +426,6 @@ typedef NS_ENUM(NSInteger, VideoPlayerState) {
     if (!_playbackControls) {
         _playbackControls = [[PlaybackControls alloc]init];
         _playbackControls.delegate = self;
-        _playbackControls.hideInterval = _playerConfiguration.hideControlsInterval;
-        _playbackControls.statusBarHideState = _playerConfiguration.statusBarHideState;
     }
     return _playbackControls;
 }
@@ -431,6 +435,8 @@ typedef NS_ENUM(NSInteger, VideoPlayerState) {
     
     self.playerLayer.frame = self.bounds;
     self.playbackControls.frame = self.bounds;
+    
+    
 }
 
 /** 释放播放器 */

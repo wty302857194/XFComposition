@@ -12,12 +12,20 @@
 #import "NewMicoFristCell.h"
 #import "MicrodetailModel.h"
 
+
 #import "NewMicoSecondCell.h"
 #import "NewMicoThirdCell.h"
 #import "NewMicoFourthCell.h"
 #import "NewMicoFiveCell.h"
 #import "NewMicoSixthCell.h"
 #import "NewMicoSeventhCell.h"
+
+#import "Microdetailrequst.h"
+#import "MicoClassRequst.h"
+#import "MicrodetailModel.h"
+#import "WriteListModel.h"
+#import "MicroVideoModel.h"
+#import "MicroWriteModel.h"
 
 static NSString *firstCellID = @"NewMicoFristCell";
 static NSString *secondCellID = @"NewMicoSecondCell";
@@ -29,24 +37,81 @@ static NSString *seventhCellID = @"NewMicoSeventhCell";
 
 @interface NewMicrodetailController ()<UITableViewDelegate, UITableViewDataSource>
 
+
 @property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) UIImageView *playBackImgView;
 @property (nonatomic, strong) VideoPlayer *playerView;
+@property (nonatomic, strong) PlayerConfiguration *configuration;
+
+
+@property (nonatomic, assign) NSString *panduan;
+@property (nonatomic, strong) NSMutableArray *videoArray;
+@property (nonatomic, strong) NSMutableArray *modelArray;
+@property (nonatomic, strong) MicrodetailModel *detailmodel;
 
 
 @end
 
 @implementation NewMicrodetailController
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.navigationItem.title = @"视频详情";
-    UIBarButtonItem *item=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"left-arrow_s"] style: UIBarButtonItemStylePlain target:self action:@selector(onBack)];
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];  
+    UIBarButtonItem *item=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"ty_jianTouLeft"] style: UIBarButtonItemStylePlain target:self action:@selector(onBack)];
     self.navigationItem.leftBarButtonItem=item;
     
     [self.view addSubview:self.playerView];
     [self.view addSubview:self.tableView];
-//    self.tableView.tableHeaderView = self.playerView;
+    
+    [self Microdetailrequst0];
+}
+
+
+- (MicrodetailModel *)detailmodel
+{
+    if (!_detailmodel) {
+        _detailmodel = [[MicrodetailModel alloc] init];
+    }
+    return _detailmodel;
+}
+
+- (NSMutableArray *)videoArray
+{
+    if (!_videoArray) {
+        _videoArray = [NSMutableArray array];
+    }
+    return _videoArray;
+}
+//获取微课第一行信息
+//课程大纲和本课习作
+//这里可能需要判断是否登录
+-(void)Microdetailrequst0{
+    __weak typeof (self) weakSelf = self;
+    self.panduan = @"0";
+    Microdetailrequst *requst = [[Microdetailrequst alloc]init];
+    [requst GetmicroInfoWithClassId:self.classId withUserId:@"0" :^(NSDictionary *json) {
+        
+        weakSelf.detailmodel = [MicrodetailModel loadWithJSOn:json[@"ret_data"]];
+        
+        
+        NSDictionary *dic = weakSelf.detailmodel.videoList.firstObject;
+        if (dic) {
+            MicroVideoModel *model = [MicroVideoModel loadWithJSOn:dic];
+            self.configuration.imageUrl = [NSString stringWithFormat:@"%@%@",HTurl,model.picpath];
+            self.configuration.sourceUrl = [NSURL URLWithString:model.MicroclassItemMp4Path];
+            [self.playerView setPlayerConfiguration:self.configuration];
+        }
+        
+        [weakSelf.videoArray removeAllObjects];
+        for (NSDictionary *dic in weakSelf.detailmodel.videoList) {
+            MicroVideoModel *model = [MicroVideoModel loadWithJSOn:dic];
+            [weakSelf.videoArray addObject:model];
+        }
+        [weakSelf.tableView reloadData];
+    }];
     
 }
 
@@ -77,24 +142,27 @@ static NSString *seventhCellID = @"NewMicoSeventhCell";
     return _tableView;
 }
 
-
 - (UIView *)playerView
 {
     if (!_playerView) {
-        PlayerConfiguration *configuration = [[PlayerConfiguration alloc]init];
-        configuration.shouldAutoPlay = YES;
-        configuration.supportedDoubleTap = YES;
-        configuration.shouldAutorotate = YES;
-        configuration.repeatPlay = YES;
-        configuration.statusBarHideState = StatusBarHideStateFollowControls;
-        configuration.sourceUrl = [NSURL URLWithString:@"file:///Users/liyan/Downloads/%E9%BB%91%E8%B1%B9_bd.mp4"];
-        configuration.videoGravity = VideoGravityResizeAspect;
-        
-        _playerView = [[VideoPlayer alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 180) configuration:configuration];
-        
+        _playerView = [[VideoPlayer alloc] initWithFrame:CGRectMake(0, iPhoneX ? 88 : 64, self.view.frame.size.width, 180)];
     }
     return _playerView;
 }
+
+- (PlayerConfiguration *)configuration
+{
+    if (!_configuration) {
+        _configuration = [[PlayerConfiguration alloc]init];
+        _configuration.shouldAutoPlay = NO;
+        _configuration.supportedDoubleTap = YES;
+        _configuration.shouldAutorotate = YES;
+        _configuration.repeatPlay = NO;
+        _configuration.videoGravity = VideoGravityResizeAspect;
+    }
+    return _configuration;
+}
+
 #pragma mark UITableViewDelegate
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -102,7 +170,7 @@ static NSString *seventhCellID = @"NewMicoSeventhCell";
     if (indexPath.section == 0) {
         NewMicoFristCell *cell = [tableView dequeueReusableCellWithIdentifier:firstCellID forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//        cell.data =
+        cell.dataModel = self.detailmodel;
         cell.clickBlock= ^(NSInteger index) {
             //TODO
             switch (index) {
@@ -118,18 +186,11 @@ static NSString *seventhCellID = @"NewMicoSeventhCell";
                     break;
             }
         };
-        
-        cell.titleLab.text = @"四年级下册习作5 《植物研究报告》";
-        cell.teacherLab.text = @"liyan";
-        cell.teachGuideLab.text = @"k阿克苏男那是你撒南山南三阿森纳是你卡上看啊看卡刷卡时可撒开卡刷卡时卡卡卡上扣卡卡阿克苏男那是你撒南山南三阿森纳是你卡上看啊看卡刷卡时可撒开卡刷卡时卡卡卡上扣卡卡";
-        cell.workLab.text = @"Jay：你住的 巷子里 我租了一间公寓 为了想与你不期而遇 高中三年 我为什么 为什么不好好读书 没考上跟你一样的大学 我找了份工作 离你宿舍很近 当我开始学会做蛋饼 才发现你 不吃早餐 喔 你又擦肩而过 你耳机听什么 能不能告诉我";
         return cell;
     } else if (indexPath.section == 1) {
         NewMicoSecondCell *cell = [tableView dequeueReusableCellWithIdentifier:secondCellID forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.titleLab.text =@"1 四年级下册习作5 《植物研究报告》";
-        cell.courceLab.text = @"课时 1";
-        cell.dateLab.text = @"时长 【0:08:58】";
+        cell.datas = self.videoArray;
         return cell;
     } else if (indexPath.section == 2) {
         NewMicoThirdCell *cell = [tableView dequeueReusableCellWithIdentifier:thirdCellID forIndexPath:indexPath];

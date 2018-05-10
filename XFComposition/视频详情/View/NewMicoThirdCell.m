@@ -54,7 +54,7 @@ static NSString *compositionCellID = @"CompositionCell";
 
 - (void)resetFrame:(int)count
 {
-    self.constraint.constant = 30*11;
+//    self.constraint.constant = 30*11;
 }
 
 #pragma mark - delegate

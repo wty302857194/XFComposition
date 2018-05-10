@@ -14,9 +14,13 @@
 
 /**
  初始化播放器
+ */
+- (instancetype)initWithFrame:(CGRect)frame;
+/**
+ 
  @param configuration 播放器配置信息
  */
-- (instancetype)initWithFrame:(CGRect)frame configuration:(PlayerConfiguration *)configuration;
+- (void)setPlayerConfiguration:(PlayerConfiguration *)configuration;
 
 /** 播放视频 */
 - (void)_playVideo;
