@@ -7,10 +7,11 @@
 //
 
 #import "MyWritingDetailCell.h"
+#import "UIButton+WebCache.h"
 
 @interface MyWritingDetailCell ()
-@property (strong, nonatomic) IBOutlet UIImageView *originPicImg;
-@property (strong, nonatomic) IBOutlet UIImageView *editPicImg;
+@property (strong, nonatomic) IBOutlet UIButton *originPicButton;
+@property (strong, nonatomic) IBOutlet UIButton *editPicButton;
 @property (strong, nonatomic) IBOutlet UILabel *originLabel;
 @property (strong, nonatomic) IBOutlet UILabel *editLabel;
 
@@ -29,8 +30,8 @@
     
     if ([cellData isKindOfClass:[MyWritingDetailModel class]]) {
         MyWritingDetailModel *model = (MyWritingDetailModel *)cellData;
-        [self.originPicImg sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",HTurl,model.PicUrl]]];
-        [self.editPicImg sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",HTurl,model.FixPicUrl]]];
+        [self.originPicButton sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",HTurl,model.PicUrl]] forState:UIControlStateNormal];
+        [self.editPicButton sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",HTurl,model.FixPicUrl]] forState:UIControlStateNormal];
         
         if ([model.FixPicUrl isEqualToString:@""] || [model.FixPicUrl isEqualToString:nil]) {
             self.editLabel.text = @"暂无批阅图片";
@@ -52,6 +53,11 @@
         return 25+height+15+21;        
     }
     return 0;
+}
+- (IBAction)buttonAction:(UIButton *)sender {
+    if (self.buttonActionBlock) {
+        self.buttonActionBlock(sender.tag);
+    }
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

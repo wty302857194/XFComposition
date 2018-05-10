@@ -375,7 +375,19 @@ typedef void(^TYMessageBlock)(NSString *contentStr);
     
     NSArray *arr = @[
                      @{@"deptid":@"211440",@"deptname":@"先锋推荐"},
-                     @{@"deptid":@"211441",@"deptname":@"全部市"}
+                     @{@"deptid":@"211441",@"deptname":@"全部市"},
+                     @{@"deptid":@"211442",@"deptname":@"直属"},
+                     @{@"deptid":@"211472",@"deptname":@"玄武区"},
+                     @{@"deptid":@"211573",@"deptname":@"秦淮区"},
+                     @{@"deptid":@"211721",@"deptname":@"建业区"},
+                     @{@"deptid":@"211813",@"deptname":@"鼓楼区"},
+                     @{@"deptid":@"211989",@"deptname":@"浦口区"},
+                     @{@"deptid":@"211160",@"deptname":@"栖霞区"},
+                     @{@"deptid":@"211296",@"deptname":@"雨花台区"},
+                     @{@"deptid":@"211379",@"deptname":@"江宁区"},
+                     @{@"deptid":@"211667",@"deptname":@"化工园区"},
+                     @{@"deptid":@"211714",@"deptname":@"溧水区"},
+                     @{@"deptid":@"211789",@"deptname":@"高淳县"}
                      ];
     for (NSDictionary *dic in arr) {
         GetDeptSchoolListModel *model = [GetDeptSchoolListModel loadWithJSOn:dic];

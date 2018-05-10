@@ -22,8 +22,8 @@
         [self.label1 setSingleLineAutoResizeWithMaxWidth:0];
     
         self.label1.font = [UIFont systemFontOfSize:15];
-        self.label2.sd_layout.leftSpaceToView(self.label1, 20).topSpaceToView(self.contentView, 10).heightIs(20).widthIs(20);
-        self.label2.layer.cornerRadius = 10;
+        self.label2.sd_layout.leftSpaceToView(self.label1, 20).centerYEqualToView(self.contentView).heightIs(15).widthIs(15);
+        self.label2.layer.cornerRadius = 7.5;
         self.label2.layer.masksToBounds = YES;
         self.label2.textColor = [UIColor whiteColor];
         self.label2.backgroundColor = [UIColor redColor];
@@ -34,7 +34,7 @@
         [self.label3 setSingleLineAutoResizeWithMaxWidth:0];
         self.label3.font = [UIFont systemFontOfSize:15];
         
-        self.imgView.sd_layout.rightSpaceToView(self.contentView, 20).topSpaceToView(self.contentView, 5).heightIs(30).widthIs(20);
+        self.imgView.sd_layout.rightSpaceToView(self.contentView, 10).topSpaceToView(self.contentView, 5).heightIs(30).widthIs(30);
         self.imgView.image = [UIImage imageNamed:@"right-arrow-"];
         
         

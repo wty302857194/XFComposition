@@ -7,7 +7,9 @@
 //
 
 #import "MyWritingDetailViewController.h"
+#import "PhotoViewController.h"
 #import "MyWritingDetailCell.h"
+#import "MyWritingDetailModel.h"
 
 @interface MyWritingDetailViewController ()<UITableViewDelegate,UITableViewDataSource>{
     
@@ -24,10 +26,24 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    self.navigationItem.title = @"习作详情";
+    
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+}
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:YES];
+    [self leftBarButton];
 }
 
+-(void)leftBarButton{
+    UIBarButtonItem *item=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"left-arrow_s"] style: UIBarButtonItemStylePlain target:self action:@selector(onBack)];
+    self.navigationItem.leftBarButtonItem=item;
+}
+-(void)onBack{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.dataArr.count;
@@ -48,8 +64,29 @@
     if (!cell) {
         cell = [[NSBundle mainBundle] loadNibNamed:@"MyWritingDetailCell" owner:nil options:nil].firstObject;
     }
-    id cellData = [self.dataArr objectAtIndex:indexPath.row];
-    [cell reloadCellData:cellData];
+    MyWritingDetailModel *model = [self.dataArr objectAtIndex:indexPath.row];
+    [cell setButtonActionBlock:^(NSInteger tag) {
+        PhotoViewController *vc = [[PhotoViewController alloc] init];
+        switch (tag) {
+            case 0:{//原图
+                vc.picUrl = model.PicUrl;
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+                break;
+            case 1:{//批阅图
+                if (![model.FixPicUrl isEqualToString:@""]) {
+                    vc.picUrl = model.FixPicUrl;
+                    [self.navigationController pushViewController:vc animated:YES];
+                }
+            }
+                break;
+                
+            default:
+                break;
+        }
+    }];
+    
+    [cell reloadCellData:model];
     return cell;
 }
 

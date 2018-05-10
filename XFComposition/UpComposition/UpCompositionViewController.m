@@ -7,10 +7,15 @@
 //
 
 #import "UpCompositionViewController.h"
-#import "UpCompositionTableViewCell.h"
-#import "UpCompositionModel.h"
 #import "BookwritingController.h"//BookWritingTableViewController
 #import "BookWritingTableViewController.h"
+
+#import "UpCompositionTableViewCell.h"
+#import "TYOnlyActivetyTableViewCell.h"
+
+#import "UpCompositionModel.h"
+#import "VolunteerRequst.h"
+#import "VolunteerModel.h"
 
 @interface UpCompositionViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
@@ -18,7 +23,7 @@
     NSMutableArray *_zhiYuanArr;
     NSMutableArray *_activityArr;
     NSMutableArray *_weiKeArr;
-
+    
 }
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic,copy) NSArray *titleCatgary;
@@ -41,7 +46,7 @@
     
     hud = [[MBProgressHUD alloc] initWithView:self.view];
     [self.view addSubview:hud];
-
+    
     [self getReadActiveRequestDataForZhiYuan];
     [self getReadActiveRequestDataForActive];
     [self getReadActiveRequestDataForWeiKe];
@@ -61,7 +66,7 @@
 {
     switch (section) {
         case 0:
-            return 1;
+            return 0;
             break;
         case 1:
             return _zhiYuanArr.count;
@@ -84,21 +89,32 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *identifier = @"identifier";
-    UpCompositionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-    if (!cell) {
-        cell = [[[NSBundle mainBundle] loadNibNamed:@"UpCompositionTableViewCell" owner:nil options:nil] lastObject];
+    if(indexPath.section == 2) {
+        TYOnlyActivetyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+        if (!cell) {
+            cell = [[[NSBundle mainBundle] loadNibNamed:@"TYOnlyActivetyTableViewCell" owner:nil options:nil] lastObject];
+        }
+        VolunteerModel *model = _activityArr[indexPath.row];
+        cell.model = model;
+        
+        return cell;
+    }else {
+        UpCompositionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+        if (!cell) {
+            cell = [[[NSBundle mainBundle] loadNibNamed:@"UpCompositionTableViewCell" owner:nil options:nil] lastObject];
+        }
+        if (indexPath.section == 1) {
+            VolunteerModel *model = _zhiYuanArr[indexPath.row];
+            cell.volunteerModel = model;
+            
+        }else if (indexPath.section == 3) {
+            UpCompositionModel *model = _weiKeArr[indexPath.row];
+            model.isWeiKe = YES;
+            cell.model = model;
+        }
+         return cell;
     }
-    UpCompositionModel *model = nil;
-    if (indexPath.section == 1) {
-        model = _zhiYuanArr[indexPath.row];
-    }else if(indexPath.section == 2) {
-        model = _activityArr[indexPath.row];
-    }else if (indexPath.section == 3) {
-        model = _weiKeArr[indexPath.row];
-        model.isWeiKe = YES;
-    }
-    cell.model = model;
-    return cell;
+    return nil;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
@@ -133,7 +149,7 @@
         make.centerY.mas_equalTo(view.mas_centerY);
         make.left.mas_equalTo(lab.mas_right).offset(10);
     }];
-
+    
     return back_view;
 }
 - (void)addActive
@@ -151,10 +167,6 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    BookwritingController *vc = [[BookwritingController alloc]init];
-//    vc.imgUrlStr = self.imgUrlStr;
-//    [self.navigationController pushViewController:vc animated:YES];
-    
     UIStoryboard *stotyBoard = [UIStoryboard storyboardWithName:@"TYStoryboard" bundle:nil];
     BookWritingTableViewController *loginVC = [stotyBoard instantiateViewControllerWithIdentifier:@"BookWritingTableViewController"];
     loginVC.imgUrlStr = self.imgUrlStr;
@@ -164,79 +176,59 @@
 
 - (void)getReadActiveRequestDataForZhiYuan
 {
-    [hud showAnimated:YES];
-    BaseRequest *request = [BaseRequest requestWithURL:nil];
-    NSDictionary *dic = @{
-                          @"Action":@"GetMicroClassList",
-                          @"Token":@"0A66A4FD-146F-4542-8D7B-33CDEC2981F9",
-                          @"PageIndex":@(1),
-                          @"PageSize":@"9999",
-                          @"keyword":@"",
-                          @"ActiveTypeID":@"0",
-                          };
     
-    [request startWithMethod:HTTPTypePOST params:dic successedBlock:^(id succeedResult) {
-        [hud hideAnimated:YES];
-        NSLog(@"ForecastUrl === %@",succeedResult);
-        NSArray *arr = succeedResult[@"ret_data"][@"pageInfo"];
+    __weak typeof (self) weakSelf = self;
+    VolunteerRequst *requset = [[VolunteerRequst alloc]init];
+    
+    [requset GetVolunteerRequstWithpagesize:1 :@"2" WithAcitivieTypeID:@"0" :^(NSDictionary *josn) {
+        
+        NSArray *arr = josn[@"ret_data"][@"pageInfo"];
+        
         [arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            UpCompositionModel *model = [UpCompositionModel mj_objectWithKeyValues:obj];
+            VolunteerModel *model = [VolunteerModel loadWithJSOn:obj];
             [_zhiYuanArr addObject:model];
             if (idx == 1) {
                 *stop = YES;
             }
         }];
-        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
-    } failedBolck:^(NSURLSessionDataTask *task, NSError *error) {
-        NSLog(@"error===%@",error.localizedDescription);
-        [hud hideAnimated:YES];
+        [weakSelf.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
     }];
-    
 }
+
 - (void)getReadActiveRequestDataForActive
 {
-    [hud showAnimated:YES];
-    BaseRequest *request = [BaseRequest requestWithURL:nil];
-    NSDictionary *dic = @{
-                          @"Action":@"GetMicroClassList",
-                          @"Token":@"0A66A4FD-146F-4542-8D7B-33CDEC2981F9",
-                          @"PageIndex":@(1),
-                          @"PageSize":@"9999",
-                          @"keyword":@"",
-                          @"ActiveTypeID":@"3",
-                          };
     
-    [request startWithMethod:HTTPTypePOST params:dic successedBlock:^(id succeedResult) {
+    [hud showAnimated:YES];
+    VolunteerRequst *requset = [[VolunteerRequst alloc]init];
+    [requset GetVolunteerRequstWithpagesize:1 :@"10" WithAcitivieTypeID:@"3" :^(NSDictionary *josn) {
         [hud hideAnimated:YES];
-        NSLog(@"ForecastUrl === %@",succeedResult);
-        NSArray *arr = succeedResult[@"ret_data"][@"pageInfo"];
+        NSArray *arr = josn[@"ret_data"][@"pageInfo"];
+        
         [arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            UpCompositionModel *model = [UpCompositionModel mj_objectWithKeyValues:obj];
-            
+            VolunteerModel *model = [VolunteerModel loadWithJSOn:obj];
             [_activityArr addObject:model];
             if (idx == 1) {
                 *stop = YES;
             }
         }];
-        
         [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:2] withRowAnimation:UITableViewRowAnimationNone];
-    } failedBolck:^(NSURLSessionDataTask *task, NSError *error) {
-        NSLog(@"error===%@",error.localizedDescription);
-        [hud hideAnimated:YES];
+        
     }];
+    
+    
 }
 - (void)getReadActiveRequestDataForWeiKe
 {
-//    "Action:GetMicroClassList
-//Token:0A66A4FD-146F-4542-8D7B-33CDEC2981F9
-//    changeId：3   //微课载体类别 0：全部 1：其他课程  2：同步课程 3:兴趣课程
-//    masterId：4   //微课载体  叙事 写人 写景 日志
-//    subjectId：56   //微课子类，具体到年级
-//PageIndex:1
-//PageSize:20
-//    prostatic：-1  //-1默认 0未发布 1发布
-//    recommed：-1   //-1默认 0不推荐 1推荐
-//    timeSpan：0   //0默认 1尚未开始 2正在进行 3已  经结束"
+    //    "Action:GetMicroClassList
+    //Token:0A66A4FD-146F-4542-8D7B-33CDEC2981F9
+    //    changeId：3   //微课载体类别 0：全部 1：其他课程  2：同步课程 3:兴趣课程
+    //    masterId：4   //微课载体  叙事 写人 写景 日志
+    //    subjectId：56   //微课子类，具体到年级
+    //PageIndex:1
+    //PageSize:20
+    //    prostatic：-1  //-1默认 0未发布 1发布
+    //    recommed：-1   //-1默认 0不推荐 1推荐
+    //    timeSpan：0   //0默认 1尚未开始 2正在进行 3已  经结束"
     
     [hud showAnimated:YES];
     BaseRequest *request = [BaseRequest requestWithURL:nil];

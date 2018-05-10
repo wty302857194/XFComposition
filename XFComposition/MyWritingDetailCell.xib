@@ -18,18 +18,6 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="239.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BES-92-htI">
-                        <rect key="frame" x="15" y="25" width="140" height="178.5"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="140" id="sj6-2R-PlS"/>
-                        </constraints>
-                    </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vve-Tm-lzv">
-                        <rect key="frame" x="165" y="25" width="140" height="178.5"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="140" id="Mcd-Xm-xUa"/>
-                        </constraints>
-                    </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="原图" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yng-9u-00N">
                         <rect key="frame" x="15" y="218.5" width="140" height="21"/>
                         <constraints>
@@ -50,25 +38,44 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6zK-mm-XE1">
+                        <rect key="frame" x="15" y="25" width="140" height="178.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="140" id="iVd-Oo-qA8"/>
+                        </constraints>
+                        <connections>
+                            <action selector="buttonAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Frn-iK-BMn"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Er-ix-GpQ">
+                        <rect key="frame" x="165" y="25" width="140" height="178.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="140" id="6hI-zD-NIh"/>
+                            <constraint firstAttribute="width" constant="140" id="f1H-EJ-cBA"/>
+                        </constraints>
+                        <connections>
+                            <action selector="buttonAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="zLk-c4-fqI"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="V28-Vo-NGN" firstAttribute="top" secondItem="vve-Tm-lzv" secondAttribute="bottom" constant="15" id="FPE-UR-BPo"/>
-                    <constraint firstItem="BES-92-htI" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="Fh7-hX-ekW"/>
+                    <constraint firstItem="6zK-mm-XE1" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="25" id="5RC-Cp-uzj"/>
+                    <constraint firstItem="V28-Vo-NGN" firstAttribute="top" secondItem="4Er-ix-GpQ" secondAttribute="bottom" constant="15" id="EmY-Nm-rs6"/>
+                    <constraint firstItem="yng-9u-00N" firstAttribute="centerX" secondItem="6zK-mm-XE1" secondAttribute="centerX" id="F7R-im-WQh"/>
                     <constraint firstAttribute="bottom" secondItem="yng-9u-00N" secondAttribute="bottom" id="MYq-xm-BNy"/>
-                    <constraint firstItem="BES-92-htI" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="25" id="UBo-M4-Cb4"/>
-                    <constraint firstAttribute="trailing" secondItem="vve-Tm-lzv" secondAttribute="trailing" constant="15" id="hRi-38-8dh"/>
-                    <constraint firstItem="yng-9u-00N" firstAttribute="centerX" secondItem="BES-92-htI" secondAttribute="centerX" id="hn4-Fs-1pl"/>
-                    <constraint firstItem="yng-9u-00N" firstAttribute="top" secondItem="BES-92-htI" secondAttribute="bottom" constant="15" id="k9o-gZ-Co5"/>
-                    <constraint firstItem="V28-Vo-NGN" firstAttribute="centerX" secondItem="vve-Tm-lzv" secondAttribute="centerX" id="lpZ-8r-Kpd"/>
-                    <constraint firstItem="vve-Tm-lzv" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="25" id="ter-3W-wEP"/>
+                    <constraint firstItem="yng-9u-00N" firstAttribute="top" secondItem="6zK-mm-XE1" secondAttribute="bottom" constant="15" id="SL0-Tq-fH2"/>
+                    <constraint firstItem="4Er-ix-GpQ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="25" id="Ssv-2y-I8v"/>
+                    <constraint firstItem="6zK-mm-XE1" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="TRA-3r-MZb"/>
+                    <constraint firstAttribute="trailing" secondItem="4Er-ix-GpQ" secondAttribute="trailing" constant="15" id="iWn-u6-4Ae"/>
                     <constraint firstAttribute="bottom" secondItem="V28-Vo-NGN" secondAttribute="bottom" id="xai-p9-PE1"/>
+                    <constraint firstItem="V28-Vo-NGN" firstAttribute="centerX" secondItem="4Er-ix-GpQ" secondAttribute="centerX" id="zgC-jQ-tth"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="editLabel" destination="V28-Vo-NGN" id="mnR-XH-VJi"/>
-                <outlet property="editPicImg" destination="vve-Tm-lzv" id="5Ny-BV-dmO"/>
+                <outlet property="editPicButton" destination="4Er-ix-GpQ" id="EHn-dZ-S3a"/>
                 <outlet property="originLabel" destination="yng-9u-00N" id="bxp-7G-eV6"/>
-                <outlet property="originPicImg" destination="BES-92-htI" id="2FC-9W-AZ3"/>
+                <outlet property="originPicButton" destination="6zK-mm-XE1" id="Bhs-Pa-HZD"/>
             </connections>
             <point key="canvasLocation" x="32" y="127"/>
         </tableViewCell>

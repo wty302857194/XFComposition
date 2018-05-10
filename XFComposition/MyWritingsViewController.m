@@ -24,7 +24,7 @@
 
 
 
-@interface MyWritingsViewController ()<UITableViewDelegate,UITableViewDataSource,MywritingCellDelegate,ShowMywritingDelegate>
+@interface MyWritingsViewController ()<UITableViewDelegate,UITableViewDataSource,MywritingCellDelegate,ShowMywritingDelegate,UIAlertViewDelegate>
 @property (nonatomic,strong)UITableView *tableView;
 @property (nonatomic,strong)NSArray *btTitleArray;
 @property (nonatomic,strong)UITextField *textfield;
@@ -147,7 +147,7 @@
 
 -(UITableView *)tableView{
     if (!_tableView) {
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, SafeAreaTopHeight+150, WidthFrame, HeightFrame-64-80) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, SafeAreaTopHeight+150, WidthFrame, HeightFrame-SafeAreaTopHeight-150) style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -389,17 +389,19 @@
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         
         [self requst :@"0" :@"0" :@"-1" :@"-1"];
-        
         [self.tableView.mj_header endRefreshing];
     }];
-    header.lastUpdatedTimeLabel.hidden = YES;
-    header.stateLabel.hidden = YES;
+    [header setTitle:@"普通闲置状态" forState:MJRefreshStateIdle];
+    [header setTitle:@"松开就可以进行刷新的状态" forState:MJRefreshStatePulling];
+    [header setTitle:@"正在刷新中的状态" forState:MJRefreshStateRefreshing];
+    [header setTitle:@"即将刷新的状态" forState:MJRefreshStateWillRefresh];
+    [header setTitle:@"所有数据加载完毕，没有更多的数据了" forState:MJRefreshStateNoMoreData];
+//    header.lastUpdatedTimeLabel.hidden = YES;
+//    header.stateLabel.hidden = YES;
     self.tableView.mj_header = header;
     
     [self.tableView.mj_header beginRefreshing];
     self.tableView.mj_footer=[MJRefreshBackNormalFooter   footerWithRefreshingBlock:^{
-        
-        
         [self requstMore:self.typeid :self.gardeid :self.ishost :self.istuijian];
         [self.tableView.mj_footer endRefreshing];
     }];
@@ -585,12 +587,6 @@
     }
 
 }
--(void)hiddenAllMenuView{
-    [self.menuView1 dismissView];
-    [self.menuView2 dismissView];
-    [self.menuView3 dismissView];
-    [self.menuView4 dismissView];
-}
 //多删
 -(void)duoxuanshanchu{
     DeleteBlogRequst *requst = [[DeleteBlogRequst alloc]init];
@@ -663,44 +659,51 @@
 //修改
 -(void)modify:(UIButton *)bt{
     
-    MywritingModel *model = self.writingArray[bt.tag - 2000];
-    self.saveId = [NSString stringWithFormat:@"%ld",(long)model.ID];
-    GetBlogContentInfoRequst *requst = [[GetBlogContentInfoRequst alloc]init];
+    MywritingModel *model = self.writingArray[bt.tag - 3000];
     
-    [requst GetBlogContentInfoRequstWithNoticeID:[NSString stringWithFormat:@"%ld",(long)model.ID] :^(NSDictionary *json) {
-        
-        
-        if ([json[@"ret_msg"] isEqualToString:@"成功"]) {
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.showView showView];
-            });
-            NSString *str1 = [self htmlEntityDecode:json[@"ret_data"]];
-            NSAttributedString * attributeStr = [self attributedStringWithHTMLString:str1];
-            self.showView.titletextfield.text = model.BlogTitle;
-            self.showView.textview.attributedText = attributeStr;
-            
-        }
-    }];
-
+    if ([model.BlogStatic integerValue] == 0) {//可编辑
+        self.saveId = [NSString stringWithFormat:@"%ld",(long)model.ID];
+        GetBlogContentInfoRequst *requst = [[GetBlogContentInfoRequst alloc]init];
+        __weak typeof(self) this = self;
+        [requst GetBlogContentInfoRequstWithNoticeID:[NSString stringWithFormat:@"%ld",(long)model.ID] :^(NSDictionary *json) {
+            if ([json[@"ret_msg"] isEqualToString:@"成功"]) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [this.showView showView];
+                });
+                NSString *str1 = [this htmlEntityDecode:json[@"ret_data"]];
+                NSAttributedString * attributeStr = [this attributedStringWithHTMLString:str1];
+                this.showView.titletextfield.text = model.BlogTitle;
+                this.showView.textview.attributedText = attributeStr;
+            }
+        }];
+    }else{
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"当前文章不可编辑" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        }]];
+        [self presentViewController:alert animated:YES completion:nil];
+    }
 }
 
 //删除
 -(void)deleteCell:(UIButton *)bt{
-    MywritingModel *model = self.writingArray[bt.tag - 3000];
-    DeleteBlogRequst *requst = [[DeleteBlogRequst alloc]init];
-    [requst DeleteBlogRequstWithNoticeIds:[NSString stringWithFormat:@"%ld",(long)model.ID] withUserid:self.myWritingUserid withFlag:@"7" :^(NSDictionary *json) {
-        if ([json[@"ret_msg"] isEqualToString:@"成功"]) {
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"删除成功" message:nil preferredStyle:UIAlertControllerStyleAlert];
-            [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"确定要删除该文章吗?" preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+    }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        //请求删除接口
+        MywritingModel *model = self.writingArray[bt.tag - 3000];
+        DeleteBlogRequst *requst = [[DeleteBlogRequst alloc]init];
+        [requst DeleteBlogRequstWithNoticeIds:[NSString stringWithFormat:@"%ld",(long)model.ID] withUserid:self.myWritingUserid withFlag:@"7" :^(NSDictionary *json) {
+            if ([json[@"ret_msg"] isEqualToString:@"成功"]) {
+                [SVProgressHUD showInfoWithStatus:@"删除成功"];
                 //刷新数据
                 [self requst:self.typeid :self.gardeid :self.ishost :self.istuijian];
-            }]];
-            [self presentViewController:alert animated:YES completion:nil];
-        }
-    }];
-    
-
+            }else{
+                [SVProgressHUD showInfoWithStatus:json[@"ret_msg"]];
+            }
+        }];
+    }]];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 //保存
 -(void)Savezuowen{
@@ -734,14 +737,10 @@
 }
 -(void)leftBarButton{
     UIBarButtonItem *item=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"left-arrow_s"] style: UIBarButtonItemStylePlain target:self action:@selector(onBack)];
-    
     self.navigationItem.leftBarButtonItem=item;
-    
 }
 -(void)onBack{
-    [self.navigationController popViewControllerAnimated:YES];
-    
-    
+    [self.navigationController popViewControllerAnimated:YES];    
 }
 //将 &lt 等类似的字符转化为HTML中的“<”等
 - (NSString *)htmlEntityDecode:(NSString *)string
