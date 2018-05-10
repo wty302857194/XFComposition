@@ -118,6 +118,9 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
+    if(section == 2&&_activityArr.count == 0){
+        return 0;
+    }
     return 30;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
@@ -204,11 +207,18 @@
         [hud hideAnimated:YES];
         NSArray *arr = josn[@"ret_data"][@"pageInfo"];
         
+        
+        
         [arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             VolunteerModel *model = [VolunteerModel loadWithJSOn:obj];
-            [_activityArr addObject:model];
-            if (idx == 1) {
-                *stop = YES;
+            
+            NSDate *currentDate = [NSDate date];
+            NSDateFormatter *formatter=[[NSDateFormatter alloc]init];
+            [formatter setDateFormat:@"YYYY/MM/dd HH:mm:ss"];
+            NSDate *endDate = [formatter dateFromString:model.activeendtime];
+            NSTimeInterval secs = [endDate timeIntervalSinceDate:currentDate];
+            if(secs > 0){
+                [_activityArr addObject:model];
             }
         }];
         [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:2] withRowAnimation:UITableViewRowAnimationNone];

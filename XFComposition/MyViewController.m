@@ -68,15 +68,10 @@
     }
     return _array3;
 }
--(XFUserInfo *)userInfo{
-    if (!_userInfo) {
-        _userInfo = [[XFUserInfo alloc]init];
-        _userInfo = [XFUserInfo getUserInfo];
-    }
-    return _userInfo;
-}
+
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
+    self.userInfo = [XFUserInfo getUserInfo];
     
     if ([self.userInfo.dutyId isEqualToString:@"1"]) {//学生
         self.teacherarray1 = @[@"个人中心",@"我的习作",@"申请批阅",@"阅读检测",@"我的微课"];
