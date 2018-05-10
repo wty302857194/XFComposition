@@ -40,12 +40,11 @@
                         <outlet property="delegate" destination="-1" id="8WE-GA-et5"/>
                     </connections>
                 </collectionView>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="YSG-Dg-aSE">
-                    <rect key="frame" x="0.0" y="301" width="370" height="366"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="YSG-Dg-aSE">
+                    <rect key="frame" x="0.0" y="300" width="375" height="367"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <view key="tableHeaderView" contentMode="scaleToFill" id="KcZ-A8-DZQ">
-                        <rect key="frame" x="0.0" y="0.0" width="370" height="99"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="99"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vgo-bk-IwZ" customClass="PlaceholderTextView">
@@ -69,7 +68,11 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="tV8-xN-R6R" firstAttribute="leading" secondItem="pf8-ct-87p" secondAttribute="leading" id="9YW-0v-bcj"/>
+                <constraint firstItem="pf8-ct-87p" firstAttribute="trailing" secondItem="YSG-Dg-aSE" secondAttribute="trailing" id="Uzd-wM-4Kf"/>
+                <constraint firstItem="YSG-Dg-aSE" firstAttribute="bottom" secondItem="pf8-ct-87p" secondAttribute="bottom" id="YJ0-Vg-jiD"/>
                 <constraint firstItem="tV8-xN-R6R" firstAttribute="top" secondItem="MQi-nn-Foz" secondAttribute="top" id="oug-oq-KC5"/>
+                <constraint firstItem="YSG-Dg-aSE" firstAttribute="top" secondItem="tV8-xN-R6R" secondAttribute="bottom" id="qq2-BE-M8E"/>
+                <constraint firstItem="YSG-Dg-aSE" firstAttribute="leading" secondItem="pf8-ct-87p" secondAttribute="leading" id="tbN-3U-6O9"/>
                 <constraint firstItem="tV8-xN-R6R" firstAttribute="trailing" secondItem="pf8-ct-87p" secondAttribute="trailing" id="zsQ-qd-FDm"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="pf8-ct-87p"/>

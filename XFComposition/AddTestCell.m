@@ -36,23 +36,18 @@
         
         backView.sd_layout.leftSpaceToView(self.contentView, 0).topSpaceToView(self.contentView, 5).rightSpaceToView(self.contentView, 0).autoHeightRatio(0);
         
-        self.titleLabel.sd_layout.leftSpaceToView(backView, 20).topSpaceToView(backView, 10).heightIs(30).widthIs(WidthFrame/3*2);
+        self.titleLabel.sd_layout.leftSpaceToView(backView, 20).topSpaceToView(backView, 5).heightIs(35).widthIs(WidthFrame/3*2);
         self.titleLabel.font = [UIFont systemFontOfSize:16];
         
         self.bt1.sd_layout.rightSpaceToView(backView, 40).topSpaceToView(backView, 0).heightIs(20).widthIs(20);
-//        [self.bt1 setBackgroundImage:[UIImage imageNamed:@"aixin_n"] forState:UIControlStateNormal];
-//        [self.bt1 setBackgroundImage:[UIImage imageNamed:@"aixin_s"] forState:UIControlStateSelected];
+        
         [self.bt1 addTarget:self action:@selector(buttonClick :) forControlEvents:UIControlEventTouchUpInside];
+        
         self.joinbt.sd_layout.rightSpaceToView(backView, 20).topSpaceToView(self.bt1, 0).heightIs(20).widthIs(0);
         
-//        self.joinbt.text = @"加入试卷";
         self.joinbt.font = [UIFont systemFontOfSize:12];
         [self.joinbt setSingleLineAutoResizeWithMaxWidth:0];
-//        [bt setTitle:@"加入试卷" forState:UIControlStateNormal];
-//       [ bt setBackgroundColor:[UIColor blueColor]];
-//        [bt setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
-//        bt.titleLabel.font = [UIFont systemFontOfSize:12];
-//        [bt setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+
         
         
         bgimgView.sd_layout.leftSpaceToView(backView, 20).topSpaceToView(self.joinbt, 5).widthIs(WidthFrame-40).heightIs(.5);
@@ -79,7 +74,7 @@
 
         [checkbt setImage :[UIImage imageNamed:@"icon_shanchu"] forState:UIControlStateNormal];
         [checkbt addTarget:self action:@selector(check:) forControlEvents:UIControlEventTouchUpInside];
-        [checkbt setTitle:@"查看" forState:UIControlStateNormal];
+        [checkbt setTitle:@"  查看" forState:UIControlStateNormal];
         checkbt.titleLabel.font = [UIFont systemFontOfSize:14];
         [checkbt setTitleColor:[UIColor colorWithHexString:@"9A9B9A"] forState:UIControlStateNormal];
         
@@ -95,8 +90,8 @@
     }
 }
 -(void)check:(UIButton *)bt{
-    if ([self.delegate respondsToSelector: @selector(chakan:)]) {
-        [self.delegate chakan:bt];
+    if ([self.delegate respondsToSelector: @selector(chakan: withModel:)]) {
+        [self.delegate chakan:bt withModel:_model];
     }
     
 }

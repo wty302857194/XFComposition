@@ -4152,8 +4152,8 @@
 				3F09583220A1AB8300B55F4E /* PicListTableViewCell.h */,
 				3F09583320A1AB8300B55F4E /* PicListTableViewCell.m */,
 				3F09583420A1AB8300B55F4E /* PicListTableViewCell.xib */,
-				3F4D1F4920A294D500584C6C /* QYStarReplay.m */,
 				3F4D1F4820A294D500584C6C /* QYStarReplay.h */,
+				3F4D1F4920A294D500584C6C /* QYStarReplay.m */,
 				F6C227BE1F9B449800464BD6 /* V */,
 				F6C227BD1F9B448D00464BD6 /* M */,
 				F6C227A91F9B2A2A00464BD6 /* CorrectViewController.h */,
@@ -5005,8 +5005,7 @@
 				TargetAttributes = {
 					F612EBC21F4FB341000E7432 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = 5K5GGEWVU3;
-
+						DevelopmentTeam = X225TLXQ76;
 						ProvisioningStyle = Automatic;
 					};
 					F612EBDB1F4FB341000E7432 = {
@@ -5947,8 +5946,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5K5GGEWVU3;
-
+				DEVELOPMENT_TEAM = X225TLXQ76;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/XFComposition/PrefixHeader.pch";
 				INFOPLIST_FILE = XFComposition/Info.plist;
@@ -5969,7 +5967,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5K5GGEWVU3;
+				DEVELOPMENT_TEAM = X225TLXQ76;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/XFComposition/PrefixHeader.pch";
 				INFOPLIST_FILE = XFComposition/Info.plist;

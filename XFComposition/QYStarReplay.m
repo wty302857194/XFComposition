@@ -10,7 +10,7 @@
 
 typedef void(^completeBlock)(CGFloat currentScore);
 
-@interface QYStarReplay()
+@interface QYStarReplay()<UIGestureRecognizerDelegate>
 @property (nonatomic, strong) UIView *foregroundStarView;
 @property (nonatomic, strong) UIView *backgroundStarView;
 
@@ -86,10 +86,12 @@ typedef void(^completeBlock)(CGFloat currentScore);
     [self addSubview:self.foregroundStarView];
     
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(userTapRateView:)];
+    tapGesture.delegate = self;
     tapGesture.numberOfTapsRequired = 1;
     [self addGestureRecognizer:tapGesture];
     
     UIPanGestureRecognizer * pan = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(panRateView:)];
+    pan.delegate = self;
     [self addGestureRecognizer:pan];
     
 }
@@ -106,6 +108,33 @@ typedef void(^completeBlock)(CGFloat currentScore);
         [view addSubview:imageView];
     }
     return view;
+}
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer{
+    
+    CGPoint  point  =  [gestureRecognizer locationInView:self];
+    NSLog(@"x==%f y===%f",point.x,point.y);
+ 
+    return YES;
+    
+}
+-(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch{
+  
+    
+    if ([gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]]) {
+        
+        UIPanGestureRecognizer * pan = (UIPanGestureRecognizer*)gestureRecognizer;
+        CGPoint translation = [pan translationInView:self];
+        
+        CGFloat absX = fabs(translation.x);
+        CGFloat absY = fabs(translation.y);
+         if (absY > absX) {
+             return NO;
+         }
+
+
+    }
+    return YES;
+    
 }
 #pragma mark -  滑动手势
 -(void)panRateView:(UIPanGestureRecognizer*)gesture{

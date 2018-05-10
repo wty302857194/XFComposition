@@ -400,6 +400,7 @@
 }
 -(void)sousuo{
 
+    [_tableView.mj_header beginRefreshing];
 }
 -(void)gengxinnimabi:(UIButton *)bt{
 
@@ -582,10 +583,10 @@
         
     }
 }
--(void)chakan:(UIButton *)bt{
-    GetMyPageSubjectListModel *Model = self.testArray[bt.tag - 2000];
+-(void)chakan:(UIButton *)bt withModel:(GetMyPageSubjectListModel *)model{
+
     PreviewTestViewController *vc = [[PreviewTestViewController alloc]init];
-    vc.ids = [NSString stringWithFormat:@"%@",Model.SubjectID];
+    vc.ids = [NSString stringWithFormat:@"%@",model.SubjectID];
     [self.navigationController pushViewController:vc animated:YES];
     
 }

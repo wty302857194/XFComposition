@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "QYStarReplay.h"
 @interface PicListTableViewCell : UITableViewCell
 -(void)reloadData:(FMBean*)bean;
+@property(nonatomic , strong)UILabel * label;
+@property(nonatomic , strong) QYStarReplay * starReplay;
 @end

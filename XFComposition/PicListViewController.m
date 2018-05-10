@@ -10,7 +10,7 @@
 #import "PicListCell.h"
 #import "GetWritePicRequst.h"
 #import "GetWritePicModel.h"
-
+#import "PicListTableViewCell.h"
 #import "CorrectViewController.h"
 #import "PlaceholderTextView.h"
 #import "GetWritePicRemarkRequst.h"
@@ -20,7 +20,8 @@
 @property (nonatomic,strong)  IBOutlet UICollectionView *collectionView;
 @property (nonatomic,strong)NSMutableArray *picArray;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
-@property (nonatomic,strong)NSMutableArray *remarkArray;
+@property (nonatomic,strong)NSMutableArray *dataArray;;
+
 @property (strong, nonatomic) IBOutlet PlaceholderTextView *inputTextView;
 @end
 
@@ -60,18 +61,15 @@
     }
     return _picArray;
 }
--(NSMutableArray *)remarkArray{
-    if (!_remarkArray) {
-        _remarkArray = [[NSMutableArray alloc]init];
-        
-    }
-    return _remarkArray;
-}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"我的作文";
     self.view.backgroundColor = [UIColor whiteColor];
     
+    _dataArray = [NSMutableArray array];
+    
+    [_tableView registerNib:[UINib nibWithNibName:@"PicListTableViewCell" bundle:nil] forCellReuseIdentifier:@"PicListTableViewCell"];
+    [_collectionView registerClass:[PicListCell class] forCellWithReuseIdentifier:@"cell"];
     self.inputTextView.font = [UIFont systemFontOfSize:13];
     self.inputTextView.delegate = self;
     self.inputTextView.PlaceholderLabel.text = @"请输入总评";
@@ -93,20 +91,36 @@
             [self.collectionView reloadData];
         });
     }];
+    [[XFRequestManager sharedInstance] XFRequstGetStandard:_modelId addUser:[XFUserInfo getUserInfo].Loginid modelId:@"7" :^(NSString *requestName, id responseData, BOOL isSuccess) {
+        if (isSuccess) {
+            _dataArray = responseData;
+            [_tableView reloadData];
+
+        }else{
+            
+        }
+        
+    }];
     
 }
 #pragma mark UITableViewDelegate
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
     
-    return 2;
+    return _dataArray.count;
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    PicListTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"PicListTableViewCell"];
+    [cell reloadData:_dataArray[indexPath.row]];
     
-    return nil;
+    return cell;
     
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    return 44;
 }
 #pragma mark collectionView代理方法
 //返回section个数

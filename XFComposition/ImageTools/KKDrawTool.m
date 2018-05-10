@@ -28,7 +28,7 @@
 }
 
 + (NSString*)defaultTitle{
-    return @"Draw";
+    return @"手绘";
 }
 
 + (NSUInteger)orderNum{

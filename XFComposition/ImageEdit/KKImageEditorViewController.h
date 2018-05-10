@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "KKImageToolInfo.h"
-
+#import "ICSDrawerController.h"
 static NSString* const KTextEditDoneNotification = @"KTextEditDoneNotification";
 
 @protocol KKImageEditorDelegate <NSObject>
@@ -18,7 +18,7 @@ static NSString* const KTextEditDoneNotification = @"KTextEditDoneNotification";
 @end
 
 
-@interface KKImageEditorViewController : UIViewController<UIScrollViewDelegate>{
+@interface KKImageEditorViewController : UIViewController<UIScrollViewDelegate,ICSDrawerControllerChild, ICSDrawerControllerPresenting>{
 
     __weak UIScrollView *_scrollView; //readonly
 }
