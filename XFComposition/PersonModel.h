@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @interface PersonModel : NSObject
+
+
 @property (nonatomic,strong)NSString *InTime;
 @property (nonatomic,strong)NSString *LastLoginTime;
 @property (nonatomic,strong)NSString *LoginTimes;

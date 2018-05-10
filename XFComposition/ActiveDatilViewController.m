@@ -230,7 +230,7 @@
         [sectionButton addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
         sectionButton.tag = 1000+section;
         if ([_selectedArray[section] isEqualToString:@"0"]) {
-            [sectionButton setImage:[UIImage imageNamed:@"left-arrow"] forState:UIControlStateNormal];
+            [sectionButton setImage:[UIImage imageNamed:@"left-arrow_s"] forState:UIControlStateNormal];
         }else{
             [sectionButton setImage:[UIImage imageNamed:@"right-arrow-"] forState:UIControlStateNormal];
         }

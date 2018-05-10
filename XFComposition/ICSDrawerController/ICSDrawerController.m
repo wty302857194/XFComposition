@@ -80,6 +80,7 @@ typedef NS_ENUM(NSUInteger, ICSDrawerControllerState)
     UIBarButtonItem *item2=[[UIBarButtonItem alloc]initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(goback)];
     
     self.navigationItem.rightBarButtonItem=item2;
+    [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
     
 }
 //我修改了一些东西  通过状态改变 self.drawerState

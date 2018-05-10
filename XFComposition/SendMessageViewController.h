@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "PlaceholderTextView.h"
 
 @interface SendMessageViewController : UIViewController
 

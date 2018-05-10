@@ -45,7 +45,7 @@
     typeButton.frame = CGRectMake(14, SafeAreaTopHeight+5, 80, 25);
     [typeButton setTitle:@"全部" forState:UIControlStateNormal];
     typeButton.titleLabel.font = [UIFont systemFontOfSize:14];
-    [typeButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [typeButton setTitleColor:hexColor(333333) forState:UIControlStateNormal];
     [typeButton addTarget:self action:@selector(showtype) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:typeButton];
     
@@ -53,7 +53,7 @@
     self.textfield.placeholder = @"关键词";
     self.textfield.layer.cornerRadius = 6;
     self.textfield.layer.masksToBounds = YES;
-    self.textfield.layer.borderWidth = 2;
+    self.textfield.layer.borderWidth = .5;
     self.textfield.layer.borderColor = [[UIColor colorWithHexString:@"D4D5D4"] CGColor];
     self.textfield.clearButtonMode=YES;
     self.textfield.leftViewMode=UITextFieldViewModeAlways;
@@ -202,6 +202,7 @@
     
     PicListViewController *vc = [[PicListViewController alloc]init];
     vc.blogid = model.WorkId;
+    vc.modelId = _activeId;
     [self.navigationController pushViewController:vc animated:YES];
 }
 #pragma mark cell的行数

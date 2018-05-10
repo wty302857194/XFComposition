@@ -42,7 +42,7 @@
         block(responseObject);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         //上传失败
-//        NSLog(@"上传失败");
+        NSLog(@"上传失败");
     }];
     [task resume];
 

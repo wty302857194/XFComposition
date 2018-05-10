@@ -125,4 +125,7 @@
 + (NSString *)getGameCnforString:(NSString *)str;
 
 + (NSString *)dataStringForString:(NSString *)string;
+
+//压缩图片
++(NSData *)zipNSDataWithImage:(UIImage *)sourceImage;
 @end

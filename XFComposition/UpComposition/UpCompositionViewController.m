@@ -176,34 +176,6 @@
 
 - (void)getReadActiveRequestDataForZhiYuan
 {
-//    [hud showAnimated:YES];
-//    BaseRequest *request = [BaseRequest requestWithURL:nil];
-//    NSDictionary *dic = @{
-//                          @"Action":@"GetMicroClassList",
-//                          @"Token":@"0A66A4FD-146F-4542-8D7B-33CDEC2981F9",
-//                          @"PageIndex":@(1),
-//                          @"PageSize":@"9999",
-//                          @"keyword":@"",
-//                          @"ActiveTypeID":@"0",
-//                          };
-//
-//    [request startWithMethod:HTTPTypePOST params:dic successedBlock:^(id succeedResult) {
-//        [hud hideAnimated:YES];
-//        NSLog(@"ForecastUrl === %@",succeedResult);
-//        NSArray *arr = succeedResult[@"ret_data"][@"pageInfo"];
-//        [arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-//            UpCompositionModel *model = [UpCompositionModel mj_objectWithKeyValues:obj];
-//            [_zhiYuanArr addObject:model];
-//            if (idx == 1) {
-//                *stop = YES;
-//            }
-//        }];
-//        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
-//    } failedBolck:^(NSURLSessionDataTask *task, NSError *error) {
-//        NSLog(@"error===%@",error.localizedDescription);
-//        [hud hideAnimated:YES];
-//    }];
-    
     
     __weak typeof (self) weakSelf = self;
     VolunteerRequst *requset = [[VolunteerRequst alloc]init];

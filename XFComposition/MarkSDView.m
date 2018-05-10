@@ -27,11 +27,6 @@
         label.text = @"保存试卷";
         label.font = [UIFont systemFontOfSize:18];
         [self.backView2 addSubview:label];
-        UIButton *bt1 = [UIButton buttonWithType:UIButtonTypeCustom];
-        [bt1 setBackgroundColor:[UIColor lightGrayColor]];
-        bt1.frame = CGRectMake(WidthFrame-100, 20, 20, 20);
-        [bt1 addTarget:self action:@selector(dissMiss) forControlEvents:UIControlEventTouchUpInside];
-        [self.backView2 addSubview:bt1];
         
         UILabel *label1 = [[UILabel alloc]initWithFrame:CGRectMake(20, 80, 80, 35)];
         

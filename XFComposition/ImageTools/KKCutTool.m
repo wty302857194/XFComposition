@@ -22,7 +22,7 @@
 }
 
 + (NSString*)defaultTitle{
-    return @"Cut";
+    return @"剪切";
 }
 
 + (NSUInteger)orderNum{

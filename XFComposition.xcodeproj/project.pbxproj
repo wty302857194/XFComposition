@@ -57,6 +57,8 @@
 		3262C5C12091FE0D0063DE19 /* AddPhotoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3262C5C02091FE0D0063DE19 /* AddPhotoCollectionViewCell.m */; };
 		3284728120909C7A00A1F3D0 /* TopMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3284728020909C7A00A1F3D0 /* TopMenuView.m */; };
 		3284728320909C8D00A1F3D0 /* TopMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3284728220909C8D00A1F3D0 /* TopMenuView.xib */; };
+		32A5A9D220A4171E001E4838 /* ReadJianCeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A5A9D020A4171E001E4838 /* ReadJianCeViewController.m */; };
+		32A5A9D320A4171E001E4838 /* ReadJianCeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32A5A9D120A4171E001E4838 /* ReadJianCeViewController.xib */; };
 		32A7A0F1209ADD5900C19895 /* TYOnlyActivetyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A7A0EF209ADD5800C19895 /* TYOnlyActivetyTableViewCell.m */; };
 		32A7A0F2209ADD5900C19895 /* TYOnlyActivetyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32A7A0F0209ADD5800C19895 /* TYOnlyActivetyTableViewCell.xib */; };
 		32B38F4D208875E500616A7B /* LeftMenuModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 32B38F4C208875E500616A7B /* LeftMenuModel.m */; };
@@ -93,6 +95,8 @@
 		3F3D5790209C5B3B00D415AC /* FMBean.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3D578F209C5B3B00D415AC /* FMBean.m */; };
 		3F3D5793209C5C7300D415AC /* DTApiBaseBean.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3D5792209C5C7300D415AC /* DTApiBaseBean.m */; };
 		3F4D1F4A20A294D500584C6C /* QYStarReplay.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F4D1F4920A294D500584C6C /* QYStarReplay.m */; };
+		3F4D1F4F20A2F67000584C6C /* bg_home_searchBg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F4D1F4D20A2F66C00584C6C /* bg_home_searchBg@2x.png */; };
+		3F4D1F5020A2F67100584C6C /* bg_home_searchBg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F4D1F4E20A2F66E00584C6C /* bg_home_searchBg@3x.png */; };
 		3FA5D978209FE42A0029E276 /* PerCenterViewController1.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA5D976209FE42A0029E276 /* PerCenterViewController1.m */; };
 		3FA5D979209FE42A0029E276 /* PerCenterViewController1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FA5D977209FE42A0029E276 /* PerCenterViewController1.xib */; };
 		3FA5D981209FEB070029E276 /* GetMessageListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA5D97F209FEB050029E276 /* GetMessageListModel.m */; };
@@ -780,6 +784,9 @@
 		3284727F20909C7900A1F3D0 /* TopMenuView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TopMenuView.h; sourceTree = "<group>"; };
 		3284728020909C7A00A1F3D0 /* TopMenuView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TopMenuView.m; sourceTree = "<group>"; };
 		3284728220909C8D00A1F3D0 /* TopMenuView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TopMenuView.xib; sourceTree = "<group>"; };
+		32A5A9CF20A4171E001E4838 /* ReadJianCeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReadJianCeViewController.h; sourceTree = "<group>"; };
+		32A5A9D020A4171E001E4838 /* ReadJianCeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReadJianCeViewController.m; sourceTree = "<group>"; };
+		32A5A9D120A4171E001E4838 /* ReadJianCeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReadJianCeViewController.xib; sourceTree = "<group>"; };
 		32A7A0EE209ADD5800C19895 /* TYOnlyActivetyTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TYOnlyActivetyTableViewCell.h; sourceTree = "<group>"; };
 		32A7A0EF209ADD5800C19895 /* TYOnlyActivetyTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TYOnlyActivetyTableViewCell.m; sourceTree = "<group>"; };
 		32A7A0F0209ADD5800C19895 /* TYOnlyActivetyTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TYOnlyActivetyTableViewCell.xib; sourceTree = "<group>"; };
@@ -840,6 +847,8 @@
 		3F3D5792209C5C7300D415AC /* DTApiBaseBean.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTApiBaseBean.m; sourceTree = "<group>"; };
 		3F4D1F4820A294D500584C6C /* QYStarReplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYStarReplay.h; sourceTree = "<group>"; };
 		3F4D1F4920A294D500584C6C /* QYStarReplay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QYStarReplay.m; sourceTree = "<group>"; };
+		3F4D1F4D20A2F66C00584C6C /* bg_home_searchBg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_home_searchBg@2x.png"; sourceTree = "<group>"; };
+		3F4D1F4E20A2F66E00584C6C /* bg_home_searchBg@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_home_searchBg@3x.png"; sourceTree = "<group>"; };
 		3FA5D975209FE42A0029E276 /* PerCenterViewController1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PerCenterViewController1.h; sourceTree = "<group>"; };
 		3FA5D976209FE42A0029E276 /* PerCenterViewController1.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PerCenterViewController1.m; sourceTree = "<group>"; };
 		3FA5D977209FE42A0029E276 /* PerCenterViewController1.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PerCenterViewController1.xib; sourceTree = "<group>"; };
@@ -2655,6 +2664,8 @@
 				F6038CE61F58E96A008FE507 /* mp322.png */,
 				F6038CE71F58E96A008FE507 /* mp321.png */,
 				F612EBD21F4FB341000E7432 /* Assets.xcassets */,
+				3F4D1F4D20A2F66C00584C6C /* bg_home_searchBg@2x.png */,
+				3F4D1F4E20A2F66E00584C6C /* bg_home_searchBg@3x.png */,
 				F612EBD41F4FB341000E7432 /* LaunchScreen.storyboard */,
 				F612EBD71F4FB341000E7432 /* Info.plist */,
 				F612EBC61F4FB341000E7432 /* Supporting Files */,
@@ -3066,6 +3077,9 @@
 				F612EC231F4FD7DD000E7432 /* MyViewController.m */,
 				F6A717811FA0B3970046C235 /* ChangePassWordViewController.h */,
 				F6A717821FA0B3970046C235 /* ChangePassWordViewController.m */,
+				32A5A9CF20A4171E001E4838 /* ReadJianCeViewController.h */,
+				32A5A9D020A4171E001E4838 /* ReadJianCeViewController.m */,
+				32A5A9D120A4171E001E4838 /* ReadJianCeViewController.xib */,
 				F6A7177D1FA0A9690046C235 /* V */,
 				F6A7177C1FA0A9600046C235 /* M */,
 				F6A717651FA065A50046C235 /* RealnameViewController.h */,
@@ -4154,8 +4168,8 @@
 				3F09583220A1AB8300B55F4E /* PicListTableViewCell.h */,
 				3F09583320A1AB8300B55F4E /* PicListTableViewCell.m */,
 				3F09583420A1AB8300B55F4E /* PicListTableViewCell.xib */,
-				3F4D1F4920A294D500584C6C /* QYStarReplay.m */,
 				3F4D1F4820A294D500584C6C /* QYStarReplay.h */,
+				3F4D1F4920A294D500584C6C /* QYStarReplay.m */,
 				F6C227BE1F9B449800464BD6 /* V */,
 				F6C227BD1F9B448D00464BD6 /* M */,
 				F6C227A91F9B2A2A00464BD6 /* CorrectViewController.h */,
@@ -5007,6 +5021,7 @@
 				TargetAttributes = {
 					F612EBC21F4FB341000E7432 = {
 						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = X225TLXQ76;
 						DevelopmentTeam = 5K5GGEWVU3;
 						ProvisioningStyle = Automatic;
 					};
@@ -5050,6 +5065,7 @@
 				F612EBD61F4FB341000E7432 /* LaunchScreen.storyboard in Resources */,
 				2F4FC66320A18F1B009A1E4C /* MyWritingDetailCell.xib in Resources */,
 				F612EBD31F4FB341000E7432 /* Assets.xcassets in Resources */,
+				3F4D1F4F20A2F67000584C6C /* bg_home_searchBg@2x.png in Resources */,
 				BA9C1CB420A2CCC000BFBE23 /* NewMicoSixthCell.xib in Resources */,
 				2F4FC65B20A17C34009A1E4C /* MyWritingDetailViewController.xib in Resources */,
 				BA34D9AD20A41DDF00D99165 /* CourseOutlineCell.xib in Resources */,
@@ -5099,9 +5115,11 @@
 				3FA5D9AF20A03EF00029E276 /* README.md in Resources */,
 				322B157C2088D0AD009FCC96 /* UpCompositionViewController.xib in Resources */,
 				BA90668720A2E40800631F42 /* CourseCollectionViewCell.xib in Resources */,
+				32A5A9D320A4171E001E4838 /* ReadJianCeViewController.xib in Resources */,
 				F6038CF01F590601008FE507 /* sj.png in Resources */,
 				3FA5D979209FE42A0029E276 /* PerCenterViewController1.xib in Resources */,
 				F6038CE81F58E96A008FE507 /* mp322.png in Resources */,
+				3F4D1F5020A2F67100584C6C /* bg_home_searchBg@3x.png in Resources */,
 				BAB44C9320A1A89A002455D8 /* NewMicoSecondCell.xib in Resources */,
 				32CBFA8C20886B5C004CB00F /* LeftMenuViewController.xib in Resources */,
 				32426A4C208638FF00B5227B /* HomeTableViewCell.xib in Resources */,
@@ -5765,6 +5783,7 @@
 				F6D637D41F7D284900FF6FA4 /* IQToolbar.m in Sources */,
 				F612EC241F4FD7DD000E7432 /* MyViewController.m in Sources */,
 				F62DC72B1F9F1D3C00D3E035 /* PerLeftSecondCell.m in Sources */,
+				32A5A9D220A4171E001E4838 /* ReadJianCeViewController.m in Sources */,
 				4ABBA2992080E6120002E08D /* CALayer+LCAdd.m in Sources */,
 				F6D7C7FF1F8F6C3E00A08DC1 /* GetSubejectModel.m in Sources */,
 				F61F9AE01F8B467700A02C3A /* WeikeGoodcolActionRequst.m in Sources */,
@@ -5948,6 +5967,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = X225TLXQ76;
 				DEVELOPMENT_TEAM = 5K5GGEWVU3;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/XFComposition/PrefixHeader.pch";
@@ -5969,7 +5989,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5K5GGEWVU3;
+				DEVELOPMENT_TEAM = X225TLXQ76;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/XFComposition/PrefixHeader.pch";
 				INFOPLIST_FILE = XFComposition/Info.plist;

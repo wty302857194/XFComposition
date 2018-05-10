@@ -7,6 +7,7 @@
 //
 
 #import "SendMessageViewController.h"
+#import "PlaceholderTextView.h"
 @interface SendMessageViewController ()<UITextViewDelegate>
 @property (strong, nonatomic) IBOutlet PlaceholderTextView *inputTextView;
 @end
@@ -24,7 +25,20 @@
     self.inputTextView.placeholderFont = [UIFont systemFontOfSize:13];
     self.inputTextView.textColor =hexColor(666666);
 }
-
+-(void)viewWillAppear:(BOOL)animated{
+    
+    [super viewWillAppear:animated];
+    
+    IQKeyboardManager *manager = [IQKeyboardManager sharedManager];
+    
+    manager.enable = NO;//这个是它自带键盘工具条开关
+    
+}
+-(void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    
+    
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

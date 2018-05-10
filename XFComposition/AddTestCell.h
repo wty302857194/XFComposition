@@ -12,7 +12,7 @@
 @protocol AddTestCellDelegate <NSObject>
 
 -(void)gengxinnimabi :(UIButton *)bt;
--(void)chakan :(UIButton *)bt;
+-(void)chakan :(UIButton *)bt withModel:(GetMyPageSubjectListModel*)model;
 @end
 @interface AddTestCell : UITableViewCell
 @property (nonatomic,strong)UIButton *bt1;

@@ -23,7 +23,7 @@
                                  };
     [requst requestWithURLString:APIurl parameters:parameters type:NetworkRequestTypePost imgData:nil resultBlock:^(id responseObject, NSError *error, NSURLSessionDataTask *task) {
         block(responseObject);
-//        NSLog(@"获取用户信息%@",responseObject);
+        NSLog(@"获取用户信息%@",responseObject);
         [SVProgressHUD dismiss];
         
     }];

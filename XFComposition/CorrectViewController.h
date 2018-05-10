@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ICSDrawerController.h"
 
-@interface CorrectViewController : UIViewController
+@interface CorrectViewController : UIViewController<ICSDrawerControllerChild, ICSDrawerControllerPresenting>
 @property (nonatomic,strong)NSString *PicID;
 @property (nonatomic,strong)NSString *PicUrl;
 

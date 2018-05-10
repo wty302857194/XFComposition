@@ -129,13 +129,8 @@
         
         UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(20, 0, WidthFrame-100, 60)];
         label.text = @"自动出题规则设置";
-        label.font = [UIFont systemFontOfSize:18];
+        label.font = [UIFont systemFontOfSize:16];
         [self.backView addSubview:label];
-        UIButton *bt1 = [UIButton buttonWithType:UIButtonTypeCustom];
-        [bt1 setBackgroundColor:[UIColor lightGrayColor]];
-        bt1.frame = CGRectMake(WidthFrame-100, 20, 20, 20);
-        [bt1 addTarget:self action:@selector(dissMiss) forControlEvents:UIControlEventTouchUpInside];
-        [self.backView addSubview:bt1];
         [self.backView addSubview:self.collectionView];
         
         UIButton *bt2 = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -151,10 +146,10 @@
         
         UIButton *bt3 = [UIButton buttonWithType:UIButtonTypeCustom];
         [bt3 setBackgroundColor:[UIColor colorWithHexString:@"EB6752"]];
-        bt3.frame = CGRectMake(WidthFrame-40-20-160, 235, 160, 30);
+        bt3.frame = CGRectMake(WidthFrame-80-20-40, 235, 80, 30);
         bt3.layer.cornerRadius = 4;
         bt3.layer.masksToBounds = YES;
-        [bt3 setTitle:@"取消自动--（手动设置题目）" forState:UIControlStateNormal];
+        [bt3 setTitle:@"手动设置" forState:UIControlStateNormal];
         [bt3 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [bt3 addTarget:self action:@selector(cancelit) forControlEvents:UIControlEventTouchUpInside];
         bt3.titleLabel.font = [UIFont systemFontOfSize:13];

@@ -151,7 +151,6 @@
     if (self.Array1.count>0) {
         [self.tixingArray addObject:self.Array1];
         [self.titleArray addObject:@"单选题"];
-        //             _titleArray = @[@"单选题",@"多选题",@"判断题",@"问答题",@"填空题"];
     }
     if (self.Array2.count>0) {
         [self.tixingArray addObject:self.Array2];
@@ -169,8 +168,7 @@
         [self.tixingArray addObject:self.Array5];
         [self.titleArray addObject:@"填空题"];
     }
-    NSLog(@"%@+++++++++++++++++++++",self.tixingArray);
-    NSLog(@"%@+++++++++++++++++++++",self.titleArray);
+    
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -202,7 +200,7 @@
     return [self.tixingArray[section] count];
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 150;
+    return 170;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -283,9 +281,6 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         GetActivePageViewModel *Model = self.Array3[indexPath.row];
         cell.model = Model;
-        
-        //        cell.model = self.Array3[indexPath.row];
-        
         cell.titleLabel.text = [NSString stringWithFormat:@"%ld.%@",(long)(indexPath.row+1),Model.SubjectTitle];
         return cell;
     }else if ([self.titleArray[indexPath.section] isEqualToString:@"问答题"]){
@@ -294,7 +289,6 @@
         GetActivePageViewModel *Model = self.Array4[indexPath.row];
         cell.model = Model;
         cell.titleLabel.text = [NSString stringWithFormat:@"%ld.%@",(long)(indexPath.row+1),Model.SubjectTitle];
-        //        cell.model = self.Array4[indexPath.row];
         return cell;
     }else if ([self.titleArray[indexPath.section] isEqualToString:@"填空题"]){
         TiankongCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell4" forIndexPath:indexPath];

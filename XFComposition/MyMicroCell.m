@@ -11,24 +11,43 @@
 @implementation MyMicroCell
 -(instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
+        self.layer.borderColor = hexColor(888888).CGColor;
+        self.layer.borderWidth = 0.5;
+        
         self.imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, WidthFrame/3-30, 80)];
         [self.contentView addSubview:self.imageView];
         
-        self.titleLable = [[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.imageView.frame), WidthFrame/3-30, 20)];
+        UIImageView *imgCover = [[UIImageView alloc] init];
+        imgCover.image = [UIImage imageNamed:@"17-Play-256"];
+        [self.contentView addSubview:imgCover];
+        [imgCover mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.mas_equalTo(self.imageView.mas_centerX);
+            make.centerY.mas_equalTo(self.imageView.mas_centerY);
+        }];
+        
+        self.titleLable = [[UILabel alloc]init];
         self.titleLable.text = @"科技厉害";
-        self.titleLable.backgroundColor = [UIColor colorWithHexString:@"FCFCDC"];
+        self.titleLable.numberOfLines = 3;
         self.titleLable.font = [UIFont systemFontOfSize:12];
         self.titleLable.textAlignment = NSTextAlignmentCenter;
         [self.contentView addSubview:self.titleLable];
+        [self.titleLable mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.imageView.mas_bottom);
+            make.left.mas_equalTo(self.imageView.mas_left);
+            make.right.mas_equalTo(self.imageView.mas_right);
+        }];
+        
         
         self.bt = [UIButton buttonWithType:UIButtonTypeCustom];
-        [self.bt setTitle:@"取消收藏" forState:UIControlStateNormal];
-        self.bt.frame = CGRectMake(0, CGRectGetMaxY(self.titleLable.frame), WidthFrame/3-30, 30);
-        self.bt.titleLabel.font = [UIFont systemFontOfSize:12];
-        [self.bt setBackgroundColor:[UIColor colorWithHexString:@"3791CD"]];
-        [self.bt addTarget:self action:@selector(click :) forControlEvents:UIControlEventTouchUpInside];
+        [self.bt setBackgroundImage:[UIImage imageNamed:@"aixin_s"] forState:UIControlStateNormal];
+        [self.bt addTarget:self action:@selector(click:) forControlEvents:UIControlEventTouchUpInside];
         [self.contentView addSubview:self.bt];
-        
+        [self.bt mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.imageView.mas_top).offset(10);
+            make.right.mas_equalTo(self.imageView.mas_right).offset(-10);
+            make.width.mas_equalTo(25);
+            make.height.equalTo(self.bt.mas_width);
+        }];
     }
     return self;
 }

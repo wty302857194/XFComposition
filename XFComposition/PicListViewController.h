@@ -10,4 +10,6 @@
 
 @interface PicListViewController : UIViewController
 @property (nonatomic,strong)NSString *blogid;
-@end
+@property (nonatomic,strong)NSString *modelId;
+
+@end;
