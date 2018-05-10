@@ -398,18 +398,16 @@
                     __weak __typeof(self)wself = self;
                     [imagePickerVc setDidFinishPickingPhotosHandle:^(NSArray<UIImage *> *photos,NSArray *assets,BOOL isSelectOriginalPhoto) {
                         UIImage *img = [photos objectAtIndex:0];
-                        //                        self.avatarCell.avatarImg.image = img;
                         
+                        UIImage *image = [Global imageWithImageSimple:img scaledToSize:CGSizeMake(100, 100)];
                         NSData *imageData = nil;
-                        //判断图片是不是png格式的文件
                         if (UIImagePNGRepresentation(img)) {
-                            //返回为png图像。
-                            imageData = UIImagePNGRepresentation(img);
+                            imageData = UIImagePNGRepresentation(image);
                         }else {
-                            //返回为JPEG图像。
-                            imageData = UIImageJPEGRepresentation(img, 0.1);
+                            imageData = UIImageJPEGRepresentation(image, 0.1);
                         }
-                        [wself uploadImage:imageData];
+                        [self uploadImage:imageData];
+                        
                     }];
                     [self presentViewController:imagePickerVc animated:YES completion:nil];
                 }
@@ -423,32 +421,32 @@
 
 #pragma mark -
 #pragma mark UIimagePickerDelegate
-- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
-{
-    [picker dismissViewControllerAnimated:YES completion:nil];
-}
+//- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+//{
+//    [picker dismissViewControllerAnimated:YES completion:nil];
+//}
 
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
-{
-    UIImage *img = nil;
-    if (info[UIImagePickerControllerEditedImage]) {
-        img = info[UIImagePickerControllerEditedImage];
-    }
-    else {
-        img = info[UIImagePickerControllerOriginalImage];
-    }
-    //    self.avatarCell.avatarImg.image = img;
-    [picker dismissViewControllerAnimated:YES completion:nil];
-    
-    NSData *imageData = nil;
-    //判断图片是不是png格式的文件
-    if (UIImagePNGRepresentation(img)) {
-        imageData = UIImagePNGRepresentation(img);
-    }else {
-        imageData = UIImageJPEGRepresentation(img, 0.1);
-    }
-    [self uploadImage:imageData];
-}
+//- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
+//{
+//    UIImage *img = nil;
+//    if (info[UIImagePickerControllerEditedImage]) {
+//        img = info[UIImagePickerControllerEditedImage];
+//    }
+//    else {
+//        img = info[UIImagePickerControllerOriginalImage];
+//    }
+//    //    self.avatarCell.avatarImg.image = img;
+//    [picker dismissViewControllerAnimated:YES completion:nil];
+//
+//    NSData *imageData = nil;
+//    //判断图片是不是png格式的文件
+//    if (UIImagePNGRepresentation(img)) {
+//        imageData = UIImagePNGRepresentation(img);
+//    }else {
+//        imageData = UIImageJPEGRepresentation(img, 0.1);
+//    }
+//    [self uploadImage:imageData];
+//}
 
 - (void)uploadImage:(NSData*)imageData
 {
