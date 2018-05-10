@@ -32,17 +32,7 @@
 @end
 
 @implementation CorrectViewController
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:YES];
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
-    [self leftBarButton];
-    
-}
--(void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:YES];
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
-//    [self.view removeFromSuperview];
-}
+
 -(UITableView *)tableView{
     if (!_tableView) {
         _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0,0, WidthFrame, HeightFrame) style:UITableViewStyleGrouped];
@@ -57,11 +47,8 @@
 #pragma mark cell的行数
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    
     return 1;
 }
-
-
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return HeightFrame-64;
@@ -90,7 +77,7 @@
 -(UIScrollView *)scorllView{
     if (!_scorllView) {
         _scorllView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, WidthFrame, HeightFrame)];
-        self.oldFrame = self.scorllView.frame;
+        self.oldFrame = _scorllView.frame;
         _scorllView.contentSize = CGSizeMake(WidthFrame*3/2, HeightFrame-64);
         _scorllView.pagingEnabled = YES;//设置整屏滚动
         _scorllView.bounces = YES;//设置边缘无弹跳
@@ -158,6 +145,7 @@
     
     [self getPic];
     [self GetWritePicRemark];
+    [self leftBarButton];
 }
 -(void)GetWritePicRemark{
     __weak typeof (self) weakSelf = self;
