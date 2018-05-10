@@ -42,7 +42,7 @@
         _tableView.delegate = self;
         _tableView.dataSource = self;
         [_tableView registerClass:[PersonalCell class] forCellReuseIdentifier:@"cell"];
-//        [_tabelView registerClass:[PerLeftSecondCell class] forCellReuseIdentifier:@"cell2"];
+        _tableView.tableFooterView = [UIView new];
     }
     return _tableView;
 }
@@ -164,7 +164,12 @@
         }
         cell.label1.text = self.titleArray2[indexPath.row];
         if (indexPath.row == 0) {
-            cell.label2.text = [NSString stringWithFormat:@"%ld",(long)self.msg];
+            if (self.msg == 0) {
+                cell.label2.hidden  = YES;
+            }else {
+                cell.label2.hidden  = NO;
+                cell.label2.text = [NSString stringWithFormat:@"%ld",(long)self.msg];
+            }
         }
         if (indexPath.row == 1) {
             cell.label3.text = [NSString stringWithFormat:@"%@",self.model.jifenSoft];
@@ -248,12 +253,9 @@
     
 }
 -(void)leftBarButton{
-    UIBarButtonItem *item=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"left-arrow_s"] style: UIBarButtonItemStylePlain target:self action:@selector(onBack)];
-    
-    self.navigationItem.leftBarButtonItem=item;
-    
+    GO_BACK;
 }
--(void)onBack{
+-(void)goBackNV {
     [self.navigationController popViewControllerAnimated:YES];
     
     

@@ -39,10 +39,6 @@
         
         
         self.bt = [UIButton buttonWithType:UIButtonTypeCustom];
-//        [self.bt setTitle:@"取消收藏" forState:UIControlStateNormal];
-//        self.bt.frame = CGRectMake(0, CGRectGetMaxY(self.titleLable.frame), WidthFrame/3-30, 30);
-//        self.bt.titleLabel.font = [UIFont systemFontOfSize:12];
-//        [self.bt setBackgroundColor:[UIColor colorWithHexString:@"3791CD"]];
         [self.bt setBackgroundImage:[UIImage imageNamed:@"aixin_s"] forState:UIControlStateNormal];
         [self.bt addTarget:self action:@selector(click:) forControlEvents:UIControlEventTouchUpInside];
         [self.contentView addSubview:self.bt];
