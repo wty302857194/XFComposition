@@ -11,5 +11,6 @@
 @interface PicListViewController : UIViewController
 @property (nonatomic,strong)NSString *blogid;
 @property (nonatomic,strong)NSString *modelId;
+@property (nonatomic,assign)BOOL isChange;
 
 @end;

@@ -12,4 +12,6 @@
 -(void)reloadData:(FMBean*)bean;
 @property(nonatomic , strong)UILabel * label;
 @property(nonatomic , strong) QYStarReplay * starReplay;
+@property(nonatomic , assign) BOOL  isChange;
+
 @end

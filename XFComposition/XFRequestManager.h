@@ -22,6 +22,10 @@ typedef void (^XFResponseBlock)(NSString* requestName, id responseData , BOOL is
 #define XFReq_User_GetStandard         @"获得标准"
 #define XFReq_User_DeleteStandard      @"删除标准"
 
+#define XFReq_User_GetBlogStandard     @"获得带有评分标准"
+#define XFReq_User_GetBlogComment      @"获取总评"
+#define XFReq_User_GetWritePicList     @"获取习作图片列表"
+
 
 
 
@@ -72,6 +76,34 @@ typedef void (^XFResponseBlock)(NSString* requestName, id responseData , BOOL is
                    addUser:(NSString*)AddUser
                    modelId:(NSString*)ModelId
                           :(XFResponseBlock)block;
+
+
+/**
+ *获取带有评分的标准
+ *@param blogID  //习作标识
+ *@param userID 用户标识
+ */
+-(void)XFRequstGetBlogStandard:(NSString*)blogID
+                   userID:(NSString*)userID
+                          :(XFResponseBlock)block;
+/**
+ *获取总评分
+ *@param blogID  //习作标识
+ *@param userID 用户标识
+ */
+-(void)XFRequstGetBlogComment:(NSString*)blogID
+                        userID:(NSString*)userID
+                              :(XFResponseBlock)block;
+
+/**
+ *获取习作图片列表
+ *@param blogID  //习作标识
+ *@param userID 用户标识
+ */
+-(void)XFRequstGetWritePicCheckList:(NSString*)blogID
+                       userID:(NSString*)userID
+                           isChange:(BOOL)isChange
+                             :(XFResponseBlock)block;
 
 +(NSString*)encodedParams:(NSDictionary*)params;
 

@@ -26,6 +26,8 @@ typedef NS_ENUM(NSInteger, RateStyle)
 
 @property (nonatomic,assign)BOOL isAnimation;       //是否动画显示，默认NO
 @property (nonatomic,assign)RateStyle rateStyle;    //评分样式    RateStyleNone
+@property (nonatomic,assign)BOOL isCloseGestureRecognizer;    // 是否关闭手势
+
 @property (nonatomic, weak) id<QYStarReplayDelegate>delegate;
 -(instancetype)initWithFrame:(CGRect)frame;
 
@@ -33,5 +35,8 @@ typedef NS_ENUM(NSInteger, RateStyle)
 
 
 -(instancetype)initWithFrame:(CGRect)frame finish:(finishBlock)finish;
--(instancetype)initWithFrame:(CGRect)frame numberOfStars:(NSInteger)numberOfStars rateStyle:(RateStyle)rateStyle isAnination:(BOOL)isAnimation finish:(finishBlock)finish;
+-(instancetype)initWithFrame:(CGRect)frame numberOfStars:(NSInteger)numberOfStars rateStyle:(RateStyle)rateStyle isAnimation:(BOOL)isAnimation finish:(finishBlock)finish;
+
+-(void)reloadStarWithScore:(CGFloat)score;
+
 @end;

@@ -22,8 +22,14 @@
         DTAPI_DICT_ASSIGN_STRING(AddTime, @"");
         DTAPI_DICT_ASSIGN_STRING(IsSystem, @"");
         DTAPI_DICT_ASSIGN_STRING(ObjectId, @"");
+        DTAPI_DICT_ASSIGN_STRING(Score, @"");
+        DTAPI_DICT_ASSIGN_STRING(CommentsId, @"");
+        DTAPI_DICT_ASSIGN_STRING(BlogId, @"");
+        DTAPI_DICT_ASSIGN_STRING(StandardDetailId, @"");
+        
     }
     
     return self;
     
-}@end
+}
+@end

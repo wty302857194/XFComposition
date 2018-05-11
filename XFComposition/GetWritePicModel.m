@@ -10,20 +10,27 @@
 
 @implementation GetWritePicModel
 +(id)loadWithJSOn:(NSDictionary *)json{
-    return [[self alloc]initWithJSON:json];
+    return [[self alloc]initWithDictionary:json];
     
 }
--(id)initWithJSON:(NSDictionary *)dic{
-    if (self = [super init]) {
-        self.BlogID = dic[@"BlogID"];
-        self.CreateTime = dic[@"CreateTime"];
-        self.ID = dic[@"ID"];
-        self.PicUrl = dic[@"PicUrl"];
-        self.Sort = dic[@"Sort"];
-        self.UserID = dic[@"UserID"];
-        self.FixPicUrl = dic[@"FixPicUrl"];
+-(id)initWithDictionary:(NSDictionary *)dict{
+    
+    if (self = [super init])
+    {
+        DTAPI_DICT_ASSIGN_STRING(BlogID, @"");
+        DTAPI_DICT_ASSIGN_STRING(CreateTime, @"");
+        DTAPI_DICT_ASSIGN_STRING(ID, @"");
+        DTAPI_DICT_ASSIGN_STRING(PicID, @"");
+        DTAPI_DICT_ASSIGN_STRING(PicUrl, @"");
+        DTAPI_DICT_ASSIGN_STRING(FixPicUrl, @"");
+        DTAPI_DICT_ASSIGN_STRING(Sort, @"");
+        DTAPI_DICT_ASSIGN_STRING(CheckUserID, @"");
+        DTAPI_DICT_ASSIGN_STRING(UserID, @"");
+        
     }
+    
     return self;
+    
 }
 
 @end

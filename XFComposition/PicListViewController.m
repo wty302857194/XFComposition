@@ -76,6 +76,7 @@
     self.inputTextView.placeholderColor =hexColor(cccccc) ;
     self.inputTextView.placeholderFont = [UIFont systemFontOfSize:13];
     self.inputTextView.textColor =hexColor(666666);
+    self.inputTextView.editable = _isChange;
     self.inputTextView.layer.borderWidth = 0.5;
     self.inputTextView.layer.borderColor = hexColor(888888).CGColor;
     self.inputTextView.layer.cornerRadius = 5;
@@ -84,18 +85,21 @@
     
 }
 -(void)getWritPic{
-    GetWritePicRequst *requst = [[GetWritePicRequst alloc]init];
-    [requst GetWritePicRequstwithblogid:self.blogid :^(NSDictionary *json) {
-        [self.picArray removeAllObjects];
-        for (NSDictionary *dic in json[@"ret_data"]) {
-            GetWritePicModel *model = [GetWritePicModel loadWithJSOn:dic];
-            [self.picArray addObject:model];
+    
+    
+    [[XFRequestManager sharedInstance] XFRequstGetWritePicCheckList:self.blogid userID:[XFUserInfo getUserInfo].Loginid isChange:_isChange :^(NSString *requestName, id responseData, BOOL isSuccess) {
+        
+        if (isSuccess) {
+            self.picArray = responseData;
+            [_collectionView reloadData];
+        }else{
+            
+            
         }
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.collectionView reloadData];
-        });
+        
     }];
-    [[XFRequestManager sharedInstance] XFRequstGetStandard:_modelId addUser:[XFUserInfo getUserInfo].Loginid modelId:@"7" :^(NSString *requestName, id responseData, BOOL isSuccess) {
+   
+    [[XFRequestManager sharedInstance] XFRequstGetBlogStandard:self.blogid userID:[XFUserInfo getUserInfo].Loginid  :^(NSString *requestName, id responseData, BOOL isSuccess) {
         if (isSuccess) {
             _dataArray = responseData;
             [_tableView reloadData];
@@ -106,6 +110,13 @@
         
     }];
     
+    [[XFRequestManager sharedInstance] XFRequstGetBlogComment:self.blogid userID:[XFUserInfo getUserInfo].Loginid  :^(NSString *requestName, id responseData, BOOL isSuccess) {
+        if (isSuccess) {
+            CommentInfo * info = (CommentInfo*)responseData;
+            _inputTextView.text = info.CommentsAttribute2;
+        }
+        
+    }];
 }
 #pragma mark UITableViewDelegate
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -117,6 +128,7 @@
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     PicListTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"PicListTableViewCell"];
+    cell.isChange = _isChange;
     [cell reloadData:_dataArray[indexPath.row]];
     
     return cell;
@@ -141,7 +153,6 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     PicListCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
-    
     GetWritePicModel *model = self.picArray[indexPath.row];
     cell.model = model;
 //    NSString *str = [NSString stringWithFormat:@"%@%@",HTurl,model.PicUrl];
