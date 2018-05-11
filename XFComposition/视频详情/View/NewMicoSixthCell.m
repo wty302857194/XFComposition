@@ -24,6 +24,7 @@
 {
     _datas = datas;
     self.tabHeightContraint.constant = 80 *_datas.count;
+    [self.tabView reloadData];
 }
 
 #pragma mark - delegate

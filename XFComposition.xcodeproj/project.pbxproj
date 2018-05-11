@@ -171,6 +171,8 @@
 		B6F16DB8290F62883631B0B6 /* Pods_XFComposition.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3084EAC2F37884539B99B88E /* Pods_XFComposition.framework */; };
 		BA34D9AC20A41DDF00D99165 /* CourseOutlineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BA34D9AA20A41DDF00D99165 /* CourseOutlineCell.m */; };
 		BA34D9AD20A41DDF00D99165 /* CourseOutlineCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA34D9AB20A41DDF00D99165 /* CourseOutlineCell.xib */; };
+		BA43ED5220A4E3E500B9C8D1 /* WriteViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BA43ED5020A4E3E500B9C8D1 /* WriteViewCell.m */; };
+		BA43ED5320A4E3E500B9C8D1 /* WriteViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA43ED5120A4E3E500B9C8D1 /* WriteViewCell.xib */; };
 		BA647D2C20A28BC6007AAC98 /* NewMicoFourthCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BA647D2A20A28BC6007AAC98 /* NewMicoFourthCell.m */; };
 		BA647D2D20A28BC6007AAC98 /* NewMicoFourthCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA647D2B20A28BC6007AAC98 /* NewMicoFourthCell.xib */; };
 		BA647D3120A2A7CF007AAC98 /* NewMicoFiveCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BA647D2F20A2A7CF007AAC98 /* NewMicoFiveCell.m */; };
@@ -1017,6 +1019,9 @@
 		BA34D9A920A41DDF00D99165 /* CourseOutlineCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CourseOutlineCell.h; sourceTree = "<group>"; };
 		BA34D9AA20A41DDF00D99165 /* CourseOutlineCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CourseOutlineCell.m; sourceTree = "<group>"; };
 		BA34D9AB20A41DDF00D99165 /* CourseOutlineCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CourseOutlineCell.xib; sourceTree = "<group>"; };
+		BA43ED4F20A4E3E500B9C8D1 /* WriteViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WriteViewCell.h; sourceTree = "<group>"; };
+		BA43ED5020A4E3E500B9C8D1 /* WriteViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WriteViewCell.m; sourceTree = "<group>"; };
+		BA43ED5120A4E3E500B9C8D1 /* WriteViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WriteViewCell.xib; sourceTree = "<group>"; };
 		BA647D2920A28BC6007AAC98 /* NewMicoFourthCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewMicoFourthCell.h; sourceTree = "<group>"; };
 		BA647D2A20A28BC6007AAC98 /* NewMicoFourthCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewMicoFourthCell.m; sourceTree = "<group>"; };
 		BA647D2B20A28BC6007AAC98 /* NewMicoFourthCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewMicoFourthCell.xib; sourceTree = "<group>"; };
@@ -2453,6 +2458,9 @@
 				BA647D2E20A2A7CF007AAC98 /* NewMicoFiveCell.h */,
 				BA647D2F20A2A7CF007AAC98 /* NewMicoFiveCell.m */,
 				BA647D3020A2A7CF007AAC98 /* NewMicoFiveCell.xib */,
+				BA43ED4F20A4E3E500B9C8D1 /* WriteViewCell.h */,
+				BA43ED5020A4E3E500B9C8D1 /* WriteViewCell.m */,
+				BA43ED5120A4E3E500B9C8D1 /* WriteViewCell.xib */,
 				BA9C1CB020A2CCC000BFBE23 /* NewMicoSixthCell.h */,
 				BA9C1CB120A2CCC000BFBE23 /* NewMicoSixthCell.m */,
 				BA9C1CB220A2CCC000BFBE23 /* NewMicoSixthCell.xib */,
@@ -5114,6 +5122,7 @@
 				F6038CF11F590601008FE507 /* mm.png in Resources */,
 				32A648CD20A479FF0014539F /* TYCorrectViewController.xib in Resources */,
 				3F09581D20A13DA900B55F4E /* LookStandarViewController.xib in Resources */,
+				BA43ED5320A4E3E500B9C8D1 /* WriteViewCell.xib in Resources */,
 				F621C2061FA6B4C800801521 /* SVProgressHUD.bundle in Resources */,
 				F6B3C0F41F5DA43D00C0D821 /* MJRefresh.bundle in Resources */,
 				32F7E756209323FD0016C1A6 /* TYVolunteerCollectionViewCell.xib in Resources */,
@@ -5649,6 +5658,7 @@
 				F6E811A41F5680CB00DEBE4C /* FristHeadView.m in Sources */,
 				F6FFD3EB1F90909D0029B762 /* BookFristCell.m in Sources */,
 				F6B77D361F6FACD800E159CE /* MoreCompositionViewController.m in Sources */,
+				BA43ED5220A4E3E500B9C8D1 /* WriteViewCell.m in Sources */,
 				F6CBC9711F6704AD00D71A8C /* MicrodetailFrsitCell.m in Sources */,
 				F6C227CA1F9B5CCA00464BD6 /* GetWritePicRemarkModel.m in Sources */,
 				F649DD4E1F55487F00879744 /* MyView.m in Sources */,

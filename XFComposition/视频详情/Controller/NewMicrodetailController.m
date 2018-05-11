@@ -24,11 +24,17 @@
 #import "MicoClassRequst.h"
 #import "GetGJListRequst.h"
 #import "GetDinaPinListRequst.h"
+#import "CommWriteListRequst.h"
+#import "GetCommentListRequst.h"
+#import "WeikePostCommentRequst.h"
+#import "WeikeGoodcolActionRequst.h"
 #import "MicrodetailModel.h"
 #import "WriteListModel.h"
 #import "MicroVideoModel.h"
 #import "MicPianduanmodel.h"
 #import "DianPingModel.h"
+#import "CommwritelistModel.h"
+#import "GetCommentListModel.h"
 
 
 
@@ -51,10 +57,12 @@ static NSString *seventhCellID = @"NewMicoSeventhCell";
 
 
 @property (nonatomic, assign) NSString *panduan;
-@property (nonatomic, strong) NSMutableArray *videoArray;
-@property (nonatomic, strong) NSMutableArray *articleArray;
-@property (nonatomic, strong) NSMutableArray *microArray;
-@property (nonatomic, strong) NSMutableArray *commentArray;
+@property (nonatomic, strong) NSMutableArray *videoArray;// 课程大纲
+@property (nonatomic, strong) NSMutableArray *articleArray;//写作文
+@property (nonatomic, strong) NSMutableArray *microArray;//相关课程
+@property (nonatomic, strong) NSMutableArray *commentArray;//公益点评
+@property (nonatomic, strong) NSMutableArray *writeArray;//本课习作
+@property (nonatomic, strong) NSMutableArray *discussArray; //课程交流
 @property (nonatomic, strong) MicrodetailModel *detailmodel;
 
 
@@ -75,50 +83,18 @@ static NSString *seventhCellID = @"NewMicoSeventhCell";
     [self.view addSubview:self.playerView];
     [self.view addSubview:self.tableView];
     
-    [self Microdetailrequst0];
-    [self MicroXiezuowenRequst];
-    [self GetMircroClass];
+    [self Microdetailrequst0];//视频详情
+    [self MicroXiezuowenRequst];//写作列表
+    [self MicrokechengjiaoliuRequst];//课程交流
+    [self MicrogongyidianpingRequst];//本课习作
+    [self MicrogongyidianpingRequst];//公益点评
+    [self GetMircroClass];//相关课程
+    
 }
 
-- (MicrodetailModel *)detailmodel
-{
-    if (!_detailmodel) {
-        _detailmodel = [[MicrodetailModel alloc] init];
-    }
-    return _detailmodel;
-}
 
-- (NSMutableArray *)videoArray
-{
-    if (!_videoArray) {
-        _videoArray = [NSMutableArray array];
-    }
-    return _videoArray;
-}
 
-- (NSMutableArray *)articleArray
-{
-    if (!_articleArray) {
-        _articleArray = [NSMutableArray array];
-    }
-    return _articleArray;
-}
-
-- (NSMutableArray *)microArray
-{
-    if (!_microArray) {
-        _microArray = [NSMutableArray array];
-    }
-    return _microArray;
-}
-
-- (NSMutableArray *)commentArray
-{
-    if (!_commentArray) {
-        _commentArray = [NSMutableArray array];
-    }
-    return _commentArray;
-}
+#pragma mark --接口
 //获取微课第一行信息
 //课程大纲和本课习作
 //这里可能需要判断是否登录
@@ -136,8 +112,9 @@ static NSString *seventhCellID = @"NewMicoSeventhCell";
         if (dic) {
             MicroVideoModel *model = [MicroVideoModel loadWithJSOn:dic];
             self.configuration.imageUrl = [NSString stringWithFormat:@"%@%@",HTurl,model.picpath];
-//            self.configuration.sourceUrl = [NSURL URLWithString:model.MicroclassItemMp4Path];
-            self.configuration.sourceUrl = [NSURL URLWithString:@"http://www.crowncake.cn:18080/wav/no.9.mp4"] ;
+            self.configuration.sourceUrl = [NSURL URLWithString:model.MicroclassItemMp4Path];
+            
+//            self.configuration.sourceUrl = [NSURL URLWithString:@"http://www.crowncake.cn:18080/wav/no.9.mp4"] ;
             self.configuration.title = model.title;
             [self.playerView setPlayerConfiguration:self.configuration];
         }
@@ -167,6 +144,71 @@ static NSString *seventhCellID = @"NewMicoSeventhCell";
             [weakSelf.tableView reloadSections:indexset withRowAnimation:UITableViewRowAnimationNone];
         });
     }];
+    
+}
+//添加评论
+-(void)comment:(UITextView *)textView{
+    __weak typeof (self) weakSelf = self;
+    WeikePostCommentRequst *requst = [[WeikePostCommentRequst alloc]init];
+    
+    [requst WeikePostCommentRequstwithuserid:@"" withmodelid:@"5" withclassid:self.classId withuserip:@"127.0.0.1" withCommentinfo:textView.text :^(NSDictionary *json) {
+        NSLog(@"%@",json[@"ret_msg"]);
+        if ([json[@"ret_msg"] isEqualToString:@"成功"]) {
+            [textView setText:nil];
+            [SVProgressHUD showSuccessWithStatus:@"添加评论成功"];
+            //刷新数据
+            [weakSelf MicrokechengjiaoliuRequst];
+            
+        } else {
+            [SVProgressHUD showErrorWithStatus:json[@"ret_data"]];
+        }
+    }];
+    
+    
+}
+//课程交流
+-(void)MicrokechengjiaoliuRequst{
+    __weak typeof (self) weakSelf = self;
+    GetCommentListRequst *requst = [[GetCommentListRequst alloc]init];
+    [requst GetCommentListRequstWithclassId:self.classId withmodelId:@"5" withPageIndex:@"1" withPageSize:@"10" :^(NSDictionary *json) {
+        [weakSelf.discussArray removeAllObjects];
+        for (NSDictionary *dic in json[@"ret_data"][@"pageInfo"]) {
+            GetCommentListModel *model = [GetCommentListModel loadWithJSOn:dic];
+            [weakSelf.discussArray addObject:model];
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            weakSelf.panduan = @"3";
+            NSIndexSet *indexset = [NSIndexSet indexSetWithIndex:3];
+            [weakSelf.tableView reloadSections:indexset withRowAnimation:UITableViewRowAnimationNone];
+            
+        });
+
+        
+    }];
+    
+}
+//本课习作
+-(void)MicCommWriteList{
+    __weak typeof (self) weakSelf = self;
+    self.panduan = @"4";
+    CommWriteListRequst *requst = [[CommWriteListRequst alloc]init];
+    
+    [requst Comm_GetWriteListrequstWithindex:[NSNumber numberWithInteger:1] withpagesiz:@"4" withgradid:@"5" withtypeid:self.classId withishot:@"-1" withtuijian:@"-1"  withlabelid:@"0"  withkeword:@""  BlogStatic:@"1" :^(NSDictionary *json) {
+        [weakSelf.writeArray removeAllObjects];
+        
+        for (NSDictionary *dic in json[@"ret_data"][@"pageInfo"]) {
+            CommwritelistModel *model = [CommwritelistModel loadWithJSOn:dic];
+            [weakSelf.writeArray addObject:model];
+            
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSIndexSet *indexset = [NSIndexSet indexSetWithIndex:4];
+            [weakSelf.tableView reloadSections:indexset withRowAnimation:UITableViewRowAnimationNone];
+        });
+    }];
+    
     
 }
 //公益点评
@@ -206,8 +248,127 @@ static NSString *seventhCellID = @"NewMicoSeventhCell";
     }];
     
 }
+//收藏
+-(void)shoucang{
+   
+    WeikeGoodcolActionRequst *requst = [[WeikeGoodcolActionRequst alloc]init];
+    [requst WeikeGoodcolActionRequstwith:@"" withweikeid:self.classId withtypeflag:@"col" :^(NSDictionary *json) {
+        if ([json[@"ret_code"]  isEqualToString:@"0"]) {
+            [SVProgressHUD showSuccessWithStatus:@"收藏成功"];
+        }else{
+            [SVProgressHUD showErrorWithStatus:@"收藏失败"];
+        }
+        
+    }];
+}
 
 
+#pragma mark UITableViewDelegate
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    __weak typeof (self) weakSelf = self;
+    if (indexPath.section == 0) {
+        // 视频详情
+        NewMicoFristCell *cell = [tableView dequeueReusableCellWithIdentifier:firstCellID forIndexPath:indexPath];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.dataModel = self.detailmodel;
+        cell.clickBlock= ^(NSInteger index) {
+            
+            if (index == 0) {
+                //收藏
+                [weakSelf shoucang];
+            } else if (index == 1) {
+                //TODO : 分享
+                
+            }
+            
+        };
+        return cell;
+    } else if (indexPath.section == 1) {
+        // 课程大纲
+        NewMicoSecondCell *cell = [tableView dequeueReusableCellWithIdentifier:secondCellID forIndexPath:indexPath];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.datas = self.videoArray;
+        
+        return cell;
+    } else if (indexPath.section == 2) {
+        // 写作文
+        NewMicoThirdCell *cell = [tableView dequeueReusableCellWithIdentifier:thirdCellID forIndexPath:indexPath];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.datas = self.articleArray;
+        
+        return cell;
+    } else if (indexPath.section == 3) {
+        // 课程交流
+        NewMicoFourthCell *cell = [tableView dequeueReusableCellWithIdentifier:fourthCellID forIndexPath:indexPath];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.datas = self.discussArray;
+        cell.submitCommentBlock = ^(UITextView *textView) {
+            [weakSelf comment:textView];
+        };
+        
+        return cell;
+    } else if (indexPath.section == 4) {
+        // 本课习作
+        NewMicoFiveCell *cell = [tableView dequeueReusableCellWithIdentifier:fiveCellID forIndexPath:indexPath];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.datas = self.writeArray;
+        return cell;
+    } else if (indexPath.section == 5) {
+        // 公益点评
+        NewMicoSixthCell *cell = [tableView dequeueReusableCellWithIdentifier:sixthCellID forIndexPath:indexPath];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.datas = self.commentArray;
+        
+        return cell;
+    } else if (indexPath.section == 6) {
+        // 相关课程
+        NewMicoSeventhCell *cell = [tableView dequeueReusableCellWithIdentifier:seventhCellID forIndexPath:indexPath];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.datas = self.microArray;
+        cell.showMoreBlock = ^() {
+            [self goMore];
+        };
+        cell.showDetailBlock = ^ (WriteListModel *model) {
+            NewMicrodetailController *vc = [[NewMicrodetailController alloc]init];
+            vc.classId = model.ID;
+            [weakSelf.navigationController pushViewController:vc animated:YES];
+        };
+        
+        return cell;
+    }
+    return nil;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 7;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 1;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 100;
+}
+
+
+#pragma mark --
+
+- (void)goMore
+{
+    SynchroClassViewController *synchroVc = [[SynchroClassViewController alloc]init];
+    [self.navigationController pushViewController:synchroVc animated:NO];
+}
 -(void)onBack
 {
     [self.navigationController popToRootViewControllerAnimated:YES];
@@ -216,6 +377,62 @@ static NSString *seventhCellID = @"NewMicoSeventhCell";
     [[NSNotificationCenter defaultCenter] postNotification:LoseResponse];
 }
 
+#pragma mark -- 懒加载
+- (MicrodetailModel *)detailmodel
+{
+    if (!_detailmodel) {
+        _detailmodel = [[MicrodetailModel alloc] init];
+    }
+    return _detailmodel;
+}
+
+- (NSMutableArray *)videoArray
+{
+    if (!_videoArray) {
+        _videoArray = [NSMutableArray array];
+    }
+    return _videoArray;
+}
+
+- (NSMutableArray *)articleArray
+{
+    if (!_articleArray) {
+        _articleArray = [NSMutableArray array];
+    }
+    return _articleArray;
+}
+
+- (NSMutableArray *)microArray
+{
+    if (!_microArray) {
+        _microArray = [NSMutableArray array];
+    }
+    return _microArray;
+}
+
+- (NSMutableArray *)commentArray
+{
+    if (!_commentArray) {
+        _commentArray = [NSMutableArray array];
+    }
+    return _commentArray;
+}
+
+- (NSMutableArray *)writeArray
+{
+    if (!_writeArray) {
+        _writeArray = [NSMutableArray array];
+    }
+    return _writeArray;
+}
+
+- (NSMutableArray *)discussArray
+{
+    if (!_discussArray) {
+        _discussArray = [NSMutableArray array];
+    }
+    return _discussArray;
+}
 - (UITableView *)tableView
 {
     if (!_tableView) {
@@ -230,7 +447,7 @@ static NSString *seventhCellID = @"NewMicoSeventhCell";
         [_tableView registerNib:[UINib nibWithNibName:@"NewMicoFiveCell" bundle:nil] forCellReuseIdentifier:fiveCellID];
         [_tableView registerNib:[UINib nibWithNibName:@"NewMicoSixthCell" bundle:nil] forCellReuseIdentifier:sixthCellID];
         [_tableView registerNib:[UINib nibWithNibName:@"NewMicoSeventhCell" bundle:nil] forCellReuseIdentifier:seventhCellID];
-
+        
     }
     return _tableView;
 }
@@ -264,105 +481,8 @@ static NSString *seventhCellID = @"NewMicoSeventhCell";
     return _alertView;
 }
 
-#pragma mark UITableViewDelegate
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+-(void)dealloc
 {
-    if (indexPath.section == 0) {
-        // 视频详情
-        NewMicoFristCell *cell = [tableView dequeueReusableCellWithIdentifier:firstCellID forIndexPath:indexPath];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.dataModel = self.detailmodel;
-        cell.clickBlock= ^(NSInteger index) {
-            //TODO
-            if (index == 0) {
-                //收藏
-                
-            } else if (index == 1) {
-                //分享
-                
-            }
-            
-        };
-        return cell;
-    } else if (indexPath.section == 1) {
-        // 课程大纲
-        NewMicoSecondCell *cell = [tableView dequeueReusableCellWithIdentifier:secondCellID forIndexPath:indexPath];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.datas = self.videoArray;
-        
-        return cell;
-    } else if (indexPath.section == 2) {
-        // 写作文
-        NewMicoThirdCell *cell = [tableView dequeueReusableCellWithIdentifier:thirdCellID forIndexPath:indexPath];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.datas = self.articleArray;
-        
-        return cell;
-    } else if (indexPath.section == 3) {
-        // 课程交流
-        NewMicoFourthCell *cell = [tableView dequeueReusableCellWithIdentifier:fourthCellID forIndexPath:indexPath];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        [cell resetFrame:10];
-        
-        return cell;
-    } else if (indexPath.section == 4) {
-        // 本课习作
-        NewMicoFiveCell *cell = [tableView dequeueReusableCellWithIdentifier:fiveCellID forIndexPath:indexPath];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        
-        return cell;
-    } else if (indexPath.section == 5) {
-        // 公益点评
-        NewMicoSixthCell *cell = [tableView dequeueReusableCellWithIdentifier:sixthCellID forIndexPath:indexPath];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.datas = self.commentArray;
-        
-        return cell;
-    } else if (indexPath.section == 6) {
-        // 相关课程
-        NewMicoSeventhCell *cell = [tableView dequeueReusableCellWithIdentifier:seventhCellID forIndexPath:indexPath];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.datas = self.microArray;
-        cell.showMoreBlock = ^() {
-            [self goMore];
-        };
-        cell.showDetailBlock = ^ (WriteListModel *model) {
-            NewMicrodetailController *vc = [[NewMicrodetailController alloc]init];
-            vc.classId = model.ID;
-            [self.navigationController pushViewController:vc animated:YES];
-        };
-        
-        return cell;
-    }
-    return nil;
+    [self.playerView removeFromSuperview];
 }
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 7;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return 1;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    [tableView deselectRowAtIndexPath:indexPath animated:NO];
-}
-
-- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 100;
-}
-
-#pragma mark --
-- (void)goMore
-{
-    SynchroClassViewController *synchroVc = [[SynchroClassViewController alloc]init];
-    [self.navigationController pushViewController:synchroVc animated:NO];
-}
-
 @end

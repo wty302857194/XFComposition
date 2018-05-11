@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface NewMicoFiveCell : UITableViewCell
+@interface NewMicoFiveCell : UITableViewCell <UITableViewDelegate, UITableViewDataSource>
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tabHeightConstraint;
+
+@property (nonatomic, strong) NSMutableArray *datas;
 
 @end
