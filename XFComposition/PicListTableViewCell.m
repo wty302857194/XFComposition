@@ -18,7 +18,7 @@
     _label.font = [UIFont systemFontOfSize:14];
     _label.textColor = hexColor(333333);
      [self.contentView addSubview:_label];
-    _starReplay = [[QYStarReplay alloc] initWithFrame:CGRectMake((kScreenWidth - 14)/2 + 14, 0, (kScreenWidth - 14)/2, 44) numberOfStars:5 rateStyle:RateStyleHalfStar isAnination:YES finish:^(CGFloat currentScore) {
+    _starReplay = [[QYStarReplay alloc] initWithFrame:CGRectMake((kScreenWidth - 14)/2 + 14, 0, (kScreenWidth - 14)/2, 44) numberOfStars:5 rateStyle:RateStyleHalfStar isAnimation:YES finish:^(CGFloat currentScore) {
         
         
     }];
@@ -29,8 +29,9 @@
     StandardInfo * model = (StandardInfo*)bean;
     
     _label.text = model.StandardText;
-  
-    
+    [_starReplay reloadStarWithScore: [model.Score floatValue]];
+    _starReplay.isCloseGestureRecognizer = !_isChange;
+
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

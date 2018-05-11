@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface GetWritePicModel : NSObject
+@interface GetWritePicModel : FMBean
 @property (nonatomic,strong)NSString *BlogID;
 @property (nonatomic,strong)NSString *CreateTime;
 @property (nonatomic,strong)NSString *ID;
@@ -16,6 +16,8 @@
 @property (nonatomic,strong)NSString *Sort;
 @property (nonatomic,strong)NSString *UserID;
 @property (nonatomic,strong)NSString *FixPicUrl;
-
+@property (nonatomic,strong)NSString *PicID;
+@property (nonatomic,strong)NSString *CheckUserID;
 +(id)loadWithJSOn:(NSDictionary *)json;
+
 @end

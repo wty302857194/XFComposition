@@ -38,18 +38,18 @@
     
 }
 -(void)creatHeadView{
-    UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0,SafeAreaTopHeight, kScreenWidth, 35)];
+    UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0,SafeAreaTopHeight, kScreenWidth, 50)];
     view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:view];
     UIButton *typeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    typeButton.frame = CGRectMake(14, SafeAreaTopHeight+5, 80, 25);
+    typeButton.frame = CGRectMake(14, SafeAreaTopHeight+10, 80, 30);
     [typeButton setTitle:@"全部" forState:UIControlStateNormal];
     typeButton.titleLabel.font = [UIFont systemFontOfSize:14];
     [typeButton setTitleColor:hexColor(333333) forState:UIControlStateNormal];
     [typeButton addTarget:self action:@selector(showtype) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:typeButton];
     
-    self.textfield = [[UITextField alloc]initWithFrame:CGRectMake(102, SafeAreaTopHeight+5, WidthFrame-200, 25)];
+    self.textfield = [[UITextField alloc]initWithFrame:CGRectMake(102, SafeAreaTopHeight+10, WidthFrame-200, 30)];
     self.textfield.placeholder = @"关键词";
     self.textfield.layer.cornerRadius = 6;
     self.textfield.layer.masksToBounds = YES;
@@ -62,11 +62,11 @@
     [self.view addSubview:self.textfield];
     
     UIButton *selectbt = [UIButton buttonWithType:UIButtonTypeCustom];
-    selectbt.frame = CGRectMake(CGRectGetMaxX(self.textfield.frame)+10, SafeAreaTopHeight+5, 50, 25);
+    selectbt.frame = CGRectMake(CGRectGetMaxX(self.textfield.frame)+10, SafeAreaTopHeight+10, 50,30);
     [selectbt setTitle:@"搜索" forState:UIControlStateNormal];
     [selectbt addTarget:self action:@selector(sousuo) forControlEvents:UIControlEventTouchUpInside];
     selectbt.titleLabel.font = [UIFont systemFontOfSize:14];
-    [selectbt setBackgroundColor:[UIColor colorWithHexString:@"3691CE"]];
+    [selectbt setBackgroundColor:[UIColor colorWithHexString:@"009DFF"]];
     selectbt.layer.cornerRadius =6;
     selectbt.layer.masksToBounds = YES;
     [self.view addSubview:selectbt];
@@ -81,7 +81,7 @@
 }
 -(UITableView *)tableView{
     if (!_tableView) {
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, SafeAreaTopHeight , WidthFrame, HeightFrame-SafeAreaTopHeight) style:UITableViewStyleGrouped];
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, SafeAreaTopHeight + 15, WidthFrame, HeightFrame-SafeAreaTopHeight) style:UITableViewStyleGrouped];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;//分割线
@@ -95,7 +95,7 @@
         __weak typeof (self) weakSelf = self;
         NSArray *array = [NSArray array];
         array = @[@"全部",@"尚未评审",@"已经评审",@"被退回"];
-        _menuView1 = [[MenuView alloc]initWithFrame:CGRectMake(0, SafeAreaTopHeight+35, kScreenWidth, 60*array.count)cellarray:array block:^(NSInteger i) {
+        _menuView1 = [[MenuView alloc]initWithFrame:CGRectMake(0, SafeAreaTopHeight+51, kScreenWidth, 60*array.count)cellarray:array block:^(NSInteger i) {
             weakSelf.isShow1 = NO;
             weakSelf.page = 1;
             if (i == 0) {
@@ -196,13 +196,22 @@
     }
 }
 -(void)sousuo{
+    
+    [_tableView.mj_header beginRefreshing];
 
 }
 -(void)dianping:(UIButton *)bt withModel:(GetTeachNeedCheckListModel *)model{
-    
+    BOOL isChange = NO;
+    if (bt.tag == 2) {
+        isChange = YES;
+    }else{
+        isChange = NO;
+        
+    }
     PicListViewController *vc = [[PicListViewController alloc]init];
     vc.blogid = model.WorkId;
     vc.modelId = _activeId;
+    vc.isChange = isChange;
     [self.navigationController pushViewController:vc animated:YES];
 }
 #pragma mark cell的行数

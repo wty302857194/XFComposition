@@ -14,5 +14,7 @@
 #import "DTApiBaseBean.h"
 #import "GetMessageListModel.h"
 #import "StandardInfo.h"
+#import "CommentInfo.h"
+#import "GetWritePicModel.h"
 
 #endif /* AllBean_h */

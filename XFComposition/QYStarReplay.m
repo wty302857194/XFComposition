@@ -17,7 +17,10 @@ typedef void(^completeBlock)(CGFloat currentScore);
 @property (nonatomic, assign) NSInteger numberOfStars;// 星星数目
 @property (nonatomic,assign)CGFloat currentScore;   // 当前评分：0-5  默认0
 
-@property (nonatomic,strong)completeBlock complete;
+@property (nonatomic,copy)completeBlock complete;
+
+@property (nonatomic, strong) UIPanGestureRecognizer *pan;
+@property (nonatomic, strong) UITapGestureRecognizer *tapGesture;
 
 @end;
 
@@ -62,7 +65,7 @@ typedef void(^completeBlock)(CGFloat currentScore);
     return self;
 }
 
--(instancetype)initWithFrame:(CGRect)frame numberOfStars:(NSInteger)numberOfStars rateStyle:(RateStyle)rateStyle isAnination:(BOOL)isAnimation finish:(finishBlock)finish{
+-(instancetype)initWithFrame:(CGRect)frame numberOfStars:(NSInteger)numberOfStars rateStyle:(RateStyle)rateStyle isAnimation:(BOOL)isAnimation finish:(finishBlock)finish{
     if (self = [super initWithFrame:frame]) {
         _numberOfStars = numberOfStars;
         _rateStyle = rateStyle;
@@ -85,15 +88,18 @@ typedef void(^completeBlock)(CGFloat currentScore);
     [self addSubview:self.backgroundStarView];
     [self addSubview:self.foregroundStarView];
     
-    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(userTapRateView:)];
-    tapGesture.delegate = self;
-    tapGesture.numberOfTapsRequired = 1;
-    [self addGestureRecognizer:tapGesture];
+    _tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(userTapRateView:)];
+    _tapGesture.delegate = self;
+    _tapGesture.numberOfTapsRequired = 1;
     
-    UIPanGestureRecognizer * pan = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(panRateView:)];
-    pan.delegate = self;
-    [self addGestureRecognizer:pan];
+    _pan = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(panRateView:)];
+    _pan.delegate = self;
     
+    if (!_isCloseGestureRecognizer) {
+        [self addGestureRecognizer:_tapGesture];
+        [self addGestureRecognizer:_pan];
+        
+    }
 }
 
 - (UIView *)createStarViewWithImage:(NSString *)imageName {
@@ -136,28 +142,42 @@ typedef void(^completeBlock)(CGFloat currentScore);
     return YES;
     
 }
+-(void)setIsCloseGestureRecognizer:(BOOL)isCloseGestureRecognizer{
+    
+    if (isCloseGestureRecognizer) {
+        [self removeGestureRecognizer:_pan];
+        [self removeGestureRecognizer:_tapGesture];
+    }
+    _isCloseGestureRecognizer = isCloseGestureRecognizer;
+    
+}
+// 根据分数得到星星
+-(void)reloadStarWithScore:(CGFloat)score{
+    
+  
+    switch (_rateStyle) {
+        case RateStyleWholeStar:
+        {
+            self.currentScore = ceilf(score);
+            break;
+        }
+        case RateStyleHalfStar:
+            self.currentScore = roundf(score)>=score ? ceilf(score):(ceilf(score)-0.5);
+            break;
+        case RateStyleIncompleteStar:
+            self.currentScore = score;
+            break;
+        default:
+            break;
+    }
+}
 #pragma mark -  滑动手势
 -(void)panRateView:(UIPanGestureRecognizer*)gesture{
     
     CGPoint tapPoint = [gesture locationInView:self];
     CGFloat offset = tapPoint.x;
     CGFloat realStarScore = offset / (self.bounds.size.width / self.numberOfStars);
-    switch (_rateStyle) {
-        case RateStyleWholeStar:
-        {
-            self.currentScore = ceilf(realStarScore);
-            break;
-        }
-        case RateStyleHalfStar:
-            self.currentScore = roundf(realStarScore)>realStarScore ? ceilf(realStarScore):(ceilf(realStarScore)-0.5);
-            break;
-        case RateStyleIncompleteStar:
-            self.currentScore = realStarScore;
-            break;
-        default:
-            break;
-    }
-    
+    [self reloadStarWithScore:realStarScore];
     
 }
 #pragma mark -  点击手势
@@ -165,22 +185,7 @@ typedef void(^completeBlock)(CGFloat currentScore);
     CGPoint tapPoint = [gesture locationInView:self];
     CGFloat offset = tapPoint.x;
     CGFloat realStarScore = offset / (self.bounds.size.width / self.numberOfStars);
-    switch (_rateStyle) {
-        case RateStyleWholeStar:
-        {
-            self.currentScore = ceilf(realStarScore);
-            break;
-        }
-        case RateStyleHalfStar:
-            self.currentScore = roundf(realStarScore)>realStarScore ? ceilf(realStarScore):(ceilf(realStarScore)-0.5);
-            break;
-        case RateStyleIncompleteStar:
-            self.currentScore = realStarScore;
-            break;
-        default:
-            break;
-    }
-    
+    [self reloadStarWithScore:realStarScore];
 }
 
 - (void)layoutSubviews {

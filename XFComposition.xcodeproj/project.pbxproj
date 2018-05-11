@@ -97,6 +97,7 @@
 		3F4D1F4A20A294D500584C6C /* QYStarReplay.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F4D1F4920A294D500584C6C /* QYStarReplay.m */; };
 		3F4D1F4F20A2F67000584C6C /* bg_home_searchBg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F4D1F4D20A2F66C00584C6C /* bg_home_searchBg@2x.png */; };
 		3F4D1F5020A2F67100584C6C /* bg_home_searchBg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F4D1F4E20A2F66E00584C6C /* bg_home_searchBg@3x.png */; };
+		3F97241920A448A100AF9B0F /* CommentInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F97241820A448A100AF9B0F /* CommentInfo.m */; };
 		3FA5D978209FE42A0029E276 /* PerCenterViewController1.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA5D976209FE42A0029E276 /* PerCenterViewController1.m */; };
 		3FA5D979209FE42A0029E276 /* PerCenterViewController1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FA5D977209FE42A0029E276 /* PerCenterViewController1.xib */; };
 		3FA5D981209FEB070029E276 /* GetMessageListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA5D97F209FEB050029E276 /* GetMessageListModel.m */; };
@@ -847,6 +848,8 @@
 		3F4D1F4920A294D500584C6C /* QYStarReplay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QYStarReplay.m; sourceTree = "<group>"; };
 		3F4D1F4D20A2F66C00584C6C /* bg_home_searchBg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_home_searchBg@2x.png"; sourceTree = "<group>"; };
 		3F4D1F4E20A2F66E00584C6C /* bg_home_searchBg@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_home_searchBg@3x.png"; sourceTree = "<group>"; };
+		3F97241720A448A100AF9B0F /* CommentInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommentInfo.h; sourceTree = "<group>"; };
+		3F97241820A448A100AF9B0F /* CommentInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommentInfo.m; sourceTree = "<group>"; };
 		3FA5D975209FE42A0029E276 /* PerCenterViewController1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PerCenterViewController1.h; sourceTree = "<group>"; };
 		3FA5D976209FE42A0029E276 /* PerCenterViewController1.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PerCenterViewController1.m; sourceTree = "<group>"; };
 		3FA5D977209FE42A0029E276 /* PerCenterViewController1.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PerCenterViewController1.xib; sourceTree = "<group>"; };
@@ -2194,6 +2197,8 @@
 				3FA5D97B209FE9C50029E276 /* AllBean.h */,
 				3F09582820A1436900B55F4E /* StandardInfo.h */,
 				3F09582920A1436900B55F4E /* StandardInfo.m */,
+				3F97241720A448A100AF9B0F /* CommentInfo.h */,
+				3F97241820A448A100AF9B0F /* CommentInfo.m */,
 			);
 			name = data;
 			sourceTree = "<group>";
@@ -5014,7 +5019,6 @@
 					F612EBC21F4FB341000E7432 = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = X225TLXQ76;
-						DevelopmentTeam = 5K5GGEWVU3;
 						ProvisioningStyle = Automatic;
 					};
 					F612EBDB1F4FB341000E7432 = {
@@ -5762,6 +5766,7 @@
 				F6AA9A071F61023E006897B1 /* SynchroClassViewController.m in Sources */,
 				F6E187CF1FA460CD003F06B3 /* TiankongCell.m in Sources */,
 				F6BCCC941FB04349007A4CED /* ActiveDatilViewController.m in Sources */,
+				3F97241920A448A100AF9B0F /* CommentInfo.m in Sources */,
 				F6DB74E71FAB23C400A99CDA /* GetGroupUserRequst.m in Sources */,
 				F6BCCCA31FB05E78007A4CED /* ActiveDatilThridModel.m in Sources */,
 				F69C99861F8E40DC00F0C7D6 /* BookRecCell.m in Sources */,
@@ -5958,7 +5963,6 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = X225TLXQ76;
-				DEVELOPMENT_TEAM = 5K5GGEWVU3;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/XFComposition/PrefixHeader.pch";
 				INFOPLIST_FILE = XFComposition/Info.plist;
