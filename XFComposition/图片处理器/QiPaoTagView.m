@@ -31,16 +31,17 @@
         
         FSTextView *textView = [[FSTextView alloc] init];
         textView.textColor = [UIColor whiteColor];
+        textView.userInteractionEnabled = YES;
         textView.backgroundColor = [UIColor clearColor];
         textView.placeholder = @"请输入批改内容";
         textView.placeholderColor = [UIColor whiteColor];
          __weak typeof(self) weakSelf = self;
         [textView addTextDidChangeHandler:^(FSTextView *textView) {            
-           float height = [Global heightForText:textView.text textFont:15 standardWidth:frame.size.width];
+           float height = [Global heightForText:textView.text textFont:15 standardWidth:weakSelf.frame.size.width]+20;
             if (height>weakSelf
                 .frame.size.height) {
                 CGRect newFrame = weakSelf.frame;
-                newFrame.size.height = height;
+                newFrame.size.height = height+24;
                 weakSelf.frame = newFrame;
                 imgView.frame = weakSelf.bounds;
             }
