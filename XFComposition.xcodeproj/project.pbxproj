@@ -57,6 +57,8 @@
 		3262C5C12091FE0D0063DE19 /* AddPhotoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3262C5C02091FE0D0063DE19 /* AddPhotoCollectionViewCell.m */; };
 		3284728120909C7A00A1F3D0 /* TopMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3284728020909C7A00A1F3D0 /* TopMenuView.m */; };
 		3284728320909C8D00A1F3D0 /* TopMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3284728220909C8D00A1F3D0 /* TopMenuView.xib */; };
+		329134FE20A5881D007E10AB /* 气泡-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 329134FB20A5881B007E10AB /* 气泡-2.png */; };
+		329134FF20A5881D007E10AB /* QiPaoTagView.m in Sources */ = {isa = PBXBuildFile; fileRef = 329134FD20A5881C007E10AB /* QiPaoTagView.m */; };
 		32A5A9D220A4171E001E4838 /* ReadJianCeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A5A9D020A4171E001E4838 /* ReadJianCeViewController.m */; };
 		32A5A9D320A4171E001E4838 /* ReadJianCeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32A5A9D120A4171E001E4838 /* ReadJianCeViewController.xib */; };
 		32A648CC20A479FF0014539F /* TYCorrectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A648CA20A479FF0014539F /* TYCorrectViewController.m */; };
@@ -73,6 +75,8 @@
 		32CBFA8520883C58004CB00F /* Global.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CBFA8420883C57004CB00F /* Global.m */; };
 		32CBFA8B20886B5C004CB00F /* LeftMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CBFA8920886B5C004CB00F /* LeftMenuViewController.m */; };
 		32CBFA8C20886B5C004CB00F /* LeftMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32CBFA8A20886B5C004CB00F /* LeftMenuViewController.xib */; };
+		32E5504920A583D000631A14 /* TYImageEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32E5504620A583CF00631A14 /* TYImageEditViewController.m */; };
+		32E5504A20A583D000631A14 /* TYImageEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32E5504720A583CF00631A14 /* TYImageEditViewController.xib */; };
 		32F7E755209323FD0016C1A6 /* TYVolunteerCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32F7E753209323FD0016C1A6 /* TYVolunteerCollectionViewCell.m */; };
 		32F7E756209323FD0016C1A6 /* TYVolunteerCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32F7E754209323FD0016C1A6 /* TYVolunteerCollectionViewCell.xib */; };
 		32F7E75A209341470016C1A6 /* VolunteerActiveiTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32F7E758209341470016C1A6 /* VolunteerActiveiTableViewCell.m */; };
@@ -790,6 +794,9 @@
 		3284727F20909C7900A1F3D0 /* TopMenuView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TopMenuView.h; sourceTree = "<group>"; };
 		3284728020909C7A00A1F3D0 /* TopMenuView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TopMenuView.m; sourceTree = "<group>"; };
 		3284728220909C8D00A1F3D0 /* TopMenuView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TopMenuView.xib; sourceTree = "<group>"; };
+		329134FB20A5881B007E10AB /* 气泡-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "气泡-2.png"; sourceTree = "<group>"; };
+		329134FC20A5881C007E10AB /* QiPaoTagView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QiPaoTagView.h; sourceTree = "<group>"; };
+		329134FD20A5881C007E10AB /* QiPaoTagView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QiPaoTagView.m; sourceTree = "<group>"; };
 		32A5A9CF20A4171E001E4838 /* ReadJianCeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReadJianCeViewController.h; sourceTree = "<group>"; };
 		32A5A9D020A4171E001E4838 /* ReadJianCeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReadJianCeViewController.m; sourceTree = "<group>"; };
 		32A5A9D120A4171E001E4838 /* ReadJianCeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReadJianCeViewController.xib; sourceTree = "<group>"; };
@@ -817,6 +824,9 @@
 		32CBFA8820886B5C004CB00F /* LeftMenuViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LeftMenuViewController.h; sourceTree = "<group>"; };
 		32CBFA8920886B5C004CB00F /* LeftMenuViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LeftMenuViewController.m; sourceTree = "<group>"; };
 		32CBFA8A20886B5C004CB00F /* LeftMenuViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LeftMenuViewController.xib; sourceTree = "<group>"; };
+		32E5504620A583CF00631A14 /* TYImageEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYImageEditViewController.m; sourceTree = "<group>"; };
+		32E5504720A583CF00631A14 /* TYImageEditViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TYImageEditViewController.xib; sourceTree = "<group>"; };
+		32E5504820A583CF00631A14 /* TYImageEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYImageEditViewController.h; sourceTree = "<group>"; };
 		32F7E752209323FD0016C1A6 /* TYVolunteerCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TYVolunteerCollectionViewCell.h; sourceTree = "<group>"; };
 		32F7E753209323FD0016C1A6 /* TYVolunteerCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TYVolunteerCollectionViewCell.m; sourceTree = "<group>"; };
 		32F7E754209323FD0016C1A6 /* TYVolunteerCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TYVolunteerCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -2169,6 +2179,19 @@
 				32B38F50208880B000616A7B /* LeftDetailViewController.xib */,
 			);
 			path = LeftMenuVC;
+			sourceTree = "<group>";
+		};
+		32E5504520A583CF00631A14 /* 图片处理器 */ = {
+			isa = PBXGroup;
+			children = (
+				329134FB20A5881B007E10AB /* 气泡-2.png */,
+				329134FC20A5881C007E10AB /* QiPaoTagView.h */,
+				329134FD20A5881C007E10AB /* QiPaoTagView.m */,
+				32E5504820A583CF00631A14 /* TYImageEditViewController.h */,
+				32E5504620A583CF00631A14 /* TYImageEditViewController.m */,
+				32E5504720A583CF00631A14 /* TYImageEditViewController.xib */,
+			);
+			path = "图片处理器";
 			sourceTree = "<group>";
 		};
 		3F3D5778209C371100D415AC /* ActionSheet */ = {
@@ -4195,6 +4218,7 @@
 				3F4D1F4920A294D500584C6C /* QYStarReplay.m */,
 				F6C227BE1F9B449800464BD6 /* V */,
 				F6C227BD1F9B448D00464BD6 /* M */,
+				32E5504520A583CF00631A14 /* 图片处理器 */,
 				F6C227A91F9B2A2A00464BD6 /* CorrectViewController.h */,
 				F6C227AA1F9B2A2A00464BD6 /* CorrectViewController.m */,
 				32A648C920A479FF0014539F /* TYCorrectViewController.h */,
@@ -5047,7 +5071,6 @@
 				TargetAttributes = {
 					F612EBC21F4FB341000E7432 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = X225TLXQ76;
 						DevelopmentTeam = 5K5GGEWVU3;
 						ProvisioningStyle = Automatic;
 					};
@@ -5089,6 +5112,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F612EBD61F4FB341000E7432 /* LaunchScreen.storyboard in Resources */,
+				329134FE20A5881D007E10AB /* 气泡-2.png in Resources */,
 				2F4FC66320A18F1B009A1E4C /* MyWritingDetailCell.xib in Resources */,
 				F612EBD31F4FB341000E7432 /* Assets.xcassets in Resources */,
 				3F4D1F4F20A2F67000584C6C /* bg_home_searchBg@2x.png in Resources */,
@@ -5124,6 +5148,7 @@
 				4ABBA2702080DBF60002E08D /* RegistViewController.xib in Resources */,
 				322B15822088D3A5009FCC96 /* UpCompositionTableViewCell.xib in Resources */,
 				F6038DAE1F595154008FE507 /* MBProgressHUD.bundle in Resources */,
+				32E5504A20A583D000631A14 /* TYImageEditViewController.xib in Resources */,
 				322B15742088AB3C009FCC96 /* CompositionLibraryTableViewCell.xib in Resources */,
 				F6038CF11F590601008FE507 /* mm.png in Resources */,
 				32A648CD20A479FF0014539F /* TYCorrectViewController.xib in Resources */,
@@ -5571,6 +5596,7 @@
 				F6FFD40F1F90E8CD0029B762 /* CommentFrsitCell.m in Sources */,
 				F6BC3E331F5D23710047A7AA /* UIButton+WebCache.m in Sources */,
 				F6D7C7E21F8F36AC00A08DC1 /* BookDetailViewController.m in Sources */,
+				32E5504920A583D000631A14 /* TYImageEditViewController.m in Sources */,
 				F6BC20841F94BF78000686CC /* GetBookBJListRequst.m in Sources */,
 				F6BCCC8E1FAFF27D007A4CED /* GetReadActiveRequst.m in Sources */,
 				F612EC0E1F4FBB68000E7432 /* UIView+SDAutoLayout.m in Sources */,
@@ -5606,6 +5632,7 @@
 				320D1BD62086132E00F7D45A /* HomeHeaderView.m in Sources */,
 				F6B130C11F605B0A00994571 /* Ringrequst.m in Sources */,
 				F6CFB3B61F75FBAB00ADED2F /* ActivityDetailModel.m in Sources */,
+				329134FF20A5881D007E10AB /* QiPaoTagView.m in Sources */,
 				3FA5D9BE20A03EF00029E276 /* UIView+Layout.m in Sources */,
 				F6B3C0E71F5DA43D00C0D821 /* MJRefreshBackFooter.m in Sources */,
 				F6A717781FA0A3310046C235 /* fixmyinfoRequst.m in Sources */,
@@ -5999,7 +6026,6 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = X225TLXQ76;
 				DEVELOPMENT_TEAM = 5K5GGEWVU3;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/XFComposition/PrefixHeader.pch";

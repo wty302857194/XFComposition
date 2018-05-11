@@ -16,6 +16,8 @@
 #import "GetWritePicRemarkRequst.h"
 #import "GetWritePicRemarkModel.h"
 #import "KKImageEditorViewController.h"
+#import "TYCorrectViewController.h"
+
 @interface PicListViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,KKImageEditorDelegate,UITextViewDelegate,UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong)  IBOutlet UICollectionView *collectionView;
 @property (nonatomic,strong)NSMutableArray *picArray;
@@ -184,19 +186,28 @@
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
    
-        GetWritePicModel *model = self.picArray[indexPath.row];
-        CorrectViewController *vc = [[CorrectViewController alloc]init];
-    NSString *pic = [NSString stringWithFormat:@"%@",model.FixPicUrl];
-    if (pic.length > 3){
-       vc.PicUrl = model.FixPicUrl;
-    }else{
-       vc.PicUrl = model.PicUrl;
-    }
+//        GetWritePicModel *model = self.picArray[indexPath.row];
+//        CorrectViewController *vc = [[CorrectViewController alloc]init];
+//    NSString *pic = [NSString stringWithFormat:@"%@",model.FixPicUrl];
+//    if (pic.length > 3){
+//       vc.PicUrl = model.FixPicUrl;
+//    }else{
+//       vc.PicUrl = model.PicUrl;
+//    }
+//    
+//        vc.PicID = model.ID;
+//    
+//
+//        [self.navigationController pushViewController:vc animated:YES];
     
-        vc.PicID = model.ID;
     
+    TYCorrectViewController *vc = [[TYCorrectViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 
-        [self.navigationController pushViewController:vc animated:YES];
+    
+    
+    
+    
     //手机版获取文章图片点评内容
    
     
