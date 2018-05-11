@@ -7,9 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MicPianduanmodel.h"
 
-@interface AlertWriteView : UIView
+@protocol AddwritingViewDelegate <NSObject>
 
--(void)showView;
+-(void)addWriting:(NSString *)title content:(NSString *)content flag:(NSString *)flg;
+
+@end
+
+@interface AlertWriteView : UIView 
+
+@property (nonatomic, assign) id<AddwritingViewDelegate> delegate;
+
+
+-(void)showViewWithModel:(MicPianduanmodel *)model content:(NSString *)content flag:(NSString *)flag;
 
 @end

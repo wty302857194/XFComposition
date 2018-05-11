@@ -16,6 +16,7 @@
 #import "MicoThridCell.h"
 #import "MicrodetailController.h"
 #import "TopMenuView.h"
+#import "NewMicrodetailController.h"
 
 @interface SynchroClassViewController ()<UICollectionViewDelegate,UICollectionViewDataSource> {
     UIButton *_oneBtn,*_twoBtn;
@@ -406,7 +407,9 @@
 {
     WriteListModel *model  = self.allMicArray[indexPath.row];
     
-    MicrodetailController *vc = [[MicrodetailController alloc]init];
+//    MicrodetailController *vc = [[MicrodetailController alloc]init];
+    NewMicrodetailController *vc = [[NewMicrodetailController alloc]init];
+
     vc.classId = model.ID;
     [self.navigationController pushViewController:vc animated:YES];
     NSLog(@"选择%ld",indexPath.item);

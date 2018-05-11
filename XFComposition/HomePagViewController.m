@@ -48,6 +48,7 @@
 #import "GetLabelTypeTreelistAllRequst.h"
 #import "JGInfiniteScrollView.h"//轮播
 #import "DPdetailViewController.h"
+#import "NewMicrodetailController.h"
 @interface HomePagViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,HomePaSecondDelegate,HomePaThridCellDelegate,JGInfiniteScrollViewDelegate,MircFiveCellDelegate>
 
 @property (nonatomic,strong)UICollectionView *collectionView;
@@ -551,7 +552,8 @@ referenceSizeForHeaderInSection:(NSInteger)section {
 //            [self.navigationController pushViewController:vc animated:YES];
         
         WriteListModel *model = self.jxArray[indexPath.item];
-        MicrodetailController *vc = [[MicrodetailController alloc]init];
+//        MicrodetailController *vc = [[MicrodetailController alloc]init];
+        NewMicrodetailController *vc = [[NewMicrodetailController alloc]init];
         vc.classId = model.ID;
         [self.navigationController pushViewController:vc animated:YES];
         

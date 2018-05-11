@@ -12,6 +12,7 @@
 #import "MymicroModel.h"
 #import "OmitFavClassRequst.h"
 #import "MicrodetailController.h"
+#import "NewMicrodetailController.h"
 @interface MyMicroViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,MyMicroCellDelegate>
 @property (nonatomic,strong)UICollectionView *collectionView;
 @property (nonatomic,strong)NSMutableArray *mymicroArray;
@@ -170,7 +171,8 @@
 }
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    MicrodetailController *vc = [[MicrodetailController alloc]init];
+//    MicrodetailController *vc = [[MicrodetailController alloc]init];
+    NewMicrodetailController * vc = [[NewMicrodetailController alloc] init];
     MymicroModel *model = self.mymicroArray[indexPath.item];
     
     vc.classId = model.MicroclassInfoId;

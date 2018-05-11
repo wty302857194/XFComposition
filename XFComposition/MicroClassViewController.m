@@ -27,6 +27,7 @@
 #import "WritingxzViewController.h"
 
 #import "MicrodetailController.h"
+#import "NewMicrodetailController.h"
 
 @interface SecondFooterView : UICollectionReusableView
 
@@ -501,8 +502,8 @@ referenceSizeForHeaderInSection:(NSInteger)section {
 {
     
     
-    MicrodetailController *vc = [[MicrodetailController alloc]init];
-    
+//    MicrodetailController *vc = [[MicrodetailController alloc]init];
+    NewMicrodetailController *vc = [[NewMicrodetailController alloc] init];
     
     if (indexPath.section == 1) {
         

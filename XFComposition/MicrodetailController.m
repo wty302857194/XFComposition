@@ -47,6 +47,8 @@
 #import "LoginViewController.h"
 #import "HomePaFristheadView.h"
 #import "AddwritingView.h"
+#import "NewMicrodetailController.h"
+
 @interface MicrodetailController ()<UICollectionViewDelegate,UICollectionViewDataSource,MicroHeadDelegate,AddcommentDelegate,ShowViewDelegate,Microbaocundelegate,AddwritingViewDelegate,showtextDelegate,MicrodetailFrsitCellDelegate,UIScrollViewDelegate,HomePaFristheadViewDelegate>
 @property (nonatomic,strong)UICollectionView *collectionView;
 @property (nonatomic,strong)NSMutableArray *microArray;
@@ -71,6 +73,7 @@
 @property (nonatomic,strong)UITableView *reshTableView;
 @property (nonatomic,strong)NSString *userId;
 @property (nonatomic,strong)XFUserInfo *xf;
+
 @end
 
 @implementation MicrodetailController
@@ -463,7 +466,7 @@
 {
     if (indexPath.section == 3){
         MicrodetailController *vc = [[MicrodetailController alloc]init];
-        
+
             WriteListModel *model = self.microArray[indexPath.row];
             
             vc.classId = model.ID;

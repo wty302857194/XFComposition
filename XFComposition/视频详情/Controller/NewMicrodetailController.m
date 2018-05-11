@@ -28,6 +28,9 @@
 #import "GetCommentListRequst.h"
 #import "WeikePostCommentRequst.h"
 #import "WeikeGoodcolActionRequst.h"
+#import "AddBlogRequst.h"
+#import "SaveGJRequst.h"
+#import "GetBlogContentInfoRequst.h"
 #import "MicrodetailModel.h"
 #import "WriteListModel.h"
 #import "MicroVideoModel.h"
@@ -46,14 +49,13 @@ static NSString *fiveCellID = @"NewMicoFiveCell";
 static NSString *sixthCellID = @"NewMicoSixthCell";
 static NSString *seventhCellID = @"NewMicoSeventhCell";
 
-@interface NewMicrodetailController ()<UITableViewDelegate, UITableViewDataSource>
+@interface NewMicrodetailController ()<UITableViewDelegate, UITableViewDataSource,AddwritingViewDelegate>
 
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UIImageView *playBackImgView;
 @property (nonatomic, strong) VideoPlayer *playerView;
 @property (nonatomic, strong) PlayerConfiguration *configuration;
-@property (nonatomic, strong) AlertWriteView *alertView;
 
 
 @property (nonatomic, assign) NSString *panduan;
@@ -65,6 +67,8 @@ static NSString *seventhCellID = @"NewMicoSeventhCell";
 @property (nonatomic, strong) NSMutableArray *discussArray; //课程交流
 @property (nonatomic, strong) MicrodetailModel *detailmodel;
 
+@property (nonatomic,strong)NSString *userId;
+@property (nonatomic,strong)XFUserInfo *xf;
 
 @end
 
@@ -80,19 +84,31 @@ static NSString *seventhCellID = @"NewMicoSeventhCell";
     UIBarButtonItem *item=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"ty_jianTouLeft"] style: UIBarButtonItemStylePlain target:self action:@selector(onBack)];
     self.navigationItem.leftBarButtonItem=item;
     
+    self.userId = self.xf.Loginid;
+    
     [self.view addSubview:self.playerView];
     [self.view addSubview:self.tableView];
     
+    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [self getAllData];
+    }];
+    header.lastUpdatedTimeLabel.hidden = YES;
+    header.stateLabel.hidden = YES;
+    self.tableView.mj_header = header;
+    
+    [self getAllData];
+    
+}
+
+- (void)getAllData
+{
     [self Microdetailrequst0];//视频详情
     [self MicroXiezuowenRequst];//写作列表
     [self MicrokechengjiaoliuRequst];//课程交流
     [self MicrogongyidianpingRequst];//本课习作
     [self MicrogongyidianpingRequst];//公益点评
     [self GetMircroClass];//相关课程
-    
 }
-
-
 
 #pragma mark --接口
 //获取微课第一行信息
@@ -103,7 +119,9 @@ static NSString *seventhCellID = @"NewMicoSeventhCell";
     __weak typeof (self) weakSelf = self;
     self.panduan = @"0";
     Microdetailrequst *requst = [[Microdetailrequst alloc]init];
-    [requst GetmicroInfoWithClassId:self.classId withUserId:@"0" :^(NSDictionary *json) {
+    [requst GetmicroInfoWithClassId:self.classId withUserId:self.userId :^(NSDictionary *json) {
+        
+        [self.tableView.mj_header endRefreshing];
         
         weakSelf.detailmodel = [MicrodetailModel loadWithJSOn:json[@"ret_data"]];
         
@@ -132,9 +150,8 @@ static NSString *seventhCellID = @"NewMicoSeventhCell";
 //获取写作文列表
 -(void)MicroXiezuowenRequst{
     __weak typeof (self) weakSelf = self;
-    self.panduan = @"2";
     GetGJListRequst *requst = [[GetGJListRequst alloc]init];
-    [requst GetGJListRequstWithuserId:@"" withPageIndex:@"1" withPagesize:@"20" withTypeid:self.classId withModelid:@"5" :^(NSDictionary *json) {
+    [requst GetGJListRequstWithuserId:self.userId withPageIndex:@"1" withPagesize:@"20" withTypeid:self.classId withModelid:@"5" :^(NSDictionary *json) {
         [weakSelf.articleArray removeAllObjects];
         XFMicData *micData = [XFMicData mj_objectWithKeyValues:json];
         weakSelf.articleArray = micData.ret_data.pageInfo.x_Userblogs;
@@ -144,6 +161,82 @@ static NSString *seventhCellID = @"NewMicoSeventhCell";
             [weakSelf.tableView reloadSections:indexset withRowAnimation:UITableViewRowAnimationNone];
         });
     }];
+}
+//新建作文
+-(void)newWriting:(NSString *)title content:(NSString *)content flag:(NSString *)flg{
+    __weak typeof (self) weakSelf = self;
+    AddBlogRequst *requst = [[AddBlogRequst alloc]init];
+    [requst AddBlogRequstWithNoticeName:title withNoticeObject:self.classId withNoticeContent:content withNoticeID:flg withuserid:self.userId withactiveItemId:@"0" withposttype:@"0" :^(NSDictionary *json) {
+        if ([json[@"ret_msg"] isEqualToString:@"成功"]) {
+            [weakSelf MicroXiezuowenRequst];
+        }
+    }];
+    
+}
+
+//保存 ，无法编辑
+-(void)SaveGJ:(NSString *)ids
+{
+    __weak typeof (self) weakSelf = self;
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"您确定要保存吗，稿件保存后将不能编辑?" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        SaveGJRequst *requst = [[SaveGJRequst alloc]init];
+        [requst SaveGJRequstWithclassId:self.classId withModelld:@"5" withUserID:self.userId ids:ids :^(NSDictionary *json) {
+            if ([json[@"ret_msg"] isEqualToString:@"成功"]) {
+                [MBProgressHUD showSuccess:@"保存成功"];
+                [weakSelf MicroXiezuowenRequst];
+            }else{
+                [MBProgressHUD showError:@"保存失败"];
+            }
+        }];
+    }]];
+    [self presentViewController:alert animated:YES completion:nil];
+    
+
+    
+}
+//提交老师
+-(void)SubmittTeacher:(NSString *)ids
+{
+    
+    __weak typeof (self) weakSelf = self;
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"您确定要提交老师嘛?" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        SaveGJRequst *requst = [[SaveGJRequst alloc]init];
+        [requst PostTeacherWithclassId:self.classId withModelld:@"5" withUserID:self.userId  ids:ids :^(NSDictionary *json) {
+            if ([json[@"ret_msg"] isEqualToString:@"成功"]) {
+                [weakSelf MicroXiezuowenRequst];
+                [MBProgressHUD showSuccess:json[@"ret_data"]];
+            }else{
+                [MBProgressHUD showError:json[@"ret_data"]];
+            }
+        }];
+    }]];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+//点击弹出作文，可修改
+-(void)showzuowen:(MicPianduanmodel *)model{
+    
+    GetBlogContentInfoRequst *requst = [[GetBlogContentInfoRequst alloc]init];
+    [requst GetBlogContentInfoRequstWithNoticeID:model.ID :^(NSDictionary *json) {
+        if ([json[@"ret_msg"] isEqualToString:@"成功"]) {
+            NSString *str1 = [self htmlEntityDecode:json[@"ret_data"]];
+            NSAttributedString * attributeStr = [self attributedStringWithHTMLString:str1];
+            NSString *string = [attributeStr string];
+            AlertWriteView *alertView = [[AlertWriteView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+            alertView.delegate = self;
+            [alertView showViewWithModel:model content:string flag:@"1"];
+            
+        }
+    }];
     
 }
 //添加评论
@@ -151,16 +244,16 @@ static NSString *seventhCellID = @"NewMicoSeventhCell";
     __weak typeof (self) weakSelf = self;
     WeikePostCommentRequst *requst = [[WeikePostCommentRequst alloc]init];
     
-    [requst WeikePostCommentRequstwithuserid:@"" withmodelid:@"5" withclassid:self.classId withuserip:@"127.0.0.1" withCommentinfo:textView.text :^(NSDictionary *json) {
+    [requst WeikePostCommentRequstwithuserid:self.userId withmodelid:@"5" withclassid:self.classId withuserip:@"127.0.0.1" withCommentinfo:textView.text :^(NSDictionary *json) {
         NSLog(@"%@",json[@"ret_msg"]);
         if ([json[@"ret_msg"] isEqualToString:@"成功"]) {
             [textView setText:nil];
-            [SVProgressHUD showSuccessWithStatus:@"添加评论成功"];
+            [MBProgressHUD showSuccess:@"添加评论成功"];
             //刷新数据
             [weakSelf MicrokechengjiaoliuRequst];
             
         } else {
-            [SVProgressHUD showErrorWithStatus:json[@"ret_data"]];
+            [MBProgressHUD showError:json[@"ret_data"]];
         }
     }];
     
@@ -182,9 +275,7 @@ static NSString *seventhCellID = @"NewMicoSeventhCell";
             NSIndexSet *indexset = [NSIndexSet indexSetWithIndex:3];
             [weakSelf.tableView reloadSections:indexset withRowAnimation:UITableViewRowAnimationNone];
             
-        });
-
-        
+        });        
     }];
     
 }
@@ -254,14 +345,13 @@ static NSString *seventhCellID = @"NewMicoSeventhCell";
     WeikeGoodcolActionRequst *requst = [[WeikeGoodcolActionRequst alloc]init];
     [requst WeikeGoodcolActionRequstwith:@"" withweikeid:self.classId withtypeflag:@"col" :^(NSDictionary *json) {
         if ([json[@"ret_code"]  isEqualToString:@"0"]) {
-            [SVProgressHUD showSuccessWithStatus:@"收藏成功"];
+            [MBProgressHUD showSuccess:@"收藏成功"];
         }else{
-            [SVProgressHUD showErrorWithStatus:@"收藏失败"];
+            [MBProgressHUD showError:@"收藏失败"];
         }
         
     }];
 }
-
 
 #pragma mark UITableViewDelegate
 
@@ -297,7 +387,35 @@ static NSString *seventhCellID = @"NewMicoSeventhCell";
         NewMicoThirdCell *cell = [tableView dequeueReusableCellWithIdentifier:thirdCellID forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.datas = self.articleArray;
-        
+        cell.didSelectRowBlock = ^(MicPianduanmodel *model) {
+            [self showzuowen:model];
+            
+        };
+        cell.clickBlock = ^(NSArray<MicPianduanmodel *> *array, ClickType type) {
+            
+            if (type == ClickTypeAdd) {//新建作文
+                AlertWriteView *alertView = [[AlertWriteView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+                alertView.delegate = self;
+                [alertView showViewWithModel:nil content:nil flag:@"0"];
+
+            } else if (type == ClickTypeSave) {//保存
+                NSMutableArray *ary = [NSMutableArray array];
+                for (MicPianduanmodel *model in array) {
+                    [ary addObject:model.ID];
+                }
+                NSString *ids = [ary componentsJoinedByString:@","];
+                [self SaveGJ:ids];
+                
+            } else if (type == ClickTypeSubmit) {//提交
+                NSMutableArray *ary = [NSMutableArray array];
+                for (MicPianduanmodel *model in array) {
+                    [ary addObject:model.ID];
+                }
+                NSString *ids = [ary componentsJoinedByString:@","];
+                [self SubmittTeacher:ids];
+            }
+            
+        };
         return cell;
     } else if (indexPath.section == 3) {
         // 课程交流
@@ -378,6 +496,13 @@ static NSString *seventhCellID = @"NewMicoSeventhCell";
 }
 
 #pragma mark -- 懒加载
+-(XFUserInfo *)xf{
+    if (!_xf) {
+        _xf = [[XFUserInfo alloc]init];
+        _xf = [XFUserInfo getUserInfo];
+    }
+    return _xf;
+}
 - (MicrodetailModel *)detailmodel
 {
     if (!_detailmodel) {
@@ -473,13 +598,36 @@ static NSString *seventhCellID = @"NewMicoSeventhCell";
     return _configuration;
 }
 
-- (AlertWriteView *)alertView
+#pragma mark --
+- (void)addWriting:(NSString *)title content:(NSString *)content flag:(NSString *)flg
 {
-    if (!_alertView) {
-        _alertView = [[AlertWriteView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
-    }
-    return _alertView;
+    
+    [self newWriting:title content:content flag:flg];
 }
+
+//将 &lt 等类似的字符转化为HTML中的“<”等
+- (NSString *)htmlEntityDecode:(NSString *)string
+{
+    string = [string stringByReplacingOccurrencesOfString:@"&quot;" withString:@"\""];
+    string = [string stringByReplacingOccurrencesOfString:@"&apos;" withString:@"'"];
+    string = [string stringByReplacingOccurrencesOfString:@"&lt;" withString:@"<"];
+    string = [string stringByReplacingOccurrencesOfString:@"&gt;" withString:@">"];
+    string = [string stringByReplacingOccurrencesOfString:@"&amp;" withString:@"&"]; // Do this last so that, e.g. @"&amp;lt;" goes to @"&lt;" not @"<"
+    string = [string stringByReplacingOccurrencesOfString:@"{}" withString:@""];
+    return string;
+}
+
+//将HTML字符串转化为NSAttributedString富文本字符串
+- (NSAttributedString *)attributedStringWithHTMLString:(NSString *)htmlString
+{
+    NSDictionary *options = @{ NSDocumentTypeDocumentAttribute : NSHTMLTextDocumentType,
+                               NSCharacterEncodingDocumentAttribute :@(NSUTF8StringEncoding) };
+    
+    NSData *data = [htmlString dataUsingEncoding:NSUTF8StringEncoding];
+    
+    return [[NSAttributedString alloc] initWithData:data options:options documentAttributes:nil error:nil];
+}
+
 
 -(void)dealloc
 {

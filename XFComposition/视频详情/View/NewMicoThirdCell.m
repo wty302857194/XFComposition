@@ -7,7 +7,12 @@
 //
 
 #import "NewMicoThirdCell.h"
-#import "CompositionCell.h"
+@interface NewMicoThirdCell ()
+
+
+@property (nonatomic, strong) NSMutableArray *selectArray;
+
+@end
 
 
 static NSString *compositionCellID = @"CompositionCell";
@@ -24,12 +29,20 @@ static NSString *compositionCellID = @"CompositionCell";
     
 }
 
+-(NSMutableArray *)selectArray
+{
+    if (!_selectArray) {
+        _selectArray = [NSMutableArray array];
+    }
+    return _selectArray;
+}
 -(void)setDatas:(NSMutableArray *)datas
 {
     _datas = datas;
     if (datas.count > 4) {
         self.constraint.constant = 30*datas.count;
     }
+    [self.selectArray removeAllObjects];
     [self.tableView reloadData];
 }
 
@@ -38,17 +51,22 @@ static NSString *compositionCellID = @"CompositionCell";
     switch (sender.tag) {
         case 10:
             {// 新建作文
-                
+                self.clickBlock(nil, ClickTypeAdd);
             }
             break;
         case 11:
             {// 保存
+                if (self.selectArray.count > 0) {
+                    self.clickBlock(self.selectArray, ClickTypeSave);
+                }
                 
             }
             break;
         case 12:
             {// 提交教师
-                
+                if (self.selectArray.count > 0) {
+                    self.clickBlock(self.selectArray, ClickTypeSubmit);
+                }
             }
             break;
             
@@ -57,18 +75,24 @@ static NSString *compositionCellID = @"CompositionCell";
     }
 }
 
-- (void)resetFrame:(int)count
-{
-
-}
 
 #pragma mark - delegate
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    __weak typeof (self) weakSelf = self;
     CompositionCell *cell = [tableView dequeueReusableCellWithIdentifier:compositionCellID forIndexPath:indexPath];
-    cell.dataModel = self.datas[indexPath.row];
+    MicPianduanmodel *model = self.datas[indexPath.row];
+    cell.dataModel = model;
     cell.selectItemBlock = ^(BOOL isSelected) {
         
+        if (isSelected) {//选中状态下，数组中没有时添加
+            if (![weakSelf.selectArray containsObject:model]) {
+                [weakSelf.selectArray addObject:model];
+            }
+        } else {//非选中状态下，数组中有时删除
+            if ([weakSelf.selectArray containsObject:model]) {
+                [weakSelf.selectArray removeObject:model];
+            }
+        }
     };
     return cell;
 }
@@ -86,5 +110,8 @@ static NSString *compositionCellID = @"CompositionCell";
 
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    MicPianduanmodel *model = self.datas[indexPath.row];
+    self.didSelectRowBlock(model);
 }
+
 @end
