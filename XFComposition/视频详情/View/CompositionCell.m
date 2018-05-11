@@ -13,6 +13,29 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [btn setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+}
+
+-(void)setDataModel:(MicPianduanmodel *)dataModel
+{
+    _dataModel = dataModel;
+    _saveLab.text = [_dataModel.BlogStatic isEqualToString:@"1"] ? @"【已保存】 " : @"";
+    _submitLab.text = [_dataModel.BlogBg isEqualToString:@"1"] ? @"【已提交】 " : @"";
+    _titleLab.text = _dataModel.BlogTitle;
+    _dateLab.text = _dataModel.BlogAddTime;
+}
+
+- (IBAction)selectItem:(id)sender
+{
+    self.selectBtn.selected = !self.selectBtn.selected;
+    if (self.selectBtn.selected) {
+        [self.selectBtn setImage:[UIImage imageNamed:@"selectIcon"] forState:UIControlStateNormal];
+    } else {
+        [self.selectBtn setImage:[UIImage imageNamed:@"normalIcon"] forState:UIControlStateNormal];
+    }
+    self.selectItemBlock(self.selectBtn.selected);
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

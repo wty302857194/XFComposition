@@ -7,9 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WriteListModel.h"
 
 @interface CourseCollectionViewCell : UICollectionViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *courseImg;
 @property (weak, nonatomic) IBOutlet UILabel *courseLab;
+
+@property (nonatomic, strong) WriteListModel *dataModel;
+
 @end

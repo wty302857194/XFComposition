@@ -47,6 +47,10 @@
 @property (nonatomic, strong)UIButton *backButton;
 /** 顶部标题 */
 @property (nonatomic, strong)UILabel *titleLab;
+/** 背景图片 */
+@property (nonatomic, strong)UIImageView *bgImageView;
+/** 背景播放图片 */
+@property (nonatomic, strong)UIImageView *bgPlayImgView;
 /** 播放按钮 */
 @property (nonatomic, strong) UIButton *playButton;
 /** 全屏切换按钮 */
@@ -65,8 +69,6 @@
 @property (nonatomic, assign) NSTimeInterval hideInterval;
 /** 是否处于全屏状态 */
 @property (nonatomic, assign) BOOL isFullScreen;
-/** 全屏状态下状态栏显示方式 */
-@property (nonatomic, assign) StatusBarHideState statusBarHideState;
 /** 加载指示器 */
 @property (nonatomic, strong) UIActivityIndicatorView *activityIndicatorView;
 /** 加载失败重试按钮 */

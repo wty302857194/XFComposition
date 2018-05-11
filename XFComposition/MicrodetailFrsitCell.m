@@ -30,7 +30,7 @@
         NSString *urlss = [NSString stringWithFormat:@"%@/LocalFiles/Weike/File/1480173972162.flv",HTurl];
         [self addSubview:self.playView];
 
-        self.playView.urlString = urlss;
+        self.playView.urlString = @"file:///Users/liyan/Downloads/黑豹_bd.mp4";
         
 //        UIView *microView = [[UIView alloc]initWithFrame:CGRectMake(20, 0, WidthFrame-40, HeightFrame/3)];
 //        microView.backgroundColor = [UIColor lightGrayColor];

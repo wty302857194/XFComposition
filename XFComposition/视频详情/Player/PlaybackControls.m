@@ -37,11 +37,14 @@ static const CGFloat PlaybackControlsAutoHideTimeInterval = 0.3f;
 - (void)setupUI
 {
     self.backgroundColor = [UIColor clearColor];
-//    [self addSubview:self.playButton];
+
     [self addSubview:self.topControlsBar];
     [self addSubview:self.bottomControlsBar];
     [self addSubview:self.activityIndicatorView];
     [self addSubview:self.retryButton];
+    [self addSubview:self.bgImageView];
+    
+    [_bgImageView addSubview:self.bgPlayImgView];
     
     [_topControlsBar addSubview:self.backButton];
     [_topControlsBar addSubview:self.titleLab];
@@ -61,9 +64,11 @@ static const CGFloat PlaybackControlsAutoHideTimeInterval = 0.3f;
 /** 重置控制面板 */
 - (void)_resetPlaybackControls
 {
-    self.bottomControlsBar.alpha = 0;
-    self.isShowing = NO;
+    self.bottomControlsBar.alpha = 1;
+    self.topControlsBar.alpha =1;
+    self.isShowing = YES;
     [self _activityIndicatorViewShow:YES];
+    [self performSelector:@selector(_playerHidePlaybackControls) withObject:nil afterDelay:5.0f];
 }
 
 /**
@@ -185,7 +190,10 @@ static const CGFloat PlaybackControlsAutoHideTimeInterval = 0.3f;
     if (!self.isActivityShowing && !self.isRetryShowing) {
         self.playButton.hidden = NO;
     }
-    [self _showOrHideStatusBar];
+    if (self.isFullScreen) {
+        [self _showOrHideStatusBar];
+    }
+    
 }
 
 /** 隐藏控制面板 */
@@ -204,31 +212,13 @@ static const CGFloat PlaybackControlsAutoHideTimeInterval = 0.3f;
 - (void)_playerAutoHidePlaybackControls
 {
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(_playerHidePlaybackControls) object:nil];
-    [self performSelector:@selector(_playerHidePlaybackControls) withObject:nil afterDelay:_hideInterval];
+    [self performSelector:@selector(_playerHidePlaybackControls) withObject:nil afterDelay:5.0f];
 }
 
 /** 显示或隐藏状态栏 */
 - (void)_showOrHideStatusBar
 {
-    switch (_statusBarHideState) {
-        case StatusBarHideStateFollowControls:
-        {
-            [[UIApplication sharedApplication] setStatusBarHidden:!self.isShowing];
-        }
-            break;
-        case StatusBarHideStateNever:
-        {
-            [[UIApplication sharedApplication] setStatusBarHidden:NO];
-        }
-            break;
-        case StatusBarHideStateAlways:
-        {
-            [[UIApplication sharedApplication] setStatusBarHidden:YES];
-        }
-            break;
-        default:
-            break;
-    }
+    [[UIApplication sharedApplication] setStatusBarHidden:YES];
 }
 
 /** 是否处于全屏状态 */
@@ -236,6 +226,9 @@ static const CGFloat PlaybackControlsAutoHideTimeInterval = 0.3f;
 {
     _isFullScreen = isFullScreen;
     self.fullScreenButton.selected = _isFullScreen;
+    
+    [self reMakeConstraints:isFullScreen];
+    
 }
 
 /** 取消延时隐藏playbackControls */
@@ -261,24 +254,93 @@ static const CGFloat PlaybackControlsAutoHideTimeInterval = 0.3f;
     [singleTapGesture requireGestureRecognizerToFail:doubleTapGesture];
 }
 
+// 重制约束
+- (void)reMakeConstraints:(BOOL)isFullScreen
+{
+    if (isFullScreen) {
+        _backButton.hidden = NO;
+        [_topControlsBar mas_updateConstraints:^(MASConstraintMaker *make) {
+            if (@available(iOS 11.0, *)) {
+                make.top.equalTo(self.mas_safeAreaLayoutGuideTop).offset(30);
+            } else {
+                make.top.equalTo(self).offset(30);
+            }
+        }];
+        
+        [_backButton mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.width.equalTo(@50);
+            make.centerY.equalTo(_topControlsBar);
+        }];
+        
+        [_bottomControlsBar mas_updateConstraints:^(MASConstraintMaker *make) {
+            if (@available(iOS 11.0, *)) {
+                make.right.equalTo(self.mas_safeAreaLayoutGuideRight).offset(-50);
+                
+            } else {
+
+            }
+        }];
+    } else {
+        _backButton.hidden = YES;
+        [_topControlsBar mas_updateConstraints:^(MASConstraintMaker *make) {
+            if (@available(iOS 11.0, *)) {
+                make.top.equalTo(self.mas_safeAreaLayoutGuideTop).offset(5);
+            } else {
+                make.top.equalTo(self).offset(5);
+            }
+        }];
+        
+        [_backButton mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.width.equalTo(@0);
+        }];
+        
+        [_bottomControlsBar mas_updateConstraints:^(MASConstraintMaker *make) {
+            if (@available(iOS 11.0, *)) {
+                make.right.equalTo(self.mas_safeAreaLayoutGuideRight).offset(-15);
+            } else {
+                
+            }
+            
+        }];
+    }
+}
+
 /** 添加约束 */
 - (void)makeConstraints
 {
     
+    [_bgImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.equalTo(self);
+        make.size.equalTo(self);
+    }];
+    
+    [_bgPlayImgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.equalTo(self);
+        make.size.mas_equalTo(CGSizeMake(60, 60));
+    }];
+    
     [_topControlsBar mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(@20);
-        make.left.right.equalTo(@15);
-        make.height.equalTo(@30);
+        if (@available(iOS 11.0, *)) {
+            make.top.equalTo(self.mas_safeAreaLayoutGuideTop).offset(5);
+            make.left.equalTo(self.mas_safeAreaLayoutGuideLeft).offset(15);
+            make.right.equalTo(self.mas_safeAreaLayoutGuideRight).offset(-15);
+
+        } else {
+            make.top.equalTo(self).offset(5);
+            make.left.equalTo(@15);
+            make.right.equalTo(self).offset(-15);
+        }
+        make.height.equalTo(@50);
     }];
     
     [_backButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(_topControlsBar).offset(5);
-        make.height.equalTo(@20);
-        make.centerY.equalTo(_topControlsBar.mas_centerY);
+        make.left.equalTo(_topControlsBar);
+        make.width.equalTo(@0);
+        make.height.equalTo(_topControlsBar.mas_height);
     }];
     
     [_titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(_backButton.mas_right).offset(5);
+        make.left.equalTo(_backButton.mas_right);
         make.centerY.equalTo(_topControlsBar.mas_centerY);
     }];
     
@@ -288,11 +350,19 @@ static const CGFloat PlaybackControlsAutoHideTimeInterval = 0.3f;
     
     [_retryButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(self);
-        make.size.mas_equalTo(CGSizeMake(80, 80));
+        make.size.mas_equalTo(CGSizeMake(100, 40));
     }];
     
     [_bottomControlsBar mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.bottom.equalTo(self);
+        if (@available(iOS 11.0, *)) {
+            make.left.equalTo(self.mas_safeAreaLayoutGuideLeft).offset(15);
+            make.right.equalTo(self.mas_safeAreaLayoutGuideRight).offset(-15);
+            make.bottom.equalTo(self.mas_safeAreaLayoutGuideBottom).offset(-5);
+        } else {
+            make.left.equalTo(self).offset(15);
+            make.right.equalTo(self).offset(-15);
+            make.bottom.equalTo(self).offset(-5);
+        }
         make.height.equalTo(@50);
     }];
     
@@ -362,12 +432,34 @@ static const CGFloat PlaybackControlsAutoHideTimeInterval = 0.3f;
     return _topControlsBar;
 }
 
+/** 背景图片*/
+-(UIImageView *)bgImageView
+{
+    if (!_bgImageView) {
+        _bgImageView = [[UIImageView alloc] init];
+        _bgImageView.userInteractionEnabled = YES;
+        UITapGestureRecognizer *singleTapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(toPlay)];
+        [_bgImageView addGestureRecognizer:singleTapGesture];
+    }
+    return _bgImageView;
+}
+/** 背景上播放图片*/
+- (UIImageView *)bgPlayImgView
+{
+    if (!_bgPlayImgView) {
+        _bgPlayImgView = [[UIImageView alloc] init];
+        _bgPlayImgView.image = [UIImage imageNamed:@"17-Play-256"];
+    }
+    return _bgPlayImgView;
+}
+
 /** 顶部返回按钮 */
 -(UIButton *)backButton
 {
     if (!_backButton) {
         _backButton = [[UIButton alloc] init];
-        _backButton.backgroundColor = [UIColor redColor];
+        [_backButton setImage:[UIImage imageNamed:@"left-arrow_s"] forState:UIControlStateNormal];
+        [_backButton setImageEdgeInsets:UIEdgeInsetsMake(14, 0, 14, 28)];
         [_backButton addTarget:self action:@selector(fullScreenAction) forControlEvents:UIControlEventTouchUpInside];
     }
     return _backButton;
@@ -389,9 +481,8 @@ static const CGFloat PlaybackControlsAutoHideTimeInterval = 0.3f;
 {
     if (!_playButton){
         _playButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _playButton.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10);
-        [_playButton setImage:[UIImage imageNamed:@"full_play_btn_hl"] forState:UIControlStateNormal];
-        [_playButton setImage:[UIImage imageNamed:@"full_pause_btn_hl"] forState:UIControlStateSelected];
+        [_playButton setImage:[UIImage imageNamed:@"full_play_btn"] forState:UIControlStateNormal];
+        [_playButton setImage:[UIImage imageNamed:@"full_pause_btn"] forState:UIControlStateSelected];
         [_playButton addTarget:self action:@selector(playAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _playButton;
@@ -402,9 +493,8 @@ static const CGFloat PlaybackControlsAutoHideTimeInterval = 0.3f;
 {
     if (!_fullScreenButton) {
         _fullScreenButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _fullScreenButton.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10);
-        [_fullScreenButton setImage:[UIImage imageNamed:@"mini_launchFullScreen_btn_hl"] forState:UIControlStateNormal];
-        [_fullScreenButton setImage:[UIImage imageNamed:@"mini_launchFullScreen_btn_hl"] forState:UIControlStateSelected];
+        [_fullScreenButton setImage:[UIImage imageNamed:@"mini_launchFullScreen_btn"] forState:UIControlStateNormal];
+        [_fullScreenButton setImage:[UIImage imageNamed:@"mini_launchFullScreen_btn"] forState:UIControlStateSelected];
         [_fullScreenButton addTarget:self action:@selector(fullScreenAction) forControlEvents:UIControlEventTouchUpInside];
     }
     return _fullScreenButton;
@@ -444,7 +534,10 @@ static const CGFloat PlaybackControlsAutoHideTimeInterval = 0.3f;
 {
     if (!_retryButton) {
         _retryButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_retryButton setImage:[UIImage imageNamed:@"Action_reload_player_100x100_"] forState:UIControlStateNormal];
+        _retryButton.backgroundColor = [UIColor colorWithHexString:@"#646464"];
+        [_retryButton setTitle:@"点击重拾" forState:UIControlStateNormal];
+        _retryButton.layer.cornerRadius = 20;
+        _retryButton.titleLabel.font = [UIFont systemFontOfSize:15];
         [_retryButton addTarget:self action:@selector(retryAction) forControlEvents:UIControlEventTouchUpInside];
         _retryButton.hidden = YES;
     }
@@ -499,6 +592,13 @@ static const CGFloat PlaybackControlsAutoHideTimeInterval = 0.3f;
     }
 }
 
+- (void)toPlay
+{
+    self.bgImageView.hidden = YES;
+    if (_delegate && [_delegate respondsToSelector:@selector(playButtonAction:)]) {
+        [_delegate playButtonAction:NO];
+    }
+}
 /** 播放按钮点击事件 */
 - (void)playAction:(UIButton *)button
 {

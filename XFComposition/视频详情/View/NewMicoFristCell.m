@@ -22,6 +22,13 @@
     [super awakeFromNib];
     // Initialization code
     
+    _titleLab.text = @"";
+    _teacherLab.text = @"";
+    _courseLab.text = @"";
+    
+    _teachGuideLab.text = @"";
+    _workLab.text = @"";
+    
     _collectionBtn.layer.masksToBounds = YES;
     _collectionBtn.layer.cornerRadius = 4;
     
@@ -44,9 +51,13 @@
 -(void)setDataModel:(MicrodetailModel *)dataModel
 {
     _dataModel = dataModel;
-    _titleLab.text = [NSString stringWithFormat:@"《%@》",_dataModel.className];
+    if (_dataModel.className) {
+        _titleLab.text = [NSString stringWithFormat:@"《%@》",_dataModel.className];
+    }
     _teacherLab.text = _dataModel.classMaster;
-    _courseLab.text = [NSString stringWithFormat:@"%@~%@",[_dataModel.classStartTime substringToIndex:9],[_dataModel.classEndTime substringToIndex:9]];
+    if (_dataModel.classStartTime) {
+        _courseLab.text = [NSString stringWithFormat:@"%@~%@",[_dataModel.classStartTime substringToIndex:9],[_dataModel.classEndTime substringToIndex:9]];
+    }
     
     _teachGuideLab.text = _dataModel.classTarget;
     _workLab.text = _dataModel.classInfo;

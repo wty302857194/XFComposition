@@ -59,6 +59,8 @@
 		3284728320909C8D00A1F3D0 /* TopMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3284728220909C8D00A1F3D0 /* TopMenuView.xib */; };
 		32A5A9D220A4171E001E4838 /* ReadJianCeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A5A9D020A4171E001E4838 /* ReadJianCeViewController.m */; };
 		32A5A9D320A4171E001E4838 /* ReadJianCeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32A5A9D120A4171E001E4838 /* ReadJianCeViewController.xib */; };
+		32A648CC20A479FF0014539F /* TYCorrectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A648CA20A479FF0014539F /* TYCorrectViewController.m */; };
+		32A648CD20A479FF0014539F /* TYCorrectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32A648CB20A479FF0014539F /* TYCorrectViewController.xib */; };
 		32A7A0F1209ADD5900C19895 /* TYOnlyActivetyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A7A0EF209ADD5800C19895 /* TYOnlyActivetyTableViewCell.m */; };
 		32A7A0F2209ADD5900C19895 /* TYOnlyActivetyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32A7A0F0209ADD5800C19895 /* TYOnlyActivetyTableViewCell.xib */; };
 		32B38F4D208875E500616A7B /* LeftMenuModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 32B38F4C208875E500616A7B /* LeftMenuModel.m */; };
@@ -168,6 +170,8 @@
 		58A49AB02079F2C1008405EA /* CompositionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A49AAF2079F2C1008405EA /* CompositionViewController.m */; };
 		58E291E1206A1F1E0016DACD /* fenxiangViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E291E0206A1F1E0016DACD /* fenxiangViewController.m */; };
 		B6F16DB8290F62883631B0B6 /* Pods_XFComposition.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3084EAC2F37884539B99B88E /* Pods_XFComposition.framework */; };
+		BA34D9AC20A41DDF00D99165 /* CourseOutlineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BA34D9AA20A41DDF00D99165 /* CourseOutlineCell.m */; };
+		BA34D9AD20A41DDF00D99165 /* CourseOutlineCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA34D9AB20A41DDF00D99165 /* CourseOutlineCell.xib */; };
 		BA647D2C20A28BC6007AAC98 /* NewMicoFourthCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BA647D2A20A28BC6007AAC98 /* NewMicoFourthCell.m */; };
 		BA647D2D20A28BC6007AAC98 /* NewMicoFourthCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA647D2B20A28BC6007AAC98 /* NewMicoFourthCell.xib */; };
 		BA647D3120A2A7CF007AAC98 /* NewMicoFiveCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BA647D2F20A2A7CF007AAC98 /* NewMicoFiveCell.m */; };
@@ -194,6 +198,7 @@
 		BAB44C9620A1A89A002455D8 /* VideoPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = BAB44C8520A1A89A002455D8 /* VideoPlayer.m */; };
 		BAB44C9720A1A89A002455D8 /* VideoSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = BAB44C8620A1A89A002455D8 /* VideoSlider.m */; };
 		BAB44C9820A1A89A002455D8 /* PlayerConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = BAB44C8920A1A89A002455D8 /* PlayerConfiguration.m */; };
+		BADA87CD20A49E840031EA5E /* AlertWriteView.m in Sources */ = {isa = PBXBuildFile; fileRef = BADA87CC20A49E840031EA5E /* AlertWriteView.m */; };
 		F602ADB21F58095600C152C4 /* MicroClassViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F602ADB11F58095600C152C4 /* MicroClassViewController.m */; };
 		F6038CE81F58E96A008FE507 /* mp322.png in Resources */ = {isa = PBXBuildFile; fileRef = F6038CE61F58E96A008FE507 /* mp322.png */; };
 		F6038CE91F58E96A008FE507 /* mp321.png in Resources */ = {isa = PBXBuildFile; fileRef = F6038CE71F58E96A008FE507 /* mp321.png */; };
@@ -786,6 +791,9 @@
 		32A5A9CF20A4171E001E4838 /* ReadJianCeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReadJianCeViewController.h; sourceTree = "<group>"; };
 		32A5A9D020A4171E001E4838 /* ReadJianCeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReadJianCeViewController.m; sourceTree = "<group>"; };
 		32A5A9D120A4171E001E4838 /* ReadJianCeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReadJianCeViewController.xib; sourceTree = "<group>"; };
+		32A648C920A479FF0014539F /* TYCorrectViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TYCorrectViewController.h; sourceTree = "<group>"; };
+		32A648CA20A479FF0014539F /* TYCorrectViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TYCorrectViewController.m; sourceTree = "<group>"; };
+		32A648CB20A479FF0014539F /* TYCorrectViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TYCorrectViewController.xib; sourceTree = "<group>"; };
 		32A7A0EE209ADD5800C19895 /* TYOnlyActivetyTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TYOnlyActivetyTableViewCell.h; sourceTree = "<group>"; };
 		32A7A0EF209ADD5800C19895 /* TYOnlyActivetyTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TYOnlyActivetyTableViewCell.m; sourceTree = "<group>"; };
 		32A7A0F0209ADD5800C19895 /* TYOnlyActivetyTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TYOnlyActivetyTableViewCell.xib; sourceTree = "<group>"; };
@@ -1009,6 +1017,9 @@
 		58E291E5206A27370016DACD /* custom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = custom.png; path = "../../../../Downloads/ShareTest-master/ShareTest/custom.png"; sourceTree = "<group>"; };
 		58E291E6206A27370016DACD /* shareImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = shareImage.png; path = "../../../../Downloads/ShareTest-master/ShareTest/shareImage.png"; sourceTree = "<group>"; };
 		6E5ED5FF21E6705D17491C80 /* Pods-XFComposition.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XFComposition.debug.xcconfig"; path = "Pods/Target Support Files/Pods-XFComposition/Pods-XFComposition.debug.xcconfig"; sourceTree = "<group>"; };
+		BA34D9A920A41DDF00D99165 /* CourseOutlineCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CourseOutlineCell.h; sourceTree = "<group>"; };
+		BA34D9AA20A41DDF00D99165 /* CourseOutlineCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CourseOutlineCell.m; sourceTree = "<group>"; };
+		BA34D9AB20A41DDF00D99165 /* CourseOutlineCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CourseOutlineCell.xib; sourceTree = "<group>"; };
 		BA647D2920A28BC6007AAC98 /* NewMicoFourthCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewMicoFourthCell.h; sourceTree = "<group>"; };
 		BA647D2A20A28BC6007AAC98 /* NewMicoFourthCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewMicoFourthCell.m; sourceTree = "<group>"; };
 		BA647D2B20A28BC6007AAC98 /* NewMicoFourthCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewMicoFourthCell.xib; sourceTree = "<group>"; };
@@ -1051,6 +1062,8 @@
 		BAB44C8820A1A89A002455D8 /* PlaybackControls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaybackControls.h; sourceTree = "<group>"; };
 		BAB44C8920A1A89A002455D8 /* PlayerConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerConfiguration.m; sourceTree = "<group>"; };
 		BAB44C8A20A1A89A002455D8 /* VideoPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoPlayer.h; sourceTree = "<group>"; };
+		BADA87CB20A49E840031EA5E /* AlertWriteView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlertWriteView.h; sourceTree = "<group>"; };
+		BADA87CC20A49E840031EA5E /* AlertWriteView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlertWriteView.m; sourceTree = "<group>"; };
 		F602ADB01F58095600C152C4 /* MicroClassViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MicroClassViewController.h; sourceTree = "<group>"; };
 		F602ADB11F58095600C152C4 /* MicroClassViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MicroClassViewController.m; sourceTree = "<group>"; };
 		F6038CE61F58E96A008FE507 /* mp322.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mp322.png; sourceTree = "<group>"; };
@@ -2430,6 +2443,9 @@
 				BAB44C7620A1A89A002455D8 /* NewMicoSecondCell.h */,
 				BAB44C7B20A1A89A002455D8 /* NewMicoSecondCell.m */,
 				BAB44C7F20A1A89A002455D8 /* NewMicoSecondCell.xib */,
+				BA34D9A920A41DDF00D99165 /* CourseOutlineCell.h */,
+				BA34D9AA20A41DDF00D99165 /* CourseOutlineCell.m */,
+				BA34D9AB20A41DDF00D99165 /* CourseOutlineCell.xib */,
 				BAB44C7D20A1A89A002455D8 /* NewMicoThirdCell.h */,
 				BAB44C7820A1A89A002455D8 /* NewMicoThirdCell.m */,
 				BAB44C7A20A1A89A002455D8 /* NewMicoThirdCell.xib */,
@@ -2454,6 +2470,8 @@
 				BA90668820A2F2C300631F42 /* CommentViewCell.h */,
 				BA90668920A2F2C300631F42 /* CommentViewCell.m */,
 				BA90668A20A2F2C300631F42 /* CommentViewCell.xib */,
+				BADA87CB20A49E840031EA5E /* AlertWriteView.h */,
+				BADA87CC20A49E840031EA5E /* AlertWriteView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -4171,6 +4189,9 @@
 				F6C227BD1F9B448D00464BD6 /* M */,
 				F6C227A91F9B2A2A00464BD6 /* CorrectViewController.h */,
 				F6C227AA1F9B2A2A00464BD6 /* CorrectViewController.m */,
+				32A648C920A479FF0014539F /* TYCorrectViewController.h */,
+				32A648CA20A479FF0014539F /* TYCorrectViewController.m */,
+				32A648CB20A479FF0014539F /* TYCorrectViewController.xib */,
 				F6C227AD1F9B2A3B00464BD6 /* V */,
 				F6C227AC1F9B2A3600464BD6 /* M */,
 				F6C741E01F95F8FC006CF76D /* MytestpaperViewController.h */,
@@ -5019,6 +5040,7 @@
 					F612EBC21F4FB341000E7432 = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = X225TLXQ76;
+						DevelopmentTeam = 5K5GGEWVU3;
 						ProvisioningStyle = Automatic;
 					};
 					F612EBDB1F4FB341000E7432 = {
@@ -5064,6 +5086,7 @@
 				3F4D1F4F20A2F67000584C6C /* bg_home_searchBg@2x.png in Resources */,
 				BA9C1CB420A2CCC000BFBE23 /* NewMicoSixthCell.xib in Resources */,
 				2F4FC65B20A17C34009A1E4C /* MyWritingDetailViewController.xib in Resources */,
+				BA34D9AD20A41DDF00D99165 /* CourseOutlineCell.xib in Resources */,
 				320D1BDD20862AA700F7D45A /* HomeHeaderView.xib in Resources */,
 				4ABBA2782080E02A0002E08D /* LoginViewController.xib in Resources */,
 				F612EBD11F4FB341000E7432 /* Main.storyboard in Resources */,
@@ -5095,6 +5118,7 @@
 				F6038DAE1F595154008FE507 /* MBProgressHUD.bundle in Resources */,
 				322B15742088AB3C009FCC96 /* CompositionLibraryTableViewCell.xib in Resources */,
 				F6038CF11F590601008FE507 /* mm.png in Resources */,
+				32A648CD20A479FF0014539F /* TYCorrectViewController.xib in Resources */,
 				3F09581D20A13DA900B55F4E /* LookStandarViewController.xib in Resources */,
 				F621C2061FA6B4C800801521 /* SVProgressHUD.bundle in Resources */,
 				F6B3C0F41F5DA43D00C0D821 /* MJRefresh.bundle in Resources */,
@@ -5471,6 +5495,7 @@
 				F6AB07841F78EC4A00B5304A /* ActiveWriteListModel.m in Sources */,
 				F6C227C71F9B595600464BD6 /* GetWritePicRemarkRequst.m in Sources */,
 				F6BC3E391F5D23710047A7AA /* UIView+WebCacheOperation.m in Sources */,
+				32A648CC20A479FF0014539F /* TYCorrectViewController.m in Sources */,
 				F6BC20871F94C357000686CC /* GetBookBjListModel.m in Sources */,
 				F6BC3E301F5D23710047A7AA /* SDWebImageDownloaderOperation.m in Sources */,
 				F6AF708E1F9DC214008E4220 /* CreatcircleFristCell.m in Sources */,
@@ -5478,6 +5503,7 @@
 				F649DD431F5516DD00879744 /* FristCollectionViewCell.m in Sources */,
 				BAB44C8D20A1A89A002455D8 /* CompositionCell.m in Sources */,
 				F6A7175E1FA039540046C235 /* GetMessageWaitNumRequst.m in Sources */,
+				BA34D9AC20A41DDF00D99165 /* CourseOutlineCell.m in Sources */,
 				F6D7C7ED1F8F440300A08DC1 /* BookDetailFristCell.m in Sources */,
 				F62DC7301F9F2ECF00D3E035 /* PerCenterCell.m in Sources */,
 				F6FFD3EE1F9094190029B762 /* BookSecondCell.m in Sources */,
@@ -5555,6 +5581,7 @@
 				F6A717831FA0B3970046C235 /* ChangePassWordViewController.m in Sources */,
 				04A07A2B1F6B62070026DD6E /* NSString+MJExtension.m in Sources */,
 				F6DC7CD51F91FECB0050D1DF /* ApplyMarkCell.m in Sources */,
+				BADA87CD20A49E840031EA5E /* AlertWriteView.m in Sources */,
 				BAB44C9220A1A89A002455D8 /* NewMicoFristCell.m in Sources */,
 				F6C0918A1F8A2EEE00F89A9B /* GetVoletacherModel.m in Sources */,
 				F6B3C0E61F5DA43D00C0D821 /* MJRefreshAutoFooter.m in Sources */,
@@ -5963,6 +5990,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = X225TLXQ76;
+				DEVELOPMENT_TEAM = 5K5GGEWVU3;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/XFComposition/PrefixHeader.pch";
 				INFOPLIST_FILE = XFComposition/Info.plist;

@@ -7,12 +7,22 @@
 //
 
 #import "CourseCollectionViewCell.h"
+#import "SDWebImageManager.h"
 
 @implementation CourseCollectionViewCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+}
+
+- (void)setDataModel:(WriteListModel *)dataModel
+{
+    _dataModel = dataModel;
+    NSString *str =[NSString stringWithFormat:@"%@%@",HTurl,_dataModel.MicroclassInfoAttr1];
+    [_courseImg sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",HTurl,_dataModel.MicroclassInfoAttr1]] placeholderImage:[UIImage imageNamed:@"icon_02"]];
+    _courseLab.text = _dataModel.MicroclassInfoTitle;
+    
 }
 
 @end

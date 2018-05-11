@@ -8,9 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface NewMicoSecondCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UILabel *titleLab;
-@property (weak, nonatomic) IBOutlet UILabel *courceLab;
-@property (weak, nonatomic) IBOutlet UILabel *dateLab;
+@interface NewMicoSecondCell : UITableViewCell<UITableViewDelegate,UITableViewDataSource>
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tabheightConstraint;
+
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+
+@property (nonatomic, strong)  NSMutableArray *datas;
 
 @end

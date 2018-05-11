@@ -7,7 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MicPianduanmodel.h"
+
+typedef void(^SelectItemBlock)(BOOL isSelected);
 
 @interface CompositionCell : UITableViewCell
+
+@property (nonatomic, strong) SelectItemBlock selectItemBlock;
+
+@property (weak, nonatomic) IBOutlet UIButton *selectBtn;
+@property (weak, nonatomic) IBOutlet UILabel *titleLab;
+@property (weak, nonatomic) IBOutlet UILabel *dateLab;
+@property (weak, nonatomic) IBOutlet UILabel *saveLab;
+@property (weak, nonatomic) IBOutlet UILabel *submitLab;
+@property (nonatomic, strong) MicPianduanmodel *dataModel;
 
 @end

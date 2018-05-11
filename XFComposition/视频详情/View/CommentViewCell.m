@@ -7,6 +7,8 @@
 //
 
 #import "CommentViewCell.h"
+#import "SDWebImageManager.h"
+#import "DianPingModel.h"
 
 @implementation CommentViewCell
 
@@ -15,6 +17,17 @@
     // Initialization code
 }
 
+-(void)setData:(id)data
+{
+    _data = data;
+    if ([_data isKindOfClass:[DianPingModel class]]) {
+        DianPingModel *model = (DianPingModel *)_data;
+        _userNameLab.text = model.username;
+        _dateLab.text = model.checktime;
+        _contentLab.text = model.title;
+    }
+//    [_iconImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",HTurl,model.]] placeholderImage:[UIImage ima]]
+}
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 

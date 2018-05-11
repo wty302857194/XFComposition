@@ -20,14 +20,19 @@ static NSString *compositionCellID = @"CompositionCell";
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.tableView registerNib:[UINib nibWithNibName:@"CompositionCell" bundle:nil] forCellReuseIdentifier:compositionCellID];
+    self.tableView.tableFooterView = [UIView new];
     
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
+-(void)setDatas:(NSMutableArray *)datas
+{
+    _datas = datas;
+    if (datas.count > 4) {
+        self.constraint.constant = 30*datas.count;
+    }
+    [self.tableView reloadData];
 }
+
 - (IBAction)clickAction:(UIButton *)sender {
     
     switch (sender.tag) {
@@ -54,19 +59,23 @@ static NSString *compositionCellID = @"CompositionCell";
 
 - (void)resetFrame:(int)count
 {
-    self.constraint.constant = 30*11;
+
 }
 
 #pragma mark - delegate
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     CompositionCell *cell = [tableView dequeueReusableCellWithIdentifier:compositionCellID forIndexPath:indexPath];
+    cell.dataModel = self.datas[indexPath.row];
+    cell.selectItemBlock = ^(BOOL isSelected) {
+        
+    };
     return cell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return 10;
+    return self.datas.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

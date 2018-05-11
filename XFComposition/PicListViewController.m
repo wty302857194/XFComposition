@@ -77,6 +77,10 @@
     self.inputTextView.placeholderFont = [UIFont systemFontOfSize:13];
     self.inputTextView.textColor =hexColor(666666);
     self.inputTextView.editable = _isChange;
+    self.inputTextView.layer.borderWidth = 0.5;
+    self.inputTextView.layer.borderColor = hexColor(888888).CGColor;
+    self.inputTextView.layer.cornerRadius = 5;
+    self.inputTextView.layer.masksToBounds = YES;
     [self getWritPic];
     
 }

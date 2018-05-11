@@ -11,17 +11,5 @@
 @implementation PlayerConfiguration
 
 
-/**
- 初始化 设置缺省值
- */
-- (instancetype)init
-{
-    self = [super init];
-    if (self) {
-        _hideControlsInterval = 5.0f;
-    }
-    return self;
-}
-
 
 @end

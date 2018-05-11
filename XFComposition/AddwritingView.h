@@ -7,12 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-@class AddwritingView;
+
 @protocol AddwritingViewDelegate <NSObject>
 
 -(void)newWriting;
 
 @end
+
 @interface AddwritingView : UIView
 @property (nonatomic,strong)UITextField *titletextfield;
 @property (nonatomic,strong)UITextView *textview;
@@ -20,3 +21,5 @@
 -(void)showView;
 -(void)dismissView;
 @end
+
+
