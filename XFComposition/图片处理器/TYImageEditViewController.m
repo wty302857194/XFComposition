@@ -7,6 +7,7 @@
 //
 
 #import "TYImageEditViewController.h"
+#import "TYCorrectViewController.h"
 
 @interface TYImageEditViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *imgView;
@@ -29,7 +30,10 @@
             break;
         case 12://旁批
         {
-            
+            [UIView animateWithDuration:0.5 animations:^{
+                [self.TYCorrecVC.scrollView setContentOffset:CGPointMake(kScreenWidth/2.f, self.TYCorrecVC.scrollView.contentOffset.y)];
+                self.TYCorrecVC.scrollView.scrollEnabled = YES;
+            }];
         }
             break;
         case 13://手绘

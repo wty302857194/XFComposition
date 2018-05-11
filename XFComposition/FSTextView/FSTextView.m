@@ -129,7 +129,11 @@ CGFloat const kFSTextViewPlaceholderHorizontalMargin = 6.0; ///< placeholderæ°´å
     _borderWidth = borderWidth;
     self.layer.borderWidth = _borderWidth;
 }
+- (void)setPlaceholderColor:(UIColor *)placeholderColor {
+    _placeholderColor = placeholderColor;
+    _placeholderLabel.textColor = _placeholderColor;
 
+}
 - (void)setPlaceholder:(NSString *)placeholder {
     if (!placeholder) return;
     _placeholder = placeholder;

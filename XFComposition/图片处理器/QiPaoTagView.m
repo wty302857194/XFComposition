@@ -37,8 +37,9 @@
          __weak typeof(self) weakSelf = self;
         [textView addTextDidChangeHandler:^(FSTextView *textView) {            
            float height = [Global heightForText:textView.text textFont:15 standardWidth:frame.size.width];
-            if (height>frame.size.height) {
-                CGRect newFrame = frame;
+            if (height>weakSelf
+                .frame.size.height) {
+                CGRect newFrame = weakSelf.frame;
                 newFrame.size.height = height;
                 weakSelf.frame = newFrame;
                 imgView.frame = weakSelf.bounds;
@@ -86,5 +87,7 @@
     }
     rec.view.center = CGPointMake(ty_x, ty_y);
     [rec setTranslation:CGPointMake(0, 0) inView:self];
+    
+    rec.view.frame = CGRectMake(ty_x-self.width/2.f, ty_y - self.height/2.f, self.frame.size.width, self.frame.size.height);
 }
 @end

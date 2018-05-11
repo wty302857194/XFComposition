@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class TYCorrectViewController;
 @interface TYImageEditViewController : UIViewController
-
+@property (nonatomic, strong) TYCorrectViewController *TYCorrecVC;
 @end

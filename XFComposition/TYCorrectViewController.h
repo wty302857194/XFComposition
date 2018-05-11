@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface TYCorrectViewController : UIViewController
+@property (strong, nonatomic) UIScrollView *scrollView;
 
 @end
