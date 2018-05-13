@@ -100,6 +100,13 @@ static NSString *seventhCellID = @"NewMicoSeventhCell";
     
 }
 
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    [self.playerView _deallocPlayer];
+    [self.playerView removeFromSuperview];
+}
+
 - (void)getAllData
 {
     [self Microdetailrequst0];//视频详情
@@ -629,8 +636,10 @@ static NSString *seventhCellID = @"NewMicoSeventhCell";
 }
 
 
+
+
 -(void)dealloc
 {
-    [self.playerView removeFromSuperview];
+    
 }
 @end
