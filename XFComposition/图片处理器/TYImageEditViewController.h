@@ -10,4 +10,7 @@
 @class TYCorrectViewController;
 @interface TYImageEditViewController : UIViewController
 @property (nonatomic, strong) TYCorrectViewController *TYCorrecVC;
+@property (nonatomic,strong)NSString *PicUrl;
+@property (strong, nonatomic) UIImageView *imgView;
+
 @end

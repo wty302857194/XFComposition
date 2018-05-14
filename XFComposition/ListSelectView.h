@@ -40,7 +40,7 @@ typedef void (^CancelButtonBlock)();
 @property (nonatomic, assign)float title_height;//标题的高度
 @property (nonatomic, strong)UIColor * _Nullable title_color;
 @property (nonatomic, assign)float title_font;//标题的字体大小
-//@property (strong, nonatomic)YKLabel *_Nullable tilteLabel;
+@property (strong, nonatomic)UILabel *_Nullable tilteLabel;
 // 仅仅是一个提示框时  提示的内容不能为空
 @property (nonatomic, copy) NSString  * _Nonnull content_text;
 @property (nonatomic, assign)float contentTextFount;//字体大小

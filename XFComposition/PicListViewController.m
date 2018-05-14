@@ -186,22 +186,17 @@
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
    
-//        GetWritePicModel *model = self.picArray[indexPath.row];
-//        CorrectViewController *vc = [[CorrectViewController alloc]init];
-//    NSString *pic = [NSString stringWithFormat:@"%@",model.FixPicUrl];
-//    if (pic.length > 3){
-//       vc.PicUrl = model.FixPicUrl;
-//    }else{
-//       vc.PicUrl = model.PicUrl;
-//    }
-//    
-//        vc.PicID = model.ID;
-//    
-//
-//        [self.navigationController pushViewController:vc animated:YES];
-    
-    
+    GetWritePicModel *model = self.picArray[indexPath.row];
     TYCorrectViewController *vc = [[TYCorrectViewController alloc] init];
+    NSString *pic = [NSString stringWithFormat:@"%@",model.FixPicUrl];
+    if (pic.length > 3){
+        vc.PicUrl = model.FixPicUrl;
+    }else{
+        vc.PicUrl = model.PicUrl;
+    }
+    
+    vc.PicID = model.ID;
+    
     [self.navigationController pushViewController:vc animated:YES];
 
     

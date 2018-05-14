@@ -224,11 +224,11 @@
     /**
      标题Label
      */
-//    self.tilteLabel.frame = CGRectMake(0, 0, self.selectView.frame.size.width, _title_height);
-//    self.tilteLabel.hidden = _isShowTitle?NO:YES;;
-//    self.tilteLabel.text = _title_str;//@"请选择适合的选项";
-//    self.tilteLabel.textColor = _title_color?:hexColor(323232);
-//    self.tilteLabel.font = [UIFont systemFontOfSize:_title_font!=0?_title_font:17];
+    self.tilteLabel.frame = CGRectMake(0, 0, self.selectView.frame.size.width, _title_height);
+    self.tilteLabel.hidden = _isShowTitle?NO:YES;;
+    self.tilteLabel.text = _title_str;//@"请选择适合的选项";
+    self.tilteLabel.textColor = _title_color?:hexColor(323232);
+    self.tilteLabel.font = [UIFont systemFontOfSize:_title_font!=0?_title_font:17];
     /**
      横线
      */

@@ -61,6 +61,9 @@
 		329134FF20A5881D007E10AB /* QiPaoTagView.m in Sources */ = {isa = PBXBuildFile; fileRef = 329134FD20A5881C007E10AB /* QiPaoTagView.m */; };
 		32A5A9D220A4171E001E4838 /* ReadJianCeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A5A9D020A4171E001E4838 /* ReadJianCeViewController.m */; };
 		32A5A9D320A4171E001E4838 /* ReadJianCeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32A5A9D120A4171E001E4838 /* ReadJianCeViewController.xib */; };
+		32A5E62120A961FE00B7D56F /* DCBeizierPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A5E61F20A961FE00B7D56F /* DCBeizierPath.m */; };
+		32A5E62220A961FE00B7D56F /* DCBezierPaintBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A5E62020A961FE00B7D56F /* DCBezierPaintBoard.m */; };
+		32A5E62720A9642500B7D56F /* DCUndoBeziPathPaintBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A5E62520A9642500B7D56F /* DCUndoBeziPathPaintBoard.m */; };
 		32A648CC20A479FF0014539F /* TYCorrectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A648CA20A479FF0014539F /* TYCorrectViewController.m */; };
 		32A648CD20A479FF0014539F /* TYCorrectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32A648CB20A479FF0014539F /* TYCorrectViewController.xib */; };
 		32A7A0F1209ADD5900C19895 /* TYOnlyActivetyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A7A0EF209ADD5800C19895 /* TYOnlyActivetyTableViewCell.m */; };
@@ -800,6 +803,13 @@
 		32A5A9CF20A4171E001E4838 /* ReadJianCeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReadJianCeViewController.h; sourceTree = "<group>"; };
 		32A5A9D020A4171E001E4838 /* ReadJianCeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReadJianCeViewController.m; sourceTree = "<group>"; };
 		32A5A9D120A4171E001E4838 /* ReadJianCeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReadJianCeViewController.xib; sourceTree = "<group>"; };
+		32A5E61D20A961FE00B7D56F /* DCBeizierPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCBeizierPath.h; sourceTree = "<group>"; };
+		32A5E61E20A961FE00B7D56F /* DCBezierPaintBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCBezierPaintBoard.h; sourceTree = "<group>"; };
+		32A5E61F20A961FE00B7D56F /* DCBeizierPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCBeizierPath.m; sourceTree = "<group>"; };
+		32A5E62020A961FE00B7D56F /* DCBezierPaintBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCBezierPaintBoard.m; sourceTree = "<group>"; };
+		32A5E62320A9628400B7D56F /* DCCommon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DCCommon.h; sourceTree = "<group>"; };
+		32A5E62520A9642500B7D56F /* DCUndoBeziPathPaintBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCUndoBeziPathPaintBoard.m; sourceTree = "<group>"; };
+		32A5E62620A9642500B7D56F /* DCUndoBeziPathPaintBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCUndoBeziPathPaintBoard.h; sourceTree = "<group>"; };
 		32A648C920A479FF0014539F /* TYCorrectViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TYCorrectViewController.h; sourceTree = "<group>"; };
 		32A648CA20A479FF0014539F /* TYCorrectViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TYCorrectViewController.m; sourceTree = "<group>"; };
 		32A648CB20A479FF0014539F /* TYCorrectViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TYCorrectViewController.xib; sourceTree = "<group>"; };
@@ -2148,6 +2158,27 @@
 			path = UpComposition;
 			sourceTree = "<group>";
 		};
+		32A5E61C20A961FE00B7D56F /* BeziPathPaint */ = {
+			isa = PBXGroup;
+			children = (
+				32A5E62320A9628400B7D56F /* DCCommon.h */,
+				32A5E61D20A961FE00B7D56F /* DCBeizierPath.h */,
+				32A5E61F20A961FE00B7D56F /* DCBeizierPath.m */,
+				32A5E61E20A961FE00B7D56F /* DCBezierPaintBoard.h */,
+				32A5E62020A961FE00B7D56F /* DCBezierPaintBoard.m */,
+			);
+			path = BeziPathPaint;
+			sourceTree = "<group>";
+		};
+		32A5E62420A9642500B7D56F /* UndoBezipath */ = {
+			isa = PBXGroup;
+			children = (
+				32A5E62620A9642500B7D56F /* DCUndoBeziPathPaintBoard.h */,
+				32A5E62520A9642500B7D56F /* DCUndoBeziPathPaintBoard.m */,
+			);
+			path = UndoBezipath;
+			sourceTree = "<group>";
+		};
 		32CBFA7E20878245004CB00F /* model */ = {
 			isa = PBXGroup;
 			children = (
@@ -2184,6 +2215,8 @@
 		32E5504520A583CF00631A14 /* 图片处理器 */ = {
 			isa = PBXGroup;
 			children = (
+				32A5E62420A9642500B7D56F /* UndoBezipath */,
+				32A5E61C20A961FE00B7D56F /* BeziPathPaint */,
 				329134FB20A5881B007E10AB /* 气泡-2.png */,
 				329134FC20A5881C007E10AB /* QiPaoTagView.h */,
 				329134FD20A5881C007E10AB /* QiPaoTagView.m */,
@@ -5071,7 +5104,7 @@
 				TargetAttributes = {
 					F612EBC21F4FB341000E7432 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = 5K5GGEWVU3;
+						DevelopmentTeam = W2Y3WMTNRF;
 						ProvisioningStyle = Automatic;
 					};
 					F612EBDB1F4FB341000E7432 = {
@@ -5468,6 +5501,7 @@
 				BAB44C9620A1A89A002455D8 /* VideoPlayer.m in Sources */,
 				F6ACDA031FAB134F009F897B /* MemberViewController.m in Sources */,
 				F6BC3E351F5D23710047A7AA /* UIImage+MultiFormat.m in Sources */,
+				32A5E62720A9642500B7D56F /* DCUndoBeziPathPaintBoard.m in Sources */,
 				589BF89B2062587F00BA0D88 /* JGInfiniteScrollView.m in Sources */,
 				F6D7C8081F8F7EAE00A08DC1 /* ReplaceCell.m in Sources */,
 				F6AF70891F9DBDB0008E4220 /* CreatecircleViewController.m in Sources */,
@@ -5557,6 +5591,7 @@
 				4ABBA2732080E0150002E08D /* BaseViewController.m in Sources */,
 				F6A717801FA0AE780046C235 /* PasswordCell.m in Sources */,
 				F60496E41F74AE05007EE6C8 /* JoinGroupRequst.m in Sources */,
+				32A5E62120A961FE00B7D56F /* DCBeizierPath.m in Sources */,
 				F6B0BEB91F7B4FD00002DB82 /* WritingxzViewController.m in Sources */,
 				F6B578F21F65A9390049FEDA /* HomepaSecondCell.m in Sources */,
 				F6AA9A161F613AA9006897B1 /* MicroClassTypeModel.m in Sources */,
@@ -5570,6 +5605,7 @@
 				32BB21C02089C53700107075 /* UpCompositionModel.m in Sources */,
 				F6BC3E2C1F5D23710047A7AA /* SDImageCache.m in Sources */,
 				F67F9EA31F57D8780070C629 /* VolunteerFrsitHeadView.m in Sources */,
+				32A5E62220A961FE00B7D56F /* DCBezierPaintBoard.m in Sources */,
 				BAB44C9420A1A89A002455D8 /* PlaybackControls.m in Sources */,
 				F6BC3E2A1F5D23710047A7AA /* MKAnnotationView+WebCache.m in Sources */,
 				3F09582720A1404900B55F4E /* XFTipView.m in Sources */,
@@ -6026,13 +6062,13 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5K5GGEWVU3;
+				DEVELOPMENT_TEAM = W2Y3WMTNRF;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/XFComposition/PrefixHeader.pch";
 				INFOPLIST_FILE = XFComposition/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.house365.Rent;
+				PRODUCT_BUNDLE_IDENTIFIER = com.grasp.test1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -6047,13 +6083,13 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = X225TLXQ76;
+				DEVELOPMENT_TEAM = W2Y3WMTNRF;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/XFComposition/PrefixHeader.pch";
 				INFOPLIST_FILE = XFComposition/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.house365.Rent;
+				PRODUCT_BUNDLE_IDENTIFIER = com.grasp.test1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";

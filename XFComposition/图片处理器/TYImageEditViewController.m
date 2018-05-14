@@ -8,16 +8,27 @@
 
 #import "TYImageEditViewController.h"
 #import "TYCorrectViewController.h"
+#import "DCCommon.h"
+#import "DCBezierPaintBoard.h"
+#import "ListSelectView.h"
+#import "DCUndoBeziPathPaintBoard.h"
 
 @interface TYImageEditViewController ()
 {
     CGFloat lastScale;
     CGRect oldFrame;    //保存图片原来的大小
-    CGRect largeFrame;  //确定图片放大最大的程度
+    CGRect largeFrame;  //确定图片放大最大的程;
+    UIPinchGestureRecognizer *pinchGestureRecognizer;
+    UIPanGestureRecognizer *panGestureRecognizer;
 }
-@property (weak, nonatomic) IBOutlet UIImageView *imgView;
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic, assign)DCPaintColor  selectPaintColor;
+@property (nonatomic, assign) BOOL isErase;
+@property (nonatomic, assign) DCPaintBoardType paintBoardType;
 
+@property (strong, nonatomic) DCBezierPaintBoard *DCUndoView;
+@property (weak, nonatomic) IBOutlet UIView *topBackView;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic,copy) NSArray *tabArr;
 @end
 
 @implementation TYImageEditViewController
@@ -43,48 +54,96 @@
             break;
         case 13://手绘
         {
-            
+            sender.selected = !sender.selected;
+            if (sender.isSelected) {
+                self.DCUndoView.lineColor = [UIColor redColor];
+                [self removeGestureRecognizerFromView:self.imgView];
+            }else {
+                self.DCUndoView.lineColor = [UIColor clearColor];
+                [self addGestureRecognizerToView:self.imgView];
+            }
         }
             break;
         case 14://撤销
         {
-            
+            sender.selected = !sender.selected;
+            self.isErase = sender.selected;
         }
             break;
         case 15://tableview
         {
-            
+            self.tableView.hidden = !self.tableView.hidden;
         }
             break;
         default:
             break;
     }
 }
+- (void)tableViewHidden {
+    self.tableView.hidden = !self.tableView.hidden;
+    if (self.tableView.isHidden) {
+        [UIView animateWithDuration:0.5 animations:^{
+            
+        } completion:^(BOOL finished) {
+            
+        }];
+    }
+    
+}
+- (UIImageView *)imgView {
+    if (!_imgView) {
+        _imgView = [[UIImageView alloc] init];
+        _imgView.backgroundColor = hexColor(ff4e00);
+        [_imgView setMultipleTouchEnabled:YES];
+        [_imgView setUserInteractionEnabled:YES];
+        NSString *str = [NSString stringWithFormat:@"%@%@",HTurl,self.PicUrl];
+        [_imgView sd_setImageWithURL:[NSURL URLWithString:str]];
+        _topBackView.clipsToBounds = YES;
+        [_topBackView addSubview:_imgView];
+        [_imgView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(50);
+            make.right.mas_equalTo(-50);
+            make.top.mas_equalTo(100);
+            make.height.mas_equalTo(_imgView.mas_width).multipliedBy(2083/1602.f);
+        }];
+        
+        _DCUndoView = [[DCBezierPaintBoard alloc] init];
+        _DCUndoView.lineColor = [UIColor clearColor];
+        _DCUndoView.backgroundColor = [UIColor clearColor];
+        [_imgView addSubview:_DCUndoView];
+        [_DCUndoView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.mas_equalTo(_imgView);
+        }];
+    }
+    return _imgView;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    [self.imgView setMultipleTouchEnabled:YES];
-    [self.imgView setUserInteractionEnabled:YES];
-    oldFrame = self.imgView.frame;
+    _tabArr = @[@"清屏",@"颜色",@"画笔",@"还原大小",@"范文库",@"病文库"];
     
+    oldFrame = self.imgView.frame;
     largeFrame = CGRectMake(-(3 * oldFrame.size.width - self.view.height)/2.f, -(3 * oldFrame.size.height - self.view.height)/2.f, 3 * oldFrame.size.width, 3 * oldFrame.size.height);
     
     [self addGestureRecognizerToView:self.imgView];
-    self.view.clipsToBounds = YES;
 }
-
+//取消手势
+- (void)removeGestureRecognizerFromView:(UIView *)view {
+    [view removeGestureRecognizer:pinchGestureRecognizer];
+    [view removeGestureRecognizer:panGestureRecognizer];
+}
 //添加手势
 // 添加所有的手势
 - (void) addGestureRecognizerToView:(UIView *)view
 {
     
     // 缩放手势
-    UIPinchGestureRecognizer *pinchGestureRecognizer = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinchView:)];
+    pinchGestureRecognizer = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinchView:)];
     [view addGestureRecognizer:pinchGestureRecognizer];
     
     // 移动手势
-    UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panView:)];
+    panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panView:)];
     [view addGestureRecognizer:panGestureRecognizer];
 }
 
@@ -112,6 +171,108 @@
 //            self.imgView.frame = largeFrame;
 //        }
         pinchGestureRecognizer.scale = 1;
+    }
+}
+/**
+ *  画笔颜色set方法
+ *
+ */
+- (void)setSelectPaintColor:(DCPaintColor)selectPaintColor
+{
+    _selectPaintColor = selectPaintColor;
+    switch (selectPaintColor) {
+        case DCPaintColorRed:
+            self.DCUndoView.lineColor = [UIColor redColor];
+            break;
+        case DCPaintColorBlue:
+            self.DCUndoView.lineColor = [UIColor blueColor];
+            break;
+        case DCPaintColorGreen:
+            self.DCUndoView.lineColor = [UIColor greenColor];
+            break;
+        case DCPaintColorBlack:
+            self.DCUndoView.lineColor = [UIColor blackColor];
+            break;
+        default:
+            self.DCUndoView.lineColor = [UIColor blackColor];
+            break;
+    }
+}
+- (void)setIsErase:(BOOL)isErase{
+    _isErase = isErase;
+    self.DCUndoView.isErase = isErase;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 40;
+}
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return _tabArr.count;
+}
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *identifier = @"identifier";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+    }
+    cell.textLabel.text = _tabArr[indexPath.row];
+    cell.textLabel.font = [UIFont systemFontOfSize:15];
+    return cell;
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    switch (indexPath.row) {
+        case 0:
+        {
+            [self.DCUndoView clear];
+        }
+            break;
+        case 1:
+        {
+            __weak typeof(self) weakSelf = self;
+            ListSelectView *select_view = [[ListSelectView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, self.view.height)];
+            select_view.choose_type = MORECHOOSETITLETYPE;
+            select_view.isShowCancelBtn = YES;
+            select_view.isShowSureBtn = NO;
+            select_view.isShowTitle = YES;
+            [select_view addTitleArray:@[@"红色",@"绿色",@"蓝色",@"黑色"] andTitleString:@"颜色设置" animated:YES completionHandler:^(NSString * _Nullable string, NSInteger index) {
+                weakSelf.selectPaintColor = (DCPaintColor)index+1;
+
+            } withSureButtonBlock:^{
+                NSLog(@"sure btn");
+            }];
+            [self.navigationController.view addSubview:select_view];
+        }
+            break;
+        case 2:
+        {
+            
+        }
+            break;
+        case 3:
+        {
+            self.imgView.frame = oldFrame;
+        }
+            break;
+        case 4:
+        {
+            
+        }
+            break;
+        case 5:
+        {
+            
+        }
+            break;
+        default:
+            break;
     }
 }
 
