@@ -89,8 +89,9 @@ static NSString *seventhCellID = @"NewMicoSeventhCell";
     [self.view addSubview:self.playerView];
     [self.view addSubview:self.tableView];
     
+    __weak typeof (self) weakSelf = self;
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [self getAllData];
+        [weakSelf getAllData];
     }];
     header.lastUpdatedTimeLabel.hidden = YES;
     header.stateLabel.hidden = YES;
@@ -103,8 +104,7 @@ static NSString *seventhCellID = @"NewMicoSeventhCell";
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
-    [self.playerView _deallocPlayer];
-    [self.playerView removeFromSuperview];
+    
 }
 
 - (void)getAllData
@@ -124,11 +124,10 @@ static NSString *seventhCellID = @"NewMicoSeventhCell";
 -(void)Microdetailrequst0
 {
     __weak typeof (self) weakSelf = self;
-    self.panduan = @"0";
     Microdetailrequst *requst = [[Microdetailrequst alloc]init];
     [requst GetmicroInfoWithClassId:self.classId withUserId:self.userId :^(NSDictionary *json) {
         
-        [self.tableView.mj_header endRefreshing];
+        [weakSelf.tableView.mj_header endRefreshing];
         
         weakSelf.detailmodel = [MicrodetailModel loadWithJSOn:json[@"ret_data"]];
         
@@ -136,12 +135,12 @@ static NSString *seventhCellID = @"NewMicoSeventhCell";
         NSDictionary *dic = weakSelf.detailmodel.videoList.firstObject;
         if (dic) {
             MicroVideoModel *model = [MicroVideoModel loadWithJSOn:dic];
-            self.configuration.imageUrl = [NSString stringWithFormat:@"%@%@",HTurl,model.picpath];
-            self.configuration.sourceUrl = [NSURL URLWithString:model.MicroclassItemMp4Path];
+            weakSelf.configuration.imageUrl = [NSString stringWithFormat:@"%@%@",HTurl,model.picpath];
+            weakSelf.configuration.sourceUrl = [NSURL URLWithString:model.MicroclassItemMp4Path];
             
 //            self.configuration.sourceUrl = [NSURL URLWithString:@"http://www.crowncake.cn:18080/wav/no.9.mp4"] ;
-            self.configuration.title = model.title;
-            [self.playerView setPlayerConfiguration:self.configuration];
+            weakSelf.configuration.title = model.title;
+            [weakSelf.playerView setPlayerConfiguration:self.configuration];
         }
         
         [weakSelf.videoArray removeAllObjects];
@@ -232,14 +231,15 @@ static NSString *seventhCellID = @"NewMicoSeventhCell";
 //点击弹出作文，可修改
 -(void)showzuowen:(MicPianduanmodel *)model{
     
+    __weak typeof (self) weakSelf = self;
     GetBlogContentInfoRequst *requst = [[GetBlogContentInfoRequst alloc]init];
     [requst GetBlogContentInfoRequstWithNoticeID:model.ID :^(NSDictionary *json) {
         if ([json[@"ret_msg"] isEqualToString:@"成功"]) {
             NSString *str1 = [self htmlEntityDecode:json[@"ret_data"]];
-            NSAttributedString * attributeStr = [self attributedStringWithHTMLString:str1];
+            NSAttributedString * attributeStr = [weakSelf attributedStringWithHTMLString:str1];
             NSString *string = [attributeStr string];
             AlertWriteView *alertView = [[AlertWriteView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
-            alertView.delegate = self;
+            alertView.delegate = weakSelf;
             [alertView showViewWithModel:model content:string flag:@"1"];
             
         }
@@ -278,7 +278,6 @@ static NSString *seventhCellID = @"NewMicoSeventhCell";
         }
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            weakSelf.panduan = @"3";
             NSIndexSet *indexset = [NSIndexSet indexSetWithIndex:3];
             [weakSelf.tableView reloadSections:indexset withRowAnimation:UITableViewRowAnimationNone];
             
@@ -289,7 +288,6 @@ static NSString *seventhCellID = @"NewMicoSeventhCell";
 //本课习作
 -(void)MicCommWriteList{
     __weak typeof (self) weakSelf = self;
-    self.panduan = @"4";
     CommWriteListRequst *requst = [[CommWriteListRequst alloc]init];
     
     [requst Comm_GetWriteListrequstWithindex:[NSNumber numberWithInteger:1] withpagesiz:@"4" withgradid:@"5" withtypeid:self.classId withishot:@"-1" withtuijian:@"-1"  withlabelid:@"0"  withkeword:@""  BlogStatic:@"1" :^(NSDictionary *json) {
@@ -322,25 +320,26 @@ static NSString *seventhCellID = @"NewMicoSeventhCell";
         
         dispatch_async(dispatch_get_main_queue(), ^{
             NSIndexSet *indexset = [NSIndexSet indexSetWithIndex:5];
-            [self.tableView reloadSections:indexset withRowAnimation:UITableViewRowAnimationNone];
+            [weakSelf.tableView reloadSections:indexset withRowAnimation:UITableViewRowAnimationNone];
         });
     }];
     
 }
 //获取正在进行的微课堂
 -(void)GetMircroClass{
+    __weak typeof (self) weakSelf = self;
     MicoClassRequst *requst = [[MicoClassRequst alloc]init];
     [requst requstGetmicListWithchangId:@"2" Withmasterid:@"0" Withsubjectid:@"0" Withindex:@"1" Withpagesize:@"3" Withrecommed:@"-1" Withprostatic:@"-1" Withtimespan:@"0" :^(NSDictionary *json) {
         
         
-        [self.microArray removeAllObjects];
+        [weakSelf.microArray removeAllObjects];
         for (NSDictionary *dic in json[@"ret_data"][@"pageInfo"]) {
             WriteListModel *model = [WriteListModel loadWithJSOn:dic];
-            [self.microArray addObject:model];
+            [weakSelf.microArray addObject:model];
         }
         dispatch_async(dispatch_get_main_queue(), ^{
             NSIndexSet *indexset = [NSIndexSet indexSetWithIndex:6];
-            [self.tableView reloadSections:indexset withRowAnimation:UITableViewRowAnimationNone];
+            [weakSelf.tableView reloadSections:indexset withRowAnimation:UITableViewRowAnimationNone];
         });
         
     }];
@@ -395,14 +394,14 @@ static NSString *seventhCellID = @"NewMicoSeventhCell";
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.datas = self.articleArray;
         cell.didSelectRowBlock = ^(MicPianduanmodel *model) {
-            [self showzuowen:model];
+            [weakSelf showzuowen:model];
             
         };
         cell.clickBlock = ^(NSArray<MicPianduanmodel *> *array, ClickType type) {
             
             if (type == ClickTypeAdd) {//新建作文
                 AlertWriteView *alertView = [[AlertWriteView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
-                alertView.delegate = self;
+                alertView.delegate = weakSelf;
                 [alertView showViewWithModel:nil content:nil flag:@"0"];
 
             } else if (type == ClickTypeSave) {//保存
@@ -411,7 +410,7 @@ static NSString *seventhCellID = @"NewMicoSeventhCell";
                     [ary addObject:model.ID];
                 }
                 NSString *ids = [ary componentsJoinedByString:@","];
-                [self SaveGJ:ids];
+                [weakSelf SaveGJ:ids];
                 
             } else if (type == ClickTypeSubmit) {//提交
                 NSMutableArray *ary = [NSMutableArray array];
@@ -419,7 +418,7 @@ static NSString *seventhCellID = @"NewMicoSeventhCell";
                     [ary addObject:model.ID];
                 }
                 NSString *ids = [ary componentsJoinedByString:@","];
-                [self SubmittTeacher:ids];
+                [weakSelf SubmittTeacher:ids];
             }
             
         };
@@ -453,7 +452,7 @@ static NSString *seventhCellID = @"NewMicoSeventhCell";
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.datas = self.microArray;
         cell.showMoreBlock = ^() {
-            [self goMore];
+            [weakSelf goMore];
         };
         cell.showDetailBlock = ^ (WriteListModel *model) {
             NewMicrodetailController *vc = [[NewMicrodetailController alloc]init];
@@ -568,7 +567,7 @@ static NSString *seventhCellID = @"NewMicoSeventhCell";
 - (UITableView *)tableView
 {
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.playerView.frame), self.view.frame.size.width, self.view.frame.size.height-CGRectGetMaxY(self.playerView.frame)) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_playerView.frame), kScreenWidth, kScreenHeight-CGRectGetMaxY(_playerView.frame)) style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.separatorColor = [UIColor clearColor];
@@ -587,7 +586,7 @@ static NSString *seventhCellID = @"NewMicoSeventhCell";
 - (UIView *)playerView
 {
     if (!_playerView) {
-        _playerView = [[VideoPlayer alloc] initWithFrame:CGRectMake(0, iPhoneX ? 88 : 64, self.view.frame.size.width, 180)];
+        _playerView = [[VideoPlayer alloc] initWithFrame:CGRectMake(0, iPhoneX ? 88 : 64, kScreenWidth, 180)];
     }
     return _playerView;
 }
@@ -636,10 +635,9 @@ static NSString *seventhCellID = @"NewMicoSeventhCell";
 }
 
 
-
-
 -(void)dealloc
 {
-    
+    [self.playerView _deallocPlayer];
+    [self.playerView removeFromSuperview];
 }
 @end

@@ -285,7 +285,7 @@ typedef NS_ENUM(NSInteger, VideoPlayerState) {
 /** 应用进入前台 */
 - (void)appDidEnterPlayground:(NSNotification *)notify
 {
-    
+    [self _playVideo];
 }
 
 /** 视频播放结束事件监听 */
