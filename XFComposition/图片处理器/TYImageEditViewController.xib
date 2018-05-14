@@ -34,9 +34,9 @@
                     <subviews>
                         <button opaque="NO" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U2e-DJ-5Uk">
                             <rect key="frame" x="80" y="0.0" width="43" height="60"/>
-                            <inset key="titleEdgeInsets" minX="-30" minY="20" maxX="0.0" maxY="0.0"/>
-                            <inset key="imageEdgeInsets" minX="5" minY="0.0" maxX="0.0" maxY="20"/>
-                            <state key="normal" title="语音" image="40.jpg">
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <inset key="imageEdgeInsets" minX="5" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <state key="normal" title="语音">
                                 <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
                             <connections>
@@ -45,21 +45,27 @@
                         </button>
                         <button opaque="NO" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ils-eM-97w">
                             <rect key="frame" x="123" y="-0.5" width="43" height="60"/>
-                            <state key="normal" title="截图"/>
+                            <state key="normal" title="截图">
+                                <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
                             <connections>
                                 <action selector="yuYin:" destination="-1" eventType="touchUpInside" id="gps-ie-rYU"/>
                             </connections>
                         </button>
                         <button opaque="NO" tag="13" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ypZ-2e-9vC">
                             <rect key="frame" x="209" y="-0.5" width="43" height="60"/>
-                            <state key="normal" title="手绘"/>
+                            <state key="normal" title="手绘">
+                                <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
                             <connections>
                                 <action selector="yuYin:" destination="-1" eventType="touchUpInside" id="IUa-uS-GjV"/>
                             </connections>
                         </button>
                         <button opaque="NO" tag="14" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d43-EF-jnM">
                             <rect key="frame" x="252" y="-0.5" width="43" height="60"/>
-                            <state key="normal" title="撤销"/>
+                            <state key="normal" title="撤销">
+                                <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
                             <connections>
                                 <action selector="yuYin:" destination="-1" eventType="touchUpInside" id="bAQ-tB-pRp"/>
                             </connections>
@@ -77,7 +83,9 @@
                         </button>
                         <button opaque="NO" tag="12" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JY0-Wg-cjU">
                             <rect key="frame" x="166" y="-0.5" width="43" height="60"/>
-                            <state key="normal" title="旁批"/>
+                            <state key="normal" title="旁批">
+                                <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
                             <connections>
                                 <action selector="yuYin:" destination="-1" eventType="touchUpInside" id="hKA-pX-PuI"/>
                             </connections>
@@ -136,7 +144,6 @@
         </view>
     </objects>
     <resources>
-        <image name="40.jpg" width="40" height="40"/>
         <image name="ic_banner_yuedu" width="563" height="300"/>
         <image name="ic_read_pl00" width="32" height="30"/>
     </resources>

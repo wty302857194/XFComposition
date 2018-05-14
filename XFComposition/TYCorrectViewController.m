@@ -19,7 +19,7 @@
 @implementation TYCorrectViewController
 - (UIScrollView *)scrollView {
     if (!_scrollView) {
-        _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, kLayoutViewMarginTop, kScreenWidth, kScreenHeight - kLayoutViewMarginTop)];
+        _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, kLayoutViewMarginTop, kScreenWidth, kScreenHeight - kLayoutViewMarginTop - kSafeAreaMaiginBottom)];
         _scrollView.delegate = self;
         _scrollView.pagingEnabled = YES;
         _scrollView.bounces = NO;
@@ -71,10 +71,6 @@
     if(scrollView.contentOffset.x == 0) {
         scrollView.scrollEnabled = NO;
     }
-//    int index = scrollView.contentOffset.x/kScreenWidth;
-//    if (index == 1) {
-//        [_scrollView setContentOffset:CGPointMake(index*kScreenWidth, _scrollView.contentOffset.y)];
-//    }
 }
 
 @end
