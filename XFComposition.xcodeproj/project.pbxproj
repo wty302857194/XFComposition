@@ -78,6 +78,7 @@
 		32CBFA8520883C58004CB00F /* Global.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CBFA8420883C57004CB00F /* Global.m */; };
 		32CBFA8B20886B5C004CB00F /* LeftMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CBFA8920886B5C004CB00F /* LeftMenuViewController.m */; };
 		32CBFA8C20886B5C004CB00F /* LeftMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32CBFA8A20886B5C004CB00F /* LeftMenuViewController.xib */; };
+		32DFCE2220AA6CED00E46F13 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32DFCE2120AA6CED00E46F13 /* OpenGLES.framework */; };
 		32E5504920A583D000631A14 /* TYImageEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32E5504620A583CF00631A14 /* TYImageEditViewController.m */; };
 		32E5504A20A583D000631A14 /* TYImageEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32E5504720A583CF00631A14 /* TYImageEditViewController.xib */; };
 		32F7E755209323FD0016C1A6 /* TYVolunteerCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32F7E753209323FD0016C1A6 /* TYVolunteerCollectionViewCell.m */; };
@@ -834,6 +835,7 @@
 		32CBFA8820886B5C004CB00F /* LeftMenuViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LeftMenuViewController.h; sourceTree = "<group>"; };
 		32CBFA8920886B5C004CB00F /* LeftMenuViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LeftMenuViewController.m; sourceTree = "<group>"; };
 		32CBFA8A20886B5C004CB00F /* LeftMenuViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LeftMenuViewController.xib; sourceTree = "<group>"; };
+		32DFCE2120AA6CED00E46F13 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		32E5504620A583CF00631A14 /* TYImageEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYImageEditViewController.m; sourceTree = "<group>"; };
 		32E5504720A583CF00631A14 /* TYImageEditViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TYImageEditViewController.xib; sourceTree = "<group>"; };
 		32E5504820A583CF00631A14 /* TYImageEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYImageEditViewController.h; sourceTree = "<group>"; };
@@ -2061,6 +2063,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				32DFCE2220AA6CED00E46F13 /* OpenGLES.framework in Frameworks */,
 				B6F16DB8290F62883631B0B6 /* Pods_XFComposition.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2391,6 +2394,7 @@
 		587AA2B7206A10840034B766 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				32DFCE2120AA6CED00E46F13 /* OpenGLES.framework */,
 				587AA2CC206A12150034B766 /* libresolv.tbd */,
 				587AA2CA206A120A0034B766 /* libz.tbd */,
 				587AA2C8206A11FE0034B766 /* CFNetwork.framework */,
@@ -5104,7 +5108,7 @@
 				TargetAttributes = {
 					F612EBC21F4FB341000E7432 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = W2Y3WMTNRF;
+						DevelopmentTeam = RGN8U623GW;
 						ProvisioningStyle = Automatic;
 					};
 					F612EBDB1F4FB341000E7432 = {
@@ -6062,7 +6066,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = W2Y3WMTNRF;
+				DEVELOPMENT_TEAM = RGN8U623GW;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/XFComposition/PrefixHeader.pch";
 				INFOPLIST_FILE = XFComposition/Info.plist;
@@ -6083,7 +6087,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = W2Y3WMTNRF;
+				DEVELOPMENT_TEAM = RGN8U623GW;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/XFComposition/PrefixHeader.pch";
 				INFOPLIST_FILE = XFComposition/Info.plist;

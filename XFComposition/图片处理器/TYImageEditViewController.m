@@ -10,6 +10,7 @@
 #import "TYCorrectViewController.h"
 #import "DCCommon.h"
 #import "DCBezierPaintBoard.h"
+//#import "DCOpenGLDrawView.h"
 #import "ListSelectView.h"
 #import "DCUndoBeziPathPaintBoard.h"
 
@@ -79,20 +80,10 @@
             break;
     }
 }
-- (void)tableViewHidden {
-    self.tableView.hidden = !self.tableView.hidden;
-    if (self.tableView.isHidden) {
-        [UIView animateWithDuration:0.5 animations:^{
-            
-        } completion:^(BOOL finished) {
-            
-        }];
-    }
-    
-}
+
 - (UIImageView *)imgView {
     if (!_imgView) {
-        _imgView = [[UIImageView alloc] init];
+        _imgView = [[UIImageView alloc] initWithFrame:CGRectMake(50, 80, kScreenWidth-100, (kScreenWidth-100)*2083/1602.f)];
         _imgView.backgroundColor = hexColor(ff4e00);
         [_imgView setMultipleTouchEnabled:YES];
         [_imgView setUserInteractionEnabled:YES];
@@ -100,12 +91,10 @@
         [_imgView sd_setImageWithURL:[NSURL URLWithString:str]];
         _topBackView.clipsToBounds = YES;
         [_topBackView addSubview:_imgView];
-        [_imgView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(50);
-            make.right.mas_equalTo(-50);
-            make.top.mas_equalTo(100);
-            make.height.mas_equalTo(_imgView.mas_width).multipliedBy(2083/1602.f);
-        }];
+
+        oldFrame = _imgView.frame;
+        largeFrame = CGRectMake(-(3 * oldFrame.size.width - self.view.height)/2.f, -(3 * oldFrame.size.height - self.view.height)/2.f, 3 * oldFrame.size.width, 3 * oldFrame.size.height);
+        
         
         _DCUndoView = [[DCBezierPaintBoard alloc] init];
         _DCUndoView.lineColor = [UIColor clearColor];
@@ -121,10 +110,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    _tabArr = @[@"清屏",@"颜色",@"画笔",@"还原大小",@"范文库",@"病文库"];
+    _tabArr = @[@"清屏",@"颜色",@"还原大小",@"范文库",@"病文库"];
     
-    oldFrame = self.imgView.frame;
-    largeFrame = CGRectMake(-(3 * oldFrame.size.width - self.view.height)/2.f, -(3 * oldFrame.size.height - self.view.height)/2.f, 3 * oldFrame.size.width, 3 * oldFrame.size.height);
+
     
     [self addGestureRecognizerToView:self.imgView];
 }
@@ -228,6 +216,7 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     switch (indexPath.row) {
         case 0:
         {
@@ -251,14 +240,15 @@
             [self.navigationController.view addSubview:select_view];
         }
             break;
+
         case 2:
         {
-            
+            self.imgView.frame = oldFrame;
         }
             break;
         case 3:
         {
-            self.imgView.frame = oldFrame;
+            
         }
             break;
         case 4:
@@ -266,14 +256,11 @@
             
         }
             break;
-        case 5:
-        {
-            
-        }
-            break;
         default:
             break;
     }
+    
+    self.tableView.hidden = YES;
 }
 
 @end

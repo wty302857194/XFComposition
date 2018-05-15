@@ -44,16 +44,16 @@
 /**
  标题Label
  */
-//- (YKLabel *)tilteLabel {
-//    if (!_tilteLabel) {
-//        _tilteLabel = [[YKLabel alloc]init];
+- (UILabel *)tilteLabel {
+    if (!_tilteLabel) {
+        _tilteLabel = [[UILabel alloc]init];
 //        _tilteLabel.verticalAlignment = YKLabelVerticalAlignmentModelBottom;
-////        _tilteLabel.font = [UIFont systemFontOfSize:17.f];
-//        _tilteLabel.textAlignment = NSTextAlignmentCenter;
-//        [self.selectView addSubview:_tilteLabel];
-//    }
-//    return _tilteLabel;
-//}
+//        _tilteLabel.font = [UIFont systemFontOfSize:17.f];
+        _tilteLabel.textAlignment = NSTextAlignmentCenter;
+        [self.selectView addSubview:_tilteLabel];
+    }
+    return _tilteLabel;
+}
 /**
  横线
  */
@@ -170,11 +170,11 @@
     self.sureButtonBlock = sureButtonBlock;
     self.title_str = titleStr;
     
-//    if (!_isShowTitle) {
-//        kSingleTitleHeight = 0.f;
-//    }else{
-//        kSingleTitleHeight = _title_height;
-//    }
+    if (!_isShowTitle) {
+        kSingleTitleHeight = 0.f;
+    }else{
+        kSingleTitleHeight = _title_height;
+    }
     if (_isShowSureBtn||_isShowCancelBtn) {
         kSingleBtnHeight = 50;
     }else {
