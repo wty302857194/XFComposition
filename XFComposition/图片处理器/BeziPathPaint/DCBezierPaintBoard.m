@@ -112,6 +112,12 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
 }
 
 - (void)clear{
+    if(self.beziPathArrM.count){
+        for (DCBeizierPath *path  in self.beziPathArrM) {
+            [path removeAllPoints];
+        }
+    }
+    [self setNeedsDisplay];
 
 }
 
