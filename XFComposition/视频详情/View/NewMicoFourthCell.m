@@ -22,10 +22,12 @@
     
 
 }
-- (void)resetFrame:(int)count
+
+- (void)setDatas:(NSMutableArray *)datas
 {
-    
-    self.tableViewHeightConstraint.constant = 80 *6;
+    _datas = datas;
+    self.tableViewHeightConstraint.constant = 80 *_datas.count;
+    [self.tableView reloadData];
 }
 
 #pragma mark - delegate
@@ -33,13 +35,13 @@
     
     CommentViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommentViewCell" forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.contentLab.text = @"alskdkaks凯撒圣诞节阿森纳";
+    cell.data = self.datas[indexPath.row];
     return cell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return 6;
+    return self.datas.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -86,7 +88,14 @@
     }
     free(ivars);
 }
-- (IBAction)submitComment:(id)sender {
+- (IBAction)submitComment:(id)sender
+{
+    if (self.textView.text.length > 0) {
+        self.submitCommentBlock(self.textView);
+    } else {
+        [SVProgressHUD showInfoWithStatus:@"请输入内容"];
+    }
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

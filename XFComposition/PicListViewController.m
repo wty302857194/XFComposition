@@ -16,6 +16,8 @@
 #import "GetWritePicRemarkRequst.h"
 #import "GetWritePicRemarkModel.h"
 #import "KKImageEditorViewController.h"
+#import "TYCorrectViewController.h"
+
 @interface PicListViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,KKImageEditorDelegate,UITextViewDelegate,UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong)  IBOutlet UICollectionView *collectionView;
 @property (nonatomic,strong)NSMutableArray *picArray;
@@ -172,7 +174,7 @@
 {
    
     GetWritePicModel *model = self.picArray[indexPath.row];
-                                            
+    
     TYCorrectViewController *vc = [[TYCorrectViewController alloc]init];
 //    NSString *pic = [NSString stringWithFormat:@"%@",model.FixPicUrl];
 //    if (pic.length > 3){
@@ -185,6 +187,22 @@
 //
     vc.picModel = model;
     [self.navigationController pushViewController:vc animated:YES];
+    TYCorrectViewController *vc = [[TYCorrectViewController alloc] init];
+    NSString *pic = [NSString stringWithFormat:@"%@",model.FixPicUrl];
+    if (pic.length > 3){
+        vc.PicUrl = model.FixPicUrl;
+    }else{
+        vc.PicUrl = model.PicUrl;
+    }
+    
+    vc.PicID = model.ID;
+    
+    [self.navigationController pushViewController:vc animated:YES];
+
+    
+    
+    
+    
     //手机版获取文章图片点评内容
    
     

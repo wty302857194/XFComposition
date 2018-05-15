@@ -25,6 +25,7 @@
 - (void)setDatas:(NSMutableArray *)datas
 {
     _datas = datas;
+    [self.courseCollView reloadData];
 }
 
 #pragma mark --delegate

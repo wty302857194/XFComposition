@@ -128,4 +128,7 @@
 
 //压缩图片
 +(NSData *)zipNSDataWithImage:(UIImage *)sourceImage;
+
+//view生成image
++ (UIImage *)makeImageWithView:(UIView *)view withSize:(CGSize)size;
 @end

@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+
 @interface NewMicoSecondCell : UITableViewCell<UITableViewDelegate,UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tabheightConstraint;

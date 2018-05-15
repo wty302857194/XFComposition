@@ -535,7 +535,7 @@ static const CGFloat PlaybackControlsAutoHideTimeInterval = 0.3f;
     if (!_retryButton) {
         _retryButton = [UIButton buttonWithType:UIButtonTypeCustom];
         _retryButton.backgroundColor = [UIColor colorWithHexString:@"#646464"];
-        [_retryButton setTitle:@"点击重拾" forState:UIControlStateNormal];
+        [_retryButton setTitle:@"点击重试" forState:UIControlStateNormal];
         _retryButton.layer.cornerRadius = 20;
         _retryButton.titleLabel.font = [UIFont systemFontOfSize:15];
         [_retryButton addTarget:self action:@selector(retryAction) forControlEvents:UIControlEventTouchUpInside];

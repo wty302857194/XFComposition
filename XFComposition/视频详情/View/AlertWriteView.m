@@ -11,9 +11,12 @@
 @interface AlertWriteView ()
 
 @property (nonatomic, strong) UIView  *contentView;
-@property (nonatomic,strong)UITextField *titletextfield;
-@property (nonatomic,strong)UITextView *textview;
+@property (nonatomic, strong) UITextField *titletextfield;
+@property (nonatomic, strong) UITextView *textview;
+@property (nonatomic, strong) NSString *flag;
 
+@property (nonatomic, strong) UILabel *dateLab;
+@property (nonatomic, strong) UIButton *saveBtn;
 @end
 
 @implementation AlertWriteView
@@ -42,7 +45,7 @@
     
     /*创建显示View*/
     _contentView = [[UIView alloc] init];
-    _contentView.bounds = CGRectMake(0, 0, self.width - 80, 290);
+    _contentView.bounds = CGRectMake(0, 0, self.width - 60, 290);
     _contentView.center = CGPointMake(self.width/2, self.height/2);
     _contentView.backgroundColor=[UIColor whiteColor];
     _contentView.layer.cornerRadius = 4;
@@ -90,15 +93,29 @@
     [self setPlaceHolder];
     [_contentView addSubview:self.textview];
     
+    UILabel *dateLab = [[UILabel alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(self.textview.frame)+10, 150, 20)];
+    dateLab.text = @"2018/09/12 20:12:26";
+    dateLab.textColor = [UIColor whiteColor];
+    dateLab.textAlignment = NSTextAlignmentCenter;
+    dateLab.backgroundColor = [UIColor colorWithHexString:@"#19a1d8"];
+    dateLab.font = [UIFont systemFontOfSize:12];
+    dateLab.layer.cornerRadius =4;
+    dateLab.layer.masksToBounds = YES;
+    [_contentView addSubview:dateLab];
+    self.dateLab = dateLab;
+    self.dateLab.hidden = YES;
+
+    
     UIButton *bt2 = [UIButton buttonWithType:UIButtonTypeCustom];
     [bt2 setTitle:@"保存" forState:UIControlStateNormal];
-    bt2.frame = CGRectMake(_contentView.width- 70, CGRectGetMaxY(self.textview.frame)+10, 50, 20);
-    bt2.titleLabel.font = [UIFont systemFontOfSize:10];
+    bt2.frame = CGRectMake(_contentView.width- 80, CGRectGetMaxY(self.textview.frame)+10, 60, 20);
+    bt2.titleLabel.font = [UIFont systemFontOfSize:12];
     bt2.backgroundColor = [UIColor colorWithHexString:@"#19a1d8"];
     [bt2 addTarget:self action:@selector(save) forControlEvents:UIControlEventTouchUpInside];
     bt2.layer.cornerRadius =4;
     bt2.layer.masksToBounds = YES;
     [_contentView addSubview:bt2];
+    self.saveBtn = bt2;
     
 }
 #pragma mark - 手势点击事件,移除View
@@ -106,10 +123,20 @@
     
 //    [self dismissContactView];
 }
+
 - (void)save
 {
+    if (self.textview.text.length == 0 || self.titletextfield.text.length == 0) {
+        [MBProgressHUD showError:@"请输入内容"];
+    } else {
+        [self dismissContactView];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(addWriting:content:flag:)]) {
+            [self.delegate addWriting:self.titletextfield.text content:self.textview.text flag:self.flag];
+        }
+    }
     
 }
+
 -(void)dismissContactView
 {
     __weak typeof(self)weakSelf = self;
@@ -122,8 +149,22 @@
 }
 
 // 这里加载在了window上
--(void)showView
+-(void)showViewWithModel:(MicPianduanmodel *)model content:(NSString *)content flag:(NSString *)flag
 {
+    self.flag = flag;
+    if (model) {
+        
+        self.titletextfield.text = model.BlogTitle;
+        self.textview.text = content;
+        if ([model.BlogStatic isEqualToString:@"1"] || [model.BlogBg isEqualToString:@"1"]) {
+            self.saveBtn.hidden = YES;
+            self.dateLab.hidden = NO;
+            self.dateLab.text = model.BlogAddTime;
+            self.titletextfield.enabled = NO;
+            self.textview.editable = NO;
+        }
+    }
+    
     UIWindow * window = [UIApplication sharedApplication].keyWindow;
     [window addSubview:self];
 }  
@@ -150,4 +191,8 @@
     }
     free(ivars);
 }
+
+
+
+
 @end

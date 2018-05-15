@@ -9,6 +9,7 @@
 #import "CommentViewCell.h"
 #import "SDWebImageManager.h"
 #import "DianPingModel.h"
+#import "GetCommentListModel.h"
 
 @implementation CommentViewCell
 
@@ -25,8 +26,14 @@
         _userNameLab.text = model.username;
         _dateLab.text = model.checktime;
         _contentLab.text = model.title;
+    } else if ([_data isKindOfClass:[GetCommentListModel class]]) {
+        GetCommentListModel *model = (GetCommentListModel *)_data;
+        [_iconImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",HTurl,model.UserPic]] placeholderImage:[UIImage imageNamed:@"glide_error_loading_round"]];
+        _userNameLab.text = model.UserName;
+        _dateLab.text = model.C_Intime;
+        _contentLab.text = model.C_Content;
     }
-//    [_iconImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",HTurl,model.]] placeholderImage:[UIImage ima]]
+
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

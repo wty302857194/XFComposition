@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface TYCorrectViewController : UIViewController
-
+@property (strong, nonatomic) UIScrollView *scrollView;
+@property (nonatomic,strong)NSString *PicID;
+@property (nonatomic,strong)NSString *PicUrl;
 @end

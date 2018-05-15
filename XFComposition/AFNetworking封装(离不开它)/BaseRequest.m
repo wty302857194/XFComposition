@@ -42,7 +42,7 @@
                               failedBolck:(FailedBlock)failed {
     NSURLSessionDataTask *task = nil;
 //    self.completionBlock = completion;
-    self.sessionManager = [self sessionManagerWithParams];
+//    self.sessionManager = [self sessionManagerWithParams];
     NSString *temUrl = [self.urlString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     
     if(methodType == HTTPTypeGET) {
@@ -91,18 +91,26 @@
         
     }];
 }
-
-
-- (AFHTTPSessionManager *)sessionManagerWithParams{
-    NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
-    config.timeoutIntervalForRequest = 30.0f;
-    AFHTTPSessionManager *sessionManager = [[AFHTTPSessionManager alloc] initWithSessionConfiguration:config];
-    sessionManager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/plain", @"text/json", @"text/javascript", @"text/html", nil];
-//    sessionManager.requestSerializer = [AFHTTPRequestSerializer serializer];
-//    sessionManager.responseSerializer = [AFHTTPResponseSerializer serializer];
-
-    return sessionManager;
+- (AFHTTPSessionManager *)sessionManager {
+    if (!_sessionManager) {
+        NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
+        config.timeoutIntervalForRequest = 30.0f;
+        _sessionManager = [[AFHTTPSessionManager alloc] initWithSessionConfiguration:config];
+        _sessionManager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/plain", @"text/json", @"text/javascript", @"text/html", nil];
+    }
+    return _sessionManager;
 }
+
+//- (AFHTTPSessionManager *)sessionManagerWithParams{
+//    NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
+//    config.timeoutIntervalForRequest = 30.0f;
+//    AFHTTPSessionManager *sessionManager = [[AFHTTPSessionManager alloc] initWithSessionConfiguration:config];
+//    sessionManager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/plain", @"text/json", @"text/javascript", @"text/html", nil];
+////    sessionManager.requestSerializer = [AFHTTPRequestSerializer serializer];
+////    sessionManager.responseSerializer = [AFHTTPResponseSerializer serializer];
+//
+//    return sessionManager;
+//}
 
 
 @end
