@@ -18,6 +18,8 @@
 @property (nonatomic,strong)MenuView *menuView1;
 @property (nonatomic,assign)BOOL isShow1;
 @property (nonatomic,strong)NSString *str1;
+@property (nonatomic,copy) UIButton *typeButton;
+@property (nonatomic,strong)   UIImageView * imgView;
 
 @property (nonatomic,strong)NSMutableArray *WorkArray;
 @property (nonatomic,assign)NSInteger page;
@@ -41,15 +43,15 @@
     UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0,SafeAreaTopHeight, kScreenWidth, 50)];
     view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:view];
-    UIButton *typeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    typeButton.frame = CGRectMake(14, SafeAreaTopHeight+10, 80, 30);
-    [typeButton setTitle:@"全部" forState:UIControlStateNormal];
-    typeButton.titleLabel.font = [UIFont systemFontOfSize:14];
-    [typeButton setTitleColor:hexColor(333333) forState:UIControlStateNormal];
-    [typeButton addTarget:self action:@selector(showtype) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:typeButton];
+    _typeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    _typeButton.frame = CGRectMake(14, SafeAreaTopHeight+10, 80, 30);
+    [_typeButton setTitle:@"全部" forState:UIControlStateNormal];
+    _typeButton.titleLabel.font = [UIFont systemFontOfSize:14];
+    [_typeButton setTitleColor:hexColor(333333) forState:UIControlStateNormal];
+    [_typeButton addTarget:self action:@selector(showtype) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_typeButton];
     
-    self.textfield = [[UITextField alloc]initWithFrame:CGRectMake(102, SafeAreaTopHeight+10, WidthFrame-200, 30)];
+    self.textfield = [[UITextField alloc]initWithFrame:CGRectMake(112, SafeAreaTopHeight+10, WidthFrame-190, 30)];
     self.textfield.placeholder = @"关键词";
     self.textfield.layer.cornerRadius = 6;
     self.textfield.layer.masksToBounds = YES;
@@ -71,6 +73,10 @@
     selectbt.layer.masksToBounds = YES;
     [self.view addSubview:selectbt];
     
+    _imgView  = [[UIImageView alloc] initWithFrame:CGRectMake(85  , SafeAreaTopHeight + (50 -16)/2, 16, 16)];
+    _imgView.image = [UIImage imageNamed:@"ic_open_down2"];
+    
+    [self.view addSubview:_imgView];
 
 }
 -(XFUserInfo *)xf{
@@ -107,6 +113,8 @@
             }else if (i == 3){
                 weakSelf.checkType = @"2";
             }
+            [_typeButton setTitle:array[i] forState:UIControlStateNormal];
+            _imgView.image = [UIImage imageNamed:@"ic_open_down2"];
             [weakSelf GetTeachNeedCheckList:self.checkType];
             
         }];
@@ -191,7 +199,9 @@
     _isShow1 = !_isShow1;
     if (_isShow1) {
         [self.menuView1 showView];
+        _imgView.image = [UIImage imageNamed:@"ic_colse_down2"];
     }else{
+        _imgView.image = [UIImage imageNamed:@"ic_open_down2"];
         [self.menuView1 dismissView];
     }
 }

@@ -25,8 +25,8 @@ typedef void (^XFResponseBlock)(NSString* requestName, id responseData , BOOL is
 #define XFReq_User_GetBlogStandard     @"获得带有评分标准"
 #define XFReq_User_GetBlogComment      @"获取总评"
 #define XFReq_User_GetWritePicList     @"获取习作图片列表"
-
-
+#define XFReq_User_UploadAudio         @"上传录音文件"
+#define XFReq_User_AddCutPic           @"添加截图"
 
 
 @interface XFRequestManager : NSObject
@@ -104,6 +104,32 @@ typedef void (^XFResponseBlock)(NSString* requestName, id responseData , BOOL is
                        userID:(NSString*)userID
                            isChange:(BOOL)isChange
                              :(XFResponseBlock)block;
+/**
+ *上传录音文件
+ *@param userID  //用户标识
+ *@param fileValue 录音文件
+ */
+-(void)XFRequstUploadAudio:(NSString*)userID
+                           fileValue:(NSData*)fileValue
+                                   :(XFResponseBlock)block;
+
+/**
+ *添加截图
+ *@param userID  //用户标识
+ *@param PicID 习作图片标识
+ *@param blogID 习作标识
+ *@param ExtractPicUrl 截图图片地址
+  *@param ExtractContent /截图文字
+ *@param ExtractType  0：范文库  1：病文库
+ */
+-(void)XFRequstAddCutPic:(NSString*)userID
+                   PicID:(NSString*)PicID
+                  blogID:(NSString*)blogID
+           ExtractPicUrl:(NSString*)ExtractPicUrl
+          ExtractContent:(NSString*)ExtractContent
+             ExtractType:(NSString*)ExtractType
+                        :(XFResponseBlock)block;
+
 
 +(NSString*)encodedParams:(NSDictionary*)params;
 

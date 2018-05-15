@@ -77,11 +77,16 @@
             }
         }
             break;
-        case 14://撤销
+        case 14://橡皮檫
         {
             
             sender.selected = !sender.selected;
             self.isErase = sender.selected;
+            if (sender.isSelected) {
+                [self removeGestureRecognizerFromView:self.imgView];
+            }else {
+                [self addGestureRecognizerToView:self.imgView];
+            }
         }
             break;
         case 15://tableview

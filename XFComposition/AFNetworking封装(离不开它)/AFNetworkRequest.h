@@ -21,6 +21,7 @@ typedef NS_ENUM(NSUInteger,NetworkRequestType) {
     NetworkRequestTypeGet,
     NetworkRequestTypeHead,
     NetworkRequestTypePut,
+    NetworkRequestTypePostData,
     NetworkRequestTypeDelete
 };
 

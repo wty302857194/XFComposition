@@ -71,8 +71,8 @@
         [self GetMyPageListRequst];
         [self.tableView.mj_header endRefreshing];
     }];
-    header.lastUpdatedTimeLabel.hidden = YES;
-    header.stateLabel.hidden = YES;
+//    header.lastUpdatedTimeLabel.hidden = YES;
+//    header.stateLabel.hidden = YES;
     self.tableView.mj_header = header;
     
     [self.tableView.mj_header beginRefreshing];

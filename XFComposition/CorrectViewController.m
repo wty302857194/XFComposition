@@ -326,7 +326,7 @@ int i= 0;
 {
     UIImageView *picImageview = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, WidthFrame, HeightFrame-64)];
     
-    //    KKImageEditorViewController *editor = [[KKImageEditorViewController alloc] initWithImage:image delegate:self];
+        KKImageEditorViewController *editor = [[KKImageEditorViewController alloc] initWithImage:image delegate:self];
     //
     //
     //    [self.navigationController pushViewController:editor animated:YES];

@@ -285,6 +285,8 @@
         [self drawLine:_prevDraggingPosition to:currentDraggingPosition];
     }
     _prevDraggingPosition = currentDraggingPosition;
+    
+    
 }
 
 //画线

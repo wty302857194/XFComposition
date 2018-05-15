@@ -70,8 +70,7 @@
     MenuTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     cell.label.text = self.itemsArray[indexPath.row];
     if ([self.choseSet containsObject:@(indexPath.row)]) {
-//        cell.label.backgroundColor = [UIColor colorWithHexString:@"F19833"];
-//        cell.label.textColor = [UIColor whiteColor];
+
         
     }else {
         cell.label.backgroundColor = [UIColor whiteColor];

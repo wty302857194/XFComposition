@@ -18,7 +18,7 @@
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
 
         self.selectionStyle=UITableViewCellSelectionStyleNone;
-//        _label = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(self.frame)+2, CGRectGetMaxY(self.frame)+2, WidthFrame/5-5, 25)];
+
         _label = [[UILabel alloc]init];
         [self.contentView addSubview:_label];
         _label.sd_layout.leftSpaceToView(self.contentView, 15).topSpaceToView(self.contentView, 3).rightSpaceToView(self.contentView, 15).bottomSpaceToView(self.contentView, 3);
@@ -28,9 +28,12 @@
         _label.layer.masksToBounds = YES;
         
         
-        UILabel *lineLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(_label.frame)+1, WidthFrame, 0.5)];
-        lineLabel.backgroundColor = hexColor(e5e5e5);
-        [self.contentView addSubview:lineLabel];
+        UIImageView *imge = [[UIImageView alloc]init];
+        
+        [self.contentView addSubview:imge];
+        imge.sd_layout.bottomSpaceToView(self.contentView, .5).rightSpaceToView(self.contentView,0).leftSpaceToView(self.contentView,0).heightIs(0.5);
+        imge.backgroundColor = hexColor(e5e5e5);
+        
     }
     return self;
 }

@@ -21,11 +21,14 @@
 @property (nonatomic,strong)UITableView *tableView;
 @property (nonatomic,strong)NSMutableArray *tabBtnArray;
 @property (nonatomic,strong)NSMutableArray *bjArray;
-
+@property (nonatomic,strong)   UIImageView * imgView;
 @property (nonatomic,strong)MenuView *menuView1;
 @property (nonatomic,assign)BOOL isShow1;
-@property (nonatomic,strong)NSString *str1;
+@property (nonatomic,copy)NSString *str1;
 @property (nonatomic,assign)NSInteger page;
+@property (nonatomic,strong)UIButton *bt;
+
+
 @end
 
 @implementation ReadnotesViewController
@@ -40,11 +43,15 @@
     
 }
 -(void)creatHeadView{
-    self.textfield = [[UITextField alloc]initWithFrame:CGRectMake(20, 5+64, WidthFrame-160, 30)];
+    
+    UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, SafeAreaTopHeight, kScreenWidth, 50)];
+    view.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:view];
+    self.textfield = [[UITextField alloc]initWithFrame:CGRectMake(20, 10+SafeAreaTopHeight, WidthFrame-160, 30)];
     self.textfield.placeholder = @"关键词";
     self.textfield.layer.cornerRadius = 6;
     self.textfield.layer.masksToBounds = YES;
-    self.textfield.layer.borderWidth = 2;
+    self.textfield.layer.borderWidth = .5;
     self.textfield.layer.borderColor = [[UIColor colorWithHexString:@"D4D5D4"] CGColor];
     self.textfield.clearButtonMode=YES;
     self.textfield.leftViewMode=UITextFieldViewModeAlways;
@@ -53,47 +60,45 @@
     [self.view addSubview:self.textfield];
     
     UIButton *selectbt = [UIButton buttonWithType:UIButtonTypeCustom];
-    selectbt.frame = CGRectMake(CGRectGetMaxX(self.textfield.frame)+10, 5+64, 50, 30);
+    selectbt.frame = CGRectMake(CGRectGetMaxX(self.textfield.frame)+10, 10+SafeAreaTopHeight, 50, 30);
     [selectbt setTitle:@"查询" forState:UIControlStateNormal];
-    selectbt.titleLabel.font = [UIFont systemFontOfSize:16];
+    selectbt.titleLabel.font = [UIFont systemFontOfSize:14];
     [selectbt setBackgroundColor:[UIColor colorWithHexString:@"3691CE"]];
     selectbt.layer.cornerRadius =6;
     selectbt.layer.masksToBounds = YES;
     [self.view addSubview:selectbt];
     UIButton *delecttbt = [UIButton buttonWithType:UIButtonTypeCustom];
-    delecttbt.frame = CGRectMake(CGRectGetMaxX(selectbt.frame)+10, 5+64, 50, 30);
+    delecttbt.frame = CGRectMake(CGRectGetMaxX(selectbt.frame)+10, 10+SafeAreaTopHeight, 50, 30);
     [delecttbt setTitle:@"删除" forState:UIControlStateNormal];
-    delecttbt.titleLabel.font = [UIFont systemFontOfSize:16];
+    delecttbt.titleLabel.font = [UIFont systemFontOfSize:14];
     [delecttbt setBackgroundColor:[UIColor colorWithHexString:@"E93E33"]];
     delecttbt.layer.cornerRadius =6;
     delecttbt.layer.masksToBounds = YES;
     [self.view addSubview:delecttbt];
-//    NSArray *array = [[NSArray alloc]init];
-//    array = @[@"全部状态",@"全部状态"];
+     _bt = [UIButton buttonWithType:UIButtonTypeCustom];
+
+    _bt.frame = CGRectMake(0, SafeAreaTopHeight + 51, WidthFrame, 40);
+    [_bt setTitle:@"全部状态" forState:UIControlStateNormal];
+    [_bt setTitleColor:hexColor(333333) forState:UIControlStateNormal];
+    _bt.titleLabel.font = [UIFont systemFontOfSize:14];
+    _bt.backgroundColor = [UIColor whiteColor];
+    [_bt addTarget:self action:@selector(click) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_bt];
     
-//    for (int i = 0; i<2; i++) {
-        UIButton *bt = [UIButton buttonWithType:UIButtonTypeCustom];
-//        if (i == 0) {
-            bt.frame = CGRectMake(20, CGRectGetMaxY(self.textfield.frame)+10, WidthFrame-40, 40);
-//        }else{
-//            bt.frame = CGRectMake(WidthFrame/5*3, CGRectGetMaxY(self.textfield.frame)+10, WidthFrame/5, 40);
-//        }
-        
-//        bt.tag = 1000+i;
-        [bt setTitle:@"全部状态" forState:UIControlStateNormal];
-        [bt setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        bt.titleLabel.font = [UIFont systemFontOfSize:16];
-        [bt addTarget:self action:@selector(click) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:bt];
-//    }
+    _imgView  = [[UIImageView alloc] initWithFrame:CGRectMake(WidthFrame/2+ 30, SafeAreaTopHeight + 50 + (40 -16)/2, 16, 16)];
+    _imgView.image = [UIImage imageNamed:@"ic_open_down2"];
+    
+    [self.view addSubview:_imgView];
+
     
 }
 
 -(UITableView *)tableView{
     if (!_tableView) {
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 64+85, WidthFrame, HeightFrame-64-80) style:UITableViewStyleGrouped];
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, SafeAreaTopHeight+91, WidthFrame, HeightFrame-64-80) style:UITableViewStyleGrouped];
         _tableView.delegate = self;
         _tableView.dataSource = self;
+        _tableView.backgroundColor = [UIColor clearColor];
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_tableView registerClass:[ReadnotesCell class] forCellReuseIdentifier:@"cell"];
         
@@ -111,7 +116,7 @@
         __weak typeof (self) weakSelf = self;
         NSArray *array = [NSArray array];
         array = @[@"全部状态",@"推荐",@"不推荐"];
-        _menuView1 = [[MenuView alloc]initWithFrame:CGRectMake(20, 64+85, WidthFrame-40, 30*array.count)cellarray:array block:^(NSInteger i) {
+        _menuView1 = [[MenuView alloc]initWithFrame:CGRectMake(0, SafeAreaTopHeight+92, WidthFrame, 60*array.count)cellarray:array block:^(NSInteger i) {
             weakSelf.isShow1 = NO;
             weakSelf.page = 1;
             if (i == 0) {
@@ -121,6 +126,8 @@
             }else if (i == 2){
                 weakSelf.str1 = @"1";
             }
+            _imgView.image = [UIImage imageNamed:@"ic_open_down2"];
+            [_bt setTitle:array [i] forState:UIControlStateNormal];
             [weakSelf GetBookBJList:weakSelf.str1];
 
         }];
@@ -132,7 +139,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"读书笔记";
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = hexColor(e5e5e5);
     [self creatHeadView];
 
     [self.view addSubview:self.tableView];
@@ -191,9 +198,12 @@
     
     
     _isShow1 = !_isShow1;
+    
     if (_isShow1) {
+        _imgView.image = [UIImage imageNamed:@"ic_colse_down2"];
         [self.menuView1 showView];
     }else{
+        _imgView.image = [UIImage imageNamed:@"ic_open_down2"];
         [self.menuView1 dismissView];
     }
     
