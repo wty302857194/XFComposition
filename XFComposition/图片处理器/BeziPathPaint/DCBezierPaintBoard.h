@@ -10,6 +10,10 @@
 
 @interface DCBezierPaintBoard : UIView
 /**
+ *  画线的width
+ */
+@property (nonatomic, assign) NSInteger lineWidth;
+/**
  *  画线的颜色
  */
 @property (nonatomic, strong) UIColor *lineColor;
@@ -22,4 +26,9 @@
  *  清楚画笔
  */
 - (void)clear;
+
+/**
+ *  撤销画笔
+ */
+- (void)cheXiao;
 @end

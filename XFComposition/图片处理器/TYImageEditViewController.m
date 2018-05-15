@@ -57,6 +57,7 @@
         {
             sender.selected = !sender.selected;
             if (sender.isSelected) {
+                self.DCUndoView.lineWidth = 3;
                 self.DCUndoView.lineColor = [UIColor redColor];
                 [self removeGestureRecognizerFromView:self.imgView];
             }else {
@@ -67,6 +68,7 @@
             break;
         case 14://撤销
         {
+            
             sender.selected = !sender.selected;
             self.isErase = sender.selected;
         }
@@ -110,9 +112,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    _tabArr = @[@"清屏",@"颜色",@"还原大小",@"范文库",@"病文库"];
-    
-
+    _tabArr = @[@"清屏",@"颜色",@"画笔",@"还原大小",@"范文库",@"病文库",@"撤销"];
     
     [self addGestureRecognizerToView:self.imgView];
 }
@@ -125,7 +125,6 @@
 // 添加所有的手势
 - (void) addGestureRecognizerToView:(UIView *)view
 {
-    
     // 缩放手势
     pinchGestureRecognizer = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinchView:)];
     [view addGestureRecognizer:pinchGestureRecognizer];
@@ -216,7 +215,8 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    self.tableView.hidden = YES;
+
     switch (indexPath.row) {
         case 0:
         {
@@ -231,6 +231,7 @@
             select_view.isShowCancelBtn = YES;
             select_view.isShowSureBtn = NO;
             select_view.isShowTitle = YES;
+            select_view.title_height = 40;
             [select_view addTitleArray:@[@"红色",@"绿色",@"蓝色",@"黑色"] andTitleString:@"颜色设置" animated:YES completionHandler:^(NSString * _Nullable string, NSInteger index) {
                 weakSelf.selectPaintColor = (DCPaintColor)index+1;
 
@@ -243,12 +244,39 @@
 
         case 2:
         {
-            self.imgView.frame = oldFrame;
+            __weak typeof(self) weakSelf = self;
+            ListSelectView *select_view = [[ListSelectView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, self.view.height)];
+            select_view.choose_type = MORECHOOSETITLETYPE;
+            select_view.isShowCancelBtn = YES;
+            select_view.isShowSureBtn = NO;
+            select_view.isShowTitle = YES;
+            select_view.title_height = 40;
+            [select_view addTitleArray:@[@"细",@"中",@"粗"] andTitleString:@"画笔设置" animated:YES completionHandler:^(NSString * _Nullable string, NSInteger index) {
+                NSInteger width = 0;
+                switch (index) {
+                    case 0:
+                        width = 2;
+                        break;
+                    case 1:
+                        width = 4;
+                        break;
+                    case 2:
+                        width = 6;
+                        break;
+                    default:
+                        break;
+                }
+                weakSelf.DCUndoView.lineWidth = width;
+                
+            } withSureButtonBlock:^{
+                NSLog(@"sure btn");
+            }];
+            [self.navigationController.view addSubview:select_view];
         }
             break;
         case 3:
         {
-            
+            self.imgView.frame = oldFrame;
         }
             break;
         case 4:
@@ -256,11 +284,22 @@
             
         }
             break;
+        case 5:
+        {
+            
+        }
+            break;
+        case 6:
+        {
+            self.tableView.hidden = NO;
+
+            [self.DCUndoView cheXiao];
+        }
+            break;
         default:
             break;
     }
     
-    self.tableView.hidden = YES;
 }
 
 @end

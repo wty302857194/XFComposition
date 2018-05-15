@@ -39,6 +39,7 @@
     CGPoint currentPoint = [touch locationInView:self];
 //    NSLog(@"touchesBegan--%@",NSStringFromCGPoint(currentPoint));
       self.beziPath = [[DCBeizierPath alloc] init];
+    self.beziPath.lineWidth = self.lineWidth;
     self.beziPath.lineColor = self.lineColor;
     self.beziPath.isErase = self.isErase;
     [self.beziPath moveToPoint:currentPoint];
@@ -94,23 +95,29 @@ CGPoint midPoint(CGPoint p1, CGPoint p2)
             }else{
                 [path.lineColor setStroke];
             }
-            
-            path.lineJoinStyle = kCGLineJoinRound;
-            path.lineCapStyle = kCGLineCapRound;
             if (path.isErase) {
                 path.lineWidth = kEraseLineWidth;
                 [path strokeWithBlendMode:kCGBlendModeCopy alpha:1.0];
             } else {
-                path.lineWidth = kLineWidth;
+                path.lineWidth = self.lineWidth?:3;
                 [path strokeWithBlendMode:kCGBlendModeNormal alpha:1.0];
             }
+            path.lineJoinStyle = kCGLineJoinRound;
+            path.lineCapStyle = kCGLineCapRound;
+            
             [path stroke];
         }
     }
     
     [super drawRect:rect];
 }
+- (void)cheXiao {
+    DCBeizierPath *path = self.beziPathArrM.lastObject;
+    [path removeAllPoints];
+    [self.beziPathArrM removeLastObject];
+    [self setNeedsDisplay];
 
+}
 - (void)clear{
     if(self.beziPathArrM.count){
         for (DCBeizierPath *path  in self.beziPathArrM) {
