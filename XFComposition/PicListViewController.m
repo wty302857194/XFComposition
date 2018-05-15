@@ -172,7 +172,7 @@
 }
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-   
+    TYCorrectViewController *vc = [[TYCorrectViewController alloc]init];
     GetWritePicModel *model = self.picArray[indexPath.row];
     vc.picModel = model;
     [self.navigationController pushViewController:vc animated:YES];
