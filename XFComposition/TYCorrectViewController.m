@@ -270,7 +270,8 @@
     [_moreBtn setSelected:NO];
     switch (indexPath.row) {
         case 0:// 清屏
-            [_drawView setBoard:setTypeClearAll];
+            [_drawView setBoard:setTypeClearAll                        [_drawView setBoard:setTypeEraser];
+];
             break;
         case 1: // 颜色
             [self.strokeView showStrokeView:_colorArray isSetColor:YES];

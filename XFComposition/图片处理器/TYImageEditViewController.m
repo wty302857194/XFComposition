@@ -13,6 +13,7 @@
 //#import "DCOpenGLDrawView.h"
 #import "ListSelectView.h"
 #import "DCUndoBeziPathPaintBoard.h"
+#import "TKImageView.h"
 
 @interface TYImageEditViewController ()
 {
@@ -21,6 +22,7 @@
     CGRect largeFrame;  //确定图片放大最大的程;
     UIPinchGestureRecognizer *pinchGestureRecognizer;
     UIPanGestureRecognizer *panGestureRecognizer;
+    UIImage *_image;
 }
 @property (nonatomic, assign)DCPaintColor  selectPaintColor;
 @property (nonatomic, assign) BOOL isErase;
@@ -30,6 +32,11 @@
 @property (weak, nonatomic) IBOutlet UIView *topBackView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic,copy) NSArray *tabArr;
+
+@property (weak, nonatomic) IBOutlet UIButton *clipButton;
+
+@property (nonatomic, strong) TKImageView *tkImageView;
+
 @end
 
 @implementation TYImageEditViewController
@@ -42,6 +49,10 @@
             break;
         case 11://截图
         {
+            self.imgView.hidden = YES;
+            self.tkImageView.toCropImage = _image;
+            [self.view addSubview:self.tkImageView];
+            self.clipButton.hidden = NO;
             
         }
             break;
@@ -87,6 +98,47 @@
             break;
     }
 }
+- (IBAction)clipImage:(id)sender {
+    [self.tkImageView removeFromSuperview];
+    self.clipButton.hidden = YES;
+    self.imgView.hidden = NO;
+    _image = [self.tkImageView currentCroppedImage];
+    self.imgView.image = _image;
+    
+}
+
+- (TKImageView *)tkImageView
+{
+    if (!_tkImageView) {
+        _tkImageView = [[TKImageView alloc] initWithFrame:CGRectMake(50, 80, kScreenWidth-100, (kScreenWidth-100)*2083/1602.f)];
+        //需要进行裁剪的图片对象
+//        _tkImageView.toCropImage = _image;
+        //是否显示中间线
+        //    _tkImageView.showMidLines = YES;
+        //是否需要支持缩放裁剪
+        _tkImageView.needScaleCrop = YES;
+        //是否显示九宫格交叉线
+        //    _tkImageView.showCrossLines = YES;
+        _tkImageView.cornerBorderInImage = NO;
+        _tkImageView.cropAreaCornerWidth = 44;
+        _tkImageView.cropAreaCornerHeight = 44;
+        _tkImageView.minSpace = 30;
+        _tkImageView.cropAreaCornerLineColor = [UIColor redColor];
+        _tkImageView.cropAreaBorderLineColor = [UIColor lightGrayColor];
+//        _tkImageView.cropAreaCornerLineWidth = 6;
+        _tkImageView.cropAreaBorderLineWidth = 1;
+        _tkImageView.cropAreaMidLineWidth = 20;
+//        _tkImageView.cropAreaMidLineHeight = 6;
+        _tkImageView.cropAreaMidLineColor = [UIColor whiteColor];
+        _tkImageView.cropAreaCrossLineColor = [UIColor whiteColor];
+        _tkImageView.cropAreaCrossLineWidth = 0.5;
+        _tkImageView.initialScaleFactor = .8f;
+        _tkImageView.cropAspectRatio = 0;
+        _tkImageView.maskColor = [UIColor clearColor];
+    }
+    return _tkImageView;
+}
+
 
 - (UIImageView *)imgView {
     if (!_imgView) {
@@ -95,7 +147,9 @@
         [_imgView setMultipleTouchEnabled:YES];
         [_imgView setUserInteractionEnabled:YES];
         NSString *str = [NSString stringWithFormat:@"%@%@",HTurl,self.PicUrl];
-        [_imgView sd_setImageWithURL:[NSURL URLWithString:str]];
+        [_imgView sd_setImageWithURL:[NSURL URLWithString:str] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            _image = image;
+        }];
         _topBackView.clipsToBounds = YES;
         [_topBackView addSubview:_imgView];
 
@@ -118,7 +172,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     _tabArr = @[@"清屏",@"颜色",@"画笔",@"还原大小",@"范文库",@"病文库",@"撤销"];
-    
+    self.clipButton.hidden = YES;
     [self addGestureRecognizerToView:self.imgView];
 }
 //取消手势

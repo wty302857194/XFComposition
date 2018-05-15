@@ -44,6 +44,8 @@
 		3237381B2092C26900015514 /* ListSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 323738192092C26800015514 /* ListSelectView.m */; };
 		32426A4B208638FF00B5227B /* HomeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32426A49208638FF00B5227B /* HomeTableViewCell.m */; };
 		32426A4C208638FF00B5227B /* HomeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32426A4A208638FF00B5227B /* HomeTableViewCell.xib */; };
+		3248EC8720AADBF60042CF3F /* TYCorrectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3248EC8420AADBF50042CF3F /* TYCorrectViewController.m */; };
+		3248EC8820AADBF60042CF3F /* TYCorrectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3248EC8520AADBF60042CF3F /* TYCorrectViewController.xib */; };
 		3256A5E2209344AC00A19946 /* VolunteerNewsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3256A5E0209344AC00A19946 /* VolunteerNewsTableViewCell.m */; };
 		3256A5E3209344AC00A19946 /* VolunteerNewsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3256A5E1209344AC00A19946 /* VolunteerNewsTableViewCell.xib */; };
 		3256A5F220947AC200A19946 /* VolunteerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3256A5F120947AC200A19946 /* VolunteerViewController.m */; };
@@ -229,6 +231,7 @@
 		BAB44C9620A1A89A002455D8 /* VideoPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = BAB44C8520A1A89A002455D8 /* VideoPlayer.m */; };
 		BAB44C9720A1A89A002455D8 /* VideoSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = BAB44C8620A1A89A002455D8 /* VideoSlider.m */; };
 		BAB44C9820A1A89A002455D8 /* PlayerConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = BAB44C8920A1A89A002455D8 /* PlayerConfiguration.m */; };
+		BAD0F5D920AAC3F400AAD3D4 /* TKImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = BAD0F5D720AAC3F300AAD3D4 /* TKImageView.m */; };
 		BADA87CD20A49E840031EA5E /* AlertWriteView.m in Sources */ = {isa = PBXBuildFile; fileRef = BADA87CC20A49E840031EA5E /* AlertWriteView.m */; };
 		F602ADB21F58095600C152C4 /* MicroClassViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F602ADB11F58095600C152C4 /* MicroClassViewController.m */; };
 		F6038CE81F58E96A008FE507 /* mp322.png in Resources */ = {isa = PBXBuildFile; fileRef = F6038CE61F58E96A008FE507 /* mp322.png */; };
@@ -797,6 +800,9 @@
 		32426A48208638FF00B5227B /* HomeTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeTableViewCell.h; sourceTree = "<group>"; };
 		32426A49208638FF00B5227B /* HomeTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeTableViewCell.m; sourceTree = "<group>"; };
 		32426A4A208638FF00B5227B /* HomeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeTableViewCell.xib; sourceTree = "<group>"; };
+		3248EC8420AADBF50042CF3F /* TYCorrectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYCorrectViewController.m; sourceTree = "<group>"; };
+		3248EC8520AADBF60042CF3F /* TYCorrectViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TYCorrectViewController.xib; sourceTree = "<group>"; };
+		3248EC8620AADBF60042CF3F /* TYCorrectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYCorrectViewController.h; sourceTree = "<group>"; };
 		3256A5DF209344AC00A19946 /* VolunteerNewsTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VolunteerNewsTableViewCell.h; sourceTree = "<group>"; };
 		3256A5E0209344AC00A19946 /* VolunteerNewsTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VolunteerNewsTableViewCell.m; sourceTree = "<group>"; };
 		3256A5E1209344AC00A19946 /* VolunteerNewsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VolunteerNewsTableViewCell.xib; sourceTree = "<group>"; };
@@ -1147,6 +1153,8 @@
 		BAB44C8820A1A89A002455D8 /* PlaybackControls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaybackControls.h; sourceTree = "<group>"; };
 		BAB44C8920A1A89A002455D8 /* PlayerConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerConfiguration.m; sourceTree = "<group>"; };
 		BAB44C8A20A1A89A002455D8 /* VideoPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoPlayer.h; sourceTree = "<group>"; };
+		BAD0F5D720AAC3F300AAD3D4 /* TKImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKImageView.m; sourceTree = "<group>"; };
+		BAD0F5D820AAC3F400AAD3D4 /* TKImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKImageView.h; sourceTree = "<group>"; };
 		BADA87CB20A49E840031EA5E /* AlertWriteView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlertWriteView.h; sourceTree = "<group>"; };
 		BADA87CC20A49E840031EA5E /* AlertWriteView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlertWriteView.m; sourceTree = "<group>"; };
 		F602ADB01F58095600C152C4 /* MicroClassViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MicroClassViewController.h; sourceTree = "<group>"; };
@@ -2281,6 +2289,8 @@
 				32A5E62420A9642500B7D56F /* UndoBezipath */,
 				32A5E61C20A961FE00B7D56F /* BeziPathPaint */,
 				329134FB20A5881B007E10AB /* 气泡-2.png */,
+				BAD0F5D820AAC3F400AAD3D4 /* TKImageView.h */,
+				BAD0F5D720AAC3F300AAD3D4 /* TKImageView.m */,
 				329134FC20A5881C007E10AB /* QiPaoTagView.h */,
 				329134FD20A5881C007E10AB /* QiPaoTagView.m */,
 				32E5504820A583CF00631A14 /* TYImageEditViewController.h */,
@@ -4333,6 +4343,9 @@
 				F6C227BE1F9B449800464BD6 /* V */,
 				F6C227BD1F9B448D00464BD6 /* M */,
 				32E5504520A583CF00631A14 /* 图片处理器 */,
+				3248EC8620AADBF60042CF3F /* TYCorrectViewController.h */,
+				3248EC8420AADBF50042CF3F /* TYCorrectViewController.m */,
+				3248EC8520AADBF60042CF3F /* TYCorrectViewController.xib */,
 				F6C227A91F9B2A2A00464BD6 /* CorrectViewController.h */,
 				F6C227AA1F9B2A2A00464BD6 /* CorrectViewController.m */,
 				3FECC89B20AACFE000FE6727 /* TYCorrectViewController.h */,
@@ -5206,6 +5219,7 @@
 					F612EBC21F4FB341000E7432 = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = X225TLXQ76;
+						DevelopmentTeam = RGN8U623GW;
 						ProvisioningStyle = Automatic;
 					};
 					F612EBDB1F4FB341000E7432 = {
@@ -5298,6 +5312,7 @@
 				3284728320909C8D00A1F3D0 /* TopMenuView.xib in Resources */,
 				3262C5BB2091F6870063DE19 /* TYStoryboard.storyboard in Resources */,
 				3FECC89D20AACFE200FE6727 /* TYCorrectViewController.xib in Resources */,
+				3248EC8820AADBF60042CF3F /* TYCorrectViewController.xib in Resources */,
 				3256A5FD2098A7EB00A19946 /* TYAllListViewController.xib in Resources */,
 				BA90668C20A2F2C300631F42 /* CommentViewCell.xib in Resources */,
 				BAB44C9020A1A89A002455D8 /* NewMicoThirdCell.xib in Resources */,
@@ -5800,6 +5815,7 @@
 				BA90668620A2E40800631F42 /* CourseCollectionViewCell.m in Sources */,
 				3FECC8A420AAD38100FE6727 /* HBDrawModel.m in Sources */,
 				F6ACDA081FAB1617009F897B /* MemberCell.m in Sources */,
+				3248EC8720AADBF60042CF3F /* TYCorrectViewController.m in Sources */,
 				3FA5D9B920A03EF00029E276 /* TZPhotoPickerController.m in Sources */,
 				F6BC3E481F5D697B0047A7AA /* ActiveInfoModel.m in Sources */,
 				F6B87CA71F5C342400B02A46 /* XFUserInfo.m in Sources */,
@@ -5946,6 +5962,7 @@
 				F612EBC81F4FB341000E7432 /* main.m in Sources */,
 				F6AF70971F9DC277008E4220 /* CreatcircleFourCell.m in Sources */,
 				F6E3BA201F5E41A80060DEDD /* WriteListModel.m in Sources */,
+				BAD0F5D920AAC3F400AAD3D4 /* TKImageView.m in Sources */,
 				F6A604651F79F91800794B20 /* GetActiveApplyTeacherModel.m in Sources */,
 				3256A5F220947AC200A19946 /* VolunteerViewController.m in Sources */,
 				F6E12A751F7E1F4400E2A27D /* ApplySecondCell.m in Sources */,
@@ -6185,6 +6202,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = X225TLXQ76;
+				DEVELOPMENT_TEAM = RGN8U623GW;
 				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/XFComposition/PrefixHeader.pch";
@@ -6196,6 +6214,7 @@
 					"$(PROJECT_DIR)/XFComposition",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.house365.Rent;
+				PRODUCT_BUNDLE_IDENTIFIER = com.grasp.test1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -6211,6 +6230,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = X225TLXQ76;
+				DEVELOPMENT_TEAM = RGN8U623GW;
 				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/XFComposition/PrefixHeader.pch";
@@ -6222,6 +6242,7 @@
 					"$(PROJECT_DIR)/XFComposition",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.house365.Rent;
+				PRODUCT_BUNDLE_IDENTIFIER = com.grasp.test1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
