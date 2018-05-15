@@ -208,6 +208,7 @@
 		BAB44C9620A1A89A002455D8 /* VideoPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = BAB44C8520A1A89A002455D8 /* VideoPlayer.m */; };
 		BAB44C9720A1A89A002455D8 /* VideoSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = BAB44C8620A1A89A002455D8 /* VideoSlider.m */; };
 		BAB44C9820A1A89A002455D8 /* PlayerConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = BAB44C8920A1A89A002455D8 /* PlayerConfiguration.m */; };
+		BAD0F5D920AAC3F400AAD3D4 /* TKImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = BAD0F5D720AAC3F300AAD3D4 /* TKImageView.m */; };
 		BADA87CD20A49E840031EA5E /* AlertWriteView.m in Sources */ = {isa = PBXBuildFile; fileRef = BADA87CC20A49E840031EA5E /* AlertWriteView.m */; };
 		F602ADB21F58095600C152C4 /* MicroClassViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F602ADB11F58095600C152C4 /* MicroClassViewController.m */; };
 		F6038CE81F58E96A008FE507 /* mp322.png in Resources */ = {isa = PBXBuildFile; fileRef = F6038CE61F58E96A008FE507 /* mp322.png */; };
@@ -1089,6 +1090,8 @@
 		BAB44C8820A1A89A002455D8 /* PlaybackControls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaybackControls.h; sourceTree = "<group>"; };
 		BAB44C8920A1A89A002455D8 /* PlayerConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerConfiguration.m; sourceTree = "<group>"; };
 		BAB44C8A20A1A89A002455D8 /* VideoPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoPlayer.h; sourceTree = "<group>"; };
+		BAD0F5D720AAC3F300AAD3D4 /* TKImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKImageView.m; sourceTree = "<group>"; };
+		BAD0F5D820AAC3F400AAD3D4 /* TKImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKImageView.h; sourceTree = "<group>"; };
 		BADA87CB20A49E840031EA5E /* AlertWriteView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlertWriteView.h; sourceTree = "<group>"; };
 		BADA87CC20A49E840031EA5E /* AlertWriteView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlertWriteView.m; sourceTree = "<group>"; };
 		F602ADB01F58095600C152C4 /* MicroClassViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MicroClassViewController.h; sourceTree = "<group>"; };
@@ -2221,6 +2224,8 @@
 				32A5E62420A9642500B7D56F /* UndoBezipath */,
 				32A5E61C20A961FE00B7D56F /* BeziPathPaint */,
 				329134FB20A5881B007E10AB /* 气泡-2.png */,
+				BAD0F5D820AAC3F400AAD3D4 /* TKImageView.h */,
+				BAD0F5D720AAC3F300AAD3D4 /* TKImageView.m */,
 				329134FC20A5881C007E10AB /* QiPaoTagView.h */,
 				329134FD20A5881C007E10AB /* QiPaoTagView.m */,
 				32E5504820A583CF00631A14 /* TYImageEditViewController.h */,
@@ -5830,6 +5835,7 @@
 				F612EBC81F4FB341000E7432 /* main.m in Sources */,
 				F6AF70971F9DC277008E4220 /* CreatcircleFourCell.m in Sources */,
 				F6E3BA201F5E41A80060DEDD /* WriteListModel.m in Sources */,
+				BAD0F5D920AAC3F400AAD3D4 /* TKImageView.m in Sources */,
 				F6A604651F79F91800794B20 /* GetActiveApplyTeacherModel.m in Sources */,
 				3256A5F220947AC200A19946 /* VolunteerViewController.m in Sources */,
 				F6E12A751F7E1F4400E2A27D /* ApplySecondCell.m in Sources */,

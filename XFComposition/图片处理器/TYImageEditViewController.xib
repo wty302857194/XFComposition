@@ -13,6 +13,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TYImageEditViewController">
             <connections>
+                <outlet property="clipButton" destination="OOT-8S-zfK" id="Qjq-0R-XWF"/>
                 <outlet property="tableView" destination="ZH1-NG-XGj" id="unG-pB-E6a"/>
                 <outlet property="topBackView" destination="QCK-Lr-c9D" id="0EL-Ag-HJA"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -25,7 +26,32 @@
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QCK-Lr-c9D">
                     <rect key="frame" x="0.0" y="20" width="375" height="587"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OOT-8S-zfK">
+                            <rect key="frame" x="50" y="538" width="275" height="44"/>
+                            <color key="backgroundColor" red="0.27843137254901962" green="0.5607843137254902" blue="0.792156862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="275" id="BT6-be-Lc0"/>
+                                <constraint firstAttribute="height" constant="44" id="PUt-Sc-b1M"/>
+                            </constraints>
+                            <state key="normal" title="截图">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="4"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="clipImage:" destination="-1" eventType="touchUpInside" id="eoG-Ma-ztY"/>
+                            </connections>
+                        </button>
+                    </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="OOT-8S-zfK" firstAttribute="centerX" secondItem="QCK-Lr-c9D" secondAttribute="centerX" id="4Au-dH-R7C"/>
+                        <constraint firstAttribute="bottom" secondItem="OOT-8S-zfK" secondAttribute="bottom" constant="5" id="zjc-SS-U1g"/>
+                    </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xIv-bu-KYZ">
                     <rect key="frame" x="0.0" y="607" width="375" height="60"/>
