@@ -17,7 +17,7 @@ use_frameworks!
 
 pod 'Masonry'
 pod 'CWLateralSlide'
-
+pod 'JPImageresizerView'
 
 end
  

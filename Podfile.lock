@@ -1,15 +1,18 @@
 PODS:
   - CWLateralSlide (1.5.8)
+  - JPImageresizerView (0.3.7)
   - Masonry (1.1.0)
 
 DEPENDENCIES:
   - CWLateralSlide
+  - JPImageresizerView
   - Masonry
 
 SPEC CHECKSUMS:
   CWLateralSlide: 3af190c8ffa08040abfd9780f279dac94d531f8b
+  JPImageresizerView: 234c0f33cda8891ec2ad0bdb541f1f16441ea3de
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
 
-PODFILE CHECKSUM: f9d940ea567cf7387358c827a62a1a8ef21cfc91
+PODFILE CHECKSUM: ca8064b8f1435a612d63990db77c00af5190150d
 
 COCOAPODS: 1.4.0
