@@ -175,7 +175,7 @@
    
     GetWritePicModel *model = self.picArray[indexPath.row];
     
-    TYCorrectViewController *vc = [[TYCorrectViewController alloc]init];
+//    TYCorrectViewController *vc = [[TYCorrectViewController alloc]init];
 //    NSString *pic = [NSString stringWithFormat:@"%@",model.FixPicUrl];
 //    if (pic.length > 3){
 //       vc.PicUrl = model.FixPicUrl;
@@ -185,8 +185,8 @@
 //
 //        vc.PicID = model.ID;
 //
-    vc.picModel = model;
-    [self.navigationController pushViewController:vc animated:YES];
+//    vc.picModel = model;
+//    [self.navigationController pushViewController:vc animated:YES];
     TYCorrectViewController *vc = [[TYCorrectViewController alloc] init];
     NSString *pic = [NSString stringWithFormat:@"%@",model.FixPicUrl];
     if (pic.length > 3){

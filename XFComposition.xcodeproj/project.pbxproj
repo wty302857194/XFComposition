@@ -44,6 +44,8 @@
 		3237381B2092C26900015514 /* ListSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 323738192092C26800015514 /* ListSelectView.m */; };
 		32426A4B208638FF00B5227B /* HomeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32426A49208638FF00B5227B /* HomeTableViewCell.m */; };
 		32426A4C208638FF00B5227B /* HomeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32426A4A208638FF00B5227B /* HomeTableViewCell.xib */; };
+		3248EC8720AADBF60042CF3F /* TYCorrectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3248EC8420AADBF50042CF3F /* TYCorrectViewController.m */; };
+		3248EC8820AADBF60042CF3F /* TYCorrectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3248EC8520AADBF60042CF3F /* TYCorrectViewController.xib */; };
 		3256A5E2209344AC00A19946 /* VolunteerNewsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3256A5E0209344AC00A19946 /* VolunteerNewsTableViewCell.m */; };
 		3256A5E3209344AC00A19946 /* VolunteerNewsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3256A5E1209344AC00A19946 /* VolunteerNewsTableViewCell.xib */; };
 		3256A5F220947AC200A19946 /* VolunteerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3256A5F120947AC200A19946 /* VolunteerViewController.m */; };
@@ -64,8 +66,6 @@
 		32A5E62120A961FE00B7D56F /* DCBeizierPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A5E61F20A961FE00B7D56F /* DCBeizierPath.m */; };
 		32A5E62220A961FE00B7D56F /* DCBezierPaintBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A5E62020A961FE00B7D56F /* DCBezierPaintBoard.m */; };
 		32A5E62720A9642500B7D56F /* DCUndoBeziPathPaintBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A5E62520A9642500B7D56F /* DCUndoBeziPathPaintBoard.m */; };
-		32A648CC20A479FF0014539F /* TYCorrectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A648CA20A479FF0014539F /* TYCorrectViewController.m */; };
-		32A648CD20A479FF0014539F /* TYCorrectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32A648CB20A479FF0014539F /* TYCorrectViewController.xib */; };
 		32A7A0F1209ADD5900C19895 /* TYOnlyActivetyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A7A0EF209ADD5800C19895 /* TYOnlyActivetyTableViewCell.m */; };
 		32A7A0F2209ADD5900C19895 /* TYOnlyActivetyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32A7A0F0209ADD5800C19895 /* TYOnlyActivetyTableViewCell.xib */; };
 		32B38F4D208875E500616A7B /* LeftMenuModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 32B38F4C208875E500616A7B /* LeftMenuModel.m */; };
@@ -790,6 +790,9 @@
 		32426A48208638FF00B5227B /* HomeTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeTableViewCell.h; sourceTree = "<group>"; };
 		32426A49208638FF00B5227B /* HomeTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeTableViewCell.m; sourceTree = "<group>"; };
 		32426A4A208638FF00B5227B /* HomeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeTableViewCell.xib; sourceTree = "<group>"; };
+		3248EC8420AADBF50042CF3F /* TYCorrectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYCorrectViewController.m; sourceTree = "<group>"; };
+		3248EC8520AADBF60042CF3F /* TYCorrectViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TYCorrectViewController.xib; sourceTree = "<group>"; };
+		3248EC8620AADBF60042CF3F /* TYCorrectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYCorrectViewController.h; sourceTree = "<group>"; };
 		3256A5DF209344AC00A19946 /* VolunteerNewsTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VolunteerNewsTableViewCell.h; sourceTree = "<group>"; };
 		3256A5E0209344AC00A19946 /* VolunteerNewsTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VolunteerNewsTableViewCell.m; sourceTree = "<group>"; };
 		3256A5E1209344AC00A19946 /* VolunteerNewsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VolunteerNewsTableViewCell.xib; sourceTree = "<group>"; };
@@ -825,9 +828,6 @@
 		32A5E62320A9628400B7D56F /* DCCommon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DCCommon.h; sourceTree = "<group>"; };
 		32A5E62520A9642500B7D56F /* DCUndoBeziPathPaintBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCUndoBeziPathPaintBoard.m; sourceTree = "<group>"; };
 		32A5E62620A9642500B7D56F /* DCUndoBeziPathPaintBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCUndoBeziPathPaintBoard.h; sourceTree = "<group>"; };
-		32A648C920A479FF0014539F /* TYCorrectViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TYCorrectViewController.h; sourceTree = "<group>"; };
-		32A648CA20A479FF0014539F /* TYCorrectViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TYCorrectViewController.m; sourceTree = "<group>"; };
-		32A648CB20A479FF0014539F /* TYCorrectViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TYCorrectViewController.xib; sourceTree = "<group>"; };
 		32A7A0EE209ADD5800C19895 /* TYOnlyActivetyTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TYOnlyActivetyTableViewCell.h; sourceTree = "<group>"; };
 		32A7A0EF209ADD5800C19895 /* TYOnlyActivetyTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TYOnlyActivetyTableViewCell.m; sourceTree = "<group>"; };
 		32A7A0F0209ADD5800C19895 /* TYOnlyActivetyTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TYOnlyActivetyTableViewCell.xib; sourceTree = "<group>"; };
@@ -4306,6 +4306,9 @@
 				F6C227BE1F9B449800464BD6 /* V */,
 				F6C227BD1F9B448D00464BD6 /* M */,
 				32E5504520A583CF00631A14 /* 图片处理器 */,
+				3248EC8620AADBF60042CF3F /* TYCorrectViewController.h */,
+				3248EC8420AADBF50042CF3F /* TYCorrectViewController.m */,
+				3248EC8520AADBF60042CF3F /* TYCorrectViewController.xib */,
 				F6C227A91F9B2A2A00464BD6 /* CorrectViewController.h */,
 				F6C227AA1F9B2A2A00464BD6 /* CorrectViewController.m */,
 				3F487EBC20A956EB00E50A00 /* AudioView.h */,
@@ -5167,7 +5170,6 @@
 				TargetAttributes = {
 					F612EBC21F4FB341000E7432 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = X225TLXQ76;
 						DevelopmentTeam = RGN8U623GW;
 						ProvisioningStyle = Automatic;
 					};
@@ -5260,6 +5262,7 @@
 				F6D637D61F7D284900FF6FA4 /* IQKeyboardManager.bundle in Resources */,
 				3284728320909C8D00A1F3D0 /* TopMenuView.xib in Resources */,
 				3262C5BB2091F6870063DE19 /* TYStoryboard.storyboard in Resources */,
+				3248EC8820AADBF60042CF3F /* TYCorrectViewController.xib in Resources */,
 				3256A5FD2098A7EB00A19946 /* TYAllListViewController.xib in Resources */,
 				BA90668C20A2F2C300631F42 /* CommentViewCell.xib in Resources */,
 				BAB44C9020A1A89A002455D8 /* NewMicoThirdCell.xib in Resources */,
@@ -5755,6 +5758,7 @@
 				04A07A241F6B62070026DD6E /* MJProperty.m in Sources */,
 				BA90668620A2E40800631F42 /* CourseCollectionViewCell.m in Sources */,
 				F6ACDA081FAB1617009F897B /* MemberCell.m in Sources */,
+				3248EC8720AADBF60042CF3F /* TYCorrectViewController.m in Sources */,
 				3FA5D9B920A03EF00029E276 /* TZPhotoPickerController.m in Sources */,
 				F6BC3E481F5D697B0047A7AA /* ActiveInfoModel.m in Sources */,
 				F6B87CA71F5C342400B02A46 /* XFUserInfo.m in Sources */,
@@ -6138,9 +6142,8 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = X225TLXQ76;
-				ENABLE_BITCODE = NO;
 				DEVELOPMENT_TEAM = RGN8U623GW;
+				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/XFComposition/PrefixHeader.pch";
 				INFOPLIST_FILE = XFComposition/Info.plist;
@@ -6150,7 +6153,6 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/XFComposition",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.house365.Rent;
 				PRODUCT_BUNDLE_IDENTIFIER = com.grasp.test1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -6166,9 +6168,8 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = X225TLXQ76;
-				ENABLE_BITCODE = NO;
 				DEVELOPMENT_TEAM = RGN8U623GW;
+				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/XFComposition/PrefixHeader.pch";
 				INFOPLIST_FILE = XFComposition/Info.plist;
@@ -6178,7 +6179,6 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/XFComposition",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.house365.Rent;
 				PRODUCT_BUNDLE_IDENTIFIER = com.grasp.test1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
