@@ -157,6 +157,38 @@
         }
    
             
+        case NetworkRequestTypePostData: {
+            
+            [self.manager POST:urlString parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+
+                NSData *data = imgData[0];
+                
+                NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+                formatter.dateFormat = @"yyyyMMddHHmmss";
+                NSString *str = [formatter stringFromDate:[NSDate date]];
+                NSString *fileName = [NSString stringWithFormat:@"%@.mp3", str];
+                
+                [formData appendPartWithFileData:data name:@"fileValue" fileName:fileName mimeType:@"application/octet-stream" ];
+
+
+                
+                
+                
+            } progress:^(NSProgress * _Nonnull uploadProgress) {
+                
+            } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                [self handleRequestResultWithDataTask:task responseObject:responseObject
+                                                error:nil
+                                          resultBlock:resultBlock];
+            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                
+                [self handleRequestResultWithDataTask:task responseObject:nil
+                                                error:error
+                                          resultBlock:resultBlock];
+            }];
+            
+            break;
+        }
             
             
         case NetworkRequestTypeGet: {

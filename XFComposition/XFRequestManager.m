@@ -410,6 +410,73 @@ static XFRequestManager *instance = nil;
     
     
 }
+-(void)XFRequstUploadAudio:(NSString*)userID
+                 fileValue:(NSData *)fileValue
+                          :(XFResponseBlock)block{
+    
+    NSDictionary *parameters = @{@"Action":@"UploadAudio",
+                                 @"Token":@"0A66A4FD-146F-4542-8D7B-33CDEC2981F9",
+                                 @"userID":userID,
+                                 };
+    [xfrequst requestWithURLString:APIurl parameters:parameters type:NetworkRequestTypePostData imgData:@[fileValue] resultBlock:^(id responseObject, NSError *error, NSURLSessionDataTask *task) {
+        
+        NSLog(@"%@%@",XFReq_User_UploadAudio
+              ,responseObject);
+        
+        if ([responseObject[@"ret_code"] integerValue] == 0) {
+            
+            block(XFReq_User_UploadAudio, responseObject[@"ret_data"]  ,YES);
+        }else{
+            
+            NSString *msg = responseObject[@"ret_msg"];
+            block(XFReq_User_UploadAudio, msg,NO);
+        }
+    }];
+            
+    
+}
+-(void)XFRequstAddCutPic:(NSString*)userID
+                   PicID:(NSString*)PicID
+                  blogID:(NSString*)blogID
+           ExtractPicUrl:(NSString*)ExtractPicUrl
+          ExtractContent:(NSString*)ExtractContent
+             ExtractType:(NSString*)ExtractType
+                        :(XFResponseBlock)block{
+    
+    
+    
+    
+    NSDictionary *parameters = @{@"Action":@"AddCutPic",
+                                 @"Token":@"0A66A4FD-146F-4542-8D7B-33CDEC2981F9",
+                                 @"blogID":blogID,
+                                 @"userID":userID,
+                                 @"PicID":PicID,
+                                 @"ExtractPicUrl":ExtractPicUrl,
+                                 @"ExtractContent":ExtractContent,
+                                 @"ExtractType":ExtractType,
+                                 };
+    [xfrequst requestWithURLString:APIurl parameters:parameters type:NetworkRequestTypePost imgData:nil resultBlock:^(id responseObject, NSError *error, NSURLSessionDataTask *task) {
+        
+        NSLog(@"%@%@",XFReq_User_AddCutPic
+              ,responseObject);
+        
+        if ([responseObject[@"ret_code"] integerValue] == 0) {
+            
+            NSString *msg = responseObject[@"ret_msg"];
+
+            block(XFReq_User_AddCutPic, msg ,YES);
+        }else{
+            
+            NSString *msg = responseObject[@"ret_msg"];
+            block(XFReq_User_AddCutPic, msg,NO);
+        }
+        
+    }];
+    
+    
+    
+    
+}
 -(void)printUrl:(NSString*)requstName parameters:(NSDictionary*)parameters{
     
     

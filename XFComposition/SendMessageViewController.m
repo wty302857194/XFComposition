@@ -24,6 +24,10 @@
     self.inputTextView.placeholderColor = hexColor(cccccc);
     self.inputTextView.placeholderFont = [UIFont systemFontOfSize:13];
     self.inputTextView.textColor =hexColor(666666);
+    self.inputTextView.layer.borderWidth = 1;
+    self.inputTextView.layer.borderColor = hexColor(e5e5e5).CGColor;
+    self.inputTextView.layer.cornerRadius = 6;
+    self.inputTextView.layer.masksToBounds = YES;
 }
 -(void)viewWillAppear:(BOOL)animated{
     

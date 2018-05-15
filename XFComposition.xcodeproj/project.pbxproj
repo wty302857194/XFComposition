@@ -59,8 +59,6 @@
 		3284728320909C8D00A1F3D0 /* TopMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3284728220909C8D00A1F3D0 /* TopMenuView.xib */; };
 		32A5A9D220A4171E001E4838 /* ReadJianCeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A5A9D020A4171E001E4838 /* ReadJianCeViewController.m */; };
 		32A5A9D320A4171E001E4838 /* ReadJianCeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32A5A9D120A4171E001E4838 /* ReadJianCeViewController.xib */; };
-		32A648CC20A479FF0014539F /* TYCorrectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A648CA20A479FF0014539F /* TYCorrectViewController.m */; };
-		32A648CD20A479FF0014539F /* TYCorrectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32A648CB20A479FF0014539F /* TYCorrectViewController.xib */; };
 		32A7A0F1209ADD5900C19895 /* TYOnlyActivetyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A7A0EF209ADD5800C19895 /* TYOnlyActivetyTableViewCell.m */; };
 		32A7A0F2209ADD5900C19895 /* TYOnlyActivetyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32A7A0F0209ADD5800C19895 /* TYOnlyActivetyTableViewCell.xib */; };
 		32B38F4D208875E500616A7B /* LeftMenuModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 32B38F4C208875E500616A7B /* LeftMenuModel.m */; };
@@ -77,6 +75,10 @@
 		32F7E756209323FD0016C1A6 /* TYVolunteerCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32F7E754209323FD0016C1A6 /* TYVolunteerCollectionViewCell.xib */; };
 		32F7E75A209341470016C1A6 /* VolunteerActiveiTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32F7E758209341470016C1A6 /* VolunteerActiveiTableViewCell.m */; };
 		32F7E75B209341470016C1A6 /* VolunteerActiveiTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32F7E759209341470016C1A6 /* VolunteerActiveiTableViewCell.xib */; };
+		3F0564C520A5762D00FC69BF /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F0564C420A5762D00FC69BF /* AVFoundation.framework */; };
+		3F0564C820A5776200FC69BF /* AudioRecordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F0564C720A5776200FC69BF /* AudioRecordView.m */; };
+		3F0564CA20A5779C00FC69BF /* AudioRecordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F0564C920A5779C00FC69BF /* AudioRecordView.xib */; };
+		3F0564DD20A5966100FC69BF /* libmp3lame.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F0564DC20A5966100FC69BF /* libmp3lame.a */; };
 		3F09581C20A13DA900B55F4E /* LookStandarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F09581A20A13DA900B55F4E /* LookStandarViewController.m */; };
 		3F09581D20A13DA900B55F4E /* LookStandarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F09581B20A13DA900B55F4E /* LookStandarViewController.xib */; };
 		3F09582120A13E8C00B55F4E /* LookStandarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F09581F20A13E8C00B55F4E /* LookStandarCell.m */; };
@@ -96,9 +98,14 @@
 		3F3D578B209C528700D415AC /* MessageDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F3D5789209C528700D415AC /* MessageDetailViewController.xib */; };
 		3F3D5790209C5B3B00D415AC /* FMBean.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3D578F209C5B3B00D415AC /* FMBean.m */; };
 		3F3D5793209C5C7300D415AC /* DTApiBaseBean.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3D5792209C5C7300D415AC /* DTApiBaseBean.m */; };
+		3F487EBE20A956EB00E50A00 /* AudioView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F487EBD20A956EB00E50A00 /* AudioView.m */; };
+		3F487EC020A9575200E50A00 /* AudioView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F487EBF20A9575200E50A00 /* AudioView.xib */; };
 		3F4D1F4A20A294D500584C6C /* QYStarReplay.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F4D1F4920A294D500584C6C /* QYStarReplay.m */; };
 		3F4D1F4F20A2F67000584C6C /* bg_home_searchBg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F4D1F4D20A2F66C00584C6C /* bg_home_searchBg@2x.png */; };
 		3F4D1F5020A2F67100584C6C /* bg_home_searchBg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F4D1F4E20A2F66E00584C6C /* bg_home_searchBg@3x.png */; };
+		3F60444420A987ED00D87E92 /* YasicClipAreaLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F60444020A987E800D87E92 /* YasicClipAreaLayer.m */; };
+		3F60444520A987ED00D87E92 /* YasicPanGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F60444120A987EA00D87E92 /* YasicPanGestureRecognizer.m */; };
+		3F60444820A987F600D87E92 /* YasicClipPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F60444720A987F500D87E92 /* YasicClipPage.m */; };
 		3F97241920A448A100AF9B0F /* CommentInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F97241820A448A100AF9B0F /* CommentInfo.m */; };
 		3FA5D978209FE42A0029E276 /* PerCenterViewController1.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA5D976209FE42A0029E276 /* PerCenterViewController1.m */; };
 		3FA5D979209FE42A0029E276 /* PerCenterViewController1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FA5D977209FE42A0029E276 /* PerCenterViewController1.xib */; };
@@ -124,6 +131,10 @@
 		3FA5D9BD20A03EF00029E276 /* TZVideoPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA5D9AB20A03EEF0029E276 /* TZVideoPlayerController.m */; };
 		3FA5D9BE20A03EF00029E276 /* UIView+Layout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA5D9AD20A03EEF0029E276 /* UIView+Layout.m */; };
 		3FA5D9C020A056C90029E276 /* MarktaskCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FA5D9BF20A056C90029E276 /* MarktaskCell.xib */; };
+		3FECC88D20AA8D1300FE6727 /* StrokeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FECC88C20AA8D1300FE6727 /* StrokeView.m */; };
+		3FECC88F20AA8D3000FE6727 /* StrokeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FECC88E20AA8D3000FE6727 /* StrokeView.xib */; };
+		3FECC89320AAA49500FE6727 /* StrokeViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FECC89120AAA49500FE6727 /* StrokeViewCell.m */; };
+		3FECC89420AAA49500FE6727 /* StrokeViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FECC89220AAA49500FE6727 /* StrokeViewCell.xib */; };
 		4ABBA26F2080DBF60002E08D /* RegistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ABBA26D2080DBF60002E08D /* RegistViewController.m */; };
 		4ABBA2702080DBF60002E08D /* RegistViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4ABBA26E2080DBF60002E08D /* RegistViewController.xib */; };
 		4ABBA2732080E0150002E08D /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ABBA2722080E0150002E08D /* BaseViewController.m */; };
@@ -791,9 +802,6 @@
 		32A5A9CF20A4171E001E4838 /* ReadJianCeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReadJianCeViewController.h; sourceTree = "<group>"; };
 		32A5A9D020A4171E001E4838 /* ReadJianCeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReadJianCeViewController.m; sourceTree = "<group>"; };
 		32A5A9D120A4171E001E4838 /* ReadJianCeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReadJianCeViewController.xib; sourceTree = "<group>"; };
-		32A648C920A479FF0014539F /* TYCorrectViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TYCorrectViewController.h; sourceTree = "<group>"; };
-		32A648CA20A479FF0014539F /* TYCorrectViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TYCorrectViewController.m; sourceTree = "<group>"; };
-		32A648CB20A479FF0014539F /* TYCorrectViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TYCorrectViewController.xib; sourceTree = "<group>"; };
 		32A7A0EE209ADD5800C19895 /* TYOnlyActivetyTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TYOnlyActivetyTableViewCell.h; sourceTree = "<group>"; };
 		32A7A0EF209ADD5800C19895 /* TYOnlyActivetyTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TYOnlyActivetyTableViewCell.m; sourceTree = "<group>"; };
 		32A7A0F0209ADD5800C19895 /* TYOnlyActivetyTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TYOnlyActivetyTableViewCell.xib; sourceTree = "<group>"; };
@@ -821,6 +829,12 @@
 		32F7E757209341470016C1A6 /* VolunteerActiveiTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VolunteerActiveiTableViewCell.h; sourceTree = "<group>"; };
 		32F7E758209341470016C1A6 /* VolunteerActiveiTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VolunteerActiveiTableViewCell.m; sourceTree = "<group>"; };
 		32F7E759209341470016C1A6 /* VolunteerActiveiTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VolunteerActiveiTableViewCell.xib; sourceTree = "<group>"; };
+		3F0564C420A5762D00FC69BF /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		3F0564C620A5776200FC69BF /* AudioRecordView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioRecordView.h; sourceTree = "<group>"; };
+		3F0564C720A5776200FC69BF /* AudioRecordView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioRecordView.m; sourceTree = "<group>"; };
+		3F0564C920A5779C00FC69BF /* AudioRecordView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AudioRecordView.xib; sourceTree = "<group>"; };
+		3F0564DB20A5966000FC69BF /* lame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lame.h; sourceTree = "<group>"; };
+		3F0564DC20A5966100FC69BF /* libmp3lame.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libmp3lame.a; sourceTree = "<group>"; };
 		3F09581920A13DA900B55F4E /* LookStandarViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LookStandarViewController.h; sourceTree = "<group>"; };
 		3F09581A20A13DA900B55F4E /* LookStandarViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LookStandarViewController.m; sourceTree = "<group>"; };
 		3F09581B20A13DA900B55F4E /* LookStandarViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LookStandarViewController.xib; sourceTree = "<group>"; };
@@ -852,10 +866,19 @@
 		3F3D578F209C5B3B00D415AC /* FMBean.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMBean.m; sourceTree = "<group>"; };
 		3F3D5791209C5C7300D415AC /* DTApiBaseBean.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTApiBaseBean.h; sourceTree = "<group>"; };
 		3F3D5792209C5C7300D415AC /* DTApiBaseBean.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTApiBaseBean.m; sourceTree = "<group>"; };
+		3F487EBC20A956EB00E50A00 /* AudioView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioView.h; sourceTree = "<group>"; };
+		3F487EBD20A956EB00E50A00 /* AudioView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioView.m; sourceTree = "<group>"; };
+		3F487EBF20A9575200E50A00 /* AudioView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AudioView.xib; sourceTree = "<group>"; };
 		3F4D1F4820A294D500584C6C /* QYStarReplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYStarReplay.h; sourceTree = "<group>"; };
 		3F4D1F4920A294D500584C6C /* QYStarReplay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QYStarReplay.m; sourceTree = "<group>"; };
 		3F4D1F4D20A2F66C00584C6C /* bg_home_searchBg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_home_searchBg@2x.png"; sourceTree = "<group>"; };
 		3F4D1F4E20A2F66E00584C6C /* bg_home_searchBg@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_home_searchBg@3x.png"; sourceTree = "<group>"; };
+		3F60444020A987E800D87E92 /* YasicClipAreaLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YasicClipAreaLayer.m; sourceTree = "<group>"; };
+		3F60444120A987EA00D87E92 /* YasicPanGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YasicPanGestureRecognizer.m; sourceTree = "<group>"; };
+		3F60444220A987EB00D87E92 /* YasicClipAreaLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YasicClipAreaLayer.h; sourceTree = "<group>"; };
+		3F60444320A987ED00D87E92 /* YasicPanGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YasicPanGestureRecognizer.h; sourceTree = "<group>"; };
+		3F60444620A987F400D87E92 /* YasicClipPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YasicClipPage.h; sourceTree = "<group>"; };
+		3F60444720A987F500D87E92 /* YasicClipPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YasicClipPage.m; sourceTree = "<group>"; };
 		3F97241720A448A100AF9B0F /* CommentInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommentInfo.h; sourceTree = "<group>"; };
 		3F97241820A448A100AF9B0F /* CommentInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommentInfo.m; sourceTree = "<group>"; };
 		3FA5D975209FE42A0029E276 /* PerCenterViewController1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PerCenterViewController1.h; sourceTree = "<group>"; };
@@ -902,6 +925,12 @@
 		3FA5D9AC20A03EEF0029E276 /* UIView+Layout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Layout.h"; sourceTree = "<group>"; };
 		3FA5D9AD20A03EEF0029E276 /* UIView+Layout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Layout.m"; sourceTree = "<group>"; };
 		3FA5D9BF20A056C90029E276 /* MarktaskCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MarktaskCell.xib; sourceTree = "<group>"; };
+		3FECC88B20AA8D1300FE6727 /* StrokeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StrokeView.h; sourceTree = "<group>"; };
+		3FECC88C20AA8D1300FE6727 /* StrokeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StrokeView.m; sourceTree = "<group>"; };
+		3FECC88E20AA8D3000FE6727 /* StrokeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StrokeView.xib; sourceTree = "<group>"; };
+		3FECC89020AAA49500FE6727 /* StrokeViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StrokeViewCell.h; sourceTree = "<group>"; };
+		3FECC89120AAA49500FE6727 /* StrokeViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StrokeViewCell.m; sourceTree = "<group>"; };
+		3FECC89220AAA49500FE6727 /* StrokeViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StrokeViewCell.xib; sourceTree = "<group>"; };
 		4ABBA26C2080DBF60002E08D /* RegistViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegistViewController.h; sourceTree = "<group>"; };
 		4ABBA26D2080DBF60002E08D /* RegistViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RegistViewController.m; sourceTree = "<group>"; };
 		4ABBA26E2080DBF60002E08D /* RegistViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegistViewController.xib; sourceTree = "<group>"; };
@@ -2036,6 +2065,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F0564DD20A5966100FC69BF /* libmp3lame.a in Frameworks */,
+				3F0564C520A5762D00FC69BF /* AVFoundation.framework in Frameworks */,
 				B6F16DB8290F62883631B0B6 /* Pods_XFComposition.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2330,6 +2361,7 @@
 		587AA2B7206A10840034B766 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3F0564C420A5762D00FC69BF /* AVFoundation.framework */,
 				587AA2CC206A12150034B766 /* libresolv.tbd */,
 				587AA2CA206A120A0034B766 /* libz.tbd */,
 				587AA2C8206A11FE0034B766 /* CFNetwork.framework */,
@@ -2754,6 +2786,8 @@
 		F612EC041F4FBA83000E7432 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				3F0564DB20A5966000FC69BF /* lame.h */,
+				3F0564DC20A5966100FC69BF /* libmp3lame.a */,
 				3F09582420A1404800B55F4E /* XFTipView.h */,
 				3F09582520A1404900B55F4E /* XFTipView.m */,
 				3F09582320A1404800B55F4E /* XFTipView.xib */,
@@ -4175,6 +4209,12 @@
 				58A49A6D2079F066008405EA /* ImageBase */,
 				F6C741D21F95DD79006CF76D /* WorkMarkViewController.h */,
 				F6C741D31F95DD79006CF76D /* WorkMarkViewController.m */,
+				3F60444220A987EB00D87E92 /* YasicClipAreaLayer.h */,
+				3F60444020A987E800D87E92 /* YasicClipAreaLayer.m */,
+				3F60444320A987ED00D87E92 /* YasicPanGestureRecognizer.h */,
+				3F60444120A987EA00D87E92 /* YasicPanGestureRecognizer.m */,
+				3F60444620A987F400D87E92 /* YasicClipPage.h */,
+				3F60444720A987F500D87E92 /* YasicClipPage.m */,
 				F6C741D61F95DF19006CF76D /* V */,
 				F6C741D51F95DF14006CF76D /* M */,
 				F6C227BA1F9B448300464BD6 /* PicListViewController.h */,
@@ -4189,9 +4229,18 @@
 				F6C227BD1F9B448D00464BD6 /* M */,
 				F6C227A91F9B2A2A00464BD6 /* CorrectViewController.h */,
 				F6C227AA1F9B2A2A00464BD6 /* CorrectViewController.m */,
-				32A648C920A479FF0014539F /* TYCorrectViewController.h */,
-				32A648CA20A479FF0014539F /* TYCorrectViewController.m */,
-				32A648CB20A479FF0014539F /* TYCorrectViewController.xib */,
+				3F487EBC20A956EB00E50A00 /* AudioView.h */,
+				3F487EBD20A956EB00E50A00 /* AudioView.m */,
+				3F487EBF20A9575200E50A00 /* AudioView.xib */,
+				3FECC88B20AA8D1300FE6727 /* StrokeView.h */,
+				3FECC88C20AA8D1300FE6727 /* StrokeView.m */,
+				3FECC88E20AA8D3000FE6727 /* StrokeView.xib */,
+				3FECC89020AAA49500FE6727 /* StrokeViewCell.h */,
+				3FECC89120AAA49500FE6727 /* StrokeViewCell.m */,
+				3FECC89220AAA49500FE6727 /* StrokeViewCell.xib */,
+				3F0564C620A5776200FC69BF /* AudioRecordView.h */,
+				3F0564C720A5776200FC69BF /* AudioRecordView.m */,
+				3F0564C920A5779C00FC69BF /* AudioRecordView.xib */,
 				F6C227AD1F9B2A3B00464BD6 /* V */,
 				F6C227AC1F9B2A3600464BD6 /* M */,
 				F6C741E01F95F8FC006CF76D /* MytestpaperViewController.h */,
@@ -5040,7 +5089,6 @@
 					F612EBC21F4FB341000E7432 = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = X225TLXQ76;
-						DevelopmentTeam = 5K5GGEWVU3;
 						ProvisioningStyle = Automatic;
 					};
 					F612EBDB1F4FB341000E7432 = {
@@ -5097,6 +5145,7 @@
 				2F4FC66820A1A9D4009A1E4C /* PhotoViewController.xib in Resources */,
 				F6F42F7D1F6DF083003014F6 /* CLAVPlayerView.xib in Resources */,
 				3256A5E3209344AC00A19946 /* VolunteerNewsTableViewCell.xib in Resources */,
+				3F0564CA20A5779C00FC69BF /* AudioRecordView.xib in Resources */,
 				3F09583620A1AB8300B55F4E /* PicListTableViewCell.xib in Resources */,
 				04A07A211F6B62070026DD6E /* Info.plist in Resources */,
 				323738182092C01900015514 /* TYTableView.xib in Resources */,
@@ -5109,6 +5158,7 @@
 				BA647D2D20A28BC6007AAC98 /* NewMicoFourthCell.xib in Resources */,
 				3FA5D9B620A03EF00029E276 /* TZImagePickerController.bundle in Resources */,
 				32B38F52208880B000616A7B /* LeftDetailViewController.xib in Resources */,
+				3FECC88F20AA8D3000FE6727 /* StrokeView.xib in Resources */,
 				3FA5D98720A02F060029E276 /* SendMessageViewController.xib in Resources */,
 				BA9C1CB920A2CF0600BFBE23 /* NewMicoSeventhCell.xib in Resources */,
 				3F09582220A13E8C00B55F4E /* LookStandarCell.xib in Resources */,
@@ -5118,7 +5168,6 @@
 				F6038DAE1F595154008FE507 /* MBProgressHUD.bundle in Resources */,
 				322B15742088AB3C009FCC96 /* CompositionLibraryTableViewCell.xib in Resources */,
 				F6038CF11F590601008FE507 /* mm.png in Resources */,
-				32A648CD20A479FF0014539F /* TYCorrectViewController.xib in Resources */,
 				3F09581D20A13DA900B55F4E /* LookStandarViewController.xib in Resources */,
 				F621C2061FA6B4C800801521 /* SVProgressHUD.bundle in Resources */,
 				F6B3C0F41F5DA43D00C0D821 /* MJRefresh.bundle in Resources */,
@@ -5140,8 +5189,10 @@
 				F6038CE81F58E96A008FE507 /* mp322.png in Resources */,
 				3F4D1F5020A2F67100584C6C /* bg_home_searchBg@3x.png in Resources */,
 				BAB44C9320A1A89A002455D8 /* NewMicoSecondCell.xib in Resources */,
+				3F487EC020A9575200E50A00 /* AudioView.xib in Resources */,
 				32CBFA8C20886B5C004CB00F /* LeftMenuViewController.xib in Resources */,
 				32426A4C208638FF00B5227B /* HomeTableViewCell.xib in Resources */,
+				3FECC89420AAA49500FE6727 /* StrokeViewCell.xib in Resources */,
 				3F3D578B209C528700D415AC /* MessageDetailViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -5294,6 +5345,7 @@
 				F6BC3D271F5CE1F30047A7AA /* HomeRequst.m in Sources */,
 				F6ACD9E91FAAB5C3009F897B /* SaveCommentRequst.m in Sources */,
 				F6E187D81FA46F04003F06B3 /* GetActivePageViewModel.m in Sources */,
+				3F0564C820A5776200FC69BF /* AudioRecordView.m in Sources */,
 				F6AA9A191F614074006897B1 /* MicroClassGradeModel.m in Sources */,
 				F6B3C0F61F5DA43D00C0D821 /* NSBundle+MJRefresh.m in Sources */,
 				F6D7C7D11F8EF46000A08DC1 /* GetDeptSchoolListRequst.m in Sources */,
@@ -5384,6 +5436,7 @@
 				F621C2051FA6B4C800801521 /* SVProgressAnimatedView.m in Sources */,
 				04A07A251F6B62070026DD6E /* MJPropertyKey.m in Sources */,
 				F6DC7CC41F91B1C60050D1DF /* GetBookBjInfoModel.m in Sources */,
+				3FECC89320AAA49500FE6727 /* StrokeViewCell.m in Sources */,
 				F6B578FB1F65AF300049FEDA /* HomePaFiveCell.m in Sources */,
 				F6AA9A0D1F610AE1006897B1 /* SynchroHeadView.m in Sources */,
 				F6B130D71F608A7D00994571 /* MicTableViewCell.m in Sources */,
@@ -5495,7 +5548,6 @@
 				F6AB07841F78EC4A00B5304A /* ActiveWriteListModel.m in Sources */,
 				F6C227C71F9B595600464BD6 /* GetWritePicRemarkRequst.m in Sources */,
 				F6BC3E391F5D23710047A7AA /* UIView+WebCacheOperation.m in Sources */,
-				32A648CC20A479FF0014539F /* TYCorrectViewController.m in Sources */,
 				F6BC20871F94C357000686CC /* GetBookBjListModel.m in Sources */,
 				F6BC3E301F5D23710047A7AA /* SDWebImageDownloaderOperation.m in Sources */,
 				F6AF708E1F9DC214008E4220 /* CreatcircleFristCell.m in Sources */,
@@ -5572,6 +5624,7 @@
 				F623E2C21F8727630024876A /* GetBlogInfoRequst.m in Sources */,
 				F62DC71C1F9F132200D3E035 /* ICSDrawerController.m in Sources */,
 				3237381B2092C26900015514 /* ListSelectView.m in Sources */,
+				3FECC88D20AA8D1300FE6727 /* StrokeView.m in Sources */,
 				3FA5D981209FEB070029E276 /* GetMessageListModel.m in Sources */,
 				F612EBCE1F4FB341000E7432 /* ViewController.m in Sources */,
 				F6CF09D11FA9F07500D885D8 /* GetTitleBackinfoModel.m in Sources */,
@@ -5593,6 +5646,7 @@
 				F6D42FAA1FB2F43000410A08 /* GetLabelTypeTreelistAllRequst.m in Sources */,
 				F6C7417B1F9598DC006CF76D /* GetMyTongjiRequst.m in Sources */,
 				F6C741D91F95DF98006CF76D /* WorkMarkCell.m in Sources */,
+				3F60444820A987F600D87E92 /* YasicClipPage.m in Sources */,
 				F6FCBDC81F99EC150022F448 /* GetMygroupListModel.m in Sources */,
 				320D1BD62086132E00F7D45A /* HomeHeaderView.m in Sources */,
 				F6B130C11F605B0A00994571 /* Ringrequst.m in Sources */,
@@ -5673,6 +5727,7 @@
 				F6F68CC41F98DC56002B3BA2 /* AFURLSessionManager.m in Sources */,
 				F612EC1E1F4FD799000E7432 /* CompositionLibraryViewController.m in Sources */,
 				3262C5C12091FE0D0063DE19 /* AddPhotoCollectionViewCell.m in Sources */,
+				3F487EBE20A956EB00E50A00 /* AudioView.m in Sources */,
 				F6BCCC911FB00A92007A4CED /* GetReadActiveModel.m in Sources */,
 				F6B130D21F6070A200994571 /* MircFiveCell.m in Sources */,
 				F6C741DF1F95EA04006CF76D /* GetTeachNeedCheckListModel.m in Sources */,
@@ -5703,6 +5758,7 @@
 				F6D637951F7CA60100FF6FA4 /* BookRecViewController.m in Sources */,
 				3F09582A20A1436900B55F4E /* StandardInfo.m in Sources */,
 				F621C2041FA6B4C800801521 /* SVIndefiniteAnimatedView.m in Sources */,
+				3F60444420A987ED00D87E92 /* YasicClipAreaLayer.m in Sources */,
 				F6D637C91F7D284900FF6FA4 /* IQNSArray+Sort.m in Sources */,
 				F6C0918D1F8A467D00F89A9B /* GetGroupInfoRequst.m in Sources */,
 				F6AF70861F9DA4CB008E4220 /* MarkProgressThridCell.m in Sources */,
@@ -5745,6 +5801,7 @@
 				32F7E755209323FD0016C1A6 /* TYVolunteerCollectionViewCell.m in Sources */,
 				F6B3C0FC1F5DBDDB00C0D821 /* BookModel.m in Sources */,
 				F6CF09C51FA9CBBF00D885D8 /* PostViewController.m in Sources */,
+				3F60444520A987ED00D87E92 /* YasicPanGestureRecognizer.m in Sources */,
 				F6134BFD1F68B9CD0028420E /* MicroPianduanCell.m in Sources */,
 				F6BC3E3F1F5D5FB60047A7AA /* HomeGetMicroClassRequst.m in Sources */,
 				F612EC161F4FD37E000E7432 /* MainTabBarViewController.m in Sources */,
@@ -5990,12 +6047,16 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = X225TLXQ76;
-				DEVELOPMENT_TEAM = 5K5GGEWVU3;
+				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/XFComposition/PrefixHeader.pch";
 				INFOPLIST_FILE = XFComposition/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/XFComposition",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.house365.Rent;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -6012,11 +6073,16 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = X225TLXQ76;
+				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/XFComposition/PrefixHeader.pch";
 				INFOPLIST_FILE = XFComposition/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/XFComposition",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.house365.Rent;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

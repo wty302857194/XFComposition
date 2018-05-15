@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="ZDw-n6-AMO" customClass="AudioView">
+            <rect key="frame" x="0.0" y="0.0" width="81" height="89"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pic_star" translatesAutoresizingMaskIntoConstraints="NO" id="Ekk-qw-fly">
+                    <rect key="frame" x="0.0" y="0.0" width="81" height="89"/>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" red="0.30588235289999999" green="0.56078431370000004" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="Ekk-qw-fly" firstAttribute="leading" secondItem="ZDw-n6-AMO" secondAttribute="leading" id="Pc2-O7-mAZ"/>
+                <constraint firstItem="Ekk-qw-fly" firstAttribute="top" secondItem="ZDw-n6-AMO" secondAttribute="top" id="dsI-kW-TR7"/>
+                <constraint firstAttribute="trailing" secondItem="Ekk-qw-fly" secondAttribute="trailing" id="oyq-OH-18L"/>
+                <constraint firstAttribute="bottom" secondItem="Ekk-qw-fly" secondAttribute="bottom" id="xqQ-77-hU0"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="sJE-kY-Tb0"/>
+            <connections>
+                <outlet property="imgView" destination="Ekk-qw-fly" id="hJT-Eb-7sb"/>
+            </connections>
+            <point key="canvasLocation" x="-137.5" y="-88.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="pic_star" width="13" height="12"/>
+    </resources>
+</document>

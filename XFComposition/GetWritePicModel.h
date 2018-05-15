@@ -9,15 +9,15 @@
 #import <Foundation/Foundation.h>
 
 @interface GetWritePicModel : FMBean
-@property (nonatomic,strong)NSString *BlogID;
-@property (nonatomic,strong)NSString *CreateTime;
-@property (nonatomic,strong)NSString *ID;
-@property (nonatomic,strong)NSString *PicUrl;
-@property (nonatomic,strong)NSString *Sort;
-@property (nonatomic,strong)NSString *UserID;
-@property (nonatomic,strong)NSString *FixPicUrl;
-@property (nonatomic,strong)NSString *PicID;
-@property (nonatomic,strong)NSString *CheckUserID;
+@property (nonatomic,copy)NSString *BlogID;
+@property (nonatomic,copy)NSString *CreateTime;
+@property (nonatomic,copy)NSString *ID;
+@property (nonatomic,copy)NSString *PicUrl;
+@property (nonatomic,copy)NSString *Sort;
+@property (nonatomic,copy)NSString *UserID;
+@property (nonatomic,copy)NSString *FixPicUrl;
+@property (nonatomic,copy)NSString *PicID;
+@property (nonatomic,copy)NSString *CheckUserID;
 +(id)loadWithJSOn:(NSDictionary *)json;
 
 @end

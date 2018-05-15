@@ -11,7 +11,7 @@
 #import "GetWritePicRequst.h"
 #import "GetWritePicModel.h"
 #import "PicListTableViewCell.h"
-#import "CorrectViewController.h"
+#import "TYCorrectViewController.h"
 #import "PlaceholderTextView.h"
 #import "GetWritePicRemarkRequst.h"
 #import "GetWritePicRemarkModel.h"
@@ -42,19 +42,6 @@
     [self.navigationController setNavigationBarHidden:YES animated:YES];
     
 }
-//-(UICollectionView *)collectionView{
-//    if (!_collectionView) {
-//        UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-        //设置collectionView滚动方向
-//        [layout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
-//
-//        _collectionView = [[UICollectionView alloc]initWithFrame:self.view.bounds collectionViewLayout:layout];
-//;
-//        [_collectionView registerClass:[PicListCell class] forCellWithReuseIdentifier:@"cell"];
-//
-//    }
-//    return _collectionView;
-//}
 -(NSMutableArray *)picArray{
     if (!_picArray) {
         _picArray = [[NSMutableArray alloc]init];
@@ -78,7 +65,7 @@
     self.inputTextView.textColor =hexColor(666666);
     self.inputTextView.editable = _isChange;
     self.inputTextView.layer.borderWidth = 0.5;
-    self.inputTextView.layer.borderColor = hexColor(888888).CGColor;
+    self.inputTextView.layer.borderColor = hexColor(e5e5e5).CGColor;
     self.inputTextView.layer.cornerRadius = 5;
     self.inputTextView.layer.masksToBounds = YES;
     [self getWritPic];
@@ -184,19 +171,20 @@
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
    
-        GetWritePicModel *model = self.picArray[indexPath.row];
-        CorrectViewController *vc = [[CorrectViewController alloc]init];
-    NSString *pic = [NSString stringWithFormat:@"%@",model.FixPicUrl];
-    if (pic.length > 3){
-       vc.PicUrl = model.FixPicUrl;
-    }else{
-       vc.PicUrl = model.PicUrl;
-    }
-    
-        vc.PicID = model.ID;
-    
-
-        [self.navigationController pushViewController:vc animated:YES];
+    GetWritePicModel *model = self.picArray[indexPath.row];
+                                            
+    TYCorrectViewController *vc = [[TYCorrectViewController alloc]init];
+//    NSString *pic = [NSString stringWithFormat:@"%@",model.FixPicUrl];
+//    if (pic.length > 3){
+//       vc.PicUrl = model.FixPicUrl;
+//    }else{
+//       vc.PicUrl = model.PicUrl;
+//    }
+//
+//        vc.PicID = model.ID;
+//
+    vc.picModel = model;
+    [self.navigationController pushViewController:vc animated:YES];
     //手机版获取文章图片点评内容
    
     

@@ -53,8 +53,9 @@
         
         self.label1.sd_layout.rightSpaceToView(backView, 20).topSpaceToView(self.titleLabel, 10).heightIs(20).widthIs(0);
         [self.label1 setSingleLineAutoResizeWithMaxWidth:0];
+        self.label1.textColor = hexColor(333333);
         self.label1.font = [UIFont systemFontOfSize:14];
-        bgimgView.sd_layout.leftSpaceToView(backView, 10).topSpaceToView(self.timeLabel, 5).widthIs(WidthFrame-60).heightIs(2);
+        bgimgView.sd_layout.leftSpaceToView(backView, 10).topSpaceToView(self.timeLabel, 5).widthIs(WidthFrame-60).heightIs(.5);
         bgimgView.image = [UIImage imageNamed:@"xuxian"];
         CGFloat w = (WidthFrame-80)/4;
         self.bt1.sd_layout.leftSpaceToView(backView, w).topSpaceToView(bgimgView, 5).widthIs(20).heightIs(20);
