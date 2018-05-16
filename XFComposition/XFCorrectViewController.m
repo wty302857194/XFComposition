@@ -53,6 +53,7 @@
         contentViewController = [[TYImageEditViewController alloc] init];
         contentViewController.PicUrl = self.PicUrl;
         contentViewController.view.frame = CGRectMake(0, 0, _leftView.width, _leftView.height);
+        contentViewController.picModel = self.picModel;
         contentViewController.TYCorrecVC = self;
         [self addChildViewController:contentViewController];
         [_leftView addSubview:contentViewController.view];

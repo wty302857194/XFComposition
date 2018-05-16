@@ -14,6 +14,8 @@
 #import "ListSelectView.h"
 #import "DCUndoBeziPathPaintBoard.h"
 #import "TKImageView.h"
+#import "ActionSheetView.h"
+#import "UploadPicRequst.h"
 
 @interface TYImageEditViewController ()
 {
@@ -107,7 +109,33 @@
     self.clipButton.hidden = YES;
     self.imgView.hidden = NO;
     _image = [self.tkImageView currentCroppedImage];
-    self.imgView.image = _image;
+
+    ActionSheetView * actionSheet = [[ActionSheetView alloc] initWithCancleTitle:@"取消" otherTitles:@"范文库",@"病文库" ,nil];
+    
+    [actionSheet show];
+    actionSheet.actionSheetBlock = ^(ActionSheetItem *sheetItem) {
+        
+        NSData * imageData = nil;
+        
+        if (UIImagePNGRepresentation(_image)) {
+            imageData = UIImagePNGRepresentation(_image);
+        }else {
+            imageData = UIImageJPEGRepresentation(_image, 0.2);
+        }
+        UploadPicRequst *requst = [[UploadPicRequst alloc]init];
+        [requst UploadPicRequstWithfileValue:imageData withuserid:[XFUserInfo getUserInfo].Loginid withtypeid:@"1" :^(NSDictionary *json){
+            NSString * str =   json[@"ret_data"]?:@"";
+            
+            [[XFRequestManager sharedInstance] XFRequstAddCutPic:[XFUserInfo getUserInfo].Loginid PicID:_picModel.PicID blogID:_picModel.BlogID ExtractPicUrl:str ExtractContent:@"" ExtractType:[NSString stringWithFormat:@"%ld",(long)sheetItem.index] :^(NSString *requestName, id responseData, BOOL isSuccess) {
+                if (isSuccess) {//跳转病文库或者范文库
+                    
+                }
+                [SVProgressHUD showInfoWithStatus:responseData];
+                
+            }];
+            
+        }];
+    };
     
 }
 
@@ -124,9 +152,9 @@
         //是否显示九宫格交叉线
         //    _tkImageView.showCrossLines = YES;
         _tkImageView.cornerBorderInImage = NO;
-        _tkImageView.cropAreaCornerWidth = 44;
-        _tkImageView.cropAreaCornerHeight = 44;
-        _tkImageView.minSpace = 30;
+        _tkImageView.cropAreaCornerWidth = 10;
+        _tkImageView.cropAreaCornerHeight = 10;
+        _tkImageView.minSpace = 5;
         _tkImageView.cropAreaCornerLineColor = [UIColor redColor];
         _tkImageView.cropAreaBorderLineColor = [UIColor lightGrayColor];
 //        _tkImageView.cropAreaCornerLineWidth = 6;

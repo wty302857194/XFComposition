@@ -12,5 +12,6 @@
 @property (nonatomic, strong) XFCorrectViewController *TYCorrecVC;
 @property (nonatomic,strong)NSString *PicUrl;
 @property (strong, nonatomic) UIImageView *imgView;
+@property (nonatomic, strong) GetWritePicModel* picModel;
 
 @end

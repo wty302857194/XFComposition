@@ -12,5 +12,6 @@
 @property (strong, nonatomic) UIScrollView *scrollView;
 @property (nonatomic,strong)NSString *PicID;
 @property (nonatomic,strong)NSString *PicUrl;
+@property (nonatomic, strong) GetWritePicModel* picModel;
 
 @end
