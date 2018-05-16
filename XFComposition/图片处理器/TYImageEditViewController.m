@@ -16,6 +16,8 @@
 #import "TKImageView.h"
 #import "ActionSheetView.h"
 #import "UploadPicRequst.h"
+#import "AudioRecordView.h"
+#import "AudioView.h"
 
 @interface TYImageEditViewController ()
 {
@@ -24,6 +26,7 @@
     CGRect largeFrame;  //确定图片放大最大的程;
     UIPinchGestureRecognizer *pinchGestureRecognizer;
     UIPanGestureRecognizer *panGestureRecognizer;
+    UIImage *_image;
     BOOL _isShouHui;
 }
 @property (nonatomic, assign)DCPaintColor  selectPaintColor;
@@ -38,6 +41,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *clipButton;
 
 @property (nonatomic, strong) TKImageView *tkImageView;
+@property (nonatomic, strong)AudioRecordView * recordView;
 
 @end
 
@@ -46,13 +50,15 @@
     switch (sender.tag) {
         case 10://语音
         {
-            
+            [self.recordView  showAudioRecordView];
         }
             break;
         case 11://截图
         {
+            _image = [Global makeImageWithView:self.imgView withSize:self.imgView.size];
+
             self.imgView.hidden = YES;
-            self.tkImageView.toCropImage = [Global makeImageWithView:self.imgView withSize:self.imgView.size];
+            self.tkImageView.toCropImage = _image;
             [self.view addSubview:self.tkImageView];
             self.clipButton.hidden = NO;
             
@@ -107,6 +113,8 @@
     [self.tkImageView removeFromSuperview];
     self.clipButton.hidden = YES;
     self.imgView.hidden = NO;
+    _image = [self.tkImageView currentCroppedImage];
+
     ActionSheetView * actionSheet = [[ActionSheetView alloc] initWithCancleTitle:@"取消" otherTitles:@"范文库",@"病文库" ,nil];
     
     [actionSheet show];
@@ -114,10 +122,10 @@
         
         NSData * imageData = nil;
         
-        if (UIImagePNGRepresentation([self.tkImageView currentCroppedImage])) {
-            imageData = UIImagePNGRepresentation([self.tkImageView currentCroppedImage]);
+        if (UIImagePNGRepresentation(_image)) {
+            imageData = UIImagePNGRepresentation(_image);
         }else {
-            imageData = UIImageJPEGRepresentation([self.tkImageView currentCroppedImage], 0.2);
+            imageData = UIImageJPEGRepresentation(_image, 0.2);
         }
         UploadPicRequst *requst = [[UploadPicRequst alloc]init];
         [requst UploadPicRequstWithfileValue:imageData withuserid:[XFUserInfo getUserInfo].Loginid withtypeid:@"1" :^(NSDictionary *json){
@@ -133,7 +141,44 @@
     };
     
 }
-
+-(AudioRecordView *)recordView{
+    
+    __weak typeof(self)  weakSelf = self;
+    
+    if (_recordView == nil) {
+        _recordView = [[NSBundle mainBundle] loadNibNamed:@"AudioRecordView" owner:self options:nil].lastObject;
+        _recordView.recordViewBlock = ^(id recordFileUrl) {
+            
+            
+            
+            [[XFRequestManager sharedInstance] XFRequstUploadAudio:[XFUserInfo getUserInfo].Loginid  fileValue:recordFileUrl :^(NSString *requestName, id responseData, BOOL isSuccess) {
+                if (isSuccess) {
+                    [weakSelf creatAudioView:[NSString stringWithFormat:@"%@%@",HTurl,responseData]];
+                }
+            }] ;
+        };
+    }
+    return _recordView;
+}
+//创建多个
+-(void)creatAudioView:(NSString*)urlStr{
+    
+    AudioView * view = [[NSBundle mainBundle] loadNibNamed:@"AudioView" owner:self options:nil].lastObject;
+    view.tapBlock = ^{
+        [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
+        AVURLAsset *asset = [AVURLAsset assetWithURL:[NSURL URLWithString:urlStr]];
+        AVPlayerItem *item = [AVPlayerItem playerItemWithAsset:asset];
+        
+        AVPlayer*  player = [AVPlayer playerWithPlayerItem:item];
+        [player play];
+    };
+    view.panBlock = ^(CGPoint point) {
+        
+    };
+    
+    [self.view addSubview:view];
+    
+}
 - (TKImageView *)tkImageView
 {
     if (!_tkImageView) {
@@ -175,6 +220,8 @@
         [_imgView setUserInteractionEnabled:YES];
         NSString *str = [NSString stringWithFormat:@"%@%@",HTurl,self.PicUrl];
         [_imgView sd_setImageWithURL:[NSURL URLWithString:str] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+//            _image = image;
+//            _image = [Global makeImageWithView:self.imgView withSize:self.imgView.size];
         }];
         _topBackView.clipsToBounds = YES;
         [_topBackView addSubview:_imgView];
