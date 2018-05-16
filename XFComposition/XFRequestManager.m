@@ -477,6 +477,38 @@ static XFRequestManager *instance = nil;
     
     
 }
+-(void)XFRequstGetCutPicBlog:(NSString*)userID
+                  blogID:(NSString*)blogID
+             ExtractType:(NSString*)ExtractType
+                        :(XFResponseBlock)block{
+    
+    
+    NSDictionary *parameters = @{@"Action":@"GetCutPicBlog",
+                                 @"Token":@"0A66A4FD-146F-4542-8D7B-33CDEC2981F9",
+                                 @"blogID":blogID,
+                                 @"userID":userID,
+                                 @"ExtractType":ExtractType,
+                                 };
+    [xfrequst requestWithURLString:APIurl parameters:parameters type:NetworkRequestTypePost imgData:nil resultBlock:^(id responseObject, NSError *error, NSURLSessionDataTask *task) {
+        
+        NSLog(@"%@%@",XFReq_User_GetPicBlog
+              ,responseObject);
+        
+        if ([responseObject[@"ret_code"] integerValue] == 0) {
+            
+            NSMutableArray * array  =[FMBean objectsWithArray:responseObject[@"ret_data"] classType:[XFLibrary class] ];
+            
+            
+            block(XFReq_User_GetPicBlog, array ,YES);
+        }else{
+            
+            NSString *msg = responseObject[@"ret_msg"];
+            block(XFReq_User_GetPicBlog, msg,NO);
+        }
+        
+    }];
+    
+}
 -(void)printUrl:(NSString*)requstName parameters:(NSDictionary*)parameters{
     
     

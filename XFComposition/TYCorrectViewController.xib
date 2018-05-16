@@ -14,6 +14,7 @@
             <connections>
                 <outlet property="backgroundView" destination="DZu-kE-NUZ" id="Sja-QD-lic"/>
                 <outlet property="backgroundViewWidth" destination="8uk-6n-DSK" id="hyc-nt-OTp"/>
+                <outlet property="drawBrn" destination="HtB-BV-nSW" id="a9r-IU-gah"/>
                 <outlet property="leftView" destination="3fg-zw-Xgg" id="6Io-5k-C8S"/>
                 <outlet property="leftViewWidth" destination="s0S-gf-afa" id="HZq-nY-P6D"/>
                 <outlet property="moreBtn" destination="eHG-Ah-i7p" id="3Pz-H3-hJO"/>
@@ -101,7 +102,7 @@
                                                         <color key="titleColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
                                                     <state key="selected">
-                                                        <color key="titleColor" red="0.0" green="0.61568627450000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <connections>
                                                         <action selector="button_action:" destination="-1" eventType="touchUpInside" id="HPW-g3-Fou"/>

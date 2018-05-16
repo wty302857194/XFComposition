@@ -16,5 +16,6 @@
 #import "StandardInfo.h"
 #import "CommentInfo.h"
 #import "GetWritePicModel.h"
+#import "XFLibrary.h"
 
 #endif /* AllBean_h */

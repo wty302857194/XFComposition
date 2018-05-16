@@ -141,6 +141,11 @@
 		3FA5D9C020A056C90029E276 /* MarktaskCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FA5D9BF20A056C90029E276 /* MarktaskCell.xib */; };
 		3FBD7E2820ABBA6300C7F58E /* XFCorrectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FBD7E2620ABBA6200C7F58E /* XFCorrectViewController.m */; };
 		3FBD7E2920ABBA6300C7F58E /* XFCorrectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FBD7E2720ABBA6300C7F58E /* XFCorrectViewController.xib */; };
+		3FBD7E2C20ABC8A800C7F58E /* XFLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FBD7E2B20ABC8A800C7F58E /* XFLibrary.m */; };
+		3FBD7E3020ABCA8E00C7F58E /* XFLbraryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FBD7E2E20ABCA8E00C7F58E /* XFLbraryViewController.m */; };
+		3FBD7E3120ABCA8E00C7F58E /* XFLbraryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FBD7E2F20ABCA8E00C7F58E /* XFLbraryViewController.xib */; };
+		3FBD7E3520ABCBC100C7F58E /* XFLbraryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FBD7E3320ABCBC100C7F58E /* XFLbraryCell.m */; };
+		3FBD7E3620ABCBC100C7F58E /* XFLbraryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FBD7E3420ABCBC100C7F58E /* XFLbraryCell.xib */; };
 		3FECC88D20AA8D1300FE6727 /* StrokeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FECC88C20AA8D1300FE6727 /* StrokeView.m */; };
 		3FECC88F20AA8D3000FE6727 /* StrokeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FECC88E20AA8D3000FE6727 /* StrokeView.xib */; };
 		3FECC89320AAA49500FE6727 /* StrokeViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FECC89120AAA49500FE6727 /* StrokeViewCell.m */; };
@@ -965,6 +970,14 @@
 		3FBD7E2520ABBA6100C7F58E /* XFCorrectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XFCorrectViewController.h; sourceTree = "<group>"; };
 		3FBD7E2620ABBA6200C7F58E /* XFCorrectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XFCorrectViewController.m; sourceTree = "<group>"; };
 		3FBD7E2720ABBA6300C7F58E /* XFCorrectViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XFCorrectViewController.xib; sourceTree = "<group>"; };
+		3FBD7E2A20ABC8A800C7F58E /* XFLibrary.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XFLibrary.h; sourceTree = "<group>"; };
+		3FBD7E2B20ABC8A800C7F58E /* XFLibrary.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XFLibrary.m; sourceTree = "<group>"; };
+		3FBD7E2D20ABCA8E00C7F58E /* XFLbraryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XFLbraryViewController.h; sourceTree = "<group>"; };
+		3FBD7E2E20ABCA8E00C7F58E /* XFLbraryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XFLbraryViewController.m; sourceTree = "<group>"; };
+		3FBD7E2F20ABCA8E00C7F58E /* XFLbraryViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = XFLbraryViewController.xib; sourceTree = "<group>"; };
+		3FBD7E3220ABCBC100C7F58E /* XFLbraryCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XFLbraryCell.h; sourceTree = "<group>"; };
+		3FBD7E3320ABCBC100C7F58E /* XFLbraryCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XFLbraryCell.m; sourceTree = "<group>"; };
+		3FBD7E3420ABCBC100C7F58E /* XFLbraryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = XFLbraryCell.xib; sourceTree = "<group>"; };
 		3FECC88B20AA8D1300FE6727 /* StrokeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StrokeView.h; sourceTree = "<group>"; };
 		3FECC88C20AA8D1300FE6727 /* StrokeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StrokeView.m; sourceTree = "<group>"; };
 		3FECC88E20AA8D3000FE6727 /* StrokeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StrokeView.xib; sourceTree = "<group>"; };
@@ -2346,6 +2359,8 @@
 				3F09582920A1436900B55F4E /* StandardInfo.m */,
 				3F97241720A448A100AF9B0F /* CommentInfo.h */,
 				3F97241820A448A100AF9B0F /* CommentInfo.m */,
+				3FBD7E2A20ABC8A800C7F58E /* XFLibrary.h */,
+				3FBD7E2B20ABC8A800C7F58E /* XFLibrary.m */,
 			);
 			name = data;
 			sourceTree = "<group>";
@@ -4371,6 +4386,12 @@
 				3F0564C620A5776200FC69BF /* AudioRecordView.h */,
 				3F0564C720A5776200FC69BF /* AudioRecordView.m */,
 				3F0564C920A5779C00FC69BF /* AudioRecordView.xib */,
+				3FBD7E2D20ABCA8E00C7F58E /* XFLbraryViewController.h */,
+				3FBD7E2E20ABCA8E00C7F58E /* XFLbraryViewController.m */,
+				3FBD7E2F20ABCA8E00C7F58E /* XFLbraryViewController.xib */,
+				3FBD7E3220ABCBC100C7F58E /* XFLbraryCell.h */,
+				3FBD7E3320ABCBC100C7F58E /* XFLbraryCell.m */,
+				3FBD7E3420ABCBC100C7F58E /* XFLbraryCell.xib */,
 				F6C227AD1F9B2A3B00464BD6 /* V */,
 				F6C227AC1F9B2A3600464BD6 /* M */,
 				F6C741E01F95F8FC006CF76D /* MytestpaperViewController.h */,
@@ -5310,6 +5331,7 @@
 				320D1BD1208611B700F7D45A /* HomeViewController.xib in Resources */,
 				F6D637D61F7D284900FF6FA4 /* IQKeyboardManager.bundle in Resources */,
 				3284728320909C8D00A1F3D0 /* TopMenuView.xib in Resources */,
+				3FBD7E3120ABCA8E00C7F58E /* XFLbraryViewController.xib in Resources */,
 				3262C5BB2091F6870063DE19 /* TYStoryboard.storyboard in Resources */,
 				3FECC89D20AACFE200FE6727 /* TYCorrectViewController.xib in Resources */,
 				3256A5FD2098A7EB00A19946 /* TYAllListViewController.xib in Resources */,
@@ -5322,6 +5344,7 @@
 				F6038CF01F590601008FE507 /* sj.png in Resources */,
 				3FA5D979209FE42A0029E276 /* PerCenterViewController1.xib in Resources */,
 				F6038CE81F58E96A008FE507 /* mp322.png in Resources */,
+				3FBD7E3620ABCBC100C7F58E /* XFLbraryCell.xib in Resources */,
 				3F4D1F5020A2F67100584C6C /* bg_home_searchBg@3x.png in Resources */,
 				BAB44C9320A1A89A002455D8 /* NewMicoSecondCell.xib in Resources */,
 				3F487EC020A9575200E50A00 /* AudioView.xib in Resources */,
@@ -5436,6 +5459,7 @@
 				58A49AAC2079F0EE008405EA /* KKImageToolBase.m in Sources */,
 				58A49AAD2079F0EE008405EA /* KKToolBarItem.m in Sources */,
 				F6CF09BC1FA9A96B00D885D8 /* GetTitleCommentRequst.m in Sources */,
+				3FBD7E2C20ABC8A800C7F58E /* XFLibrary.m in Sources */,
 				F6C227B61F9B36F900464BD6 /* GetWritePicRequst.m in Sources */,
 				F6C1D3711F6B78A8003D36E0 /* ShowtextView.m in Sources */,
 				F6C741E21F95F8FC006CF76D /* MytestpaperViewController.m in Sources */,
@@ -5795,6 +5819,7 @@
 				F6C7417B1F9598DC006CF76D /* GetMyTongjiRequst.m in Sources */,
 				F6C741D91F95DF98006CF76D /* WorkMarkCell.m in Sources */,
 				3F60444820A987F600D87E92 /* YasicClipPage.m in Sources */,
+				3FBD7E3020ABCA8E00C7F58E /* XFLbraryViewController.m in Sources */,
 				F6FCBDC81F99EC150022F448 /* GetMygroupListModel.m in Sources */,
 				320D1BD62086132E00F7D45A /* HomeHeaderView.m in Sources */,
 				F6B130C11F605B0A00994571 /* Ringrequst.m in Sources */,
@@ -5802,6 +5827,7 @@
 				329134FF20A5881D007E10AB /* QiPaoTagView.m in Sources */,
 				3FA5D9BE20A03EF00029E276 /* UIView+Layout.m in Sources */,
 				F6B3C0E71F5DA43D00C0D821 /* MJRefreshBackFooter.m in Sources */,
+				3FBD7E3520ABCBC100C7F58E /* XFLbraryCell.m in Sources */,
 				F6A717781FA0A3310046C235 /* fixmyinfoRequst.m in Sources */,
 				F6D7C7F01F8F444600A08DC1 /* BookDetailSecondCell.m in Sources */,
 				32B38F4D208875E500616A7B /* LeftMenuModel.m in Sources */,

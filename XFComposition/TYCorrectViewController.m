@@ -15,6 +15,7 @@
 #import "UploadPicRequst.h"
 #import "StrokeView.h"
 #import "HBDrawingBoard.h"
+#import "XFLbraryViewController.h"
 @interface TYCorrectViewController ()<UIScrollViewDelegate,ImageViewDelegate,UITableViewDelegate,UITableViewDataSource,HBDrawingBoardDelegate>{
     
       int i;
@@ -25,6 +26,7 @@
 }
 
 @property (nonatomic, strong) HBDrawingBoard *drawView;
+@property (strong, nonatomic) IBOutlet UIButton *drawBrn;
 
 @property (strong, nonatomic) IBOutlet UIButton *playBtn;
 @property (strong, nonatomic) IBOutlet UITableView *moreTablVuew;
@@ -116,7 +118,7 @@
     _drawView.lineWidth = 1;
     _drawView.lineColor = [UIColor redColor];
     [_leftView addSubview:_drawView];
-    
+
     [self.drawView.backImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",HTurl,_picModel.PicUrl]]];
     
     
@@ -281,15 +283,50 @@
             
             break;
         case 3:// 还原大小
-            [_imgeView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",HTurl,_picModel.PicUrl]]];            break;
+            [_imgeView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",HTurl,_picModel.PicUrl]]];
+            [_drawView setBoard:setTypeClearAll];
+
+            
+            break;
         case 4://范文库
             
-            break;
-        case 5:// 病文库
+        {
+            
+            
+            [[XFRequestManager sharedInstance] XFRequstGetCutPicBlog:[XFUserInfo getUserInfo].Loginid blogID:_picModel.BlogID ExtractType:@"0" :^(NSString *requestName, id responseData, BOOL isSuccess) {
+                if (isSuccess) {
+                    XFLbraryViewController * vc = [[XFLbraryViewController alloc]init];
+                    
+                    vc.dataArray = responseData;
+                    
+                    [self.navigationController pushViewController:vc animated:YES];
+                }
+            }] ;
+            
+        }
+            
             
             break;
+         case 5:// 病文库
+        {
+            
+            [[XFRequestManager sharedInstance] XFRequstGetCutPicBlog:[XFUserInfo getUserInfo].Loginid blogID:_picModel.BlogID ExtractType:@"1" :^(NSString *requestName, id responseData, BOOL isSuccess) {
+                if (isSuccess) {
+                    XFLbraryViewController * vc = [[XFLbraryViewController alloc]init];
+                    
+                    vc.dataArray = responseData;
+                    
+                    [self.navigationController pushViewController:vc animated:YES];
+                }
+            }] ;
+            
+        }
+           
+            break;
         case 6:// 橡皮擦
-                        [_drawView setBoard:setTypeEraser];
+            _drawView.lineWidth = 10;
+            
+            [_drawView setBoard:setTypeEraser];
             break;
       
             
@@ -323,36 +360,42 @@
         case 0://语音
             [self.recordView  showAudioRecordView];
             [_moreBtn setSelected:NO];
+            [_drawBrn setSelected:NO];
 
             break;
         case 1://截图
         {
+            
+            
+            [self.drawView showCropView];
+            
             YasicClipPage * vc = [[YasicClipPage alloc] init];
-            vc.imgeBlock = ^(NSInteger index, UIImage *imge) {
-                
-                NSData * imageData = nil;
-                
-                if (UIImagePNGRepresentation(imge)) {
-                    imageData = UIImagePNGRepresentation(imge);
-                }else {
-                    imageData = UIImageJPEGRepresentation(imge, 0.2);
-                }
-                UploadPicRequst *requst = [[UploadPicRequst alloc]init];
-                [requst UploadPicRequstWithfileValue:imageData withuserid:[XFUserInfo getUserInfo].Loginid withtypeid:@"1" :^(NSDictionary *json){
-                    NSString * str =   json[@"ret_data"]?:@"";
-                    
-                    [[XFRequestManager sharedInstance] XFRequstAddCutPic:[XFUserInfo getUserInfo].Loginid PicID:_picModel.PicID blogID:_picModel.BlogID ExtractPicUrl:str ExtractContent:@"" ExtractType:[NSString stringWithFormat:@"%ld",(long)index] :^(NSString *requestName, id responseData, BOOL isSuccess) {
-                        
-                        [SVProgressHUD showInfoWithStatus:responseData];
-                        
-                    }];
-                    
-                }];
-                
-            };
-            vc.urlStr= [NSString stringWithFormat:@"%@%@",HTurl,_picModel.PicUrl];
-            [self.navigationController pushViewController:vc animated:YES];
+//            vc.imgeBlock = ^(NSInteger index, UIImage *imge) {
+//
+//                NSData * imageData = nil;
+//
+//                if (UIImagePNGRepresentation(imge)) {
+//                    imageData = UIImagePNGRepresentation(imge);
+//                }else {
+//                    imageData = UIImageJPEGRepresentation(imge, 0.2);
+//                }
+//                UploadPicRequst *requst = [[UploadPicRequst alloc]init];
+//                [requst UploadPicRequstWithfileValue:imageData withuserid:[XFUserInfo getUserInfo].Loginid withtypeid:@"1" :^(NSDictionary *json){
+//                    NSString * str =   json[@"ret_data"]?:@"";
+//
+//                    [[XFRequestManager sharedInstance] XFRequstAddCutPic:[XFUserInfo getUserInfo].Loginid PicID:_picModel.PicID blogID:_picModel.BlogID ExtractPicUrl:str ExtractContent:@"" ExtractType:[NSString stringWithFormat:@"%ld",(long)index] :^(NSString *requestName, id responseData, BOOL isSuccess) {
+//
+//                        [SVProgressHUD showInfoWithStatus:responseData];
+//
+//                    }];
+//
+//                }];
+//
+//            };
+//            vc.urlStr= [NSString stringWithFormat:@"%@%@",HTurl,_picModel.PicUrl];
+//            [self.navigationController pushViewController:vc animated:YES];
             [_moreBtn setSelected:NO];
+            [_drawBrn setSelected:NO];
 
         }
             
@@ -365,6 +408,7 @@
             _scorllView.scrollEnabled = YES;
             _pan.enabled = NO;
             [_moreBtn setSelected:NO];
+            [_drawBrn setSelected:NO];
 
             
         }
@@ -374,7 +418,19 @@
         {
             _pan.enabled = YES;
             [_moreBtn setSelected:NO];
+            [btn setSelected:!btn.selected];
 
+            if (_drawBrn.isSelected) {
+                [_drawBrn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+                [_drawBrn setBackgroundColor:hexColor(009dff)];
+                _drawView.isDraw = YES;
+            }else{
+                
+                [_drawBrn setTitleColor:hexColor(333333) forState:UIControlStateNormal];
+                [_drawBrn setBackgroundColor:[UIColor clearColor]];
+                _drawView.isDraw = NO;
+
+            }
             
         }
             break;
@@ -384,12 +440,14 @@
             [_moreBtn setSelected:NO];
             [_drawView setBoard:setTypeBack];
             
-            
+            [_drawBrn setSelected:NO];
+
         }
             break;
         case 5://更多
         {
             [btn setSelected:!btn.selected];
+            [_drawBrn setSelected:NO];
 
             if (btn.isSelected) {
                 _moreView.hidden = NO;

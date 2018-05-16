@@ -55,7 +55,13 @@ typedef NS_ENUM(NSInteger, actionOpen) {
 
 @end
 
+typedef void(^YasicClipPageBlock)(NSInteger index ,UIImage*imge);
+
+
 @interface HBDrawingBoard : UIView
+
+@property (nonatomic , copy) YasicClipPageBlock  imgeBlock;
+
 @property (nonatomic, assign) BOOL ise;
 
 @property (nonatomic, assign) HBDrawingShapeType shapType;
@@ -68,8 +74,16 @@ typedef NS_ENUM(NSInteger, actionOpen) {
 
 @property (nonatomic, weak) id<HBDrawingBoardDelegate> delegate;
 
+@property (nonatomic, assign) BOOL isDraw;// 是否绘画；
+
+
 - (BOOL)drawWithPoints:(HBDrawModel *)model;
-  -(void)setBoard:(setType) type;
+
+-(void)setBoard:(setType) type;
+
+-(void)showCropView;
+-(void)closeCropView;
+
 + (HBDrawModel *)objectWith:(NSDictionary *)dic;
 @end
 
