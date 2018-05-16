@@ -91,7 +91,7 @@
     
     XFUserInfo *_xf = [XFUserInfo getUserInfo];
     AddBlogwritingRequst *requst = [[AddBlogwritingRequst alloc]init];
-    [requst AddBlogwritingRequstwithNoticeName:self.textField.text withNoticeObject:@"0" withNoticeContent:@"" withNoticeID:@"0" withuserid:_xf.Loginid withmodel:@"7" withposttype:_indexStr withIsApp:@"1" :^(NSDictionary *json) {
+    [requst AddBlogwritingRequstwithNoticeName:self.textField.text withNoticeObject:self.noticeObjectId withNoticeContent:@"" withNoticeID:@"0" withuserid:_xf.Loginid withmodel:self.modelId withposttype:_indexStr withIsApp:@"1" :^(NSDictionary *json) {
         
         if ([json[@"ret_code"] isEqualToString:@"0"]){
             [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"%@",json[@"ret_msg"]]];

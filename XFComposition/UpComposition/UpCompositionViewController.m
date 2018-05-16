@@ -170,9 +170,35 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    
     UIStoryboard *stotyBoard = [UIStoryboard storyboardWithName:@"TYStoryboard" bundle:nil];
     BookWritingTableViewController *loginVC = [stotyBoard instantiateViewControllerWithIdentifier:@"BookWritingTableViewController"];
     loginVC.imgUrlStr = self.imgUrlStr;
+    if(indexPath.section == 2) {
+        VolunteerModel *model = _activityArr[indexPath.row];
+        
+        loginVC.noticeObjectId = model.activeid?:@"";
+        loginVC.modelId = @"7";
+
+        
+    }else if (indexPath.section == 1) {
+        VolunteerModel *model = _zhiYuanArr[indexPath.row];
+        loginVC.noticeObjectId = model.activeid?:@"";
+        loginVC.modelId = @"7";
+
+
+    }else if (indexPath.section == 3) {
+        UpCompositionModel *model = _weiKeArr[indexPath.row];
+        loginVC.noticeObjectId = model.ID?:@"";
+        loginVC.modelId = @"5";
+
+
+    }else {
+        loginVC.noticeObjectId = @"0";
+        loginVC.modelId = @"4";
+
+    }
     [self.navigationController pushViewController:loginVC animated:YES];
 }
 #pragma mark - requestdata

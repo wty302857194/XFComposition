@@ -30,7 +30,6 @@
 @implementation PicListViewController
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
     IQKeyboardManager *manager = [IQKeyboardManager sharedManager];
     
     manager.enableAutoToolbar = YES;//这个是它自带键盘工具条开关
@@ -41,8 +40,6 @@
     IQKeyboardManager *manager = [IQKeyboardManager sharedManager];
     
     manager.enableAutoToolbar = NO;//这个是它自带键盘工具条开关
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
-    
 }
 -(NSMutableArray *)picArray{
     if (!_picArray) {
@@ -176,16 +173,16 @@
     
     
     GetWritePicModel *model = self.picArray[indexPath.row];
+//
+//    TYCorrectViewController *vc = [[TYCorrectViewController alloc]init];
+//    vc.picModel = model;
+//    [self.navigationController pushViewController:vc animated:YES];
 
-    TYCorrectViewController *vc = [[TYCorrectViewController alloc]init];
-    vc.picModel = model;
-    [self.navigationController pushViewController:vc animated:YES];
-
-//    XFCorrectViewController * VC = [[XFCorrectViewController alloc]init];
-//    VC.PicUrl = model.PicUrl;
-//    VC.PicID = model.PicID;
-//    VC.picModel = model;
-//    [self.navigationController pushViewController:VC animated:YES];
+    XFCorrectViewController * VC = [[XFCorrectViewController alloc]init];
+    VC.PicUrl = model.PicUrl;
+    VC.PicID = model.PicID;
+    VC.picModel = model;
+    [self.navigationController pushViewController:VC animated:YES];
     
     
     //手机版获取文章图片点评内容

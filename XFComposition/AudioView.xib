@@ -13,14 +13,13 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="ZDw-n6-AMO" customClass="AudioView">
-            <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ty_vidio_img" translatesAutoresizingMaskIntoConstraints="NO" id="Ekk-qw-fly">
-                    <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                 </imageView>
             </subviews>
-            <color key="backgroundColor" red="0.30588235289999999" green="0.56078431370000004" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="Ekk-qw-fly" firstAttribute="leading" secondItem="ZDw-n6-AMO" secondAttribute="leading" id="Pc2-O7-mAZ"/>
                 <constraint firstItem="Ekk-qw-fly" firstAttribute="top" secondItem="ZDw-n6-AMO" secondAttribute="top" id="dsI-kW-TR7"/>

@@ -165,11 +165,17 @@
     
     AudioView * view = [[NSBundle mainBundle] loadNibNamed:@"AudioView" owner:self options:nil].lastObject;
     view.tapBlock = ^{
-        [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
-        AVURLAsset *asset = [AVURLAsset assetWithURL:[NSURL URLWithString:urlStr]];
-        AVPlayerItem *item = [AVPlayerItem playerItemWithAsset:asset];
+//        [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
+//        AVURLAsset *asset = [AVURLAsset assetWithURL:[NSURL URLWithString:urlStr]];
+//        AVPlayerItem *item = [AVPlayerItem playerItemWithAsset:asset];
+//        
+//        AVPlayer*  player = [AVPlayer playerWithPlayerItem:item];
+//        [player play];
         
-        AVPlayer*  player = [AVPlayer playerWithPlayerItem:item];
+        
+        NSURL * url  = [NSURL URLWithString:urlStr];
+        AVPlayerItem * songItem = [[AVPlayerItem alloc]initWithURL:url];
+        AVPlayer * player = [[AVPlayer alloc]initWithPlayerItem:songItem];
         [player play];
     };
     view.panBlock = ^(CGPoint point) {
