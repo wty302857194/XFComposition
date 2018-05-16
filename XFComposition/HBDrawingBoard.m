@@ -13,7 +13,7 @@
 #import "MJExtension.h"
 #import "NSFileManager+Helper.h"
 #import "YasicClipAreaLayer.h"
-
+#import "ActionSheetView.h"
 #import "YasicPanGestureRecognizer.h"
 typedef NS_ENUM(NSInteger, ACTIVEGESTUREVIEW) {
     CROPVIEWLEFT,
@@ -38,14 +38,18 @@ typedef NS_ENUM(NSInteger, ACTIVEGESTUREVIEW) {
 
 @property (nonatomic, strong) NSMutableArray *tempPath;
 
-@property (nonatomic, strong) UIImageView *drawImage;
-
 @property (nonatomic, strong) HBDrawView *drawView;
 
+@property (nonatomic, strong) UIImage *sourceImg;
 
 @property(strong, nonatomic) UIView *cropView;
 
 @property(assign, nonatomic) ACTIVEGESTUREVIEW activeGestureView;
+
+@property (nonatomic, strong)  YasicClipAreaLayer * yasiclayer ;
+@property (nonatomic, strong)  UIPinchGestureRecognizer *pinGestu;
+@property (nonatomic, strong)  YasicPanGestureRecognizer *panGesture;
+
 
 // 图片 view 原始 frame
 @property(assign, nonatomic) CGRect originalFrame;
@@ -77,17 +81,48 @@ typedef NS_ENUM(NSInteger, ACTIVEGESTUREVIEW) {
         
      
         
-        self.drawImage.image = self.backImage.image;
+        self.clipWidth = kScreenWidth;
+        self.clipHeight = self.clipWidth * 9/16;
+        
+        self.cropAreaX = (kScreenWidth - self.clipWidth)/2;
+        self.cropAreaY = (self.frame.size.height - self.clipHeight)/2;
+        self.cropAreaWidth = self.clipWidth;
+        self.cropAreaHeight = self.clipHeight;
+        
+        
+        CGFloat tempWidth = 0.0;
+        CGFloat tempHeight = 0.0;
+        
+        if (self.backImage.size.width/self.cropAreaWidth <= self.backImage.size.height/self.cropAreaHeight) {
+            tempWidth = self.cropAreaWidth;
+            tempHeight = (tempWidth/self.backImage.size.width) * self.backImage.size.height;
+        } else if (self.backImage.size.width/self.cropAreaWidth > self.backImage.size.height/self.cropAreaHeight) {
+            tempHeight = self.cropAreaHeight;
+            tempWidth = (tempHeight/self.backImage.size.height) * self.backImage.size.width;
+        }
+        
+        
+        self.originalFrame = CGRectMake(self.cropAreaX - (tempWidth - self.cropAreaWidth)/2, self.cropAreaY - (tempHeight - self.cropAreaHeight)/2, tempWidth, tempHeight);
         
         
         self.backgroundColor = [UIColor clearColor];
         
         [self addSubview:self.backImage];
         
-        [self addSubview:self.drawImage];
         
-        [self.drawImage addSubview:self.drawView];
-       
+        [self.backImage addSubview:self.drawView];
+        [self addSubview:self.cropView];
+
+        // 捏合手势
+        _pinGestu = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handleCenterPinGesture:)];
+        [self addGestureRecognizer:_pinGestu];
+        
+        // 拖动手势
+        _panGesture = [[YasicPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleDynamicPanGesture:) inview:self.cropView];
+        [self addGestureRecognizer:_panGesture];
+        
+        
+        [self setUpCropLayer];
 
         
     }
@@ -101,63 +136,47 @@ typedef NS_ENUM(NSInteger, ACTIVEGESTUREVIEW) {
 
 -(void)showCropView{
     
-    
-    self.clipWidth = kScreenWidth;
-    self.clipHeight = self.clipWidth * 9/16;
-    
-    self.cropAreaX = (kScreenWidth - self.clipWidth)/2;
-    self.cropAreaY = (self.frame.size.height - self.clipHeight)/2;
-    self.cropAreaWidth = self.clipWidth;
-    self.cropAreaHeight = self.clipHeight;
+   
     
     _isDraw = NO;
     
-    CGFloat tempWidth = 0.0;
-    CGFloat tempHeight = 0.0;
+    [self.cropView.layer addSublayer:_yasiclayer];
     
-    if (self.drawImage.size.width/self.cropAreaWidth <= self.drawImage.size.height/self.cropAreaHeight) {
-        tempWidth = self.cropAreaWidth;
-        tempHeight = (tempWidth/self.drawImage.size.width) * self.drawImage.size.height;
-    } else if (self.drawImage.size.width/self.cropAreaWidth > self.drawImage.size.height/self.cropAreaHeight) {
-        tempHeight = self.cropAreaHeight;
-        tempWidth = (tempHeight/self.drawImage.size.height) * self.drawImage.size.width;
-    }
-    
-    
-    self.originalFrame = CGRectMake(self.cropAreaX - (tempWidth - self.cropAreaWidth)/2, self.cropAreaY - (tempHeight - self.cropAreaHeight)/2, tempWidth, tempHeight);
-    [self addAllGesture];
-    
-    [self setUpCropLayer];
-    [self addSubview:self.cropView];
+    [self bringSubviewToFront:self.cropView];
+  
+    _panGesture.enabled = YES;
+    _pinGestu.enabled = YES;
 
 }
 -(void)closeCropView{
     
-    [self.cropView removeFromSuperview];
+    
+    [_yasiclayer removeFromSuperlayer];
+    _panGesture.enabled = NO;
+    _pinGestu.enabled = NO;
+
     
 }
 - (void)setUpCropLayer
 {
     self.cropView.layer.sublayers = nil;
     
-    YasicClipAreaLayer * layer = [[YasicClipAreaLayer alloc] init];
+    _yasiclayer = [[YasicClipAreaLayer alloc] init];
     
     CGRect cropframe = CGRectMake(self.cropAreaX, self.cropAreaY, self.cropAreaWidth, self.cropAreaHeight);
     UIBezierPath * path = [UIBezierPath bezierPathWithRoundedRect:self.cropView.frame cornerRadius:0];
     UIBezierPath * cropPath = [UIBezierPath bezierPathWithRect:cropframe];
     [path appendPath:cropPath];
-    layer.path = path.CGPath;
+    _yasiclayer.path = path.CGPath;
     
-    layer.fillRule = kCAFillRuleEvenOdd;
-    layer.fillColor = [[UIColor blackColor] CGColor];
-    layer.opacity = 0.5;
+    _yasiclayer.fillRule = kCAFillRuleEvenOdd;
+    _yasiclayer.fillColor = [[UIColor blackColor] CGColor];
+    _yasiclayer.opacity = 0.5;
     
-    layer.frame = self.cropView.bounds;
-    [layer setCropAreaLeft:self.cropAreaX CropAreaTop:self.cropAreaY CropAreaRight:self.cropAreaX + self.cropAreaWidth CropAreaBottom:self.cropAreaY + self.cropAreaHeight];
+    _yasiclayer.frame = self.cropView.bounds;
+    [_yasiclayer setCropAreaLeft:self.cropAreaX CropAreaTop:self.cropAreaY CropAreaRight:self.cropAreaX + self.cropAreaWidth CropAreaBottom:self.cropAreaY + self.cropAreaHeight];
     
-    [self.cropView.layer addSublayer:layer];
     
-    [self bringSubviewToFront:self.cropView];
 }
 
 - (UIView *)cropView
@@ -168,16 +187,7 @@ typedef NS_ENUM(NSInteger, ACTIVEGESTUREVIEW) {
     }
     return _cropView;
 }
--(void)addAllGesture
-{
-    // 捏合手势
-    UIPinchGestureRecognizer *pinGesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handleCenterPinGesture:)];
-    [self addGestureRecognizer:pinGesture];
-    
-    // 拖动手势
-    YasicPanGestureRecognizer *panGesture = [[YasicPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleDynamicPanGesture:) inview:self.cropView];
-    [self.cropView addGestureRecognizer:panGesture];
-}
+
 -(void)handleDynamicPanGesture:(YasicPanGestureRecognizer *)panGesture
 {
     UIView * view = self.backImage;
@@ -404,26 +414,60 @@ typedef NS_ENUM(NSInteger, ACTIVEGESTUREVIEW) {
 // 裁剪图片并调用返回Block
 - (void)cropImage
 {
-    CGFloat imageScale = MIN(self.backImage.frame.size.width/self.drawImage.size.width, self.backImage.frame.size.height/self.drawImage.size.height);
+    CGFloat imageScale = MIN(self.backImage.frame.size.width/self.backImage.size.width, self.backImage.frame.size.height/self.backImage.size.height);
     CGFloat cropX = (self.cropAreaX - self.backImage.frame.origin.x)/imageScale;
     CGFloat cropY = (self.cropAreaY - self.backImage.frame.origin.y)/imageScale;
     CGFloat cropWidth = self.cropAreaWidth/imageScale;
     CGFloat cropHeight = self.cropAreaHeight/imageScale;
     CGRect cropRect = CGRectMake(cropX, cropY, cropWidth, cropHeight);
     
-    CGImageRef sourceImageRef = [self.drawImage.image CGImage];
-    CGImageRef newImageRef = CGImageCreateWithImageInRect(sourceImageRef, cropRect);
-    UIImage *newImage = [UIImage imageWithCGImage:newImageRef];
-//    ActionSheetView * actionSheet = [[ActionSheetView alloc] initWithCancleTitle:@"取消" otherTitles:@"范文库",@"病文库" ,nil];
-//
-//    [actionSheet show];
-//    actionSheet.actionSheetBlock = ^(ActionSheetItem *sheetItem) {
-//        if (_imgeBlock) {
-//            _imgeBlock(sheetItem.index,newImage);
-//        }
-//    };
+    UIImage *newImage = [self cropImage:self.backImage.image toRect:cropRect];
+    ActionSheetView * actionSheet = [[ActionSheetView alloc] initWithCancleTitle:@"取消" otherTitles:@"范文库",@"病文库" ,nil];
+
+    [actionSheet show];
+    actionSheet.actionSheetBlock = ^(ActionSheetItem *sheetItem) {
+        if (_imgeBlock) {
+            _imgeBlock(sheetItem.index,newImage);
+        }
+    };
     
 }
+- (UIImage *)cropImage:(UIImage*)image toRect:(CGRect)rect {
+    CGFloat (^rad)(CGFloat) = ^CGFloat(CGFloat deg) {
+        return deg / 180.0f * (CGFloat) M_PI;
+    };
+    
+    // determine the orientation of the image and apply a transformation to the crop rectangle to shift it to the correct position
+    CGAffineTransform rectTransform;
+    switch (image.imageOrientation) {
+        case UIImageOrientationLeft:
+            rectTransform = CGAffineTransformTranslate(CGAffineTransformMakeRotation(rad(90)), 0, -image.size.height);
+            break;
+        case UIImageOrientationRight:
+            rectTransform = CGAffineTransformTranslate(CGAffineTransformMakeRotation(rad(-90)), -image.size.width, 0);
+            break;
+        case UIImageOrientationDown:
+            rectTransform = CGAffineTransformTranslate(CGAffineTransformMakeRotation(rad(-180)), -image.size.width, -image.size.height);
+            break;
+        default:
+            rectTransform = CGAffineTransformIdentity;
+    };
+    
+    // adjust the transformation scale based on the image scale
+    rectTransform = CGAffineTransformScale(rectTransform, image.scale, image.scale);
+    
+    // apply the transformation to the rect to create a new, shifted rect
+    CGRect transformedCropSquare = CGRectApplyAffineTransform(rect, rectTransform);
+    // use the rect to crop the image
+    CGImageRef imageRef = CGImageCreateWithImageInRect(image.CGImage, transformedCropSquare);
+    // create a new UIImage and set the scale and orientation appropriately
+    UIImage *result = [UIImage imageWithCGImage:imageRef scale:image.scale orientation:image.imageOrientation];
+    // memory cleanup
+    CGImageRelease(imageRef);
+    
+    return result;
+}
+
 #pragma mark - Public_Methd
 - (BOOL)drawWithPoints:(HBDrawModel *)model{
 
@@ -466,7 +510,7 @@ typedef NS_ENUM(NSInteger, ACTIVEGESTUREVIEW) {
 - (CGPoint)getTouchSet:(NSSet *)touches{
     
     UITouch *touch = [touches anyObject];
-     return [touch locationInView:self];
+     return [touch locationInView:self.backImage];
 
 }
 
@@ -524,9 +568,9 @@ typedef NS_ENUM(NSInteger, ACTIVEGESTUREVIEW) {
     
     HBPath *path = [self.paths lastObject];
     
-    UIImage *image = [self screenshot:self.drawImage];
+    UIImage *image = [self screenshot:self.backImage];
     
-    self.drawImage.image = image;
+    self.backImage.image = image;
     
     [self.drawView setBrush:nil];
     
@@ -559,7 +603,7 @@ typedef NS_ENUM(NSInteger, ACTIVEGESTUREVIEW) {
     
     UIGraphicsBeginImageContextWithOptions(self.frame.size, false, 0);
     
-    [self.drawImage.image drawInRect:self.bounds];
+    [self.backImage.image drawInRect:self.bounds];
     
     [[UIColor clearColor] set];
     
@@ -569,7 +613,7 @@ typedef NS_ENUM(NSInteger, ACTIVEGESTUREVIEW) {
     
     [path.bezierPath stroke];
     
-    self.drawImage.image = UIGraphicsGetImageFromCurrentImageContext();
+    self.backImage.image = UIGraphicsGetImageFromCurrentImageContext();
     
     UIGraphicsEndImageContext();
     
@@ -641,6 +685,7 @@ typedef NS_ENUM(NSInteger, ACTIVEGESTUREVIEW) {
     _lineWidth = lineWidth;
     _lastLineWidth = lineWidth;
 }
+
 - (UIImageView *)backImage
 {
     if (!_backImage) {
@@ -649,14 +694,7 @@ typedef NS_ENUM(NSInteger, ACTIVEGESTUREVIEW) {
     }
     return _backImage;
 }
-- (UIImageView *)drawImage
-{
-    if (!_drawImage) {
-        _drawImage = [[UIImageView alloc] initWithFrame:self.bounds];
-        _drawImage.contentMode = UIViewContentModeScaleAspectFit;
-    }
-    return _drawImage;
-}
+
 - (HBDrawView *)drawView{
     if (!_drawView) {
         _drawView = [HBDrawView new];
@@ -666,20 +704,6 @@ typedef NS_ENUM(NSInteger, ACTIVEGESTUREVIEW) {
     }
     return _drawView;
 }
-- (void)setBrush:(HBPath *)path
-{
-    CAShapeLayer *shapeLayer = (CAShapeLayer *)self.layer;
-    
-    shapeLayer.strokeColor = path.pathColor.CGColor;
-    shapeLayer.fillColor = [UIColor clearColor].CGColor;
-    shapeLayer.lineJoin = kCALineJoinRound;
-    shapeLayer.lineCap = kCALineCapRound;
-    shapeLayer.lineWidth = path.bezierPath.lineWidth;
-    ((CAShapeLayer *)self.drawImage).path = path.bezierPath.CGPath;
-    
-    
-}
-
 
 -(void)setBoard:(setType) type{
     
@@ -757,7 +781,7 @@ typedef NS_ENUM(NSInteger, ACTIVEGESTUREVIEW) {
             HBPath *path = [self.paths lastObject];
             
             UIImage *getImage = [NSFileManager hb_getImageFileName:[ThumbnailPath stringByAppendingPathComponent:path.imagePath]];
-            self.drawImage.image = getImage;
+            self.backImage.image = getImage;
             
         }
             break;
@@ -779,7 +803,7 @@ typedef NS_ENUM(NSInteger, ACTIVEGESTUREVIEW) {
             HBPath *path = [self.paths lastObject];
             
             UIImage *getImage = [NSFileManager hb_getImageFileName:[ThumbnailPath stringByAppendingPathComponent:path.imagePath]];
-            self.drawImage.image = getImage;
+            self.backImage.image = getImage;
             
         }
             break;
@@ -792,7 +816,7 @@ typedef NS_ENUM(NSInteger, ACTIVEGESTUREVIEW) {
             
             [NSFileManager deleteFile:ThumbnailPath];
             
-            self.drawImage.image = nil;
+            self.backImage.image = nil;
             
             
         }

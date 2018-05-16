@@ -83,6 +83,7 @@ typedef void(^YasicClipPageBlock)(NSInteger index ,UIImage*imge);
 
 -(void)showCropView;
 -(void)closeCropView;
+-(void)cropImage;
 
 + (HBDrawModel *)objectWith:(NSDictionary *)dic;
 @end

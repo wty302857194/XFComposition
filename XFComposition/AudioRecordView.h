@@ -17,6 +17,8 @@ typedef void(^AudioRecordViewBlock)(id recordFileUrl);
 @property (nonatomic, copy)   NSString *filePath;
 @property (nonatomic, strong)   NSURL *recordFileUrl;
 @property (nonatomic, copy)   AudioRecordViewBlock recordViewBlock;
+@property (nonatomic, assign)   BOOL isStar;
+
 @property (strong, nonatomic) IBOutlet UIButton *audioBtn;
 
 

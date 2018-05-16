@@ -27,6 +27,7 @@
     BOOL _isEraser; //橡皮擦
 }
 
+@property (strong, nonatomic) IBOutlet UIView *bottomView;
 @property (nonatomic, strong) HBDrawingBoard *drawView;
 @property (strong, nonatomic) IBOutlet UIButton *drawBrn;
 
@@ -51,11 +52,13 @@
 @property (nonatomic,strong) NSMutableArray *qiPaoArr;//旁批内容
 
 
+@property (strong, nonatomic) IBOutlet UIButton *cropBottomBtn;
 @property (nonatomic, strong) UIColor *colorStroke;  //滑动颜色
 ;
 @property (strong, nonatomic) IBOutlet UIButton *moreBtn;
 @property (nonatomic, strong) StrokeView * strokeView;
 
+- (IBAction)crop_action:(id)sender;
 
 - (IBAction)play_action:(id)sender;
 - (IBAction)addContent_action:(id)sender;
@@ -76,15 +79,6 @@
     _scorllView.bounces = YES;//设置边缘无弹跳
     _scorllView.delaysContentTouches = NO;
     _scorllView.scrollEnabled = NO;
-//    [_imgeView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",HTurl,_picModel.PicUrl]]];
-  
-   _pan =  [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panImge:)];
-    _pan.maximumNumberOfTouches = 1;
-    
-    _imgeView.userInteractionEnabled = YES;
-    _pan.enabled = NO;
-    
-    [_imgeView addGestureRecognizer:_pan];
     
     _isEraser = YES;
     _widthStroke = 1;
@@ -121,8 +115,10 @@
     _drawView.lineWidth = 1;
     _drawView.lineColor = [UIColor redColor];
     [_leftView addSubview:_drawView];
-
+    
     [self.drawView.backImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",HTurl,_picModel.PicUrl]]];
+    
+    _cropBottomBtn.hidden = YES;
     
     
 }
@@ -130,9 +126,12 @@
     
     [super viewDidAppear:animated];
     
+    [_leftView bringSubviewToFront:_bottomView];
+
+    [_leftView bringSubviewToFront:_cropBottomBtn];
     [_leftView bringSubviewToFront:_moreView];
-    
-    
+
+
 }
 - (void)addPangPi {
     QiPaoTagView *qiPaoView = [[QiPaoTagView alloc] initWithFrame:CGRectMake(0, 200, 160, 50)];
@@ -153,6 +152,14 @@
     [_moreBtn setSelected:NO];
     
 }
+- (IBAction)crop_action:(id)sender {
+    
+    
+    [_drawView cropImage];
+    
+    
+}
+
 - (IBAction)play_action:(id)sender {
     
     
@@ -182,21 +189,6 @@
         
     }
     return _strokeView;
-}
-#pragma mark 划线
--(void)panImge:(UIPanGestureRecognizer*)panGesRec{
-    
-    CGPoint currentDraggingPosition = [panGesRec locationInView:panGesRec.view];
-    
-    if(panGesRec.state == UIGestureRecognizerStateBegan){
-        _prevDraggingPosition = currentDraggingPosition;
-    }
-    
-    if(panGesRec.state != UIGestureRecognizerStateEnded){
-        [self drawLine:_prevDraggingPosition to:currentDraggingPosition];
-    }
-    _prevDraggingPosition = currentDraggingPosition;
-    
 }
 
 //画线
@@ -280,6 +272,8 @@
     
     _moreView.hidden = YES;
     [_moreBtn setSelected:NO];
+    _cropBottomBtn.hidden = YES;
+
     switch (indexPath.row) {
         case 0:// 清屏
             [_drawView setBoard:setTypeClearAll];
@@ -293,9 +287,10 @@
             
             break;
         case 3:// 还原大小
-            [_imgeView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",HTurl,_picModel.PicUrl]]];
+       
             [_drawView setBoard:setTypeClearAll];
-
+            
+            
             
             break;
         case 4://范文库
@@ -360,49 +355,63 @@
 }
 - (IBAction)addContent_action:(id)sender {
     [self addPangPi];
+    _cropBottomBtn.hidden = YES;
+
 }
 
 - (IBAction)button_action:(id)sender {
     UIButton * btn = (UIButton*)sender;
     _moreView.hidden = YES;
+    _cropBottomBtn.hidden = YES;
+    [self.drawView closeCropView];
+   
     switch (btn.tag) {
         case 0://语音
             [self.recordView  showAudioRecordView];
             [_moreBtn setSelected:NO];
             [_drawBrn setSelected:NO];
-
+            [_cropBottomBtn setSelected:NO];
+            [_drawBrn setTitleColor:hexColor(333333) forState:UIControlStateNormal];
+            [_drawBrn setBackgroundColor:[UIColor clearColor]];
+            _drawView.isDraw = NO;
             break;
         case 1://截图
         {
             
+            // 手绘不选中
+            [_drawBrn setTitleColor:hexColor(333333) forState:UIControlStateNormal];
+            [_drawBrn setBackgroundColor:[UIColor clearColor]];
+            _drawView.isDraw = NO;
             
-            [self.drawView showCropView];
+            [_cropBottomBtn setSelected:!_cropBottomBtn.isSelected];
             
-            YasicClipPage * vc = [[YasicClipPage alloc] init];
-//            vc.imgeBlock = ^(NSInteger index, UIImage *imge) {
-//
-//                NSData * imageData = nil;
-//
-//                if (UIImagePNGRepresentation(imge)) {
-//                    imageData = UIImagePNGRepresentation(imge);
-//                }else {
-//                    imageData = UIImageJPEGRepresentation(imge, 0.2);
-//                }
-//                UploadPicRequst *requst = [[UploadPicRequst alloc]init];
-//                [requst UploadPicRequstWithfileValue:imageData withuserid:[XFUserInfo getUserInfo].Loginid withtypeid:@"1" :^(NSDictionary *json){
-//                    NSString * str =   json[@"ret_data"]?:@"";
-//
-//                    [[XFRequestManager sharedInstance] XFRequstAddCutPic:[XFUserInfo getUserInfo].Loginid PicID:_picModel.PicID blogID:_picModel.BlogID ExtractPicUrl:str ExtractContent:@"" ExtractType:[NSString stringWithFormat:@"%ld",(long)index] :^(NSString *requestName, id responseData, BOOL isSuccess) {
-//
-//                        [SVProgressHUD showInfoWithStatus:responseData];
-//
-//                    }];
-//
-//                }];
-//
-//            };
-//            vc.urlStr= [NSString stringWithFormat:@"%@%@",HTurl,_picModel.PicUrl];
-//            [self.navigationController pushViewController:vc animated:YES];
+            if (_cropBottomBtn.isSelected) {
+                [self.drawView showCropView];
+                _cropBottomBtn.hidden = NO;
+
+            }
+            __weak typeof(self) weakSelf = self;
+            self.drawView.imgeBlock = ^(NSInteger index, UIImage *imge) {
+                NSData * imageData = nil;
+                
+                if (UIImagePNGRepresentation(imge)) {
+                    imageData = UIImagePNGRepresentation(imge);
+                }else {
+                    imageData = UIImageJPEGRepresentation(imge, 0.2);
+                }
+                UploadPicRequst *requst = [[UploadPicRequst alloc]init];
+                [requst UploadPicRequstWithfileValue:imageData withuserid:[XFUserInfo getUserInfo].Loginid withtypeid:@"1" :^(NSDictionary *json){
+                    NSString * str =   json[@"ret_data"]?:@"";
+                    
+                    [[XFRequestManager sharedInstance] XFRequstAddCutPic:[XFUserInfo getUserInfo].Loginid PicID:weakSelf.picModel.PicID blogID:weakSelf.picModel.BlogID ExtractPicUrl:str ExtractContent:@"" ExtractType:[NSString stringWithFormat:@"%ld",(long)index] :^(NSString *requestName, id responseData, BOOL isSuccess) {
+
+                        [SVProgressHUD showInfoWithStatus:responseData];
+
+                    }];
+                    
+                }];
+                
+            };
             [_moreBtn setSelected:NO];
             [_drawBrn setSelected:NO];
 
@@ -418,6 +427,7 @@
             _pan.enabled = NO;
             [_moreBtn setSelected:NO];
             [_drawBrn setSelected:NO];
+            [_cropBottomBtn setSelected:NO];
 
             
         }
@@ -427,18 +437,14 @@
         {
             _pan.enabled = YES;
             [_moreBtn setSelected:NO];
+            [_cropBottomBtn setSelected:NO];
+
             [btn setSelected:!btn.selected];
 
             if (_drawBrn.isSelected) {
                 [_drawBrn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
                 [_drawBrn setBackgroundColor:hexColor(009dff)];
                 _drawView.isDraw = YES;
-            }else{
-                
-                [_drawBrn setTitleColor:hexColor(333333) forState:UIControlStateNormal];
-                [_drawBrn setBackgroundColor:[UIColor clearColor]];
-                _drawView.isDraw = NO;
-
             }
             
         }
@@ -448,13 +454,15 @@
         {
             [_moreBtn setSelected:NO];
             [_drawView setBoard:setTypeBack];
-            
+            [_cropBottomBtn setSelected:NO];
+
             [_drawBrn setSelected:NO];
 
         }
             break;
         case 5://更多
         {
+            [_cropBottomBtn setSelected:NO];
             [btn setSelected:!btn.selected];
             [_drawBrn setSelected:NO];
 

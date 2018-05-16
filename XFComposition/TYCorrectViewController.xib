@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -15,6 +15,8 @@
             <connections>
                 <outlet property="backgroundView" destination="DZu-kE-NUZ" id="Sja-QD-lic"/>
                 <outlet property="backgroundViewWidth" destination="8uk-6n-DSK" id="hyc-nt-OTp"/>
+                <outlet property="bottomView" destination="G0c-3d-Nat" id="gU0-I0-0iO"/>
+                <outlet property="cropBottomBtn" destination="E1d-nX-vgb" id="JvR-xf-rjS"/>
                 <outlet property="drawBrn" destination="HtB-BV-nSW" id="a9r-IU-gah"/>
                 <outlet property="leftView" destination="3fg-zw-Xgg" id="6Io-5k-C8S"/>
                 <outlet property="leftViewWidth" destination="s0S-gf-afa" id="HZq-nY-P6D"/>
@@ -181,11 +183,26 @@
                                                 <constraint firstAttribute="trailing" secondItem="Euz-2J-1bn" secondAttribute="trailing" id="yMC-mv-OCI"/>
                                             </constraints>
                                         </view>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E1d-nX-vgb">
+                                            <rect key="frame" x="20" y="522" width="335" height="50"/>
+                                            <color key="backgroundColor" red="0.0" green="0.61568627450000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="50" id="IQo-UN-WzB"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <state key="normal" title="截图"/>
+                                            <connections>
+                                                <action selector="crop_action:" destination="-1" eventType="touchUpInside" id="Ln1-TQ-vSP"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstItem="G0c-3d-Nat" firstAttribute="top" secondItem="CeP-EA-fiS" secondAttribute="bottom" id="69c-ZI-EmU"/>
                                         <constraint firstAttribute="bottom" secondItem="G0c-3d-Nat" secondAttribute="bottom" id="B0V-GW-v1X"/>
+                                        <constraint firstItem="G0c-3d-Nat" firstAttribute="top" secondItem="E1d-nX-vgb" secondAttribute="bottom" constant="15" id="KcM-oX-XYr"/>
+                                        <constraint firstItem="E1d-nX-vgb" firstAttribute="leading" secondItem="3fg-zw-Xgg" secondAttribute="leading" constant="20" id="ZtP-eo-JZI"/>
+                                        <constraint firstAttribute="trailing" secondItem="E1d-nX-vgb" secondAttribute="trailing" constant="20" id="kya-al-ggP"/>
                                         <constraint firstAttribute="trailing" secondItem="G0c-3d-Nat" secondAttribute="trailing" id="qOf-bS-FOV"/>
                                         <constraint firstAttribute="width" constant="375" id="s0S-gf-afa"/>
                                         <constraint firstAttribute="trailing" secondItem="CeP-EA-fiS" secondAttribute="trailing" constant="14" id="vaP-2f-xIC"/>
