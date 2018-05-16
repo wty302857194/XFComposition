@@ -24,7 +24,6 @@
     CGRect largeFrame;  //确定图片放大最大的程;
     UIPinchGestureRecognizer *pinchGestureRecognizer;
     UIPanGestureRecognizer *panGestureRecognizer;
-    UIImage *_image;
     BOOL _isShouHui;
 }
 @property (nonatomic, assign)DCPaintColor  selectPaintColor;
@@ -53,7 +52,7 @@
         case 11://截图
         {
             self.imgView.hidden = YES;
-            self.tkImageView.toCropImage = _image;
+            self.tkImageView.toCropImage = [Global makeImageWithView:self.imgView withSize:self.imgView.size];
             [self.view addSubview:self.tkImageView];
             self.clipButton.hidden = NO;
             
@@ -108,8 +107,6 @@
     [self.tkImageView removeFromSuperview];
     self.clipButton.hidden = YES;
     self.imgView.hidden = NO;
-    _image = [self.tkImageView currentCroppedImage];
-
     ActionSheetView * actionSheet = [[ActionSheetView alloc] initWithCancleTitle:@"取消" otherTitles:@"范文库",@"病文库" ,nil];
     
     [actionSheet show];
@@ -117,10 +114,10 @@
         
         NSData * imageData = nil;
         
-        if (UIImagePNGRepresentation(_image)) {
-            imageData = UIImagePNGRepresentation(_image);
+        if (UIImagePNGRepresentation([self.tkImageView currentCroppedImage])) {
+            imageData = UIImagePNGRepresentation([self.tkImageView currentCroppedImage]);
         }else {
-            imageData = UIImageJPEGRepresentation(_image, 0.2);
+            imageData = UIImageJPEGRepresentation([self.tkImageView currentCroppedImage], 0.2);
         }
         UploadPicRequst *requst = [[UploadPicRequst alloc]init];
         [requst UploadPicRequstWithfileValue:imageData withuserid:[XFUserInfo getUserInfo].Loginid withtypeid:@"1" :^(NSDictionary *json){
@@ -178,7 +175,6 @@
         [_imgView setUserInteractionEnabled:YES];
         NSString *str = [NSString stringWithFormat:@"%@%@",HTurl,self.PicUrl];
         [_imgView sd_setImageWithURL:[NSURL URLWithString:str] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-            _image = image;
         }];
         _topBackView.clipsToBounds = YES;
         [_topBackView addSubview:_imgView];
@@ -204,6 +200,7 @@
     _tabArr = @[@"清屏",@"颜色",@"画笔",@"还原大小",@"范文库",@"病文库",@"撤销"];
     self.clipButton.hidden = YES;
     [self addGestureRecognizerToView:self.imgView];
+
 }
 //取消手势
 - (void)removeGestureRecognizerFromView:(UIView *)view {
