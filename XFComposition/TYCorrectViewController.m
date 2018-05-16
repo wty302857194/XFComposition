@@ -153,7 +153,7 @@
     
     if (_strokeView == nil) {
         
-        
+        __weak typeof(self) weakSelf = self;
         _strokeView = [[NSBundle mainBundle] loadNibNamed:@"StrokeView" owner:self options:nil].lastObject;
         _strokeView.layer.cornerRadius = 6.0;
         _strokeView.layer.masksToBounds = YES;
@@ -161,9 +161,9 @@
     
             if (isSetColor) {
                 
-                _drawView.lineColor = @[[UIColor redColor],[UIColor greenColor],[UIColor whiteColor]][arguments];
+                weakSelf.drawView.lineColor = @[[UIColor redColor],[UIColor greenColor],[UIColor whiteColor]][arguments];
             }else{
-                _drawView.lineWidth = arguments+1;
+                weakSelf.drawView.lineWidth = arguments+1;
             }
             
         };

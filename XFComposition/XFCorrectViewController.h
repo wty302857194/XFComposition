@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-@class XFCorrectViewController;
-@interface TYImageEditViewController : UIViewController
-@property (nonatomic, strong) XFCorrectViewController *TYCorrecVC;
+
+@interface XFCorrectViewController : UIViewController
+@property (strong, nonatomic) UIScrollView *scrollView;
+@property (nonatomic,strong)NSString *PicID;
 @property (nonatomic,strong)NSString *PicUrl;
-@property (strong, nonatomic) UIImageView *imgView;
 
 @end

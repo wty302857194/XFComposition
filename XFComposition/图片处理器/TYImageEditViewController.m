@@ -7,7 +7,7 @@
 //
 
 #import "TYImageEditViewController.h"
-#import "TYCorrectViewController.h"
+#import "XFCorrectViewController.h"
 #import "DCCommon.h"
 #import "DCBezierPaintBoard.h"
 //#import "DCOpenGLDrawView.h"

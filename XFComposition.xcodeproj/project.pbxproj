@@ -139,6 +139,8 @@
 		3FA5D9BD20A03EF00029E276 /* TZVideoPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA5D9AB20A03EEF0029E276 /* TZVideoPlayerController.m */; };
 		3FA5D9BE20A03EF00029E276 /* UIView+Layout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA5D9AD20A03EEF0029E276 /* UIView+Layout.m */; };
 		3FA5D9C020A056C90029E276 /* MarktaskCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FA5D9BF20A056C90029E276 /* MarktaskCell.xib */; };
+		3FBD7E2820ABBA6300C7F58E /* XFCorrectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FBD7E2620ABBA6200C7F58E /* XFCorrectViewController.m */; };
+		3FBD7E2920ABBA6300C7F58E /* XFCorrectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FBD7E2720ABBA6300C7F58E /* XFCorrectViewController.xib */; };
 		3FECC88D20AA8D1300FE6727 /* StrokeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FECC88C20AA8D1300FE6727 /* StrokeView.m */; };
 		3FECC88F20AA8D3000FE6727 /* StrokeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FECC88E20AA8D3000FE6727 /* StrokeView.xib */; };
 		3FECC89320AAA49500FE6727 /* StrokeViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FECC89120AAA49500FE6727 /* StrokeViewCell.m */; };
@@ -960,6 +962,9 @@
 		3FA5D9AC20A03EEF0029E276 /* UIView+Layout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Layout.h"; sourceTree = "<group>"; };
 		3FA5D9AD20A03EEF0029E276 /* UIView+Layout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Layout.m"; sourceTree = "<group>"; };
 		3FA5D9BF20A056C90029E276 /* MarktaskCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MarktaskCell.xib; sourceTree = "<group>"; };
+		3FBD7E2520ABBA6100C7F58E /* XFCorrectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XFCorrectViewController.h; sourceTree = "<group>"; };
+		3FBD7E2620ABBA6200C7F58E /* XFCorrectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XFCorrectViewController.m; sourceTree = "<group>"; };
+		3FBD7E2720ABBA6300C7F58E /* XFCorrectViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XFCorrectViewController.xib; sourceTree = "<group>"; };
 		3FECC88B20AA8D1300FE6727 /* StrokeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StrokeView.h; sourceTree = "<group>"; };
 		3FECC88C20AA8D1300FE6727 /* StrokeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StrokeView.m; sourceTree = "<group>"; };
 		3FECC88E20AA8D3000FE6727 /* StrokeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StrokeView.xib; sourceTree = "<group>"; };
@@ -4343,6 +4348,9 @@
 				3FECC89B20AACFE000FE6727 /* TYCorrectViewController.h */,
 				3FECC89C20AACFE100FE6727 /* TYCorrectViewController.m */,
 				3FECC89A20AACFDE00FE6727 /* TYCorrectViewController.xib */,
+				3FBD7E2520ABBA6100C7F58E /* XFCorrectViewController.h */,
+				3FBD7E2620ABBA6200C7F58E /* XFCorrectViewController.m */,
+				3FBD7E2720ABBA6300C7F58E /* XFCorrectViewController.xib */,
 				3FECC8A020AAD32E00FE6727 /* HBDrawingBoard.h */,
 				3FECC89F20AAD32C00FE6727 /* HBDrawingBoard.m */,
 				3FECC8A320AAD38100FE6727 /* HBDrawModel.h */,
@@ -5261,6 +5269,7 @@
 				320D1BDD20862AA700F7D45A /* HomeHeaderView.xib in Resources */,
 				4ABBA2782080E02A0002E08D /* LoginViewController.xib in Resources */,
 				F612EBD11F4FB341000E7432 /* Main.storyboard in Resources */,
+				3FBD7E2920ABBA6300C7F58E /* XFCorrectViewController.xib in Resources */,
 				F6038CE91F58E96A008FE507 /* mp321.png in Resources */,
 				3F09582620A1404900B55F4E /* XFTipView.xib in Resources */,
 				3F09582C20A148E200B55F4E /* WorkMarkCell.xib in Resources */,
@@ -5777,6 +5786,7 @@
 				F6B3C0E61F5DA43D00C0D821 /* MJRefreshAutoFooter.m in Sources */,
 				F6AE29AA1F6AFCAE00633F1C /* MicrobenkexizuoCell.m in Sources */,
 				F6CD74D11F723FBB00EBE579 /* SubmissiontableViewCell.m in Sources */,
+				3FBD7E2820ABBA6300C7F58E /* XFCorrectViewController.m in Sources */,
 				3FECC8A120AAD33000FE6727 /* HBDrawingBoard.m in Sources */,
 				F6A604681F7A2B3D00794B20 /* BookwritingController.m in Sources */,
 				F6CD74BB1F71FA9300EBE579 /* SubmissionController.m in Sources */,

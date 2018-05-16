@@ -16,7 +16,7 @@
 #import "GetWritePicRemarkRequst.h"
 #import "GetWritePicRemarkModel.h"
 #import "KKImageEditorViewController.h"
-#import "TYCorrectViewController.h"
+#import "XFCorrectViewController.h"
 
 @interface PicListViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,KKImageEditorDelegate,UITextViewDelegate,UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong)  IBOutlet UICollectionView *collectionView;
@@ -172,13 +172,20 @@
 }
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    TYCorrectViewController *vc = [[TYCorrectViewController alloc]init];
-    GetWritePicModel *model = self.picArray[indexPath.row];
-    vc.picModel = model;
-    [self.navigationController pushViewController:vc animated:YES];
-
-
     
+    
+    
+    GetWritePicModel *model = self.picArray[indexPath.row];
+
+//    TYCorrectViewController *vc = [[TYCorrectViewController alloc]init];
+//    vc.picModel = model;
+//    [self.navigationController pushViewController:vc animated:YES];
+
+    XFCorrectViewController * VC = [[XFCorrectViewController alloc]init];
+    VC.PicUrl = model.PicUrl;
+    VC.PicID = model.PicID;
+    
+    [self.navigationController pushViewController:VC animated:YES];
     
     
     //手机版获取文章图片点评内容
