@@ -23,6 +23,7 @@
     UIPinchGestureRecognizer *pinchGestureRecognizer;
     UIPanGestureRecognizer *panGestureRecognizer;
     UIImage *_image;
+    BOOL _isShouHui;
 }
 @property (nonatomic, assign)DCPaintColor  selectPaintColor;
 @property (nonatomic, assign) BOOL isErase;
@@ -58,23 +59,23 @@
             break;
         case 12://旁批
         {
-//            [UIView animateWithDuration:0.5 animations:^{
-//                [self.TYCorrecVC.scrollView setContentOffset:CGPointMake(kScreenWidth/2.f, self.TYCorrecVC.scrollView.contentOffset.y)];
-//                self.TYCorrecVC.scrollView.scrollEnabled = YES;
-//            }];
+            [UIView animateWithDuration:0.5 animations:^{
+                [self.TYCorrecVC.scrollView setContentOffset:CGPointMake(kScreenWidth/2.f, self.TYCorrecVC.scrollView.contentOffset.y)];
+                self.TYCorrecVC.scrollView.scrollEnabled = YES;
+            }];
         }
             break;
         case 13://手绘
         {
             sender.selected = !sender.selected;
+            _isShouHui = sender.selected;
             if (sender.isSelected) {
                 self.DCUndoView.lineWidth = 3;
                 self.DCUndoView.lineColor = [UIColor redColor];
-                [self removeGestureRecognizerFromView:self.imgView];
             }else {
                 self.DCUndoView.lineColor = [UIColor clearColor];
-                [self addGestureRecognizerToView:self.imgView];
             }
+            [self chooseGestureRecognizer];
         }
             break;
         case 14://橡皮檫
@@ -82,11 +83,7 @@
             
             sender.selected = !sender.selected;
             self.isErase = sender.selected;
-            if (sender.isSelected) {
-                [self removeGestureRecognizerFromView:self.imgView];
-            }else {
-                [self addGestureRecognizerToView:self.imgView];
-            }
+            [self chooseGestureRecognizer];
         }
             break;
         case 15://tableview
@@ -96,6 +93,13 @@
             break;
         default:
             break;
+    }
+}
+- (void)chooseGestureRecognizer {
+    if (_isErase||_isShouHui) {
+        [self removeGestureRecognizerFromView:self.imgView];
+    }else {
+        [self addGestureRecognizerToView:self.imgView];
     }
 }
 - (IBAction)clipImage:(id)sender {
