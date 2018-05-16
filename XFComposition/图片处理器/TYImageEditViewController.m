@@ -127,9 +127,7 @@
             NSString * str =   json[@"ret_data"]?:@"";
             
             [[XFRequestManager sharedInstance] XFRequstAddCutPic:[XFUserInfo getUserInfo].Loginid PicID:_picModel.PicID blogID:_picModel.BlogID ExtractPicUrl:str ExtractContent:@"" ExtractType:[NSString stringWithFormat:@"%ld",(long)sheetItem.index] :^(NSString *requestName, id responseData, BOOL isSuccess) {
-                if (isSuccess) {//跳转病文库或者范文库
-                    
-                }
+
                 [SVProgressHUD showInfoWithStatus:responseData];
                 
             }];
@@ -142,7 +140,7 @@
 - (TKImageView *)tkImageView
 {
     if (!_tkImageView) {
-        _tkImageView = [[TKImageView alloc] initWithFrame:CGRectMake(50, 80, kScreenWidth-100, (kScreenWidth-100)*2083/1602.f)];
+        _tkImageView = [[TKImageView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, self.view.height-50-60)];
         //需要进行裁剪的图片对象
 //        _tkImageView.toCropImage = _image;
         //是否显示中间线

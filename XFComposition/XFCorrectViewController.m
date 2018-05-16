@@ -61,11 +61,11 @@
         
         
         _rightView = [[UIView alloc] initWithFrame:CGRectMake(_scrollView.width, 0, _scrollView.width/2.f, _scrollView.height)];
-        
+        _rightView.backgroundColor = hexColor(e2d5cb);
         UIButton *bottomBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [bottomBtn setTitle:@"添 加" forState:UIControlStateNormal];
         [bottomBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        bottomBtn.backgroundColor = [UIColor blueColor];
+        bottomBtn.backgroundColor = hexColor(3198d5);
         [bottomBtn addTarget:self action:@selector(addPangPi) forControlEvents:UIControlEventTouchUpInside];
         [_rightView addSubview:bottomBtn];
         [bottomBtn mas_makeConstraints:^(MASConstraintMaker *make) {

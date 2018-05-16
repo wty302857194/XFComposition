@@ -15,6 +15,8 @@
 #import "UploadPicRequst.h"
 #import "StrokeView.h"
 #import "HBDrawingBoard.h"
+#import "QiPaoTagView.h"
+
 @interface TYCorrectViewController ()<UIScrollViewDelegate,ImageViewDelegate,UITableViewDelegate,UITableViewDataSource,HBDrawingBoardDelegate>{
     
       int i;
@@ -44,6 +46,7 @@
 @property (nonatomic, strong) NSMutableArray * moreArray;
 @property (nonatomic, strong) NSMutableArray * colorArray;
 @property (nonatomic, strong) NSMutableArray * widthArray;
+@property (nonatomic,strong) NSMutableArray *qiPaoArr;//旁批内容
 
 
 @property (nonatomic, strong) UIColor *colorStroke;  //滑动颜色
@@ -87,7 +90,7 @@
     _moreArray = [NSMutableArray arrayWithArray:@[@"清屏",@"颜色",@"画笔",@"还原大小",@"范文库",@"病文库",@"橡皮擦"]];
     
     _colorArray = [NSMutableArray array];
-    
+    _qiPaoArr = [NSMutableArray array];
     _widthArray = [NSMutableArray array];
     
     for (int i =0 ; i< @[@"红色",@"绿色",@"白色"].count; i++) {
@@ -120,15 +123,22 @@
     [self.drawView.backImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",HTurl,_picModel.PicUrl]]];
     
     
-    
 }
 -(void)viewDidAppear:(BOOL)animated{
     
     [super viewDidAppear:animated];
     
     [_leftView bringSubviewToFront:_moreView];
-
     
+    
+}
+- (void)addPangPi {
+    QiPaoTagView *qiPaoView = [[QiPaoTagView alloc] initWithFrame:CGRectMake(0, 200, 160, 50)];
+    __weak typeof(self) weakSelf = self;
+    qiPaoView.contentStrBlock = ^(NSString *contentStr) {
+        [weakSelf.qiPaoArr addObject:contentStr];
+    };
+    [_rightView addSubview:qiPaoView];
 }
 - (void)drawBoard:(HBDrawingBoard *)drawView drawingStatus:(HBDrawingStatus)drawingStatus model:(HBDrawModel *)model{
     
@@ -312,8 +322,7 @@
     
 }
 - (IBAction)addContent_action:(id)sender {
-    
-    [self creatView];
+    [self addPangPi];
 }
 
 - (IBAction)button_action:(id)sender {
@@ -416,7 +425,7 @@
 //创建多个
 -(void)creatAudioView:(NSString*)urlStr{
     
-    [self creatView];
+//    [self creatView];
     AudioView * view = [[NSBundle mainBundle] loadNibNamed:@"AudioView" owner:self options:nil].lastObject;
     view.tapBlock = ^{
         [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
@@ -433,20 +442,20 @@
     [_leftView addSubview:view];
     
 }
--(void)creatView{
-    i++;
-    ImageView *imgView = [[ImageView alloc]init];
-    imgView.tag = i;
-    imgView.delegate =self;
-    [self.rightView addSubview:imgView];
-    imgView.frame = CGRectMake(14, HeightFrame/2-32, WidthFrame/2-15, 30);
-    
-}
--(void)showAlter :(ImageView *)imgView;
-{
-    
-    
-}
+//-(void)creatView{
+//    i++;
+//    ImageView *imgView = [[ImageView alloc]init];
+//    imgView.tag = i;
+//    imgView.delegate =self;
+//    [self.rightView addSubview:imgView];
+//    imgView.frame = CGRectMake(14, HeightFrame/2-32, WidthFrame/2-15, 30);
+//
+//}
+//-(void)showAlter :(ImageView *)imgView;
+//{
+//    
+//    
+//}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
