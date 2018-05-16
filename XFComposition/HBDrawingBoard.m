@@ -86,7 +86,7 @@ typedef NS_ENUM(NSInteger, ACTIVEGESTUREVIEW) {
         
         [self addSubview:self.drawImage];
         
-//        [self.drawImage addSubview:self.drawView];
+        [self.drawImage addSubview:self.drawView];
        
 
         
@@ -450,7 +450,7 @@ typedef NS_ENUM(NSInteger, ACTIVEGESTUREVIEW) {
         
         [path pathLineToPoint:CGPointMake(point.x.floatValue * xp , point.y.floatValue * yp) WithType:HBDrawingShapeCurve];
         
-        [self setBrush:path];
+        [self.drawView setBrush:path];
         
     }];
     
@@ -508,7 +508,7 @@ typedef NS_ENUM(NSInteger, ACTIVEGESTUREVIEW) {
     if (self.ise) {
         [self setEraseBrush:path];
     }else{
-        [self setBrush:path];
+        [self.drawView setBrush:path];
     }
     
     [self.tempPoints addObject:[HBDrawPoint drawPoint:point]];
@@ -528,7 +528,7 @@ typedef NS_ENUM(NSInteger, ACTIVEGESTUREVIEW) {
     
     self.drawImage.image = image;
     
-    [self setBrush:nil];
+    [self.drawView setBrush:nil];
     
     NSData *imageData = UIImagePNGRepresentation(image);//UIImageJPEGRepresentation(image, 0.4);
     
