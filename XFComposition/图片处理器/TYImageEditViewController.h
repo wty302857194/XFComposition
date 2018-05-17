@@ -15,4 +15,5 @@
 @property (nonatomic, strong) GetWritePicModel* picModel;
 @property (nonatomic, strong) NSMutableArray *vedioArr;
 
+- (void)getGetWriteAudioRequestData;
 @end

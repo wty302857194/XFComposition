@@ -154,10 +154,7 @@
             
             [[XFRequestManager sharedInstance] XFRequstUploadAudio:[XFUserInfo getUserInfo].Loginid  fileValue:recordFileUrl :^(NSString *requestName, id responseData, BOOL isSuccess) {
                 if (isSuccess) {
-                    [weakSelf creatAudioView:[NSString stringWithFormat:@"%@%@",HTurl,responseData]];
-                    
-                    
-                    
+                    [weakSelf creatAudioView:[NSString stringWithFormat:@"%@%@",HTurl,responseData] originX:0 originY:0];
                 }
             }] ;
         };
@@ -165,9 +162,10 @@
     return _recordView;
 }
 //创建多个
--(void)creatAudioView:(NSString*)urlStr {
+-(void)creatAudioView:(NSString *)urlStr originX:(NSInteger )x originY:(NSInteger )y {
     
     AudioView * view = [[NSBundle mainBundle] loadNibNamed:@"AudioView" owner:self options:nil].lastObject;
+    view.frame = CGRectMake(x, y, 50, 50);
     NSDictionary *dic = @{
                           @"Id": @"0",   //标识  0是新增  非0 即修改
                           @"CreateTime": [Global currentTime],
@@ -191,11 +189,12 @@
     };
     view.panBlock = ^(CGRect frame) {
         [self.vedioArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            NSMutableDictionary *dic = (NSMutableDictionary *)obj;
-            if ([dic[@"AudioUrl"] isEqualToString:urlStr]) {
-                dic[@"XLocation"] = @(frame.origin.x);
-                dic[@"YLocation"] = @(frame.origin.y);
+            NSMutableDictionary *dataDic = (NSMutableDictionary *)obj;
+            if ([dataDic[@"AudioUrl"] isEqualToString:urlStr]) {
+                dataDic[@"XLocation"] = @(frame.origin.x);
+                dataDic[@"YLocation"] = @(frame.origin.y);
             }
+            NSLog(@"self.vedioArr===%@",self.vedioArr);
         }];
     };
     
@@ -484,6 +483,29 @@
 
 
 - (void)getGetWriteAudioRequestData {
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    BaseRequest *request = [BaseRequest requestWithURL:nil];
+    NSDictionary *dic = @{
+                          @"Action":@"GetWriteAudio",
+                          @"Token":@"0A66A4FD-146F-4542-8D7B-33CDEC2981F9",
+                          @"BlogID": self.picModel.ID,  //习作ID
+                          @"PicID": self.picModel.PicID,  //习作图片ID
+                          @"UserID": [XFUserInfo getUserInfo].Loginid, //用户ID
+                          };
+    NSLog(@"dic = %@",dic);
+    [request startWithMethod:HTTPTypePOST params:dic successedBlock:^(id succeedResult) {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        NSLog(@"ForecastUrl === %@",succeedResult);
+        NSArray *arr = succeedResult[@"ret_data"];
+        [arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            NSDictionary *dic = (NSDictionary *)obj;
+            [self creatAudioView:dic[@"AudioUrl"] originX:[dic[@"XLocation"] integerValue] originY:[dic[@"YLocation"] integerValue]];
+        }];
+    } failedBolck:^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"error===%@",error.localizedDescription);
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+    }];
     
 }
 @end

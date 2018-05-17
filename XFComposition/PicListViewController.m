@@ -197,7 +197,7 @@
     NSString *jsonString = [[NSString alloc] initWithData:jsonData
                                                  encoding:NSUTF8StringEncoding];
     [SVProgressHUD showWithStatus:@"正在保存"];
-    [XFRequestManager sharedInstance] XFRequstSubmitComment:[XFUserInfo getUserInfo].Loginid commentinfo:_inputTextView.text blogID:_blogid StandardDetail:jsonString :^(NSString *requestName, id responseData, BOOL isSuccess) {
+    [[XFRequestManager sharedInstance] XFRequstSubmitComment:[XFUserInfo getUserInfo].Loginid commentinfo:_inputTextView.text blogID:_blogid StandardDetail:jsonString :^(NSString *requestName, id responseData, BOOL isSuccess) {
         [SVProgressHUD dismiss];
         
         if (isSuccess) {
@@ -209,7 +209,7 @@
             
         }
         
-    }
+    }];
     
 }
 -(void)onBack{

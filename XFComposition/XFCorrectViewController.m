@@ -55,6 +55,7 @@
         contentViewController.view.frame = CGRectMake(0, 0, _leftView.width, _leftView.height);
         contentViewController.picModel = self.picModel;
         contentViewController.TYCorrecVC = self;
+        [contentViewController getGetWriteAudioRequestData];
         [self addChildViewController:contentViewController];
         [_leftView addSubview:contentViewController.view];
         
@@ -123,50 +124,7 @@
 
 //保存批改
 -(void)tijiao {
-    
-   UIImage *image = [Global makeImageWithView:contentViewController.imgView withSize:contentViewController.imgView.size];
-    UploadPicRequst *uploadPicRequst = [[UploadPicRequst alloc]init];
-    NSData *imageData = UIImagePNGRepresentation(image);
-    [uploadPicRequst UploadPicRequstWithfileValue:imageData withuserid:self.xf.Loginid withtypeid:@"1" :^(NSDictionary *json) {
-        self.picnameurl = json[@"ret_data"];
-    }];
-    
-    
-    SaveCommentCheckRequst *requst = [[SaveCommentCheckRequst alloc]init];
-    NSString *urlStr = @"";
-    if (_picnameurl.length > 3) {
-        urlStr = self.picnameurl;
-    }else{
-        urlStr = self.PicUrl;
-    }
-    [requst XFUpdateBlogPic:self.PicID fixpic:urlStr :^(NSDictionary *json) {
-        
-        
-    }];
-    
-
-
-    
-    
-    
-    for (QiPaoTagView *qiPaoView in self.scrollView.subviews) {
-        if (qiPaoView.tag>0) {
-            
-            CGFloat H = (qiPaoView.frame.origin.y+64)/HeightFrame;
-            CGFloat W = qiPaoView.frame.origin.x/WidthFrame*2;
-            SaveCommentCheckRequst *requst = [[SaveCommentCheckRequst alloc]init];
-            [requst SaveCommentCheckRequstWithRemarkID:@"0" withRemark:@"" withuserid:self.xf.Loginid withblogPicID:@"" withXLocation:[NSString stringWithFormat:@"%.2f",W] withYLocation:[NSString stringWithFormat:@"%.2f",H] :^(NSDictionary *json) {
-                
-            }];
-            //显示批改成功
-            
-        }
-        
-    }
-    
-    
-    
-    
+    [self SubmitPicCheckRequestData];
 }
 /*
  "Action:SubmitPicCheck
@@ -216,9 +174,9 @@
                           @"PicUrl":@"0",
                           @"FixPicUrl":@"0",
                           @"Remarks":self.qiPaoArr,
-                          @"Audios":@[]
+                          @"Audios":contentViewController.vedioArr
                           };
-    
+    NSLog(@"dic = %@",dic);
     [request startWithMethod:HTTPTypePOST params:dic successedBlock:^(id succeedResult) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         NSLog(@"ForecastUrl === %@",succeedResult);
