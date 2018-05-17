@@ -57,6 +57,7 @@
 ;
 @property (strong, nonatomic) IBOutlet UIButton *moreBtn;
 @property (nonatomic, strong) StrokeView * strokeView;
+@property (nonatomic, strong) AVPlayer *player;
 
 - (IBAction)crop_action:(id)sender;
 
@@ -498,10 +499,10 @@
         AVURLAsset *asset = [AVURLAsset assetWithURL:[NSURL URLWithString:urlStr]];
         AVPlayerItem *item = [AVPlayerItem playerItemWithAsset:asset];
         
-        AVPlayer*  player = [AVPlayer playerWithPlayerItem:item];
-        [player play];
+        self.player = [AVPlayer playerWithPlayerItem:item];
+        [self.player play];
     };
-    view.panBlock = ^(CGPoint point) {
+    view.panBlock = ^(CGRect frame) {
         
     };
     

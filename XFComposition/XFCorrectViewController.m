@@ -80,8 +80,25 @@
 - (void)addPangPi {
     QiPaoTagView *qiPaoView = [[QiPaoTagView alloc] initWithFrame:CGRectMake(0, 200, 160, 50)];
      __weak typeof(self) weakSelf = self;
+    __weak QiPaoTagView *weak_qiPaoView = qiPaoView;
     qiPaoView.contentStrBlock = ^(NSString *contentStr) {
-        [weakSelf.qiPaoArr addObject:contentStr];
+        __strong QiPaoTagView *strong_qiPaoView = weak_qiPaoView;
+        NSInteger X = strong_qiPaoView.frame.origin.x;
+        NSInteger Y = strong_qiPaoView.frame.origin.y;
+        
+        NSDictionary *dic = @{
+                              @"Id": @"0",   //标识   0是新增  非0 即修改
+                              @"CreateTime": [Global currentTime],
+                              @"BlogID":weakSelf.picModel.ID, //习作ID
+                              @"PicID":weakSelf.picModel.PicID,  //习作图片ID
+                              @"UserID":weakSelf.xf.userId, //用户ID
+                              @"Sort": @"0", //排序
+                              @"Remark": contentStr,    //点评内容
+                              @"XLocation": @(X),  //X轴
+                              @"YLocation": @(Y)  //Y轴
+                              };
+        
+        [weakSelf.qiPaoArr addObject:dic];
     };
     [_rightView addSubview:qiPaoView];
 }
@@ -127,15 +144,8 @@
         
     }];
     
-//    for (int i = 0; i<self.remarkArray.count; i++) {
-//        GetWritePicRemarkModel *model = self.remarkArray[i];
-//        DeleteCommentCheckRequst *requst = [[DeleteCommentCheckRequst alloc]init];
-//        [requst DeleteCommentCheckRequstwithRemarkID:model.ID withuserid:self.xf.Loginid :^(NSDictionary *json) {
-//            
-//        }];
-//        
-//        
-//    }
+
+
     
     
     
@@ -158,8 +168,67 @@
     
     
 }
-
-
+/*
+ "Action:SubmitPicCheck
+ Token:0A66A4FD-146F-4542-8D7B-33CDEC2981F9
+ PicID：23    // 习作图片标识
+ userID：23    // 用户标识
+ blogID：23    // 习作标识
+ PicUrl:   //复制习作图片
+ FixPicUrl:   //教师处理后的图片
+ Remarks: [
+ {
+ ""Id"": 134,   //标识   0是新增  非0 即修改
+ ""CreateTime"": ""2017/5/1 22:07:30"",
+ ""BlogID"": ""43"",  //习作ID
+ ""PicID"": ""43"",  //习作图片ID
+ ""UserID"": ""23"", //用户ID
+ ""Sort"": ""0"", //排序
+ ""Remark"": ""这段写的好"",    //点评内容
+ ""XLocation"": 10.08,  //X轴
+ ""YLocation"": 10.08  //Y轴
+ }
+ ]
+ Audios: [
+ {
+ ""Id"": 134,   //标识  0是新增  非0 即修改
+ ""CreateTime"": ""2017/5/1 22:07:30"",
+ ""BlogID"": ""43"",  //习作ID
+ ""PicID"": ""43"",  //习作图片ID
+ ""UserID"": ""23"", //用户ID
+ ""Sort"": ""0"", //排序
+ ""AudioUrl"": ""/LocalFiles/WriteAudio/2018/4/2018419232927.mp3"",    //录音URL
+ ""XLocation"": 10.08,  //X轴
+ ""YLocation"": 10.08  //Y轴
+ }
+ ]"
+ */
+- (void)SubmitPicCheckRequestData {
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    BaseRequest *request = [BaseRequest requestWithURL:nil];
+    NSDictionary *dic = @{
+                          @"Action":@"SubmitPicCheck",
+                          @"Token":@"0A66A4FD-146F-4542-8D7B-33CDEC2981F9",
+                          @"PicID":@"2",
+                          @"userID":@"0",
+                          @"blogID":@"0",
+                          @"PicUrl":@"0",
+                          @"FixPicUrl":@"0",
+                          @"Remarks":self.qiPaoArr,
+                          @"Audios":@[]
+                          };
+    
+    [request startWithMethod:HTTPTypePOST params:dic successedBlock:^(id succeedResult) {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        NSLog(@"ForecastUrl === %@",succeedResult);
+        
+    } failedBolck:^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"error===%@",error.localizedDescription);
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+    }];
+    
+}
 
 -(void)GetWritePicRemark{
     __weak typeof (self) weakSelf = self;

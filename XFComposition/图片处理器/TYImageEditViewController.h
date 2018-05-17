@@ -13,5 +13,6 @@
 @property (nonatomic,strong)NSString *PicUrl;
 @property (strong, nonatomic) UIImageView *imgView;
 @property (nonatomic, strong) GetWritePicModel* picModel;
+@property (nonatomic, strong) NSMutableArray *vedioArr;
 
 @end

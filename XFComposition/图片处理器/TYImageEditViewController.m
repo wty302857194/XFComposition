@@ -29,8 +29,11 @@
     UIPanGestureRecognizer *panGestureRecognizer;
     UIImage *_image;
     BOOL _isShouHui;
+
+   
 }
-@property (nonatomic, assign)DCPaintColor  selectPaintColor;
+@property (nonatomic, strong) AVPlayer *player;
+@property (nonatomic, assign) DCPaintColor  selectPaintColor;
 @property (nonatomic, assign) BOOL isErase;
 @property (nonatomic, assign) DCPaintBoardType paintBoardType;
 
@@ -133,14 +136,10 @@
             NSString * str =   json[@"ret_data"]?:@"";
             
             [[XFRequestManager sharedInstance] XFRequstAddCutPic:[XFUserInfo getUserInfo].Loginid PicID:_picModel.PicID blogID:_picModel.BlogID ExtractPicUrl:str ExtractContent:@"" ExtractType:[NSString stringWithFormat:@"%ld",(long)sheetItem.index] :^(NSString *requestName, id responseData, BOOL isSuccess) {
-
                 [SVProgressHUD showInfoWithStatus:responseData];
-                
             }];
-            
         }];
     };
-    
 }
 -(AudioRecordView *)recordView{
     
@@ -150,11 +149,12 @@
         _recordView = [[NSBundle mainBundle] loadNibNamed:@"AudioRecordView" owner:self options:nil].lastObject;
         _recordView.recordViewBlock = ^(id recordFileUrl) {
             
-            
-            
             [[XFRequestManager sharedInstance] XFRequstUploadAudio:[XFUserInfo getUserInfo].Loginid  fileValue:recordFileUrl :^(NSString *requestName, id responseData, BOOL isSuccess) {
                 if (isSuccess) {
                     [weakSelf creatAudioView:[NSString stringWithFormat:@"%@%@",HTurl,responseData]];
+                    
+                    
+                    
                 }
             }] ;
         };
@@ -162,30 +162,38 @@
     return _recordView;
 }
 //创建多个
--(void)creatAudioView:(NSString*)urlStr{
+-(void)creatAudioView:(NSString*)urlStr {
     
     AudioView * view = [[NSBundle mainBundle] loadNibNamed:@"AudioView" owner:self options:nil].lastObject;
+    NSDictionary *dic = @{
+                          @"Id": @"0",   //标识  0是新增  非0 即修改
+                          @"CreateTime": [Global currentTime],
+                          @"BlogID": self.picModel.ID,  //习作ID
+                          @"PicID": self.picModel.PicID,  //习作图片ID
+                          @"UserID": [XFUserInfo getUserInfo].Loginid, //用户ID
+                          @"Sort": @"0", //排序
+                          @"AudioUrl": urlStr,    //录音URL
+                          @"XLocation": @(view.frame.origin.x),  //X轴
+                          @"YLocation": @(view.frame.origin.y)  //Y轴
+                          };
+    [self.vedioArr addObject:dic];
+    
     view.tapBlock = ^{
-//        [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
-//        AVURLAsset *asset = [AVURLAsset assetWithURL:[NSURL URLWithString:urlStr]];
-//        AVPlayerItem *item = [AVPlayerItem playerItemWithAsset:asset];
-//        
-//        AVPlayer*  player = [AVPlayer playerWithPlayerItem:item];
-//        [player play];
+        [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
+        AVURLAsset *asset = [AVURLAsset assetWithURL:[NSURL URLWithString:urlStr]];
+        AVPlayerItem *item = [AVPlayerItem playerItemWithAsset:asset];
         
-        
-        NSURL * url  = [NSURL URLWithString:urlStr];
-//        AVPlayerItem * songItem = [[AVPlayerItem alloc]initWithURL:url];
-//        AVPlayer * player = [[AVPlayer alloc]initWithPlayerItem:songItem];
-//        [player play];
-        
-        AVPlayer * player = [[AVPlayer alloc]initWithURL:url];
-        [player play];
-
-        
+        self.player = [AVPlayer playerWithPlayerItem:item];
+        [self.player play];
     };
-    view.panBlock = ^(CGPoint point) {
-        
+    view.panBlock = ^(CGRect frame) {
+        [self.vedioArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            NSMutableDictionary *dic = (NSMutableDictionary *)obj;
+            if ([dic[@"AudioUrl"] isEqualToString:urlStr]) {
+                dic[@"XLocation"] = @(frame.origin.x);
+                dic[@"YLocation"] = @(frame.origin.y);
+            }
+        }];
     };
     
     [self.view addSubview:view];
@@ -463,4 +471,8 @@
     
 }
 
+
+- (void)getGetWriteAudioRequestData {
+    
+}
 @end
