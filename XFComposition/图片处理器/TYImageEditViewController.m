@@ -20,6 +20,7 @@
 #import "AudioView.h"
 #import "StrokeView.h"
 #import "XFLbraryViewController.h"
+#import "GetWritePicRemarkModel.h"
 
 @interface TYImageEditViewController ()
 {
@@ -161,7 +162,48 @@
     }
     return _recordView;
 }
-//创建多个
+#pragma mark - 查看时用到
+- (void)creatAudioView:(GetWriteAudioModel *)model {
+    
+    AudioView * view = [[NSBundle mainBundle] loadNibNamed:@"AudioView" owner:self options:nil].lastObject;
+    view.frame = CGRectMake([model.XLocation?:@"" integerValue], [model.YLocation?:@"" integerValue], 50, 50);
+    NSDictionary *dic = @{
+                          @"Id": model.ID,   //标识  0是新增  非0 即修改
+                          @"CreateTime": [Global currentTime],
+                          @"BlogID": self.picModel.ID,  //习作ID
+                          @"PicID": self.picModel.PicID,  //习作图片ID
+                          @"UserID": [XFUserInfo getUserInfo].Loginid, //用户ID
+                          @"Sort": @"0", //排序
+                          @"AudioUrl": model.AudioUrl?:@"",    //录音URL
+                          @"XLocation": @(view.frame.origin.x),  //X轴
+                          @"YLocation": @(view.frame.origin.y)  //Y轴
+                          };
+    [self.vedioArr addObject:dic];
+    
+    view.tapBlock = ^{
+        [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
+        AVURLAsset *asset = [AVURLAsset assetWithURL:[NSURL URLWithString:model.AudioUrl?:@""]];
+        AVPlayerItem *item = [AVPlayerItem playerItemWithAsset:asset];
+        
+        self.player = [AVPlayer playerWithPlayerItem:item];
+        [self.player play];
+    };
+    view.panBlock = ^(CGRect frame) {
+        [self.vedioArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            NSMutableDictionary *dataDic = (NSMutableDictionary *)obj;
+            if ([dataDic[@"AudioUrl"] isEqualToString:model.AudioUrl?:@""]) {
+                dataDic[@"XLocation"] = @(frame.origin.x);
+                dataDic[@"YLocation"] = @(frame.origin.y);
+            }
+            NSLog(@"self.vedioArr===%@",self.vedioArr);
+        }];
+    };
+    
+    [self.view addSubview:view];
+    
+}
+
+//创建多个（创建时用到）
 -(void)creatAudioView:(NSString *)urlStr originX:(NSInteger )x originY:(NSInteger )y {
     
     AudioView * view = [[NSBundle mainBundle] loadNibNamed:@"AudioView" owner:self options:nil].lastObject;
@@ -480,7 +522,25 @@
     }
     
 }
-
+/*
+ "{
+ ""ret_code"": ""0"",
+ ""ret_msg"": ""成功"",
+ ""ret_data"": [
+ {
+ ""Id"": 134,   //标识
+ ""CreateTime"": ""2017/5/1 22:07:30"",
+ ""BlogID"": ""43"",  //习作ID
+ ""PicID"": ""43"",  //习作图片ID
+ ""UserID"": ""23"", //用户ID
+ ""Sort"": ""0"", //排序
+ ""AudioUrl"": ""这段写的好"",    //点评内容
+ ""XLocation"": ""10.08"",  //X轴
+ ""YLocation"": ""10.08""  //Y轴
+ }
+ ]
+ }"
+ */
 
 - (void)getGetWriteAudioRequestData {
     
@@ -500,6 +560,9 @@
         NSArray *arr = succeedResult[@"ret_data"];
         [arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             NSDictionary *dic = (NSDictionary *)obj;
+            
+            GetWriteAudioModel *model = [GetWriteAudioModel loadWithJSOn:dic];
+
             [self creatAudioView:dic[@"AudioUrl"] originX:[dic[@"XLocation"] integerValue] originY:[dic[@"YLocation"] integerValue]];
         }];
     } failedBolck:^(NSURLSessionDataTask *task, NSError *error) {
