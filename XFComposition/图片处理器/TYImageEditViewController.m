@@ -18,6 +18,7 @@
 #import "UploadPicRequst.h"
 #import "AudioRecordView.h"
 #import "AudioView.h"
+#import "XFLbraryViewController.h"
 
 @interface TYImageEditViewController ()
 {
@@ -174,9 +175,14 @@
         
         
         NSURL * url  = [NSURL URLWithString:urlStr];
-        AVPlayerItem * songItem = [[AVPlayerItem alloc]initWithURL:url];
-        AVPlayer * player = [[AVPlayer alloc]initWithPlayerItem:songItem];
+//        AVPlayerItem * songItem = [[AVPlayerItem alloc]initWithURL:url];
+//        AVPlayer * player = [[AVPlayer alloc]initWithPlayerItem:songItem];
+//        [player play];
+        
+        AVPlayer * player = [[AVPlayer alloc]initWithURL:url];
         [player play];
+
+        
     };
     view.panBlock = ^(CGPoint point) {
         
@@ -420,12 +426,28 @@
             break;
         case 4:
         {
-            
+            [[XFRequestManager sharedInstance] XFRequstGetCutPicBlog:[XFUserInfo getUserInfo].Loginid blogID:_picModel.BlogID ExtractType:@"0" :^(NSString *requestName, id responseData, BOOL isSuccess) {
+                if (isSuccess) {
+                    XFLbraryViewController * vc = [[XFLbraryViewController alloc]init];
+                    
+                    vc.dataArray = responseData;
+                    
+                    [self.navigationController pushViewController:vc animated:YES];
+                }
+            }] ;
         }
             break;
         case 5:
         {
-            
+            [[XFRequestManager sharedInstance] XFRequstGetCutPicBlog:[XFUserInfo getUserInfo].Loginid blogID:_picModel.BlogID ExtractType:@"1" :^(NSString *requestName, id responseData, BOOL isSuccess) {
+                if (isSuccess) {
+                    XFLbraryViewController * vc = [[XFLbraryViewController alloc]init];
+                    
+                    vc.dataArray = responseData;
+                    
+                    [self.navigationController pushViewController:vc animated:YES];
+                }
+            }] ;
         }
             break;
         case 6:
