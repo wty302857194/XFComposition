@@ -13,6 +13,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TYImageEditViewController">
             <connections>
+                <outlet property="bottomView" destination="xIv-bu-KYZ" id="UtL-E3-nWf"/>
+                <outlet property="bottomViewLayout" destination="aZs-Km-tTP" id="6GV-Qn-t4U"/>
                 <outlet property="clipButton" destination="OOT-8S-zfK" id="Qjq-0R-XWF"/>
                 <outlet property="tableView" destination="ZH1-NG-XGj" id="unG-pB-E6a"/>
                 <outlet property="topBackView" destination="QCK-Lr-c9D" id="0EL-Ag-HJA"/>

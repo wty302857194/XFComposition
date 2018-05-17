@@ -52,10 +52,9 @@ static NSInteger const qiPaoWidth = 160;
         [_scrollView addSubview:_leftView];
         
         contentViewController = [[TYImageEditViewController alloc] init];
-        contentViewController.PicUrl = self.PicUrl;
-        contentViewController.view.frame = CGRectMake(0, 0, _leftView.width, _leftView.height);
-        contentViewController.picModel = self.picModel;
         contentViewController.TYCorrecVC = self;
+        contentViewController.picModel = self.picModel;//执行frame时才会走viewdidload方法
+        contentViewController.view.frame = CGRectMake(0, 0, _leftView.width, _leftView.height);
         [contentViewController getGetWriteAudioRequestData];
         [self addChildViewController:contentViewController];
         [_leftView addSubview:contentViewController.view];
@@ -122,8 +121,14 @@ static NSInteger const qiPaoWidth = 160;
     [super viewDidLoad];
     _qiPaoArr = [NSMutableArray arrayWithCapacity:0];
     
-    UIBarButtonItem *item2 = [[UIBarButtonItem alloc]initWithTitle:@"保存批改" style:UIBarButtonItemStylePlain target:self action:@selector(tijiao)];
-    self.navigationItem.rightBarButtonItem = item2;
+    if (self.isChange) {
+        UIBarButtonItem *item2 = [[UIBarButtonItem alloc]initWithTitle:@"保存批改" style:UIBarButtonItemStylePlain target:self action:@selector(tijiao)];
+        self.navigationItem.rightBarButtonItem = item2;
+    }else {
+        UIBarButtonItem *item1 = [[UIBarButtonItem alloc]initWithTitle:@"查看旁批" style:UIBarButtonItemStylePlain target:self action:@selector(seePangPi)];
+        self.navigationItem.rightBarButtonItem = item1;
+    }
+    
     
     [self.view addSubview:self.scrollView];
     
@@ -136,7 +141,12 @@ static NSInteger const qiPaoWidth = 160;
         scrollView.scrollEnabled = NO;
     }
 }
-
+- (void)seePangPi {
+    [UIView animateWithDuration:0.5 animations:^{
+        [self.scrollView setContentOffset:CGPointMake(kScreenWidth/2.f, self.scrollView.contentOffset.y)];
+        self.scrollView.scrollEnabled = YES;
+    }];
+}
 //保存批改
 -(void)tijiao {
     UIImage *image = [Global makeImageWithView:contentViewController.imgView withSize:contentViewController.imgView.size];
@@ -195,7 +205,7 @@ static NSInteger const qiPaoWidth = 160;
                           @"BlogID": self.picModel.ID,  //习作ID
                           @"PicID": self.picModel.PicID,  //习作图片ID
                           @"UserID": [XFUserInfo getUserInfo].Loginid, //用户ID
-                          @"PicUrl":self.PicUrl,
+                          @"PicUrl":self.picModel.PicUrl,
                           @"FixPicUrl":self.picnameurl,
                           @"Remarks":self.qiPaoArr,
                           @"Audios":contentViewController.vedioArr

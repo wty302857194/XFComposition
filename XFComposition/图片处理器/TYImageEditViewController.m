@@ -42,6 +42,8 @@
 @property (strong, nonatomic) DCBezierPaintBoard *DCUndoView;
 @property (weak, nonatomic) IBOutlet UIView *topBackView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIView *bottomView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomViewLayout;
 @property (nonatomic, strong) NSArray *tabArr;
 @property (nonatomic, strong) NSMutableArray * colorArray;
 @property (nonatomic, strong) NSMutableArray * widthArray;
@@ -263,15 +265,21 @@
         [_imgView setMultipleTouchEnabled:YES];
         [_imgView setUserInteractionEnabled:YES];
         NSString *str = @"";
-        if ([self.PicUrl containsString:HTurl]) {
-            str = self.PicUrl;
-        }else {
-            str = [NSString stringWithFormat:@"%@%@",HTurl,self.PicUrl];
+        if (self.picModel.FixPicUrl.length > 3){
+            if ([self.picModel.FixPicUrl containsString:HTurl]) {
+                str = self.picModel.FixPicUrl;
+            }else {
+                str = [NSString stringWithFormat:@"%@%@",HTurl,self.picModel.FixPicUrl];
+            }
+        }else{
+            if ([self.picModel.PicUrl containsString:HTurl]) {
+                str = self.picModel.PicUrl;
+            }else {
+                str = [NSString stringWithFormat:@"%@%@",HTurl,self.picModel.PicUrl];
+            }
         }
-        [_imgView sd_setImageWithURL:[NSURL URLWithString:str] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-//            _image = image;
-//            _image = [Global makeImageWithView:self.imgView withSize:self.imgView.size];
-        }];
+        [self.imgView sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"icon_02"] options:SDWebImageRefreshCached];
+
         _topBackView.clipsToBounds = YES;
         [_topBackView addSubview:_imgView];
 
@@ -342,6 +350,14 @@
         [_widthArray addObject:bean];
     }
     
+    
+    if (self.TYCorrecVC.isChange) {
+        self.bottomViewLayout.constant = 60;
+        self.bottomView.hidden = NO;
+    }else {
+        self.bottomViewLayout.constant = 0;
+        self.bottomView.hidden = YES;
+    }
 
 }
 //取消手势
@@ -472,9 +488,8 @@
             [[XFRequestManager sharedInstance] XFRequstGetCutPicBlog:[XFUserInfo getUserInfo].Loginid blogID:_picModel.BlogID ExtractType:@"0" :^(NSString *requestName, id responseData, BOOL isSuccess) {
                 if (isSuccess) {
                     XFLbraryViewController * vc = [[XFLbraryViewController alloc]init];
-                    
+                    vc.title = @"范文库";
                     vc.dataArray = responseData;
-                    
                     [self.TYCorrecVC.navigationController pushViewController:vc animated:YES];
                 }
             }] ;
@@ -487,9 +502,8 @@
             [[XFRequestManager sharedInstance] XFRequstGetCutPicBlog:[XFUserInfo getUserInfo].Loginid blogID:_picModel.BlogID ExtractType:@"1" :^(NSString *requestName, id responseData, BOOL isSuccess) {
                 if (isSuccess) {
                     XFLbraryViewController * vc = [[XFLbraryViewController alloc]init];
-                    
+                    vc.title = @"病文库";
                     vc.dataArray = responseData;
-                    
                     [self.TYCorrecVC.navigationController pushViewController:vc animated:YES];
                 }
             }] ;
@@ -528,7 +542,7 @@
  ]
  }"
  */
-
+#pragma mark - 获取录音按钮
 - (void)getGetWriteAudioRequestData {
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
