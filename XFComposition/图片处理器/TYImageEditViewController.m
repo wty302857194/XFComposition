@@ -31,7 +31,7 @@
     UIPanGestureRecognizer *panGestureRecognizer;
     UIImage *_image;
     BOOL _isShouHui;
-
+    BOOL isFirst;
    
 }
 @property (nonatomic, strong) AVPlayer *player;
@@ -50,7 +50,7 @@
 @property (nonatomic, strong) TKImageView *tkImageView;
 @property (nonatomic, strong)AudioRecordView * recordView;
 @property (nonatomic, strong) StrokeView * strokeView;
-
+@property (nonatomic, strong) UIColor *lineColor;
 @end
 
 @implementation TYImageEditViewController
@@ -63,12 +63,26 @@
             break;
         case 11://截图
         {
-            _image = [Global makeImageWithView:self.imgView withSize:self.imgView.size];
+            
+            sender.selected = !sender.selected;
+            
+            if (sender.selected) {
+                _image = [Global makeImageWithView:self.imgView withSize:self.imgView.size];
+                
+                self.imgView.hidden = YES;
+                self.tkImageView.toCropImage = _image;
+                [self.view addSubview:self.tkImageView];
+                self.clipButton.hidden = NO;
+            }else{
+                
+                [self.tkImageView removeFromSuperview];
+                self.imgView.hidden = NO;
 
-            self.imgView.hidden = YES;
-            self.tkImageView.toCropImage = _imgView.image;
-            [self.view addSubview:self.tkImageView];
-            self.clipButton.hidden = NO;
+                self.clipButton.hidden = YES;
+
+            }
+            
+            
             
         }
             break;
@@ -82,10 +96,16 @@
             break;
         case 13://手绘
         {
+            
             sender.selected = !sender.selected;
             _isShouHui = sender.selected;
             if (sender.isSelected) {
-                
+                if (isFirst) {
+                    _lineColor = [UIColor redColor];
+                }
+                self.DCUndoView.lineColor = _lineColor;
+
+                isFirst = NO;
             }else {
                 self.DCUndoView.lineColor = [UIColor clearColor];
             }
@@ -333,10 +353,11 @@
     // Do any additional setup after loading the view from its nib.
     _tabArr = @[@"清屏",@"颜色",@"画笔",@"还原大小",@"范文库",@"病文库",@"撤销"];
     self.clipButton.hidden = YES;
+    isFirst = YES;
+
     [self addGestureRecognizerToView:self.imgView];
     _colorArray = [NSMutableArray array];
     _widthArray = [NSMutableArray array];
-    self.DCUndoView.lineColor = [UIColor clearColor];
     for (int i =0 ; i< @[@"红色",@"绿色",@"白色"].count; i++) {
         StandardInfo * bean = [[StandardInfo alloc]init];
         NSString * str = @[@"红色",@"绿色",@"白色"][i];
@@ -412,18 +433,19 @@
     _selectPaintColor = selectPaintColor;
     switch (selectPaintColor) {
         case DCPaintColorRed:
-            self.DCUndoView.lineColor = [UIColor redColor];
+            _lineColor = [UIColor redColor];
             break;
         case DCPaintColorwhite:
-            self.DCUndoView.lineColor = [UIColor whiteColor];
+            _lineColor = [UIColor whiteColor];
             break;
         case DCPaintColorGreen:
-            self.DCUndoView.lineColor = [UIColor greenColor];
+            _lineColor = [UIColor greenColor];
             break;
         default:
-            self.DCUndoView.lineColor = [UIColor redColor];
+            _lineColor = [UIColor redColor];
             break;
     }
+    self.DCUndoView.lineColor = _lineColor;
 }
 - (void)setIsErase:(BOOL)isErase{
     _isErase = isErase;
