@@ -262,7 +262,12 @@
         _imgView.backgroundColor = hexColor(ff4e00);
         [_imgView setMultipleTouchEnabled:YES];
         [_imgView setUserInteractionEnabled:YES];
-        NSString *str = [NSString stringWithFormat:@"%@%@",HTurl,self.PicUrl];
+        NSString *str = @"";
+        if ([self.PicUrl containsString:HTurl]) {
+            str = self.PicUrl;
+        }else {
+            str = [NSString stringWithFormat:@"%@%@",HTurl,self.PicUrl];
+        }
         [_imgView sd_setImageWithURL:[NSURL URLWithString:str] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
 //            _image = image;
 //            _image = [Global makeImageWithView:self.imgView withSize:self.imgView.size];

@@ -212,18 +212,18 @@ static NSInteger const qiPaoWidth = 160;
     
 }
 
--(void)GetWritePicRemark{
-    __weak typeof (self) weakSelf = self;
-    //    GetWritePicModel *model = self.picArray[indexPath.row];
-    GetWritePicRemarkRequst *requst = [[GetWritePicRemarkRequst alloc]init];
-    [requst GetWritePicRemarkRequstwithpicid:self.PicID :^(NSDictionary *json) {
-        [self.remarkArray removeAllObjects];
-        for (NSDictionary *dic in json[@"ret_data"]) {
-            GetWritePicRemarkModel *model = [GetWritePicRemarkModel loadWithJSOn:dic];
-            [weakSelf.remarkArray addObject:model];
-        }
-    }];
-}
+//-(void)GetWritePicRemark{
+//    __weak typeof (self) weakSelf = self;
+//    //    GetWritePicModel *model = self.picArray[indexPath.row];
+//    GetWritePicRemarkRequst *requst = [[GetWritePicRemarkRequst alloc]init];
+//    [requst GetWritePicRemarkRequstwithpicid:self.PicID :^(NSDictionary *json) {
+//        [self.remarkArray removeAllObjects];
+//        for (NSDictionary *dic in json[@"ret_data"]) {
+//            GetWritePicRemarkModel *model = [GetWritePicRemarkModel loadWithJSOn:dic];
+//            [weakSelf.remarkArray addObject:model];
+//        }
+//    }];
+//}
 /*
 {
     "Id": 134,   //标识

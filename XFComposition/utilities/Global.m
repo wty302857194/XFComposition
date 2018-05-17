@@ -154,7 +154,8 @@
         @synchronized(self) {
             if (!currentFormatter) {
                 currentFormatter = [[NSDateFormatter alloc] init];
-                [currentFormatter setDateFormat:@"yyyy-MM-dd'-'HH'h-'mm'm-'ss's'SSS"];
+                //2017/5/1 22:07:30
+                [currentFormatter setDateFormat:@"YYYY/MM/dd HH:mm:ss"];
                 threadDictionary[@"currentdateformatter"] = currentFormatter;
             }
         }
