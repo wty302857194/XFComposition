@@ -70,7 +70,10 @@
     self.inputTextView.layer.cornerRadius = 5;
     self.inputTextView.layer.masksToBounds = YES;
     [self getWritPic];
-    [self rightBarButton];
+    if (_isChange) {
+        [self rightBarButton];
+
+    }
     _posArray = [NSMutableArray array];
 }
 -(void)getWritPic{
@@ -201,7 +204,10 @@
         [SVProgressHUD dismiss];
         
         if (isSuccess) {
+            
             [SVProgressHUD showInfoWithStatus:@"保存成功"];
+            
+            [self.navigationController popViewControllerAnimated:YES];
             
         }else{
             

@@ -64,7 +64,8 @@
         {
             _image = [Global makeImageWithView:self.imgView withSize:self.imgView.size];
 
-            self.imgView.hidden = NO;
+            self.imgView.hidden = YES;
+            self.tkImageView.toCropImage = _imgView.image;
             [self.view addSubview:self.tkImageView];
             self.clipButton.hidden = NO;
             
@@ -121,7 +122,7 @@
     self.clipButton.hidden = YES;
     self.imgView.hidden = NO;
     _image = [self.tkImageView currentCroppedImage];
-
+        _tkImageView.maskColor = [UIColor clearColor];
     ActionSheetView * actionSheet = [[ActionSheetView alloc] initWithCancleTitle:@"取消" otherTitles:@"范文库",@"病文库" ,nil];
     
     [actionSheet show];
