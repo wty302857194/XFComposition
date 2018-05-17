@@ -20,6 +20,7 @@
 #import "AudioView.h"
 #import "StrokeView.h"
 #import "XFLbraryViewController.h"
+
 @interface TYImageEditViewController ()
 {
     CGFloat lastScale;
@@ -177,9 +178,14 @@
         
         
         NSURL * url  = [NSURL URLWithString:urlStr];
-        AVPlayerItem * songItem = [[AVPlayerItem alloc]initWithURL:url];
-        AVPlayer * player = [[AVPlayer alloc]initWithPlayerItem:songItem];
+//        AVPlayerItem * songItem = [[AVPlayerItem alloc]initWithURL:url];
+//        AVPlayer * player = [[AVPlayer alloc]initWithPlayerItem:songItem];
+//        [player play];
+        
+        AVPlayer * player = [[AVPlayer alloc]initWithURL:url];
         [player play];
+
+        
     };
     view.panBlock = ^(CGPoint point) {
         
@@ -437,6 +443,7 @@
                 }
             }] ;
             
+
         }
             break;
         case 5:
@@ -450,6 +457,7 @@
                     [self.TYCorrecVC.navigationController pushViewController:vc animated:YES];
                 }
             }] ;
+            
             
         }
             break;
