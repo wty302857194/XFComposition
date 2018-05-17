@@ -173,6 +173,8 @@ referenceSizeForHeaderInSection:(NSInteger)section {
         if (indexPath.section == 1){
             HomePaFristheadView *headView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"header1" forIndexPath:indexPath];
             headView.textLable.text = @"志愿者教师";
+            headView.bt.hidden = YES;
+            
             return headView;
         }
         return nil;
