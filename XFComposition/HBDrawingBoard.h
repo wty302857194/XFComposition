@@ -75,6 +75,7 @@ typedef void(^YasicClipPageBlock)(NSInteger index ,UIImage*imge);
 @property (nonatomic, weak) id<HBDrawingBoardDelegate> delegate;
 
 @property (nonatomic, assign) BOOL isDraw;// 是否绘画；
+@property (nonatomic, strong)  UIPanGestureRecognizer *pan;
 
 
 - (BOOL)drawWithPoints:(HBDrawModel *)model;

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void(^StrokeViewBlcok)(NSInteger arguments,BOOL isSetColor);
+typedef void(^StrokeViewBlcok)(int arguments,BOOL isSetColor);
 
 
 @interface StrokeView : UIView<UITableViewDataSource,UITableViewDelegate>{

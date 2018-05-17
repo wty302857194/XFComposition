@@ -18,7 +18,8 @@
 #import "UploadPicRequst.h"
 #import "AudioRecordView.h"
 #import "AudioView.h"
-
+#import "StrokeView.h"
+#import "XFLbraryViewController.h"
 @interface TYImageEditViewController ()
 {
     CGFloat lastScale;
@@ -36,12 +37,14 @@
 @property (strong, nonatomic) DCBezierPaintBoard *DCUndoView;
 @property (weak, nonatomic) IBOutlet UIView *topBackView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (nonatomic,copy) NSArray *tabArr;
-
+@property (nonatomic, strong) NSArray *tabArr;
+@property (nonatomic, strong) NSMutableArray * colorArray;
+@property (nonatomic, strong) NSMutableArray * widthArray;
 @property (weak, nonatomic) IBOutlet UIButton *clipButton;
 
 @property (nonatomic, strong) TKImageView *tkImageView;
 @property (nonatomic, strong)AudioRecordView * recordView;
+@property (nonatomic, strong) StrokeView * strokeView;
 
 @end
 
@@ -57,8 +60,7 @@
         {
             _image = [Global makeImageWithView:self.imgView withSize:self.imgView.size];
 
-            self.imgView.hidden = YES;
-            self.tkImageView.toCropImage = _image;
+            self.imgView.hidden = NO;
             [self.view addSubview:self.tkImageView];
             self.clipButton.hidden = NO;
             
@@ -77,8 +79,7 @@
             sender.selected = !sender.selected;
             _isShouHui = sender.selected;
             if (sender.isSelected) {
-                self.DCUndoView.lineWidth = 3;
-                self.DCUndoView.lineColor = [UIColor redColor];
+                
             }else {
                 self.DCUndoView.lineColor = [UIColor clearColor];
             }
@@ -109,7 +110,9 @@
         [self addGestureRecognizerToView:self.imgView];
     }
 }
+
 - (IBAction)clipImage:(id)sender {
+    
     [self.tkImageView removeFromSuperview];
     self.clipButton.hidden = YES;
     self.imgView.hidden = NO;
@@ -212,7 +215,7 @@
         _tkImageView.cropAreaCrossLineWidth = 0.5;
         _tkImageView.initialScaleFactor = .8f;
         _tkImageView.cropAspectRatio = 0;
-        _tkImageView.maskColor = [UIColor clearColor];
+        
     }
     return _tkImageView;
 }
@@ -246,13 +249,58 @@
     }
     return _imgView;
 }
-
+-(StrokeView*)strokeView{
+    
+    
+    if (_strokeView == nil) {
+        
+        __weak typeof(self) weakSelf = self;
+        _strokeView = [[NSBundle mainBundle] loadNibNamed:@"StrokeView" owner:self options:nil].lastObject;
+        _strokeView.layer.cornerRadius = 6.0;
+        _strokeView.layer.masksToBounds = YES;
+        _strokeView.strokeViewBlcok = ^(int arguments,BOOL isSetColor) {
+            
+            if (isSetColor) {
+                
+                [weakSelf setSelectPaintColor:arguments+1];
+            }else{
+                weakSelf.DCUndoView.lineWidth = arguments+1;
+            }
+            
+        };
+        
+    }
+    return _strokeView;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     _tabArr = @[@"清屏",@"颜色",@"画笔",@"还原大小",@"范文库",@"病文库",@"撤销"];
     self.clipButton.hidden = YES;
     [self addGestureRecognizerToView:self.imgView];
+    _colorArray = [NSMutableArray array];
+    _widthArray = [NSMutableArray array];
+    self.DCUndoView.lineColor = [UIColor redColor];
+    for (int i =0 ; i< @[@"红色",@"绿色",@"白色"].count; i++) {
+        StandardInfo * bean = [[StandardInfo alloc]init];
+        NSString * str = @[@"红色",@"绿色",@"白色"][i];
+        bean.StandardText = str;
+        if (i == 0) {
+            bean.isSelected = YES;
+        }
+        [_colorArray addObject:bean];
+    }
+    
+    for (int i =0 ; i< @[@"细",@"中",@"粗"].count; i++) {
+        StandardInfo * bean = [[StandardInfo alloc]init];
+        NSString * str = @[@"细",@"中",@"粗"][i];
+        bean.StandardText = str;
+        if (i == 0) {
+            bean.isSelected = YES;
+        }
+        [_widthArray addObject:bean];
+    }
+    
 
 }
 //取消手势
@@ -310,17 +358,14 @@
         case DCPaintColorRed:
             self.DCUndoView.lineColor = [UIColor redColor];
             break;
-        case DCPaintColorBlue:
-            self.DCUndoView.lineColor = [UIColor blueColor];
+        case DCPaintColorwhite:
+            self.DCUndoView.lineColor = [UIColor whiteColor];
             break;
         case DCPaintColorGreen:
             self.DCUndoView.lineColor = [UIColor greenColor];
             break;
-        case DCPaintColorBlack:
-            self.DCUndoView.lineColor = [UIColor blackColor];
-            break;
         default:
-            self.DCUndoView.lineColor = [UIColor blackColor];
+            self.DCUndoView.lineColor = [UIColor redColor];
             break;
     }
 }
@@ -364,53 +409,15 @@
             break;
         case 1:
         {
-            __weak typeof(self) weakSelf = self;
-            ListSelectView *select_view = [[ListSelectView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, self.view.height)];
-            select_view.choose_type = MORECHOOSETITLETYPE;
-            select_view.isShowCancelBtn = YES;
-            select_view.isShowSureBtn = NO;
-            select_view.isShowTitle = YES;
-            select_view.title_height = 40;
-            [select_view addTitleArray:@[@"红色",@"绿色",@"蓝色",@"黑色"] andTitleString:@"颜色设置" animated:YES completionHandler:^(NSString * _Nullable string, NSInteger index) {
-                weakSelf.selectPaintColor = (DCPaintColor)index+1;
+            [self.strokeView showStrokeView:_colorArray isSetColor:YES];
 
-            } withSureButtonBlock:^{
-                NSLog(@"sure btn");
-            }];
-            [self.navigationController.view addSubview:select_view];
         }
             break;
 
         case 2:
         {
-            __weak typeof(self) weakSelf = self;
-            ListSelectView *select_view = [[ListSelectView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, self.view.height)];
-            select_view.choose_type = MORECHOOSETITLETYPE;
-            select_view.isShowCancelBtn = YES;
-            select_view.isShowSureBtn = NO;
-            select_view.isShowTitle = YES;
-            select_view.title_height = 40;
-            [select_view addTitleArray:@[@"细",@"中",@"粗"] andTitleString:@"画笔设置" animated:YES completionHandler:^(NSString * _Nullable string, NSInteger index) {
-                NSInteger width = 0;
-                switch (index) {
-                    case 0:
-                        width = 2;
-                        break;
-                    case 1:
-                        width = 4;
-                        break;
-                    case 2:
-                        width = 6;
-                        break;
-                    default:
-                        break;
-                }
-                weakSelf.DCUndoView.lineWidth = width;
-                
-            } withSureButtonBlock:^{
-                NSLog(@"sure btn");
-            }];
-            [self.navigationController.view addSubview:select_view];
+            [self.strokeView showStrokeView:_widthArray isSetColor:NO];
+
         }
             break;
         case 3:
@@ -420,11 +427,29 @@
             break;
         case 4:
         {
+            [[XFRequestManager sharedInstance] XFRequstGetCutPicBlog:[XFUserInfo getUserInfo].Loginid blogID:_picModel.BlogID ExtractType:@"0" :^(NSString *requestName, id responseData, BOOL isSuccess) {
+                if (isSuccess) {
+                    XFLbraryViewController * vc = [[XFLbraryViewController alloc]init];
+                    
+                    vc.dataArray = responseData;
+                    
+                    [self.TYCorrecVC.navigationController pushViewController:vc animated:YES];
+                }
+            }] ;
             
         }
             break;
         case 5:
         {
+            [[XFRequestManager sharedInstance] XFRequstGetCutPicBlog:[XFUserInfo getUserInfo].Loginid blogID:_picModel.BlogID ExtractType:@"1" :^(NSString *requestName, id responseData, BOOL isSuccess) {
+                if (isSuccess) {
+                    XFLbraryViewController * vc = [[XFLbraryViewController alloc]init];
+                    
+                    vc.dataArray = responseData;
+                    
+                    [self.TYCorrecVC.navigationController pushViewController:vc animated:YES];
+                }
+            }] ;
             
         }
             break;

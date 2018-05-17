@@ -23,7 +23,7 @@
       int i;
     CGPoint _prevDraggingPosition; //拖动的起点
     CGFloat  _widthStroke; //滑动宽
-    UIPanGestureRecognizer * _pan;
+   
     BOOL _isEraser; //橡皮擦
 }
 
@@ -176,7 +176,7 @@
         _strokeView = [[NSBundle mainBundle] loadNibNamed:@"StrokeView" owner:self options:nil].lastObject;
         _strokeView.layer.cornerRadius = 6.0;
         _strokeView.layer.masksToBounds = YES;
-        _strokeView.strokeViewBlcok = ^(NSInteger arguments,BOOL isSetColor) {
+        _strokeView.strokeViewBlcok = ^(int arguments,BOOL isSetColor) {
     
             if (isSetColor) {
                 
@@ -424,7 +424,6 @@
         {
             [_scorllView setContentOffset:CGPointMake(kScreenWidth/2, 0) animated:YES];
             _scorllView.scrollEnabled = YES;
-            _pan.enabled = NO;
             [_moreBtn setSelected:NO];
             [_drawBrn setSelected:NO];
             [_cropBottomBtn setSelected:NO];
@@ -435,7 +434,6 @@
             
         case 3://手绘
         {
-            _pan.enabled = YES;
             [_moreBtn setSelected:NO];
             [_cropBottomBtn setSelected:NO];
 
@@ -445,6 +443,7 @@
                 [_drawBrn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
                 [_drawBrn setBackgroundColor:hexColor(009dff)];
                 _drawView.isDraw = YES;
+                _drawView.pan.enabled = YES;
             }
             
         }

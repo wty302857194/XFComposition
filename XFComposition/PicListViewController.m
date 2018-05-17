@@ -173,7 +173,7 @@
     
     
     GetWritePicModel *model = self.picArray[indexPath.row];
-//
+
 //    TYCorrectViewController *vc = [[TYCorrectViewController alloc]init];
 //    vc.picModel = model;
 //    [self.navigationController pushViewController:vc animated:YES];
