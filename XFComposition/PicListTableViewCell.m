@@ -20,16 +20,19 @@
      [self.contentView addSubview:_label];
     _starReplay = [[QYStarReplay alloc] initWithFrame:CGRectMake((kScreenWidth - 14)/2 + 14, 0, (kScreenWidth - 14)/2, 44) numberOfStars:5 rateStyle:RateStyleHalfStar isAnimation:YES finish:^(CGFloat currentScore) {
         
-        
+        _info.Score = [NSString stringWithFormat:@"%f",currentScore];
+        if (_cellBlock) {
+            _cellBlock (_info);
+        }
     }];
     [self.contentView addSubview:_starReplay];
 }
 -(void)reloadData:(FMBean*)bean{
     
-    StandardInfo * model = (StandardInfo*)bean;
+    _info = (StandardInfo*)bean;
     
-    _label.text = model.StandardText;
-    [_starReplay reloadStarWithScore: [model.Score floatValue]];
+    _label.text = _info.StandardText;
+    [_starReplay reloadStarWithScore: [_info.Score floatValue]];
     _starReplay.isCloseGestureRecognizer = !_isChange;
 
 }

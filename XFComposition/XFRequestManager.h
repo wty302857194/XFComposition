@@ -29,6 +29,7 @@ typedef void (^XFResponseBlock)(NSString* requestName, id responseData , BOOL is
 #define XFReq_User_AddCutPic           @"添加截图"
 #define XFReq_User_GetPicBlog          @"获得文库"
 
+#define XFReq_User_SubmitComment       @"保存总评和标准"
 
 
 @interface XFRequestManager : NSObject
@@ -131,6 +132,20 @@ typedef void (^XFResponseBlock)(NSString* requestName, id responseData , BOOL is
           ExtractContent:(NSString*)ExtractContent
              ExtractType:(NSString*)ExtractType
                         :(XFResponseBlock)block;
+
+/**
+ *保存总评和标准
+ *@param userID  //用户标识
+ *@param commentinfo 总内容
+ *@param blogID 习作标识
+ *@param StandardDetail 标准id和评分
+ */
+-(void)XFRequstSubmitComment:(NSString*)userID
+             commentinfo:(NSString*)commentinfo
+                  blogID:(NSString*)blogID
+          StandardDetail:(NSString*)StandardDetail
+                        :(XFResponseBlock)block;
+
 /**
  *获得文库
  *@param userID  //用户标识

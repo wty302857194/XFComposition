@@ -294,7 +294,7 @@
     [self addGestureRecognizerToView:self.imgView];
     _colorArray = [NSMutableArray array];
     _widthArray = [NSMutableArray array];
-    self.DCUndoView.lineColor = [UIColor redColor];
+    self.DCUndoView.lineColor = [UIColor clearColor];
     for (int i =0 ; i< @[@"红色",@"绿色",@"白色"].count; i++) {
         StandardInfo * bean = [[StandardInfo alloc]init];
         NSString * str = @[@"红色",@"绿色",@"白色"][i];

@@ -509,6 +509,41 @@ static XFRequestManager *instance = nil;
     }];
     
 }
+
+-(void)XFRequstSubmitComment:(NSString*)userID
+             commentinfo:(NSString*)commentinfo
+                  blogID:(NSString*)blogID
+          StandardDetail:(NSString*)StandardDetail
+                        :(XFResponseBlock)block{
+    
+    
+    NSDictionary *parameters = @{@"Action":@"SubmitComment",
+                                 @"Token":@"0A66A4FD-146F-4542-8D7B-33CDEC2981F9",
+                                 @"blogID":blogID,
+                                 @"userID":userID,
+                                 @"StandardDetail":StandardDetail,
+                                 };
+    [xfrequst requestWithURLString:APIurl parameters:parameters type:NetworkRequestTypePost imgData:nil resultBlock:^(id responseObject, NSError *error, NSURLSessionDataTask *task) {
+        
+        NSLog(@"%@%@",XFReq_User_SubmitComment
+              ,responseObject);
+        
+        if ([responseObject[@"ret_code"] integerValue] == 0) {
+            
+            NSString *msg = responseObject[@"ret_msg"];
+            block(XFReq_User_SubmitComment, msg ,YES);
+            
+        }else{
+            
+            NSString *msg = responseObject[@"ret_msg"];
+            block(XFReq_User_SubmitComment, msg,NO);
+        }
+        
+    }];
+    
+    
+    
+}
 -(void)printUrl:(NSString*)requstName parameters:(NSDictionary*)parameters{
     
     

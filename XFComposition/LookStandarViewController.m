@@ -49,6 +49,30 @@
     
     return 60;
 }
+- (NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath{
+    StandardInfo * info   = _dataArray[indexPath.row];
+    UITableViewRowAction *deleteRowAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"删除"handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
+        [SVProgressHUD showWithStatus:@"正在删除"];
+        [[XFRequestManager sharedInstance] XFRequstDeleteStandard:info.StandardId  :^(NSString *requestName, id responseData, BOOL isSuccess) {
+            [SVProgressHUD dismiss];
+            if (isSuccess) {
+                [SVProgressHUD showInfoWithStatus:@"删除成功"];
+                
+                [_dataArray removeObject:info];
+                
+                [_tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+                
+            }else{
+                
+                [SVProgressHUD showInfoWithStatus:@"删除失败"];
+                
+            }
+        }] ;
+        
+    }];
+    return @[deleteRowAction];
+    
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

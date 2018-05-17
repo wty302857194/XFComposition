@@ -23,6 +23,8 @@
 @property (nonatomic,strong)NSMutableArray *picArray;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic,strong)NSMutableArray *dataArray;;
+@property (nonatomic,strong)NSMutableArray *posArray;;
+@property (nonatomic,strong)StandardInfo * currentInfo;;
 
 @property (strong, nonatomic) IBOutlet PlaceholderTextView *inputTextView;
 @end
@@ -68,7 +70,8 @@
     self.inputTextView.layer.cornerRadius = 5;
     self.inputTextView.layer.masksToBounds = YES;
     [self getWritPic];
-    
+    [self rightBarButton];
+    _posArray = [NSMutableArray array];
 }
 -(void)getWritPic{
     
@@ -113,10 +116,18 @@
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    
     PicListTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"PicListTableViewCell"];
     cell.isChange = _isChange;
     [cell reloadData:_dataArray[indexPath.row]];
-    
+    cell.cellBlock = ^( StandardInfo *info) {
+        
+        if (![_posArray containsObject:info]) {
+            
+            [_posArray addObject:info];
+        }
+        
+    };
     return cell;
     
 }
@@ -160,6 +171,45 @@
     UIBarButtonItem *item=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"left-arrow_s"] style: UIBarButtonItemStylePlain target:self action:@selector(onBack)];
     
     self.navigationItem.leftBarButtonItem=item;
+    
+}
+-(void)rightBarButton{
+    
+    UIBarButtonItem *item=[[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(save)];
+    
+    self.navigationItem.rightBarButtonItem=item;
+}
+-(void)save{
+    
+    NSMutableArray * array = [NSMutableArray array];
+    for (StandardInfo * info  in _posArray) {
+        NSMutableDictionary * dic = [[NSMutableDictionary alloc]init];
+        [dic setValue:info.StandardId forKey:@"StandardId"];
+        [dic setValue:info.Score forKey:@"Score"];
+        [array addObject:dic];
+    }
+    
+    
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:array
+                                                       options:kNilOptions
+                                                         error:nil];
+    
+    NSString *jsonString = [[NSString alloc] initWithData:jsonData
+                                                 encoding:NSUTF8StringEncoding];
+    [SVProgressHUD showWithStatus:@"正在保存"];
+    [XFRequestManager sharedInstance] XFRequstSubmitComment:[XFUserInfo getUserInfo].Loginid commentinfo:_inputTextView.text blogID:_blogid StandardDetail:jsonString :^(NSString *requestName, id responseData, BOOL isSuccess) {
+        [SVProgressHUD dismiss];
+        
+        if (isSuccess) {
+            [SVProgressHUD showInfoWithStatus:@"保存成功"];
+            
+        }else{
+            
+            
+            
+        }
+        
+    }
     
 }
 -(void)onBack{
