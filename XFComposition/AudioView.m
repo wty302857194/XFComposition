@@ -70,13 +70,13 @@
     if (ty_y+self.height/2.f>self.superview.height) {
         ty_y = self.superview.height - self.height/2.f;
     }
-    rec.view.center = CGPointMake(ty_x, ty_y);
+//    rec.view.center = CGPointMake(ty_x, ty_y);
     [rec setTranslation:CGPointMake(0, 0) inView:self];
     
-//    rec.view.frame = CGRectMake(ty_x-self.width/2.f, ty_y - self.height/2.f, self.frame.size.width, self.frame.size.height);
+    rec.view.frame = CGRectMake(ty_x-self.width/2.f, ty_y - self.height/2.f, self.frame.size.width, self.frame.size.height);
     
     if (_panBlock) {
-        _panBlock(rec.view.center);
+        _panBlock(rec.view.frame);
     }
 }
 -(void)longPress:(UIGestureRecognizer*)gesRec {
