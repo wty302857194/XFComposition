@@ -10,4 +10,5 @@
 typedef void(^ContentStrBlock) (NSString *contentStr);
 @interface QiPaoTagView : UIView
 @property (nonatomic,copy) ContentStrBlock contentStrBlock;//编辑的信息
+@property (nonatomic,strong) FSTextView *textView ;
 @end

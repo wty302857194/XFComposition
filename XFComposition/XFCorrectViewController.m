@@ -17,6 +17,7 @@
 
 #import "GetWritePicRemarkModel.h"
 
+static NSInteger const qiPaoWidth = 160;
 @interface XFCorrectViewController ()<UIScrollViewDelegate>
 {
     TYImageEditViewController * contentViewController;
@@ -79,8 +80,21 @@
     return _scrollView;
 }
 - (void)addPangPi {
-    QiPaoTagView *qiPaoView = [[QiPaoTagView alloc] initWithFrame:CGRectMake(0, 200, 160, 50)];
-     __weak typeof(self) weakSelf = self;
+    [self addPangPi:nil];
+}
+
+- (void)addPangPi:(GetWritePicRemarkModel *)model {
+    NSInteger height = 50;
+    if (model) {
+        height = [Global heightForText:model.Remark?:@"" textFont:15 standardWidth:qiPaoWidth]+44;
+    }
+    QiPaoTagView *qiPaoView = [[QiPaoTagView alloc] initWithFrame:CGRectMake([model.XLocation?:@"" integerValue], [model.YLocation?:@"" integerValue], qiPaoWidth, height)];
+    
+    if (model) {
+        qiPaoView.textView.text = model.Remark?:@"";
+    }
+    
+    __weak typeof(self) weakSelf = self;
     __weak QiPaoTagView *weak_qiPaoView = qiPaoView;
     qiPaoView.contentStrBlock = ^(NSString *contentStr) {
         __strong QiPaoTagView *strong_qiPaoView = weak_qiPaoView;
@@ -88,7 +102,7 @@
         NSInteger Y = strong_qiPaoView.frame.origin.y;
         
         NSDictionary *dic = @{
-                              @"Id": @"0",   //标识   0是新增  非0 即修改
+                              @"Id": model.ID?:@"0",   //标识   0是新增  非0 即修改
                               @"CreateTime": [Global currentTime],
                               @"BlogID":weakSelf.picModel.ID, //习作ID
                               @"PicID":weakSelf.picModel.PicID,  //习作图片ID
@@ -103,6 +117,7 @@
     };
     [_rightView addSubview:qiPaoView];
 }
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     _qiPaoArr = [NSMutableArray arrayWithCapacity:0];
@@ -113,7 +128,7 @@
     [self.view addSubview:self.scrollView];
     
     
-//    [self GetWritePicRemark];
+    [self GetWritePicRemarkRequestData];
     
 }
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
@@ -124,7 +139,15 @@
 
 //保存批改
 -(void)tijiao {
-    [self SubmitPicCheckRequestData];
+    UIImage *image = [Global makeImageWithView:contentViewController.imgView withSize:contentViewController.imgView.size];
+    UploadPicRequst *uploadPicRequst = [[UploadPicRequst alloc]init];
+    NSData *imageData = UIImagePNGRepresentation(image);
+    [uploadPicRequst UploadPicRequstWithfileValue:imageData withuserid:self.xf.Loginid withtypeid:@"1" :^(NSDictionary *json) {
+        self.picnameurl = json[@"ret_data"];
+        
+        [self SubmitPicCheckRequestData];
+
+    }];
 }
 /*
  "Action:SubmitPicCheck
@@ -161,6 +184,7 @@
  }
  ]"
  */
+#pragma mark - 保存批改
 - (void)SubmitPicCheckRequestData {
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -168,11 +192,11 @@
     NSDictionary *dic = @{
                           @"Action":@"SubmitPicCheck",
                           @"Token":@"0A66A4FD-146F-4542-8D7B-33CDEC2981F9",
-                          @"PicID":@"2",
-                          @"userID":@"0",
-                          @"blogID":@"0",
-                          @"PicUrl":@"0",
-                          @"FixPicUrl":@"0",
+                          @"BlogID": self.picModel.ID,  //习作ID
+                          @"PicID": self.picModel.PicID,  //习作图片ID
+                          @"UserID": [XFUserInfo getUserInfo].Loginid, //用户ID
+                          @"PicUrl":self.PicUrl,
+                          @"FixPicUrl":self.picnameurl,
                           @"Remarks":self.qiPaoArr,
                           @"Audios":contentViewController.vedioArr
                           };
@@ -198,8 +222,48 @@
             GetWritePicRemarkModel *model = [GetWritePicRemarkModel loadWithJSOn:dic];
             [weakSelf.remarkArray addObject:model];
         }
-//        [self.tableView reloadData];
     }];
 }
-
+/*
+{
+    "Id": 134,   //标识
+    "CreateTime": "2017/5/1 22:07:30",
+    "BlogID": "43",  //习作ID
+    "PicID": "43",  //习作图片ID
+    "UserID": "23", //用户ID
+    "Sort": "0", //排序
+    "Remark": "这段写的好",    //点评内容
+    "XLocation": "10.08",  //X轴
+    "YLocation": "10.08"  //Y轴
+}*/
+#pragma mark - 获取旁批
+- (void)GetWritePicRemarkRequestData {
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    BaseRequest *request = [BaseRequest requestWithURL:nil];
+    NSDictionary *dic = @{
+                          @"Action":@"GetWritePicRemark",
+                          @"Token":@"0A66A4FD-146F-4542-8D7B-33CDEC2981F9",
+                          @"BlogID": self.picModel.ID,  //习作ID
+                          @"PicID": self.picModel.PicID,  //习作图片ID
+                          @"UserID": [XFUserInfo getUserInfo].Loginid, //用户ID
+                          };
+    NSLog(@"dic = %@",dic);
+    [request startWithMethod:HTTPTypePOST params:dic successedBlock:^(id succeedResult) {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        NSLog(@"ForecastUrl === %@",succeedResult);
+        NSArray *arr = succeedResult[@"ret_data"];
+        if (arr&&arr.count>0) {
+            [arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                NSDictionary *dic = (NSDictionary *)obj;
+                
+                GetWritePicRemarkModel *model = [GetWritePicRemarkModel loadWithJSOn:dic];
+                [self addPangPi:model];
+            }];
+        }
+    } failedBolck:^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"error===%@",error.localizedDescription);
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+    }];
+}
 @end
