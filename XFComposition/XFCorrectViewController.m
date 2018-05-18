@@ -101,9 +101,9 @@ static NSInteger const qiPaoWidth = 160;
                          @(qiPaoView.tag):@{
                                  @"Id": model.ID?:@"0",   //标识   0是新增  非0 即修改
                                  @"CreateTime": qiPaoView.time,
-                                 @"BlogID":self.picModel.ID, //习作ID
+                                 @"BlogID":self.picModel.BlogID, //习作ID
                                  @"PicID":self.picModel.PicID,  //习作图片ID
-                                 @"UserID":self.xf.userId, //用户ID
+                                 @"UserID":[XFUserInfo getUserInfo].Loginid , //用户ID
                                  @"Sort": @"0", //排序
                                  @"Remark": model.Remark?:@"",    //点评内容
                                  @"XLocation": @(qiPaoView.frame.origin.x/self.rightView.width),  //X轴
@@ -236,17 +236,34 @@ static NSInteger const qiPaoWidth = 160;
         [qiPaoNewArr addObject:dataDic.allValues.firstObject];
     }];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
+    
+    NSData *qiPaoData = [NSJSONSerialization dataWithJSONObject:qiPaoNewArr
+                                                       options:kNilOptions
+                                                         error:nil];
+    
+    NSString *qiPaoString = [[NSString alloc] initWithData:qiPaoData
+                                                 encoding:NSUTF8StringEncoding];
+    
+    NSData *vedioData = [NSJSONSerialization dataWithJSONObject:contentViewController.vedioArr
+                                                        options:kNilOptions
+                                                          error:nil];
+    
+    NSString *vedioDataString = [[NSString alloc] initWithData:vedioData
+                                                      encoding:NSUTF8StringEncoding];
+    
+    
     BaseRequest *request = [BaseRequest requestWithURL:nil];
     NSDictionary *dic = @{
                           @"Action":@"SubmitPicCheck",
                           @"Token":@"0A66A4FD-146F-4542-8D7B-33CDEC2981F9",
-                          @"BlogID": self.picModel.BlogID,  //习作ID
+                          @"blogID": self.picModel.BlogID,  //习作ID
                           @"PicID": self.picModel.PicID,  //习作图片ID
-                          @"UserID": [XFUserInfo getUserInfo].Loginid, //用户ID
+                          @"userID": [XFUserInfo getUserInfo].Loginid, //用户ID
                           @"PicUrl":self.picModel.PicUrl,
                           @"FixPicUrl":self.picnameurl,
-                          @"Remarks":qiPaoNewArr,
-                          @"Audios":contentViewController.vedioArr
+                          @"Remarks":qiPaoString,
+                          @"Audios":vedioDataString
                           };
     NSLog(@"dic = %@",dic);
     [request startWithMethod:HTTPTypePOST params:dic successedBlock:^(id succeedResult) {
