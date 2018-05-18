@@ -7,13 +7,20 @@
 //
 
 #import "TYImageEditViewController.h"
-#import "TYCorrectViewController.h"
+#import "XFCorrectViewController.h"
 #import "DCCommon.h"
 #import "DCBezierPaintBoard.h"
 //#import "DCOpenGLDrawView.h"
 #import "ListSelectView.h"
 #import "DCUndoBeziPathPaintBoard.h"
 #import "TKImageView.h"
+#import "ActionSheetView.h"
+#import "UploadPicRequst.h"
+#import "AudioRecordView.h"
+#import "AudioView.h"
+#import "StrokeView.h"
+#import "XFLbraryViewController.h"
+#import "GetWritePicRemarkModel.h"
 
 @interface TYImageEditViewController ()
 {
@@ -23,20 +30,29 @@
     UIPinchGestureRecognizer *pinchGestureRecognizer;
     UIPanGestureRecognizer *panGestureRecognizer;
     UIImage *_image;
+    BOOL _isShouHui;
+    BOOL isFirst;
+   
 }
-@property (nonatomic, assign)DCPaintColor  selectPaintColor;
+@property (nonatomic, strong) AVPlayer *player;
+@property (nonatomic, assign) DCPaintColor  selectPaintColor;
 @property (nonatomic, assign) BOOL isErase;
 @property (nonatomic, assign) DCPaintBoardType paintBoardType;
 
 @property (strong, nonatomic) DCBezierPaintBoard *DCUndoView;
 @property (weak, nonatomic) IBOutlet UIView *topBackView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (nonatomic,copy) NSArray *tabArr;
-
+@property (weak, nonatomic) IBOutlet UIView *bottomView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomViewLayout;
+@property (nonatomic, strong) NSArray *tabArr;
+@property (nonatomic, strong) NSMutableArray * colorArray;
+@property (nonatomic, strong) NSMutableArray * widthArray;
 @property (weak, nonatomic) IBOutlet UIButton *clipButton;
 
 @property (nonatomic, strong) TKImageView *tkImageView;
-
+@property (nonatomic, strong)AudioRecordView * recordView;
+@property (nonatomic, strong) StrokeView * strokeView;
+@property (nonatomic, strong) UIColor *lineColor;
 @end
 
 @implementation TYImageEditViewController
@@ -44,15 +60,31 @@
     switch (sender.tag) {
         case 10://语音
         {
-            
+            [self.recordView  showAudioRecordView];
         }
             break;
         case 11://截图
         {
-            self.imgView.hidden = YES;
-            self.tkImageView.toCropImage = _image;
-            [self.view addSubview:self.tkImageView];
-            self.clipButton.hidden = NO;
+            
+            sender.selected = !sender.selected;
+            
+            if (sender.selected) {
+                _image = [Global makeImageWithView:self.imgView withSize:self.imgView.size];
+                
+                self.imgView.hidden = YES;
+                self.tkImageView.toCropImage = _image;
+                [self.view addSubview:self.tkImageView];
+                self.clipButton.hidden = NO;
+            }else{
+                
+                [self.tkImageView removeFromSuperview];
+                self.imgView.hidden = NO;
+
+                self.clipButton.hidden = YES;
+
+            }
+            
+            
             
         }
             break;
@@ -66,15 +98,20 @@
             break;
         case 13://手绘
         {
+            
             sender.selected = !sender.selected;
+            _isShouHui = sender.selected;
             if (sender.isSelected) {
-                self.DCUndoView.lineWidth = 3;
-                self.DCUndoView.lineColor = [UIColor redColor];
-                [self removeGestureRecognizerFromView:self.imgView];
+                if (isFirst) {
+                    _lineColor = [UIColor redColor];
+                }
+                self.DCUndoView.lineColor = _lineColor;
+
+                isFirst = NO;
             }else {
                 self.DCUndoView.lineColor = [UIColor clearColor];
-                [self addGestureRecognizerToView:self.imgView];
             }
+            [self chooseGestureRecognizer];
         }
             break;
         case 14://橡皮檫
@@ -82,11 +119,7 @@
             
             sender.selected = !sender.selected;
             self.isErase = sender.selected;
-            if (sender.isSelected) {
-                [self removeGestureRecognizerFromView:self.imgView];
-            }else {
-                [self addGestureRecognizerToView:self.imgView];
-            }
+            [self chooseGestureRecognizer];
         }
             break;
         case 15://tableview
@@ -98,19 +131,114 @@
             break;
     }
 }
+- (void)chooseGestureRecognizer {
+    if (_isErase||_isShouHui) {
+        [self removeGestureRecognizerFromView:self.imgView];
+    }else {
+        [self addGestureRecognizerToView:self.imgView];
+    }
+}
+
 - (IBAction)clipImage:(id)sender {
+    
     [self.tkImageView removeFromSuperview];
     self.clipButton.hidden = YES;
     self.imgView.hidden = NO;
     _image = [self.tkImageView currentCroppedImage];
-    self.imgView.image = _image;
+        _tkImageView.maskColor = [UIColor clearColor];
+    ActionSheetView * actionSheet = [[ActionSheetView alloc] initWithCancleTitle:@"取消" otherTitles:@"范文库",@"病文库" ,nil];
+    
+    [actionSheet show];
+    actionSheet.actionSheetBlock = ^(ActionSheetItem *sheetItem) {
+        
+        NSData * imageData = nil;
+        
+        if (UIImagePNGRepresentation(_image)) {
+            imageData = UIImagePNGRepresentation(_image);
+        }else {
+            imageData = UIImageJPEGRepresentation(_image, 0.2);
+        }
+        UploadPicRequst *requst = [[UploadPicRequst alloc]init];
+        [requst UploadPicRequstWithfileValue:imageData withuserid:[XFUserInfo getUserInfo].Loginid withtypeid:@"1" :^(NSDictionary *json){
+            NSString * str =   json[@"ret_data"]?:@"";
+            
+            [[XFRequestManager sharedInstance] XFRequstAddCutPic:[XFUserInfo getUserInfo].Loginid PicID:_picModel.PicID blogID:_picModel.BlogID ExtractPicUrl:str ExtractContent:@"" ExtractType:[NSString stringWithFormat:@"%ld",(long)sheetItem.index] :^(NSString *requestName, id responseData, BOOL isSuccess) {
+                [SVProgressHUD showInfoWithStatus:responseData];
+            }];
+        }];
+    };
+}
+-(AudioRecordView *)recordView{
+    
+    __weak typeof(self)  weakSelf = self;
+    
+    if (_recordView == nil) {
+        _recordView = [[NSBundle mainBundle] loadNibNamed:@"AudioRecordView" owner:self options:nil].lastObject;
+        _recordView.recordViewBlock = ^(id recordFileUrl) {
+            
+            [[XFRequestManager sharedInstance] XFRequstUploadAudio:[XFUserInfo getUserInfo].Loginid  fileValue:recordFileUrl :^(NSString *requestName, id responseData, BOOL isSuccess) {
+                if (isSuccess) {
+                    [weakSelf creatAudioView:[NSString stringWithFormat:@"%@%@",HTurl,responseData] withID:@"0" originX:0 originY:0];
+                }
+            }] ;
+        };
+    }
+    return _recordView;
+}
+#pragma mark - 创建多个video（创建时用到）
+-(void)creatAudioView:(NSString *)urlStr withID:(NSString *)ID originX:(float )x originY:(float )y {
+    
+    AudioView * view = [[NSBundle mainBundle] loadNibNamed:@"AudioView" owner:self options:nil].lastObject;
+    view.frame = CGRectMake(x*kScreenWidth, y*kScreenHeight, 50, 50);
+    NSDictionary *dic = @{
+                          @"Id": ID,   //标识  0是新增  非0 即修改
+                          @"CreateTime": [Global currentTime],
+                          @"BlogID": self.picModel.ID,  //习作ID
+                          @"PicID": self.picModel.PicID,  //习作图片ID
+                          @"UserID": [XFUserInfo getUserInfo].Loginid, //用户ID
+                          @"Sort": @"0", //排序
+                          @"AudioUrl": urlStr,    //录音URL
+                          @"XLocation": @(x),  //X轴
+                          @"YLocation": @(y)  //Y轴
+                          };
+    [self.vedioArr addObject:dic];
+    
+    view.tapBlock = ^{
+        [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
+        AVURLAsset *asset = [AVURLAsset assetWithURL:[NSURL URLWithString:urlStr]];
+        AVPlayerItem *item = [AVPlayerItem playerItemWithAsset:asset];
+        
+        self.player = [AVPlayer playerWithPlayerItem:item];
+        [self.player play];
+    };
+    view.panBlock = ^(CGRect frame) {
+        float X = frame.origin.x/kScreenWidth;
+        float Y = frame.origin.y/kScreenHeight;
+        
+        [self.vedioArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            NSMutableDictionary *dataDic = [NSMutableDictionary dictionaryWithDictionary:obj];
+            if ([dataDic[@"AudioUrl"] isEqualToString:urlStr]) {
+                dataDic[@"XLocation"] = @(X);
+                dataDic[@"YLocation"] = @(Y);
+            }
+            [self.vedioArr replaceObjectAtIndex:idx withObject:dataDic];
+            NSLog(@"self.vedioArr===%@",self.vedioArr);
+        }];
+    };
+    
+    [self.view addSubview:view];
     
 }
-
+- (AVPlayer *)player {
+    if (!_player) {
+        _player = [[AVPlayer alloc] init];
+    }
+    return _player;
+}
 - (TKImageView *)tkImageView
 {
     if (!_tkImageView) {
-        _tkImageView = [[TKImageView alloc] initWithFrame:CGRectMake(50, 80, kScreenWidth-100, (kScreenWidth-100)*2083/1602.f)];
+        _tkImageView = [[TKImageView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, self.view.height-50-60)];
         //需要进行裁剪的图片对象
 //        _tkImageView.toCropImage = _image;
         //是否显示中间线
@@ -120,9 +248,9 @@
         //是否显示九宫格交叉线
         //    _tkImageView.showCrossLines = YES;
         _tkImageView.cornerBorderInImage = NO;
-        _tkImageView.cropAreaCornerWidth = 44;
-        _tkImageView.cropAreaCornerHeight = 44;
-        _tkImageView.minSpace = 30;
+        _tkImageView.cropAreaCornerWidth = 10;
+        _tkImageView.cropAreaCornerHeight = 10;
+        _tkImageView.minSpace = 5;
         _tkImageView.cropAreaCornerLineColor = [UIColor redColor];
         _tkImageView.cropAreaBorderLineColor = [UIColor lightGrayColor];
 //        _tkImageView.cropAreaCornerLineWidth = 6;
@@ -134,7 +262,7 @@
         _tkImageView.cropAreaCrossLineWidth = 0.5;
         _tkImageView.initialScaleFactor = .8f;
         _tkImageView.cropAspectRatio = 0;
-        _tkImageView.maskColor = [UIColor clearColor];
+        
     }
     return _tkImageView;
 }
@@ -146,10 +274,22 @@
         _imgView.backgroundColor = hexColor(ff4e00);
         [_imgView setMultipleTouchEnabled:YES];
         [_imgView setUserInteractionEnabled:YES];
-        NSString *str = [NSString stringWithFormat:@"%@%@",HTurl,self.PicUrl];
-        [_imgView sd_setImageWithURL:[NSURL URLWithString:str] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-            _image = image;
-        }];
+        NSString *str = @"";
+        if (self.picModel.FixPicUrl.length > 3){
+            if ([self.picModel.FixPicUrl containsString:HTurl]) {
+                str = self.picModel.FixPicUrl;
+            }else {
+                str = [NSString stringWithFormat:@"%@%@",HTurl,self.picModel.FixPicUrl];
+            }
+        }else{
+            if ([self.picModel.PicUrl containsString:HTurl]) {
+                str = self.picModel.PicUrl;
+            }else {
+                str = [NSString stringWithFormat:@"%@%@",HTurl,self.picModel.PicUrl];
+            }
+        }
+        [self.imgView sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"icon_02"] options:SDWebImageRefreshCached];
+
         _topBackView.clipsToBounds = YES;
         [_topBackView addSubview:_imgView];
 
@@ -167,13 +307,70 @@
     }
     return _imgView;
 }
-
+-(StrokeView*)strokeView{
+    
+    
+    if (_strokeView == nil) {
+        
+        __weak typeof(self) weakSelf = self;
+        _strokeView = [[NSBundle mainBundle] loadNibNamed:@"StrokeView" owner:self options:nil].lastObject;
+        _strokeView.layer.cornerRadius = 6.0;
+        _strokeView.layer.masksToBounds = YES;
+        _strokeView.strokeViewBlcok = ^(int arguments,BOOL isSetColor) {
+            
+            if (isSetColor) {
+                
+                [weakSelf setSelectPaintColor:arguments+1];
+            }else{
+                weakSelf.DCUndoView.lineWidth = arguments+1;
+            }
+            
+        };
+        
+    }
+    return _strokeView;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     _tabArr = @[@"清屏",@"颜色",@"画笔",@"还原大小",@"范文库",@"病文库",@"撤销"];
     self.clipButton.hidden = YES;
+    isFirst = YES;
+
     [self addGestureRecognizerToView:self.imgView];
+    _colorArray = [NSMutableArray array];
+    _widthArray = [NSMutableArray array];
+    _vedioArr = [NSMutableArray arrayWithCapacity:0];
+    for (int i =0 ; i< @[@"红色",@"绿色",@"白色"].count; i++) {
+        StandardInfo * bean = [[StandardInfo alloc]init];
+        NSString * str = @[@"红色",@"绿色",@"白色"][i];
+        bean.StandardText = str;
+        if (i == 0) {
+            bean.isSelected = YES;
+        }
+        [_colorArray addObject:bean];
+    }
+    
+    for (int i =0 ; i< @[@"细",@"中",@"粗"].count; i++) {
+        StandardInfo * bean = [[StandardInfo alloc]init];
+        NSString * str = @[@"细",@"中",@"粗"][i];
+        bean.StandardText = str;
+        if (i == 0) {
+            bean.isSelected = YES;
+        }
+        [_widthArray addObject:bean];
+    }
+    
+    
+    if (self.TYCorrecVC.isChange) {
+        self.bottomViewLayout.constant = 60;
+        self.bottomView.hidden = NO;
+    }else {
+        self.bottomViewLayout.constant = 0;
+        self.bottomView.hidden = YES;
+    }
+
+    [self getGetWriteAudioRequestData];
 }
 //取消手势
 - (void)removeGestureRecognizerFromView:(UIView *)view {
@@ -228,21 +425,19 @@
     _selectPaintColor = selectPaintColor;
     switch (selectPaintColor) {
         case DCPaintColorRed:
-            self.DCUndoView.lineColor = [UIColor redColor];
+            _lineColor = [UIColor redColor];
             break;
-        case DCPaintColorBlue:
-            self.DCUndoView.lineColor = [UIColor blueColor];
+        case DCPaintColorwhite:
+            _lineColor = [UIColor whiteColor];
             break;
         case DCPaintColorGreen:
-            self.DCUndoView.lineColor = [UIColor greenColor];
-            break;
-        case DCPaintColorBlack:
-            self.DCUndoView.lineColor = [UIColor blackColor];
+            _lineColor = [UIColor greenColor];
             break;
         default:
-            self.DCUndoView.lineColor = [UIColor blackColor];
+            _lineColor = [UIColor redColor];
             break;
     }
+    self.DCUndoView.lineColor = _lineColor;
 }
 - (void)setIsErase:(BOOL)isErase{
     _isErase = isErase;
@@ -284,53 +479,15 @@
             break;
         case 1:
         {
-            __weak typeof(self) weakSelf = self;
-            ListSelectView *select_view = [[ListSelectView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, self.view.height)];
-            select_view.choose_type = MORECHOOSETITLETYPE;
-            select_view.isShowCancelBtn = YES;
-            select_view.isShowSureBtn = NO;
-            select_view.isShowTitle = YES;
-            select_view.title_height = 40;
-            [select_view addTitleArray:@[@"红色",@"绿色",@"蓝色",@"黑色"] andTitleString:@"颜色设置" animated:YES completionHandler:^(NSString * _Nullable string, NSInteger index) {
-                weakSelf.selectPaintColor = (DCPaintColor)index+1;
+            [self.strokeView showStrokeView:_colorArray isSetColor:YES];
 
-            } withSureButtonBlock:^{
-                NSLog(@"sure btn");
-            }];
-            [self.navigationController.view addSubview:select_view];
         }
             break;
 
         case 2:
         {
-            __weak typeof(self) weakSelf = self;
-            ListSelectView *select_view = [[ListSelectView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, self.view.height)];
-            select_view.choose_type = MORECHOOSETITLETYPE;
-            select_view.isShowCancelBtn = YES;
-            select_view.isShowSureBtn = NO;
-            select_view.isShowTitle = YES;
-            select_view.title_height = 40;
-            [select_view addTitleArray:@[@"细",@"中",@"粗"] andTitleString:@"画笔设置" animated:YES completionHandler:^(NSString * _Nullable string, NSInteger index) {
-                NSInteger width = 0;
-                switch (index) {
-                    case 0:
-                        width = 2;
-                        break;
-                    case 1:
-                        width = 4;
-                        break;
-                    case 2:
-                        width = 6;
-                        break;
-                    default:
-                        break;
-                }
-                weakSelf.DCUndoView.lineWidth = width;
-                
-            } withSureButtonBlock:^{
-                NSLog(@"sure btn");
-            }];
-            [self.navigationController.view addSubview:select_view];
+            [self.strokeView showStrokeView:_widthArray isSetColor:NO];
+
         }
             break;
         case 3:
@@ -340,11 +497,29 @@
             break;
         case 4:
         {
+            [[XFRequestManager sharedInstance] XFRequstGetCutPicBlog:[XFUserInfo getUserInfo].Loginid blogID:_picModel.BlogID ExtractType:@"0" :^(NSString *requestName, id responseData, BOOL isSuccess) {
+                if (isSuccess) {
+                    XFLbraryViewController * vc = [[XFLbraryViewController alloc]init];
+                    vc.title = @"范文库";
+                    vc.dataArray = responseData;
+                    [self.TYCorrecVC.navigationController pushViewController:vc animated:YES];
+                }
+            }] ;
             
+
         }
             break;
         case 5:
         {
+            [[XFRequestManager sharedInstance] XFRequstGetCutPicBlog:[XFUserInfo getUserInfo].Loginid blogID:_picModel.BlogID ExtractType:@"1" :^(NSString *requestName, id responseData, BOOL isSuccess) {
+                if (isSuccess) {
+                    XFLbraryViewController * vc = [[XFLbraryViewController alloc]init];
+                    vc.title = @"病文库";
+                    vc.dataArray = responseData;
+                    [self.TYCorrecVC.navigationController pushViewController:vc animated:YES];
+                }
+            }] ;
+            
             
         }
             break;
@@ -360,5 +535,52 @@
     }
     
 }
-
+/*
+ "{
+ ""ret_code"": ""0"",
+ ""ret_msg"": ""成功"",
+ ""ret_data"": [
+ {
+ ""Id"": 134,   //标识
+ ""CreateTime"": ""2017/5/1 22:07:30"",
+ ""BlogID"": ""43"",  //习作ID
+ ""PicID"": ""43"",  //习作图片ID
+ ""UserID"": ""23"", //用户ID
+ ""Sort"": ""0"", //排序
+ ""AudioUrl"": ""这段写的好"",    //点评内容
+ ""XLocation"": ""10.08"",  //X轴
+ ""YLocation"": ""10.08""  //Y轴
+ }
+ ]
+ }"
+ */
+#pragma mark - 获取录音按钮
+- (void)getGetWriteAudioRequestData {
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    BaseRequest *request = [BaseRequest requestWithURL:nil];
+    NSDictionary *dic = @{
+                          @"Action":@"GetWriteAudio",
+                          @"Token":@"0A66A4FD-146F-4542-8D7B-33CDEC2981F9",
+                          @"blogID": self.picModel.BlogID,  //习作ID
+                          @"PicID": self.picModel.PicID,  //习作图片ID
+                          @"userID": [XFUserInfo getUserInfo].Loginid, //用户ID
+                          };
+    NSLog(@"dic = %@",dic);
+    [request startWithMethod:HTTPTypePOST params:dic successedBlock:^(id succeedResult) {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        NSLog(@"ForecastUrl === %@",succeedResult);
+        NSArray *arr = succeedResult[@"ret_data"];
+        [arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            NSDictionary *dic = (NSDictionary *)obj;
+            
+            GetWriteAudioModel *model = [GetWriteAudioModel loadWithJSOn:dic];
+            [self creatAudioView:model.AudioUrl?:@"" withID:model.ID originX:[model.XLocation?:@"" floatValue] originY:[model.YLocation?:@"" floatValue]];
+        }];
+    } failedBolck:^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"error===%@",error.localizedDescription);
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+    }];
+    
+}
 @end

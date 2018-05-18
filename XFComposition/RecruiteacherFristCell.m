@@ -51,13 +51,13 @@
 //        [self.textView setValue:[UIColor lightGrayColor] forKeyPath:@"_placeholderLabel.textColor"];
 
         
-        self.bmbt.sd_layout.leftSpaceToView(self.contentView,WidthFrame/4).topSpaceToView(self.textView, 0).heightIs(25).widthIs(WidthFrame/2);
-        [self.bmbt setTitle:@"我要投稿" forState:UIControlStateNormal];
-        [self.bmbt addTarget:self action:@selector(tougao) forControlEvents:UIControlEventTouchUpInside];
-        self.bmbt.layer.masksToBounds = YES;
-        self.bmbt.layer.cornerRadius = 6;
-        self.bmbt.backgroundColor = [UIColor colorWithHexString:@"2791cf"];
-        self.bmbt.titleLabel.font = [UIFont systemFontOfSize:12];
+//        self.bmbt.sd_layout.leftSpaceToView(self.contentView,WidthFrame/4).topSpaceToView(self.textView, 0).heightIs(25).widthIs(WidthFrame/2);
+//        [self.bmbt setTitle:@"我要投稿" forState:UIControlStateNormal];
+//        [self.bmbt addTarget:self action:@selector(tougao) forControlEvents:UIControlEventTouchUpInside];
+//        self.bmbt.layer.masksToBounds = YES;
+//        self.bmbt.layer.cornerRadius = 6;
+//        self.bmbt.backgroundColor = [UIColor colorWithHexString:@"2791cf"];
+//        self.bmbt.titleLabel.font = [UIFont systemFontOfSize:12];
         
 //        [self setupAutoHeightWithBottomView:self.textView bottomMargin:10];
         
@@ -66,12 +66,7 @@
 
     return self;
 }
-//- (void)layoutIfNeeded{
-//    [super layoutIfNeeded];
-//
-//
-//    
-//}
+
 -(void)tougao{
     
     if ([self.delegate respondsToSelector:@selector(Submission)]) {
@@ -79,15 +74,6 @@
     }
 
 }
-//- (UICollectionViewLayoutAttributes *)preferredLayoutAttributesFittingAttributes:(UICollectionViewLayoutAttributes *)layoutAttributes {
-//    [self layoutSubviews];
-//    [self layoutIfNeeded];
-//    CGSize size = [self.contentView systemLayoutSizeFittingSize:layoutAttributes.size];
-//    CGRect newFrame = layoutAttributes.frame;
-//    newFrame.size.height = size.height;
-//    layoutAttributes.frame = newFrame;
-//    return layoutAttributes;
-//}
 
 
 @end

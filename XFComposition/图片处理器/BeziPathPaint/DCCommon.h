@@ -12,8 +12,7 @@
 typedef enum{
     DCPaintColorRed = 1,
     DCPaintColorGreen = 2,
-    DCPaintColorBlue = 3,
-    DCPaintColorBlack = 4
+    DCPaintColorwhite = 3,
 } DCPaintColor;
 
 

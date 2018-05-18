@@ -15,7 +15,7 @@
 
 @interface RecruiteacherController ()<UICollectionViewDelegate,UICollectionViewDataSource,RecruiteacherFristCellDelegate>
 @property (nonatomic,strong)UICollectionView *collectionView;
-
+@property (nonatomic, strong) UIView *bottomView;
 @property (nonatomic,strong)NSMutableArray *teacherArray;
 @property (nonatomic,strong)ActivityDetailModel *model;
 
@@ -28,23 +28,12 @@
     }
     return _model;
 }
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:YES];
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
-    [self leftBarButton];
-}
--(void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:YES];
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
-    
-}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"活动详情";
-    
+    [self.view addSubview:self.bottomView];
     [self.view addSubview:self.collectionView];
-
-//    self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(detaiRequst)];
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(detaiRequst)];
     header.lastUpdatedTimeLabel.hidden = YES;
     header.stateLabel.hidden = YES;
@@ -71,14 +60,33 @@
     
 
 }
-
-
+- (UIView *)bottomView {
+    if (!_bottomView) {
+        _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, kScreenHeight -50, kScreenWidth, 50)];
+        _bottomView.backgroundColor = [UIColor whiteColor];
+        
+        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [btn setTitle:@"申请工作" forState:UIControlStateNormal];
+        btn.titleLabel.font = [UIFont systemFontOfSize:15];
+        [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [btn setBackgroundColor:[UIColor colorWithHexString:@"e38f24"]];
+        [btn addTarget:self action:@selector(getJob) forControlEvents:UIControlEventTouchUpInside];
+        [_bottomView addSubview:btn];
+        [btn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.top.bottom.mas_equalTo(0);
+            make.width.equalTo(btn.mas_height).multipliedBy(2);
+        }];
+    }
+    return _bottomView;
+}
+- (void)getJob {
+    
+}
 -(UICollectionView *)collectionView{
     if (!_collectionView) {
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
-        _collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, WidthFrame, HeightFrame) collectionViewLayout:layout];
+        _collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, WidthFrame, HeightFrame-50) collectionViewLayout:layout];
         _collectionView.backgroundColor = UIColorFromRGBA(240, 255, 255, 1.0f);
-//        layout.estimatedItemSize = CGSizeMake(WidthFrame, 340);
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         [_collectionView registerClass:[RecruiteacherFristCell class] forCellWithReuseIdentifier:@"cell1"];
@@ -110,14 +118,12 @@
         RecruiteacherFristCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell1" forIndexPath:indexPath];
 
         
-        cell.titleLabel.text = self.model.activeName;
+        cell.titleLabel.text = self.model.activeName?:@"";
         NSString *str = [NSString stringWithFormat:@"%@%@",HTurl,self.model.activePic];
         [cell.imageView sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"mp322"] options:SDWebImageRefreshCached];
         cell.timeLabel.text = [NSString stringWithFormat:@"活动时间：%@~%@",[self.model.activeEndTime substringToIndex:9],[self.model.activeEndTime substringToIndex:9]];
          cell.xqlabel.text = @"活动详情：";
-        cell.mingelabel.text = @"(限制10名额)";
-//        cell.textView.text = [self.model.activeInfo stringByRemovingPercentEncoding];
-        
+        cell.mingelabel.text = [NSString stringWithFormat:@"(限制%@名额)",self.model.activeLimite?:@""];        
         
         NSString * str1 = [self.model.activeInfo stringByRemovingPercentEncoding];
         
@@ -141,7 +147,7 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     
     if (indexPath.section == 0) {
-        return CGSizeMake(WidthFrame, HeightFrame/4+200);
+        return CGSizeMake(WidthFrame, HeightFrame/4+150);
     }else
         return CGSizeMake(WidthFrame, HeightFrame/4*3-150);
 
@@ -167,6 +173,8 @@ referenceSizeForHeaderInSection:(NSInteger)section {
         if (indexPath.section == 1){
             HomePaFristheadView *headView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"header1" forIndexPath:indexPath];
             headView.textLable.text = @"志愿者教师";
+            headView.bt.hidden = YES;
+            
             return headView;
         }
         return nil;
@@ -177,17 +185,6 @@ referenceSizeForHeaderInSection:(NSInteger)section {
 -(void)Submission{
     
 
-}
--(void)leftBarButton{
-    UIBarButtonItem *item=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"left-arrow_s"] style: UIBarButtonItemStylePlain target:self action:@selector(onBack)];
-    
-    self.navigationItem.leftBarButtonItem=item;
-    
-}
--(void)onBack{
-    [self.navigationController popViewControllerAnimated:YES];
-    
-    
 }
 //将 &lt 等类似的字符转化为HTML中的“<”等
 - (NSString *)htmlEntityDecode:(NSString *)string
@@ -225,20 +222,7 @@ referenceSizeForHeaderInSection:(NSInteger)section {
         //替换字符
         html = [html stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"%@>",text] withString:@""];
     }
-    //    NSString * regEx = @"<([^>]*)>";
-    //    html = [html stringByReplacingOccurrencesOfString:regEx withString:@""];
     return html;
 }
-
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

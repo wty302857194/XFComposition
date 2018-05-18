@@ -27,6 +27,12 @@ typedef void (^XFResponseBlock)(NSString* requestName, id responseData , BOOL is
 #define XFReq_User_GetWritePicList     @"获取习作图片列表"
 #define XFReq_User_UploadAudio         @"上传录音文件"
 #define XFReq_User_AddCutPic           @"添加截图"
+#define XFReq_User_GetPicBlog          @"获得文库"
+
+#define XFReq_User_SubmitComment       @"保存总评和标准"
+#define XFReq_User_DeleteCutPic        @"删除截图"
+#define XFReq_User_GetWritePicRemark   @"获得写作旁批"
+
 
 
 @interface XFRequestManager : NSObject
@@ -129,6 +135,49 @@ typedef void (^XFResponseBlock)(NSString* requestName, id responseData , BOOL is
           ExtractContent:(NSString*)ExtractContent
              ExtractType:(NSString*)ExtractType
                         :(XFResponseBlock)block;
+
+/**
+ *保存总评和标准
+ *@param userID  //用户标识
+ *@param commentinfo 总内容
+ *@param blogID 习作标识
+ *@param StandardDetail 标准id和评分
+ */
+-(void)XFRequstSubmitComment:(NSString*)userID
+             commentinfo:(NSString*)commentinfo
+                  blogID:(NSString*)blogID
+          StandardDetail:(NSString*)StandardDetail
+                        :(XFResponseBlock)block;
+
+/**
+ *获得文库
+ *@param userID  //用户标识
+ *@param blogID 习作标识
+ *@param ExtractType  0：范文库  1：病文库
+ */
+-(void)XFRequstGetCutPicBlog:(NSString*)userID
+                  blogID:(NSString*)blogID
+             ExtractType:(NSString*)ExtractType
+                        :(XFResponseBlock)block;
+
+/**
+ *获得文库
+ *@param ExtractID  //截图标识
+ */
+-(void)XFRequstDeleteCutPic:(NSString*)ExtractID
+                            :(XFResponseBlock)block;
+
+
+/**
+ *获得文库
+ *@param userID  //用户标识
+ *@param blogID 习作标识
+ *@param PicID  图片id
+ */
+-(void)XFRequstGetWritePicRemark:(NSString*)userID
+                          blogID:(NSString*)blogID
+                           PicID:(NSString*)PicID
+                            :(XFResponseBlock)block;
 
 
 +(NSString*)encodedParams:(NSDictionary*)params;

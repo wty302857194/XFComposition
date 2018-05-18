@@ -27,15 +27,14 @@
     UIWindow * window = [UIApplication sharedApplication].keyWindow;
     
     [window addSubview:self];
- self.sd_layout.rightEqualToView(window).leftEqualToView(window).topEqualToView(window).bottomEqualToView(window);
+    _isStar = NO; self.sd_layout.rightEqualToView(window).leftEqualToView(window).topEqualToView(window).bottomEqualToView(window);
     
 }
 - (IBAction)startRecord:(id)sender{
     
     UIButton * btn = (UIButton*)sender;
-    
+    _isStar = YES;
     [btn setSelected:!btn.isSelected];
-    
     
     if (btn.isSelected) {
         
@@ -105,7 +104,11 @@
         }
         [self removeFromSuperview];
         if (_recordViewBlock) {
-            _recordViewBlock([self audio_PCMtoMP3]);
+            
+            if (_isStar) {
+                _recordViewBlock([self audio_PCMtoMP3]);
+
+            }
         }
         
     }
@@ -122,7 +125,7 @@
     @try {
         
         int read, write;
-        
+       
         FILE *pcm = fopen([_filePath cStringUsingEncoding:1], "rb");  //source 被转换的音频文件位置
         fseek(pcm, 4*1024, SEEK_CUR);                                   //skip file header
         FILE *mp3 = fopen([mp3FilePath cStringUsingEncoding:1], "wb");  //output 输出生成的Mp3文件位置
@@ -173,7 +176,10 @@
         [self.recorder stop];
     }
     if (_recordViewBlock) {
-        _recordViewBlock([self audio_PCMtoMP3]);
+        if (_isStar) {
+            _recordViewBlock([self audio_PCMtoMP3]);
+            
+        }
     }
     [self removeFromSuperview];
 

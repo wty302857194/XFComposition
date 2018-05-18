@@ -16,13 +16,15 @@
 #import "GetWritePicRemarkRequst.h"
 #import "GetWritePicRemarkModel.h"
 #import "KKImageEditorViewController.h"
-#import "TYCorrectViewController.h"
+#import "XFCorrectViewController.h"
 
 @interface PicListViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,KKImageEditorDelegate,UITextViewDelegate,UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong)  IBOutlet UICollectionView *collectionView;
 @property (nonatomic,strong)NSMutableArray *picArray;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic,strong)NSMutableArray *dataArray;;
+@property (nonatomic,strong)NSMutableArray *posArray;;
+@property (nonatomic,strong)StandardInfo * currentInfo;;
 
 @property (strong, nonatomic) IBOutlet PlaceholderTextView *inputTextView;
 @end
@@ -30,7 +32,6 @@
 @implementation PicListViewController
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
     IQKeyboardManager *manager = [IQKeyboardManager sharedManager];
     
     manager.enableAutoToolbar = YES;//这个是它自带键盘工具条开关
@@ -41,8 +42,6 @@
     IQKeyboardManager *manager = [IQKeyboardManager sharedManager];
     
     manager.enableAutoToolbar = NO;//这个是它自带键盘工具条开关
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
-    
 }
 -(NSMutableArray *)picArray{
     if (!_picArray) {
@@ -71,7 +70,11 @@
     self.inputTextView.layer.cornerRadius = 5;
     self.inputTextView.layer.masksToBounds = YES;
     [self getWritPic];
-    
+    if (_isChange) {
+        [self rightBarButton];
+
+    }
+    _posArray = [NSMutableArray array];
 }
 -(void)getWritPic{
     
@@ -116,10 +119,18 @@
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    
     PicListTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"PicListTableViewCell"];
     cell.isChange = _isChange;
     [cell reloadData:_dataArray[indexPath.row]];
-    
+    cell.cellBlock = ^( StandardInfo *info) {
+        
+        if (![_posArray containsObject:info]) {
+            
+            [_posArray addObject:info];
+        }
+        
+    };
     return cell;
     
 }
@@ -165,6 +176,48 @@
     self.navigationItem.leftBarButtonItem=item;
     
 }
+-(void)rightBarButton{
+    
+    UIBarButtonItem *item=[[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(save)];
+    
+    self.navigationItem.rightBarButtonItem=item;
+}
+-(void)save{
+    
+    NSMutableArray * array = [NSMutableArray array];
+    for (StandardInfo * info  in _posArray) {
+        NSMutableDictionary * dic = [[NSMutableDictionary alloc]init];
+        [dic setValue:info.StandardId forKey:@"StandardId"];
+        [dic setValue:info.Score forKey:@"Score"];
+        [array addObject:dic];
+    }
+    
+    
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:array
+                                                       options:kNilOptions
+                                                         error:nil];
+    
+    NSString *jsonString = [[NSString alloc] initWithData:jsonData
+                                                 encoding:NSUTF8StringEncoding];
+    [SVProgressHUD showWithStatus:@"正在保存"];
+    [[XFRequestManager sharedInstance] XFRequstSubmitComment:[XFUserInfo getUserInfo].Loginid commentinfo:_inputTextView.text blogID:_blogid StandardDetail:jsonString :^(NSString *requestName, id responseData, BOOL isSuccess) {
+        [SVProgressHUD dismiss];
+        
+        if (isSuccess) {
+            
+            [SVProgressHUD showInfoWithStatus:@"保存成功"];
+            
+            [self.navigationController popViewControllerAnimated:YES];
+            
+        }else{
+            
+            
+            
+        }
+        
+    }];
+    
+}
 -(void)onBack{
     [self.navigationController popViewControllerAnimated:YES];
     
@@ -172,35 +225,20 @@
 }
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-   
-    GetWritePicModel *model = self.picArray[indexPath.row];
     
+    
+    
+    GetWritePicModel *model = self.picArray[indexPath.row];
+
 //    TYCorrectViewController *vc = [[TYCorrectViewController alloc]init];
-//    NSString *pic = [NSString stringWithFormat:@"%@",model.FixPicUrl];
-//    if (pic.length > 3){
-//       vc.PicUrl = model.FixPicUrl;
-//    }else{
-//       vc.PicUrl = model.PicUrl;
-//    }
-//
-//        vc.PicID = model.ID;
-//
 //    vc.picModel = model;
 //    [self.navigationController pushViewController:vc animated:YES];
-    TYCorrectViewController *vc = [[TYCorrectViewController alloc] init];
-    NSString *pic = [NSString stringWithFormat:@"%@",model.FixPicUrl];
-    if (pic.length > 3){
-        vc.PicUrl = model.FixPicUrl;
-    }else{
-        vc.PicUrl = model.PicUrl;
-    }
-    
-    vc.PicID = model.ID;
-    
-    [self.navigationController pushViewController:vc animated:YES];
 
-    
-    
+    XFCorrectViewController * VC = [[XFCorrectViewController alloc]init];
+    VC.PicID = model.PicID;
+    VC.picModel = model;
+    VC.isChange = _isChange;
+    [self.navigationController pushViewController:VC animated:YES];
     
     
     //手机版获取文章图片点评内容

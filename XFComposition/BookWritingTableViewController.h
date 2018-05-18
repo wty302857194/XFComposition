@@ -11,4 +11,6 @@
 @interface BookWritingTableViewController : UITableViewController
 @property (nonatomic,copy) NSString *imgUrlStr;
 @property (nonatomic,strong) NSMutableArray *imgUrlArr;
+@property (nonatomic,copy) NSString *noticeObjectId;
+@property (nonatomic,copy) NSString *modelId;
 @end

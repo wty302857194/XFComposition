@@ -33,6 +33,7 @@
 #import "UploadPicRequst.h"
 #import "ReadJianCeViewController.h"
 
+
 @interface MyViewController ()<UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource,UINavigationControllerDelegate,UIImagePickerControllerDelegate,TZImagePickerControllerDelegate>
 @property (nonatomic,strong)UITableView *tableView;
 
@@ -74,12 +75,12 @@
     self.userInfo = [XFUserInfo getUserInfo];
     
     if ([self.userInfo.dutyId isEqualToString:@"1"]) {//学生
-        self.teacherarray1 = @[@"个人中心",@"我的习作",@"申请批阅",@"阅读检测",@"我的微课"];
-        self.array1 = @[@"icon_01",@"icon_03",@"icon_03",@"icon_02",@"icon_06"];
+        self.teacherarray1 = @[@"个人中心",@"我的习作",@"申请批阅",@"阅读检测",@"我的微课",@"我的圈子"];
+        self.array1 = @[@"icon_01",@"icon_03",@"icon_03",@"icon_02",@"icon_06",@"icon_06"];
     }else if ([self.userInfo.dutyId isEqualToString:@"0"]){
         
-        self.teacherarray1 = @[@"个人中心",@"批阅任务",@"我的试卷",@"阅读检测",@"我的微课"];
-        self.array1 = @[@"icon_01",@"icon_03",@"icon_04",@"icon_05",@"icon_06"];
+        self.teacherarray1 = @[@"个人中心",@"批阅任务",@"我的试卷",@"阅读检测",@"我的微课",@"我的圈子"];
+        self.array1 = @[@"icon_01",@"icon_03",@"icon_04",@"icon_05",@"icon_06",@"icon_06"];
     }
     
     
@@ -307,6 +308,12 @@
                     [self.navigationController pushViewController:vc animated:YES];
                 }
                     break;
+                case 5:{//我的圈子
+                    MyringViewController *vc = [[MyringViewController alloc]init];
+                    vc.Myringuserid = self.userInfo.Loginid;
+                    [self.navigationController pushViewController:vc animated:YES];
+                }
+                    break;
                 default:
                     break;
             }
@@ -349,8 +356,10 @@
                     [self.navigationController pushViewController:vc animated:YES];
                 }
                     break;
-                case 6:{
-                    
+                case 5:{//我的圈子
+                    MyringViewController *vc = [[MyringViewController alloc]init];
+                    vc.Myringuserid = self.userInfo.Loginid;
+                    [self.navigationController pushViewController:vc animated:YES];
                 }
                     break;
                     

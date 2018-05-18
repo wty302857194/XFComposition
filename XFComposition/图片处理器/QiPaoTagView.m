@@ -29,14 +29,16 @@
         imgView.image = newImage;
         [self addSubview:imgView];
         
-        FSTextView *textView = [[FSTextView alloc] init];
-        textView.textColor = [UIColor whiteColor];
-        textView.userInteractionEnabled = YES;
-        textView.backgroundColor = [UIColor clearColor];
-        textView.placeholder = @"请输入批改内容";
-        textView.placeholderColor = [UIColor whiteColor];
+        _textView = [[FSTextView alloc] init];
+        _textView.textColor = [UIColor whiteColor];
+        _textView.userInteractionEnabled = YES;
+        _textView.showsHorizontalScrollIndicator = NO;
+        _textView.showsVerticalScrollIndicator = NO;
+        _textView.backgroundColor = [UIColor clearColor];
+        _textView.placeholder = @"请输入批改内容";
+        _textView.placeholderColor = [UIColor whiteColor];
          __weak typeof(self) weakSelf = self;
-        [textView addTextDidChangeHandler:^(FSTextView *textView) {            
+        [_textView addTextDidChangeHandler:^(FSTextView *textView) {
            float height = [Global heightForText:textView.text textFont:15 standardWidth:weakSelf.frame.size.width]+20;
             if (height>weakSelf
                 .frame.size.height) {
@@ -50,10 +52,10 @@
                 weakSelf.contentStrBlock(textView.text);
             }
         }];
-        [self addSubview:textView];
-        [textView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.left.mas_equalTo(12);
-            make.bottom.mas_equalTo(-12);
+        [self addSubview:_textView];
+        [_textView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.left.mas_equalTo(5);
+            make.bottom.mas_equalTo(-10);
             make.right.mas_equalTo(-5);
         }];
         
@@ -90,5 +92,8 @@
     [rec setTranslation:CGPointMake(0, 0) inView:self];
     
     rec.view.frame = CGRectMake(ty_x-self.width/2.f, ty_y - self.height/2.f, self.frame.size.width, self.frame.size.height);
+    if (self.locationBlock) {
+        self.locationBlock(rec.view.frame);
+    }
 }
 @end

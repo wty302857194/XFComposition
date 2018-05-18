@@ -13,6 +13,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TYImageEditViewController">
             <connections>
+                <outlet property="bottomView" destination="xIv-bu-KYZ" id="UtL-E3-nWf"/>
+                <outlet property="bottomViewLayout" destination="aZs-Km-tTP" id="6GV-Qn-t4U"/>
                 <outlet property="clipButton" destination="OOT-8S-zfK" id="Qjq-0R-XWF"/>
                 <outlet property="tableView" destination="ZH1-NG-XGj" id="unG-pB-E6a"/>
                 <outlet property="topBackView" destination="QCK-Lr-c9D" id="0EL-Ag-HJA"/>
@@ -47,7 +49,7 @@
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="OOT-8S-zfK" firstAttribute="centerX" secondItem="QCK-Lr-c9D" secondAttribute="centerX" id="4Au-dH-R7C"/>
                         <constraint firstAttribute="bottom" secondItem="OOT-8S-zfK" secondAttribute="bottom" constant="5" id="zjc-SS-U1g"/>

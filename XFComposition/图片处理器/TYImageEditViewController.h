@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-@class TYCorrectViewController;
+@class XFCorrectViewController;
 @interface TYImageEditViewController : UIViewController
-@property (nonatomic, strong) TYCorrectViewController *TYCorrecVC;
-@property (nonatomic,strong)NSString *PicUrl;
+@property (nonatomic, strong) XFCorrectViewController *TYCorrecVC;
 @property (strong, nonatomic) UIImageView *imgView;
+@property (nonatomic, strong) GetWritePicModel* picModel;
+@property (nonatomic, strong) NSMutableArray *vedioArr;
 
+- (void)getGetWriteAudioRequestData;
 @end

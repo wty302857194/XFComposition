@@ -10,7 +10,7 @@
 
 typedef void (^AudioViewTapBlock)(void);
 
-typedef void (^AudioViewPanBlcok)(CGPoint point);
+typedef void (^AudioViewPanBlcok)(CGRect frame);
 
 @interface AudioView : UIView
 

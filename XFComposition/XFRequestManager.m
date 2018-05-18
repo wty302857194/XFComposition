@@ -477,6 +477,135 @@ static XFRequestManager *instance = nil;
     
     
 }
+-(void)XFRequstGetCutPicBlog:(NSString*)userID
+                  blogID:(NSString*)blogID
+             ExtractType:(NSString*)ExtractType
+                        :(XFResponseBlock)block{
+    
+    
+    NSDictionary *parameters = @{@"Action":@"GetCutPicBlog",
+                                 @"Token":@"0A66A4FD-146F-4542-8D7B-33CDEC2981F9",
+                                 @"blogID":blogID,
+                                 @"userID":userID,
+                                 @"ExtractType":ExtractType,
+                                 };
+    [xfrequst requestWithURLString:APIurl parameters:parameters type:NetworkRequestTypePost imgData:nil resultBlock:^(id responseObject, NSError *error, NSURLSessionDataTask *task) {
+        
+        NSLog(@"%@%@",XFReq_User_GetPicBlog
+              ,responseObject);
+        
+        if ([responseObject[@"ret_code"] integerValue] == 0) {
+            
+            NSMutableArray * array  =[FMBean objectsWithArray:responseObject[@"ret_data"] classType:[XFLibrary class] ];
+            
+            
+            block(XFReq_User_GetPicBlog, array ,YES);
+        }else{
+            
+            NSString *msg = responseObject[@"ret_msg"];
+            block(XFReq_User_GetPicBlog, msg,NO);
+        }
+        
+    }];
+    
+}
+
+-(void)XFRequstSubmitComment:(NSString*)userID
+             commentinfo:(NSString*)commentinfo
+                  blogID:(NSString*)blogID
+          StandardDetail:(NSString*)StandardDetail
+                        :(XFResponseBlock)block{
+    
+    
+    NSDictionary *parameters = @{@"Action":@"SubmitComment",
+                                 @"Token":@"0A66A4FD-146F-4542-8D7B-33CDEC2981F9",
+                                 @"blogID":blogID,
+                                 @"userID":userID,
+                                 @"StandardDetail":StandardDetail,
+                                 };
+    [xfrequst requestWithURLString:APIurl parameters:parameters type:NetworkRequestTypePost imgData:nil resultBlock:^(id responseObject, NSError *error, NSURLSessionDataTask *task) {
+        
+        NSLog(@"%@%@",XFReq_User_SubmitComment
+              ,responseObject);
+        
+        if ([responseObject[@"ret_code"] integerValue] == 0) {
+            
+            NSString *msg = responseObject[@"ret_msg"];
+            block(XFReq_User_SubmitComment, msg ,YES);
+            
+        }else{
+            
+            NSString *msg = responseObject[@"ret_msg"];
+            block(XFReq_User_SubmitComment, msg,NO);
+        }
+        
+    }];
+    
+    
+    
+}
+-(void)XFRequstDeleteCutPic:(NSString*)ExtractID
+                           :(XFResponseBlock)block{
+    
+    
+    
+    NSDictionary *parameters = @{@"Action":@"DeleteCutPic",
+                                 @"Token":@"0A66A4FD-146F-4542-8D7B-33CDEC2981F9",
+                                 @"ExtractID":ExtractID,
+                                 };
+    [xfrequst requestWithURLString:APIurl parameters:parameters type:NetworkRequestTypePost imgData:nil resultBlock:^(id responseObject, NSError *error, NSURLSessionDataTask *task) {
+        
+        NSLog(@"%@%@",XFReq_User_DeleteCutPic
+              ,responseObject);
+        
+        if ([responseObject[@"ret_code"] integerValue] == 0) {
+            
+            NSString *msg = responseObject[@"ret_msg"];
+            block(XFReq_User_DeleteCutPic, msg ,YES);
+            
+        }else{
+            
+            NSString *msg = responseObject[@"ret_msg"];
+            block(XFReq_User_DeleteCutPic, msg,NO);
+        }
+        
+    }];
+    
+    
+}
+-(void)XFRequstGetWritePicRemark:(NSString*)userID
+                          blogID:(NSString*)blogID
+                           PicID:(NSString*)PicID
+                                :(XFResponseBlock)block{
+    
+    NSDictionary *parameters = @{@"Action":@"GetWritePicRemark",
+                                 @"Token":@"0A66A4FD-146F-4542-8D7B-33CDEC2981F9",
+                                 @"blogID":blogID,
+                                @"PicID":PicID,
+                                @"userID":userID,
+                                 };
+    [self printUrl:XFReq_User_GetWritePicRemark parameters:parameters];
+
+    [xfrequst requestWithURLString:APIurl parameters:parameters type:NetworkRequestTypePost imgData:nil resultBlock:^(id responseObject, NSError *error, NSURLSessionDataTask *task) {
+        
+        NSLog(@"%@%@",XFReq_User_GetWritePicRemark
+              ,responseObject);
+        
+        if ([responseObject[@"ret_code"] integerValue] == 0) {
+            
+            NSString *msg = responseObject[@"ret_msg"];
+            block(XFReq_User_GetWritePicRemark, msg ,YES);
+            
+        }else{
+            
+            NSString *msg = responseObject[@"ret_msg"];
+            block(XFReq_User_GetWritePicRemark, msg,NO);
+        }
+        
+    }];
+
+    
+}
 -(void)printUrl:(NSString*)requstName parameters:(NSDictionary*)parameters{
     
     

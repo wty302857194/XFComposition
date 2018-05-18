@@ -21,6 +21,7 @@
         _tableView.delegate = self;
         _tableView.dataSource = self;
         [_tableView registerClass:[RecruitableviewCell class] forCellReuseIdentifier:@"cell"];
+        _tableView.tableFooterView = [UIView new];
     }
     return _tableView;
 }
