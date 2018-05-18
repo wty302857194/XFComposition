@@ -128,7 +128,7 @@
         RecruiteacherController *vc = [[RecruiteacherController alloc]init];
         vc.RecruitActiveID = volunteerModel.activeid;
         [self.navigationController pushViewController:vc animated:YES];
-    }if ([self.cellString isEqualToString:@"TYOnlyActivetyTableViewCell"]) {
+    } else if ([self.cellString isEqualToString:@"TYOnlyActivetyTableViewCell"]) {
         return;
     }
     else {
@@ -231,5 +231,10 @@
     string = [string stringByReplacingOccurrencesOfString:@"&amp;" withString:@"&"]; // Do this last so that, e.g. @"&amp;lt;" goes to @"&lt;" not @"<"
     
     return string;
+}
+
+- (void)dealloc
+{
+    NSLog(@"我被释放了");
 }
 @end
