@@ -11,7 +11,7 @@
 @interface XFCorrectViewController : UIViewController
 @property (strong, nonatomic) UIScrollView *scrollView;
 @property (nonatomic,strong)NSString *PicID;
-@property (nonatomic,strong)NSString *PicUrl;
-@property (nonatomic, strong) GetWritePicModel* picModel;
 
+@property (nonatomic, strong) GetWritePicModel* picModel;
+@property (nonatomic,assign) BOOL isChange;
 @end

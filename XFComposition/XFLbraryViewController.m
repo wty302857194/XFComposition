@@ -21,8 +21,11 @@
     [_collentionView registerNib:[UINib nibWithNibName:@"XFLbraryCell" bundle:nil] forCellWithReuseIdentifier:@"XFLbraryCell"];
     
     [_collentionView reloadData];
+    GO_BACK;
 }
-
+- (void)goBackNV {
+    [self.navigationController popViewControllerAnimated:YES];
+}
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     
     return  _dataArray.count;

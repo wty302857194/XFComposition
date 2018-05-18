@@ -235,9 +235,9 @@
 //    [self.navigationController pushViewController:vc animated:YES];
 
     XFCorrectViewController * VC = [[XFCorrectViewController alloc]init];
-    VC.PicUrl = model.PicUrl;
     VC.PicID = model.PicID;
     VC.picModel = model;
+    VC.isChange = _isChange;
     [self.navigationController pushViewController:VC animated:YES];
     
     
