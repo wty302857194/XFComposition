@@ -38,7 +38,7 @@
 -(id)initWithJSON:(NSDictionary *)dic{
     if (self = [super init]) {
         self.CreateTime = dic[@"CreateTime"];
-        self.ID = dic[@"Id"];
+        self.ID = dic[@"ID"];
         self.PicID = dic[@"PicID"];
         self.BlogID = dic[@"BlogID"];
         self.Sort = dic[@"Sort"];

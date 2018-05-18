@@ -80,7 +80,9 @@
     }
 }
 -(void)longPress:(UIGestureRecognizer*)gesRec {
- 
+    if (_deleteBlock) {
+        _deleteBlock ();
+    }
 }
 
 @end

@@ -12,9 +12,16 @@ typedef void (^AudioViewTapBlock)(void);
 
 typedef void (^AudioViewPanBlcok)(CGRect frame);
 
+typedef void (^AudioViewDeleteBlcok)();
+
+
 @interface AudioView : UIView
 
 @property (strong, nonatomic) IBOutlet UIImageView *imgView;
+@property (strong, nonatomic)  NSDictionary *dic;
+
 @property (nonatomic, copy) AudioViewTapBlock tapBlock;
 @property (nonatomic, copy) AudioViewPanBlcok panBlock;
+@property (nonatomic, copy) AudioViewDeleteBlcok deleteBlock;
+
 @end

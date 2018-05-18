@@ -32,6 +32,8 @@
     UIImage *_image;
     BOOL _isShouHui;
     BOOL isFirst;
+    
+    NSInteger audioTag;
    
 }
 @property (nonatomic, strong) AVPlayer *player;
@@ -190,7 +192,9 @@
     
     AudioView * view = [[NSBundle mainBundle] loadNibNamed:@"AudioView" owner:self options:nil].lastObject;
     view.frame = CGRectMake(x*kScreenWidth, y*kScreenHeight, 50, 50);
-    NSDictionary *dic = @{
+    audioTag ++ ;
+    view.tag = audioTag;
+    view.dic = @{
                           @"Id": ID,   //标识  0是新增  非0 即修改
                           @"CreateTime": [Global currentTime],
                           @"BlogID": self.picModel.BlogID,  //习作ID
@@ -201,7 +205,7 @@
                           @"XLocation": @(x),  //X轴
                           @"YLocation": @(y)  //Y轴
                           };
-    [self.vedioArr addObject:dic];
+    [self.vedioArr addObject:view.dic];
     
     view.tapBlock = ^{
         [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
@@ -224,6 +228,26 @@
             [self.vedioArr replaceObjectAtIndex:idx withObject:dataDic];
             NSLog(@"self.vedioArr===%@",self.vedioArr);
         }];
+    };
+    __weak typeof(view) weakView = view;
+    view.deleteBlock = ^{
+        
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"" message:@"是否删除语音" preferredStyle:UIAlertControllerStyleAlert];
+        
+        
+        UIAlertAction * cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+        
+        UIAlertAction *sure = [UIAlertAction actionWithTitle:@"删除" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+            [self.vedioArr removeObject:weakView.dic];
+            [weakView removeFromSuperview];
+        }];
+        
+        [alert addAction:cancelAction];
+        [alert addAction:sure];
+        [self presentViewController:alert animated:YES completion:nil];
+        
+       
     };
     
     [self.view addSubview:view];
@@ -336,7 +360,7 @@
     _tabArr = @[@"清屏",@"颜色",@"画笔",@"还原大小",@"范文库",@"病文库",@"撤销"];
     self.clipButton.hidden = YES;
     isFirst = YES;
-
+    audioTag = 0;
     [self addGestureRecognizerToView:self.imgView];
     _colorArray = [NSMutableArray array];
     _widthArray = [NSMutableArray array];
