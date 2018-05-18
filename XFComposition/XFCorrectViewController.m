@@ -150,12 +150,14 @@ static NSInteger const qiPaoWidth = 160;
     };
     
     qiPaoView.longPressBlock = ^{
+        __strong QiPaoTagView *strong_qiPaoView = weak_qiPaoView;
+
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"是否要删除？" message:nil preferredStyle:UIAlertControllerStyleAlert];
         [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
             
         }]];
         [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            [self deleteCommentCheckRequestData:model.ID qiPaoView:qiPaoView];
+            [self deleteCommentCheckRequestData:model.ID qiPaoView:strong_qiPaoView];
         }]];
         [self presentViewController:alertController animated:YES completion:nil];
         
@@ -359,7 +361,13 @@ static NSInteger const qiPaoWidth = 160;
         NSLog(@"ForecastUrl === %@",succeedResult);
         if ([succeedResult[@"ret_code"] integerValue] == 0) {
             [qiPaoView removeFromSuperview];
-            
+            [self.qiPaoArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                NSMutableDictionary *dataDic = [NSMutableDictionary dictionaryWithDictionary:obj];
+                if ([[dataDic.allKeys firstObject] integerValue] == qiPaoView.tag ) {
+                    [self.qiPaoArr removeObjectAtIndex:qiPaoView.tag];
+                }
+                NSLog(@"self.vedioArr===%@",self.qiPaoArr);
+            }];
         }
     } failedBolck:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"error===%@",error.localizedDescription);
