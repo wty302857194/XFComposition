@@ -102,7 +102,7 @@ static NSInteger const qiPaoWidth = 160;
                                  @"Id": model.ID?:@"0",   //标识   0是新增  非0 即修改
                                  @"CreateTime": qiPaoView.time,
                                  @"BlogID":self.picModel.BlogID, //习作ID
-                                 @"PicID":self.picModel.PicID,  //习作图片ID
+                                 @"PicID":self.picModel.ID,  //习作图片ID
                                  @"UserID":[XFUserInfo getUserInfo].Loginid , //用户ID
                                  @"Sort": @"0", //排序
                                  @"Remark": model.Remark?:@"",    //点评内容
@@ -258,7 +258,7 @@ static NSInteger const qiPaoWidth = 160;
                           @"Action":@"SubmitPicCheck",
                           @"Token":@"0A66A4FD-146F-4542-8D7B-33CDEC2981F9",
                           @"blogID": self.picModel.BlogID,  //习作ID
-                          @"PicID": self.picModel.PicID,  //习作图片ID
+                          @"PicID": self.picModel.ID,  //习作图片ID
                           @"userID": [XFUserInfo getUserInfo].Loginid, //用户ID
                           @"PicUrl":self.picModel.PicUrl,
                           @"FixPicUrl":self.picnameurl,
