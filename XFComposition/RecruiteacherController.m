@@ -12,6 +12,9 @@
 #import "RecruiteacherSecondCell.h"
 #import "HomePaFristheadView.h"
 #import "ActivityDetailModel.h"
+#import "ApplyActiveViewController.h"
+
+
 
 @interface RecruiteacherController ()<UICollectionViewDelegate,UICollectionViewDataSource,RecruiteacherFristCellDelegate>
 @property (nonatomic,strong)UICollectionView *collectionView;
@@ -80,7 +83,10 @@
     return _bottomView;
 }
 - (void)getJob {
-    
+    ApplyActiveViewController *vc = [[ApplyActiveViewController alloc] init];
+    vc.applyTitle = self.model.activeName?:@"";
+    vc.applyActiveID = self.RecruitActiveID;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 -(UICollectionView *)collectionView{
     if (!_collectionView) {

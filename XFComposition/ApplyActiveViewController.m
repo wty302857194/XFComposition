@@ -42,12 +42,12 @@
 @implementation ApplyActiveViewController
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
+//    [self.navigationController setNavigationBarHidden:NO animated:YES];
     [self leftBarButton];
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:YES];
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
+//    [self.navigationController setNavigationBarHidden:YES animated:YES];
     
 }
 -(UITableView *)tableview{
