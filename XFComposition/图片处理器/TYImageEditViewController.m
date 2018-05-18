@@ -162,7 +162,7 @@
         [requst UploadPicRequstWithfileValue:imageData withuserid:[XFUserInfo getUserInfo].Loginid withtypeid:@"1" :^(NSDictionary *json){
             NSString * str =   json[@"ret_data"]?:@"";
             
-            [[XFRequestManager sharedInstance] XFRequstAddCutPic:[XFUserInfo getUserInfo].Loginid PicID:_picModel.PicID blogID:_picModel.BlogID ExtractPicUrl:str ExtractContent:@"" ExtractType:[NSString stringWithFormat:@"%ld",(long)sheetItem.index] :^(NSString *requestName, id responseData, BOOL isSuccess) {
+            [[XFRequestManager sharedInstance] XFRequstAddCutPic:[XFUserInfo getUserInfo].Loginid PicID:_picModel.ID blogID:_picModel.BlogID ExtractPicUrl:str ExtractContent:@"" ExtractType:[NSString stringWithFormat:@"%ld",(long)sheetItem.index] :^(NSString *requestName, id responseData, BOOL isSuccess) {
                 [SVProgressHUD showInfoWithStatus:responseData];
             }];
         }];
@@ -194,7 +194,7 @@
                           @"Id": ID,   //标识  0是新增  非0 即修改
                           @"CreateTime": [Global currentTime],
                           @"BlogID": self.picModel.BlogID,  //习作ID
-                          @"PicID": self.picModel.PicID,  //习作图片ID
+                          @"PicID": self.picModel.ID,  //习作图片ID
                           @"UserID": [XFUserInfo getUserInfo].Loginid, //用户ID
                           @"Sort": @"0", //排序
                           @"AudioUrl": urlStr,    //录音URL
@@ -563,7 +563,7 @@
                           @"Action":@"GetWriteAudio",
                           @"Token":@"0A66A4FD-146F-4542-8D7B-33CDEC2981F9",
                           @"blogID": self.picModel.BlogID,  //习作ID
-                          @"PicID": self.picModel.PicID,  //习作图片ID
+                          @"PicID": self.picModel.ID,  //习作图片ID
                           @"userID": [XFUserInfo getUserInfo].Loginid, //用户ID
                           };
     NSLog(@"dic = %@",dic);
