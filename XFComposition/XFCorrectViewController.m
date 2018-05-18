@@ -84,7 +84,7 @@ static NSInteger const qiPaoWidth = 160;
 - (void)addPangPi:(GetWritePicRemarkModel *)model {
     NSInteger height = 50;
     if (model) {
-        height = [Global heightForText:model.Remark?:@"" textFont:15 standardWidth:qiPaoWidth]+44;
+        height = [Global heightForText:model.Remark?:@"" textFont:15 standardWidth:qiPaoWidth]+24;
     }
     QiPaoTagView *qiPaoView = [[QiPaoTagView alloc] initWithFrame:CGRectMake([model.XLocation?:@"" integerValue], [model.YLocation?:@"" integerValue], qiPaoWidth, height)];
     qiPaoView.tag = self.qiPaoArr.count;

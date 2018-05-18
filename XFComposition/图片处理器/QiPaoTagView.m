@@ -32,6 +32,8 @@
         _textView = [[FSTextView alloc] init];
         _textView.textColor = [UIColor whiteColor];
         _textView.userInteractionEnabled = YES;
+        _textView.showsHorizontalScrollIndicator = NO;
+        _textView.showsVerticalScrollIndicator = NO;
         _textView.backgroundColor = [UIColor clearColor];
         _textView.placeholder = @"请输入批改内容";
         _textView.placeholderColor = [UIColor whiteColor];
@@ -52,8 +54,8 @@
         }];
         [self addSubview:_textView];
         [_textView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.left.mas_equalTo(12);
-            make.bottom.mas_equalTo(-12);
+            make.top.left.mas_equalTo(5);
+            make.bottom.mas_equalTo(-10);
             make.right.mas_equalTo(-5);
         }];
         

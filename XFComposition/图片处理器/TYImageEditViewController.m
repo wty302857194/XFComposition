@@ -226,6 +226,12 @@
     [self.view addSubview:view];
     
 }
+- (AVPlayer *)player {
+    if (!_player) {
+        _player = [[AVPlayer alloc] init];
+    }
+    return _player;
+}
 - (TKImageView *)tkImageView
 {
     if (!_tkImageView) {
