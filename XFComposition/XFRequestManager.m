@@ -544,6 +544,35 @@ static XFRequestManager *instance = nil;
     
     
 }
+-(void)XFRequstDeleteCutPic:(NSString*)ExtractID
+                           :(XFResponseBlock)block{
+    
+    
+    
+    NSDictionary *parameters = @{@"Action":@"DeleteCutPic",
+                                 @"Token":@"0A66A4FD-146F-4542-8D7B-33CDEC2981F9",
+                                 @"ExtractID":ExtractID,
+                                 };
+    [xfrequst requestWithURLString:APIurl parameters:parameters type:NetworkRequestTypePost imgData:nil resultBlock:^(id responseObject, NSError *error, NSURLSessionDataTask *task) {
+        
+        NSLog(@"%@%@",XFReq_User_DeleteCutPic
+              ,responseObject);
+        
+        if ([responseObject[@"ret_code"] integerValue] == 0) {
+            
+            NSString *msg = responseObject[@"ret_msg"];
+            block(XFReq_User_DeleteCutPic, msg ,YES);
+            
+        }else{
+            
+            NSString *msg = responseObject[@"ret_msg"];
+            block(XFReq_User_DeleteCutPic, msg,NO);
+        }
+        
+    }];
+    
+    
+}
 -(void)printUrl:(NSString*)requstName parameters:(NSDictionary*)parameters{
     
     

@@ -31,9 +31,23 @@
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     XFLbraryCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"XFLbraryCell" forIndexPath:indexPath];
+    [SVProgressHUD showWithStatus:@"正在删除"];
+    
     cell.cellBlock = ^(XFLibrary *library) {
-        [_dataArray removeObject:library];
-        [collectionView reloadData];
+       [ [XFRequestManager sharedInstance] XFRequstDeleteCutPic:library.ID :^(NSString *requestName, id responseData, BOOL isSuccess) {
+           [SVProgressHUD dismiss];
+           
+           if (isSuccess) {
+               [SVProgressHUD showInfoWithStatus:@"删除成功"];
+               [_dataArray removeObject:library];
+               [collectionView reloadData];
+           }else{
+               
+               
+           }
+       }];
+        
+      
     };
 
     [cell reloadData: _dataArray[indexPath.row]];
