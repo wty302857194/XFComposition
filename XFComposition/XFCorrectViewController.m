@@ -55,7 +55,6 @@ static NSInteger const qiPaoWidth = 160;
         contentViewController.TYCorrecVC = self;
         contentViewController.picModel = self.picModel;//执行frame时才会走viewdidload方法
         contentViewController.view.frame = CGRectMake(0, 0, _leftView.width, _leftView.height);
-        [contentViewController getGetWriteAudioRequestData];
         [self addChildViewController:contentViewController];
         [_leftView addSubview:contentViewController.view];
         
@@ -88,21 +87,28 @@ static NSInteger const qiPaoWidth = 160;
         height = [Global heightForText:model.Remark?:@"" textFont:15 standardWidth:qiPaoWidth]+44;
     }
     QiPaoTagView *qiPaoView = [[QiPaoTagView alloc] initWithFrame:CGRectMake([model.XLocation?:@"" integerValue], [model.YLocation?:@"" integerValue], qiPaoWidth, height)];
+    qiPaoView.tag = self.qiPaoArr.count;
     if (model) {
         qiPaoView.textView.text = model.Remark?:@"";
+        qiPaoView.time = model.CreateTime;
+    }else {
+        qiPaoView.time = [Global currentTime];
     }
-    qiPaoView.time = [Global currentTime];
-    NSDictionary *dic = @{
-                          @"Id": model.ID?:@"0",   //标识   0是新增  非0 即修改
-                          @"CreateTime": qiPaoView.time,
-                          @"BlogID":self.picModel.ID, //习作ID
-                          @"PicID":self.picModel.PicID,  //习作图片ID
-                          @"UserID":self.xf.userId, //用户ID
-                          @"Sort": @"0", //排序
-                          @"Remark": model.Remark?:@"",    //点评内容
-                          @"XLocation": @(qiPaoView.frame.origin.x),  //X轴
-                          @"YLocation": @(qiPaoView.frame.origin.y)  //Y轴
-                          };
+    
+    NSDictionary *dic =@{
+                         @(qiPaoView.tag):@{
+                                 @"Id": model.ID?:@"0",   //标识   0是新增  非0 即修改
+                                 @"CreateTime": qiPaoView.time,
+                                 @"BlogID":self.picModel.ID, //习作ID
+                                 @"PicID":self.picModel.PicID,  //习作图片ID
+                                 @"UserID":self.xf.userId, //用户ID
+                                 @"Sort": @"0", //排序
+                                 @"Remark": model.Remark?:@"",    //点评内容
+                                 @"XLocation": @(qiPaoView.frame.origin.x),  //X轴
+                                 @"YLocation": @(qiPaoView.frame.origin.y)  //Y轴
+                                 }
+                         };
+  
     
     [self.qiPaoArr addObject:dic];
     
@@ -112,10 +118,13 @@ static NSInteger const qiPaoWidth = 160;
         __strong QiPaoTagView *strong_qiPaoView = weak_qiPaoView;
 
         [weakSelf.qiPaoArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            NSMutableDictionary *dataDic = (NSMutableDictionary *)obj;
-            if ([dataDic[@"CreateTime"] isEqualToString:strong_qiPaoView.time]) {
-                dataDic[@"Remark"] = contentStr;
+            NSMutableDictionary *dataDic = [NSMutableDictionary dictionaryWithDictionary:obj];
+            if ([[dataDic.allKeys firstObject] integerValue] == strong_qiPaoView.tag ) {
+                NSMutableDictionary *veluedic = [NSMutableDictionary dictionaryWithDictionary:dataDic.allValues.firstObject];
+                veluedic[@"Remark"] = contentStr;
+                dataDic[@(strong_qiPaoView.tag)] = veluedic;
             }
+            [self.qiPaoArr replaceObjectAtIndex:idx withObject:dataDic];
             NSLog(@"self.vedioArr===%@",self.qiPaoArr);
         }];
     };
@@ -123,12 +132,17 @@ static NSInteger const qiPaoWidth = 160;
         __strong QiPaoTagView *strong_qiPaoView = weak_qiPaoView;
         NSInteger X = frame.origin.x;
         NSInteger Y = frame.origin.y;
+        
         [weakSelf.qiPaoArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            NSMutableDictionary *dataDic = (NSMutableDictionary *)obj;
-            if ([dataDic[@"CreateTime"] isEqualToString:strong_qiPaoView.time]) {
-                dataDic[@"XLocation"] = @(X);
-                dataDic[@"YLocation"] = @(Y);
+            NSMutableDictionary *dataDic = [NSMutableDictionary dictionaryWithDictionary:obj];
+            if ([[dataDic.allKeys firstObject] integerValue] == strong_qiPaoView.tag ) {
+                NSMutableDictionary *veluedic = [NSMutableDictionary dictionaryWithDictionary:dataDic.allValues.firstObject];
+                veluedic[@"XLocation"] = @(X);
+                veluedic[@"YLocation"] = @(Y);
+                dataDic[@(strong_qiPaoView.tag)] = veluedic;
+
             }
+            [self.qiPaoArr replaceObjectAtIndex:idx withObject:dataDic];
             NSLog(@"self.vedioArr===%@",self.qiPaoArr);
         }];
     };
@@ -214,7 +228,11 @@ static NSInteger const qiPaoWidth = 160;
  */
 #pragma mark - 保存批改
 - (void)SubmitPicCheckRequestData {
-    
+    NSMutableArray *qiPaoNewArr = [NSMutableArray arrayWithCapacity:0];
+    [self.qiPaoArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSMutableDictionary *dataDic = [NSMutableDictionary dictionaryWithDictionary:obj];
+        [qiPaoNewArr addObject:dataDic.allValues.firstObject];
+    }];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     BaseRequest *request = [BaseRequest requestWithURL:nil];
     NSDictionary *dic = @{
@@ -225,7 +243,7 @@ static NSInteger const qiPaoWidth = 160;
                           @"UserID": [XFUserInfo getUserInfo].Loginid, //用户ID
                           @"PicUrl":self.picModel.PicUrl,
                           @"FixPicUrl":self.picnameurl,
-                          @"Remarks":self.qiPaoArr,
+                          @"Remarks":qiPaoNewArr,
                           @"Audios":contentViewController.vedioArr
                           };
     NSLog(@"dic = %@",dic);

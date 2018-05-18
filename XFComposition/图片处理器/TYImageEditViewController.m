@@ -213,11 +213,12 @@
     };
     view.panBlock = ^(CGRect frame) {
         [self.vedioArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            NSMutableDictionary *dataDic = (NSMutableDictionary *)obj;
+            NSMutableDictionary *dataDic = [NSMutableDictionary dictionaryWithDictionary:obj];
             if ([dataDic[@"AudioUrl"] isEqualToString:urlStr]) {
                 dataDic[@"XLocation"] = @(frame.origin.x);
                 dataDic[@"YLocation"] = @(frame.origin.y);
             }
+            [self.vedioArr replaceObjectAtIndex:idx withObject:dataDic];
             NSLog(@"self.vedioArr===%@",self.vedioArr);
         }];
     };
@@ -359,6 +360,7 @@
         self.bottomView.hidden = YES;
     }
 
+    [self getGetWriteAudioRequestData];
 }
 //取消手势
 - (void)removeGestureRecognizerFromView:(UIView *)view {
