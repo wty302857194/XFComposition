@@ -193,7 +193,7 @@
     NSDictionary *dic = @{
                           @"Id": ID,   //标识  0是新增  非0 即修改
                           @"CreateTime": [Global currentTime],
-                          @"BlogID": self.picModel.ID,  //习作ID
+                          @"BlogID": self.picModel.BlogID,  //习作ID
                           @"PicID": self.picModel.PicID,  //习作图片ID
                           @"UserID": [XFUserInfo getUserInfo].Loginid, //用户ID
                           @"Sort": @"0", //排序
@@ -368,7 +368,7 @@
         self.bottomViewLayout.constant = 0;
         self.bottomView.hidden = YES;
     }
-
+    _vedioArr = [NSMutableArray array];
     [self getGetWriteAudioRequestData];
 }
 //取消手势
