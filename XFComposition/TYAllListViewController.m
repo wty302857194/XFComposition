@@ -110,13 +110,14 @@
     if ([self.cellString isEqualToString:@"VolunteerActiveiTableViewCell"]) {
         VolunteerActiveiTableViewCell *ActiveiCell = cell;
         ActiveiCell.model = self.activityArray[indexPath.row];
-    }if ([self.cellString isEqualToString:@"TYOnlyActivetyTableViewCell"]) {
+    } else if ([self.cellString isEqualToString:@"TYOnlyActivetyTableViewCell"]) {
         TYOnlyActivetyTableViewCell *ActiveiCell = cell;
         ActiveiCell.model = self.activityArray[indexPath.row];
     }
     else {
         VolunteerNewsTableViewCell *newsCell = cell;
         newsCell.model = self.newsArr[indexPath.row];
+        
     }
     return cell;
 }
