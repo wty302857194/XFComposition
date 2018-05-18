@@ -186,10 +186,10 @@
     return _recordView;
 }
 #pragma mark - 创建多个video（创建时用到）
--(void)creatAudioView:(NSString *)urlStr withID:(NSString *)ID originX:(NSInteger )x originY:(NSInteger )y {
+-(void)creatAudioView:(NSString *)urlStr withID:(NSString *)ID originX:(float )x originY:(float )y {
     
     AudioView * view = [[NSBundle mainBundle] loadNibNamed:@"AudioView" owner:self options:nil].lastObject;
-    view.frame = CGRectMake(x, y, 50, 50);
+    view.frame = CGRectMake(x*kScreenWidth, y*kScreenHeight, 50, 50);
     NSDictionary *dic = @{
                           @"Id": ID,   //标识  0是新增  非0 即修改
                           @"CreateTime": [Global currentTime],
@@ -198,8 +198,8 @@
                           @"UserID": [XFUserInfo getUserInfo].Loginid, //用户ID
                           @"Sort": @"0", //排序
                           @"AudioUrl": urlStr,    //录音URL
-                          @"XLocation": @(view.frame.origin.x),  //X轴
-                          @"YLocation": @(view.frame.origin.y)  //Y轴
+                          @"XLocation": @(x),  //X轴
+                          @"YLocation": @(y)  //Y轴
                           };
     [self.vedioArr addObject:dic];
     
@@ -212,11 +212,14 @@
         [self.player play];
     };
     view.panBlock = ^(CGRect frame) {
+        float X = frame.origin.x/kScreenWidth;
+        float Y = frame.origin.y/kScreenHeight;
+        
         [self.vedioArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             NSMutableDictionary *dataDic = [NSMutableDictionary dictionaryWithDictionary:obj];
             if ([dataDic[@"AudioUrl"] isEqualToString:urlStr]) {
-                dataDic[@"XLocation"] = @(frame.origin.x);
-                dataDic[@"YLocation"] = @(frame.origin.y);
+                dataDic[@"XLocation"] = @(X);
+                dataDic[@"YLocation"] = @(Y);
             }
             [self.vedioArr replaceObjectAtIndex:idx withObject:dataDic];
             NSLog(@"self.vedioArr===%@",self.vedioArr);
@@ -571,7 +574,7 @@
             NSDictionary *dic = (NSDictionary *)obj;
             
             GetWriteAudioModel *model = [GetWriteAudioModel loadWithJSOn:dic];
-            [self creatAudioView:model.AudioUrl?:@"" withID:model.ID originX:[model.XLocation?:@"" integerValue] originY:[model.YLocation?:@"" integerValue]];
+            [self creatAudioView:model.AudioUrl?:@"" withID:model.ID originX:[model.XLocation?:@"" floatValue] originY:[model.YLocation?:@"" floatValue]];
         }];
     } failedBolck:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"error===%@",error.localizedDescription);

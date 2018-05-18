@@ -86,7 +86,9 @@ static NSInteger const qiPaoWidth = 160;
     if (model) {
         height = [Global heightForText:model.Remark?:@"" textFont:15 standardWidth:qiPaoWidth]+24;
     }
-    QiPaoTagView *qiPaoView = [[QiPaoTagView alloc] initWithFrame:CGRectMake([model.XLocation?:@"" integerValue], [model.YLocation?:@"" integerValue], qiPaoWidth, height)];
+    float x_oragin = [model.XLocation?:@"" floatValue]*self.rightView.width;
+    float y_oragin = [model.YLocation?:@"" floatValue]*self.view.height;
+    QiPaoTagView *qiPaoView = [[QiPaoTagView alloc] initWithFrame:CGRectMake(x_oragin, y_oragin, qiPaoWidth, height)];
     qiPaoView.tag = self.qiPaoArr.count;
     if (model) {
         qiPaoView.textView.text = model.Remark?:@"";
@@ -104,8 +106,8 @@ static NSInteger const qiPaoWidth = 160;
                                  @"UserID":self.xf.userId, //用户ID
                                  @"Sort": @"0", //排序
                                  @"Remark": model.Remark?:@"",    //点评内容
-                                 @"XLocation": @(qiPaoView.frame.origin.x),  //X轴
-                                 @"YLocation": @(qiPaoView.frame.origin.y)  //Y轴
+                                 @"XLocation": @(qiPaoView.frame.origin.x/self.rightView.width),  //X轴
+                                 @"YLocation": @(qiPaoView.frame.origin.y/self.view.height)  //Y轴
                                  }
                          };
   
@@ -130,8 +132,8 @@ static NSInteger const qiPaoWidth = 160;
     };
     qiPaoView.locationBlock = ^(CGRect frame) {
         __strong QiPaoTagView *strong_qiPaoView = weak_qiPaoView;
-        NSInteger X = frame.origin.x;
-        NSInteger Y = frame.origin.y;
+        float X = frame.origin.x/weakSelf.rightView.width;
+        float Y = frame.origin.y/weakSelf.view.height;
         
         [weakSelf.qiPaoArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             NSMutableDictionary *dataDic = [NSMutableDictionary dictionaryWithDictionary:obj];
