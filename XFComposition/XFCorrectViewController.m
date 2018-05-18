@@ -250,13 +250,13 @@ static NSInteger const qiPaoWidth = 160;
 - (void)GetWritePicRemarkRequestData {
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    BaseRequest *request = [BaseRequest requestWithURL:nil];
+    BaseRequest *request = [BaseRequest requestWithURL:APIurl];
     NSDictionary *dic = @{
                           @"Action":@"GetWritePicRemark",
                           @"Token":@"0A66A4FD-146F-4542-8D7B-33CDEC2981F9",
-                          @"BlogID": self.picModel.ID,  //习作ID
+                          @"blogID": self.picModel.BlogID,  //习作ID
                           @"PicID": self.picModel.PicID,  //习作图片ID
-                          @"UserID": [XFUserInfo getUserInfo].Loginid, //用户ID
+                          @"userID": [XFUserInfo getUserInfo].Loginid, //用户ID
                           };
     NSLog(@"dic = %@",dic);
     [request startWithMethod:HTTPTypePOST params:dic successedBlock:^(id succeedResult) {

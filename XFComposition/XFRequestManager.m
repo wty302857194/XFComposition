@@ -573,6 +573,39 @@ static XFRequestManager *instance = nil;
     
     
 }
+-(void)XFRequstGetWritePicRemark:(NSString*)userID
+                          blogID:(NSString*)blogID
+                           PicID:(NSString*)PicID
+                                :(XFResponseBlock)block{
+    
+    NSDictionary *parameters = @{@"Action":@"GetWritePicRemark",
+                                 @"Token":@"0A66A4FD-146F-4542-8D7B-33CDEC2981F9",
+                                 @"blogID":blogID,
+                                @"PicID":PicID,
+                                @"userID":userID,
+                                 };
+    [self printUrl:XFReq_User_GetWritePicRemark parameters:parameters];
+
+    [xfrequst requestWithURLString:APIurl parameters:parameters type:NetworkRequestTypePost imgData:nil resultBlock:^(id responseObject, NSError *error, NSURLSessionDataTask *task) {
+        
+        NSLog(@"%@%@",XFReq_User_GetWritePicRemark
+              ,responseObject);
+        
+        if ([responseObject[@"ret_code"] integerValue] == 0) {
+            
+            NSString *msg = responseObject[@"ret_msg"];
+            block(XFReq_User_GetWritePicRemark, msg ,YES);
+            
+        }else{
+            
+            NSString *msg = responseObject[@"ret_msg"];
+            block(XFReq_User_GetWritePicRemark, msg,NO);
+        }
+        
+    }];
+
+    
+}
 -(void)printUrl:(NSString*)requstName parameters:(NSDictionary*)parameters{
     
     
