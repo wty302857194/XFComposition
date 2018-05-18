@@ -90,5 +90,8 @@
     [rec setTranslation:CGPointMake(0, 0) inView:self];
     
     rec.view.frame = CGRectMake(ty_x-self.width/2.f, ty_y - self.height/2.f, self.frame.size.width, self.frame.size.height);
+    if (self.locationBlock) {
+        self.locationBlock(rec.view.frame);
+    }
 }
 @end

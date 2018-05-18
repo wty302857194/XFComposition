@@ -27,6 +27,7 @@
                                  @"posttype":posttype,
                                  @"IsApp":IsApp
                                  };
+    NSLog(@"parameters = %@",parameters);
     [requst requestWithURLString:APIurl parameters:parameters type:NetworkRequestTypePost imgData:nil resultBlock:^(id responseObject, NSError *error, NSURLSessionDataTask *task) {
         block(responseObject);
         NSLog(@"添加文章 习作书写%@",responseObject);
