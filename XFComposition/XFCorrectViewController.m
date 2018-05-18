@@ -148,6 +148,18 @@ static NSInteger const qiPaoWidth = 160;
             NSLog(@"self.vedioArr===%@",self.qiPaoArr);
         }];
     };
+    
+    qiPaoView.longPressBlock = ^{
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"是否要删除？" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            
+        }]];
+        [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self deleteCommentCheckRequestData:model.ID qiPaoView:qiPaoView];
+        }]];
+        [self presentViewController:alertController animated:YES completion:nil];
+        
+    };
     [_rightView addSubview:qiPaoView];
 }
 
@@ -325,6 +337,29 @@ static NSInteger const qiPaoWidth = 160;
                 GetWritePicRemarkModel *model = [GetWritePicRemarkModel loadWithJSOn:dic];
                 [self addPangPi:model];
             }];
+        }
+    } failedBolck:^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"error===%@",error.localizedDescription);
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+    }];
+}
+#pragma mark - 删除旁批、
+- (void)deleteCommentCheckRequestData:(NSString *)ID qiPaoView:(QiPaoTagView *)qiPaoView {
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    BaseRequest *request = [BaseRequest requestWithURL:APIurl];
+    NSDictionary *dic = @{
+                          @"Action":@"DeleteCommentCheck",
+                          @"Token":@"0A66A4FD-146F-4542-8D7B-33CDEC2981F9",
+                          @"RemarkID": ID,  //习作ID
+                          };
+    NSLog(@"dic = %@",dic);
+    [request startWithMethod:HTTPTypePOST params:dic successedBlock:^(id succeedResult) {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        NSLog(@"ForecastUrl === %@",succeedResult);
+        if ([succeedResult[@"ret_code"] integerValue] == 0) {
+            [qiPaoView removeFromSuperview];
+            
         }
     } failedBolck:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"error===%@",error.localizedDescription);

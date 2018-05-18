@@ -27,6 +27,7 @@
         
         UIImageView *imgView = [[UIImageView alloc] initWithFrame:self.bounds];
         imgView.image = newImage;
+        imgView.userInteractionEnabled = YES;
         [self addSubview:imgView];
         
         _textView = [[FSTextView alloc] init];
@@ -65,6 +66,10 @@
         [self setUserInteractionEnabled:YES];
         [self addGestureRecognizer:panGR];
         
+        UILongPressGestureRecognizer *longGR = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPress:)];
+        longGR.minimumPressDuration = 1;
+        [self addGestureRecognizer:longGR];
+        
     }
     return self;
 }
@@ -94,6 +99,11 @@
     rec.view.frame = CGRectMake(ty_x-self.width/2.f, ty_y - self.height/2.f, self.frame.size.width, self.frame.size.height);
     if (self.locationBlock) {
         self.locationBlock(rec.view.frame);
+    }
+}
+- (void)longPress: (UILongPressGestureRecognizer *)rec {
+    if (self.longPressBlock) {
+        self.longPressBlock();
     }
 }
 @end
