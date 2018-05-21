@@ -22,12 +22,14 @@
         imgView2.image = [UIImage imageNamed:@"icon_xianfengbi"];
         imgView2.size = CGSizeMake(30, 30);
 //        imgView2.backgroundColor = [UIColor blueColor];
+
         imgView2.center = CGPointMake(WidthFrame/4*3, 25);
         [self.contentView addSubview:imgView2];
         
         self.integralLabel = [[UILabel alloc]init];
         self.integralLabel.size = CGSizeMake(WidthFrame/2, 15);
         self.integralLabel.center = CGPointMake(WidthFrame/4, 50);
+
         self.integralLabel.text = @"积分：10";
         self.integralLabel.font = [UIFont systemFontOfSize:10];
         self.integralLabel.textAlignment = NSTextAlignmentCenter;
@@ -36,6 +38,7 @@
         self.coinLabel = [[UILabel alloc]init];
         self.coinLabel.size = CGSizeMake(WidthFrame/2, 15);
         self.coinLabel.center = CGPointMake(WidthFrame/4*3, 50);
+
         self.coinLabel.text = @"先锋币：15";
         self.coinLabel.font = [UIFont systemFontOfSize:10];
         self.coinLabel.textAlignment = NSTextAlignmentCenter;
@@ -53,6 +56,7 @@
             [self.contentView addSubview:self.VlineLabel];
         }
     self.VlineLabel.sd_layout.centerXEqualToView(self.contentView).centerYEqualToView(self.contentView).heightIs(65).widthIs(1);
+    
         self.VlineLabel.backgroundColor = UIColorFromRGB(0xd9d9d9);
         
     }

@@ -427,6 +427,7 @@
         self.bottomViewLayout.constant = 0;
         self.bottomView.hidden = YES;
     }
+
     [self getGetWriteAudioRequestData];
     [self.view bringSubviewToFront:_tableView];
 
