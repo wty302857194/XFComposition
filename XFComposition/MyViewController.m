@@ -239,9 +239,9 @@
     if (indexPath.section == 0) {
         return 200;
     }else if (indexPath.section == 1){
-        return 90;
-    }else if (indexPath.section == 2){
         return 70;
+    }else if (indexPath.section == 2){
+        return 50;
     }else {
         return 50;
     }

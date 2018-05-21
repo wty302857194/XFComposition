@@ -299,15 +299,6 @@ typedef NS_ENUM(NSInteger, TKMidLineType) {
 }
 @end
 
-@interface CropAreaView : UIView
-@property (strong, nonatomic) CAShapeLayer *crossLineLayer;
-@property (assign, nonatomic) CGFloat crossLineWidth;
-@property (strong, nonatomic) UIColor *crossLineColor;
-@property (strong, nonatomic) UIColor *borderColor;
-@property (assign, nonatomic) CGFloat borderWidth;
-@property (strong, nonatomic) CAShapeLayer *borderLayer;
-@property (assign, nonatomic) BOOL showCrossLines;
-@end
 @implementation CropAreaView
 
 - (instancetype)init {
@@ -325,6 +316,7 @@ typedef NS_ENUM(NSInteger, TKMidLineType) {
         [self showCrossLineLayer];
     }
     [self resetBorderLayerPath];
+//    [self  resetCornersOnCropAreaFrameChanged]
     
 }
 - (void)setBounds:(CGRect)bounds {
@@ -429,12 +421,10 @@ typedef NS_ENUM(NSInteger, TKMidLineType) {
     
 }
 @property (strong, nonatomic) UIView *cropMaskView;
-@property (strong, nonatomic) UIImageView *imageView;
 @property (strong, nonatomic) CornerView *topLeftCorner;
 @property (strong, nonatomic) CornerView *topRightCorner;
 @property (strong, nonatomic) CornerView *bottomLeftCorner;
 @property (strong, nonatomic) CornerView *bottomRightCorner;
-@property (strong, nonatomic) CropAreaView *cropAreaView;
 @property (strong, nonatomic) UIPanGestureRecognizer *topLeftPan;
 @property (strong, nonatomic) UIPanGestureRecognizer *topRightPan;
 @property (strong, nonatomic) UIPanGestureRecognizer *bottomLeftPan;
@@ -1132,12 +1122,47 @@ typedef NS_ENUM(NSInteger, TKMidLineType) {
     
 }
 #pragma Instance Methods
-- (UIImage *)currentCroppedImage {
+- (UIImage *)currentCroppedImage:(UIImage*)image {
     
-    CGFloat scaleFactor = WIDTH(_imageView) / _toCropImage.size.width;
-    return [_toCropImage imageAtRect: CGRectMake((MINX(_cropAreaView) + _cropAreaBorderLineWidth) / scaleFactor, (MINY(_cropAreaView) + _cropAreaBorderLineWidth) / scaleFactor, (WIDTH(_cropAreaView) - 2 * _cropAreaBorderLineWidth) / scaleFactor, (HEIGHT(_cropAreaView) - 2 * _cropAreaBorderLineWidth) / scaleFactor)];
+    return     [self cropImage:image toRect:_cropAreaView.frame];
     
 }
+- (UIImage *)cropImage:(UIImage*)image toRect:(CGRect)rect {
+    CGFloat (^rad)(CGFloat) = ^CGFloat(CGFloat deg) {
+        return deg / 180.0f * (CGFloat) M_PI;
+    };
+    
+    // determine the orientation of the image and apply a transformation to the crop rectangle to shift it to the correct position
+    CGAffineTransform rectTransform;
+    switch (image.imageOrientation) {
+        case UIImageOrientationLeft:
+            rectTransform = CGAffineTransformTranslate(CGAffineTransformMakeRotation(rad(90)), 0, -image.size.height);
+            break;
+        case UIImageOrientationRight:
+            rectTransform = CGAffineTransformTranslate(CGAffineTransformMakeRotation(rad(-90)), -image.size.width, 0);
+            break;
+        case UIImageOrientationDown:
+            rectTransform = CGAffineTransformTranslate(CGAffineTransformMakeRotation(rad(-180)), -image.size.width, -image.size.height);
+            break;
+        default:
+            rectTransform = CGAffineTransformIdentity;
+    };
+    
+    // adjust the transformation scale based on the image scale
+    rectTransform = CGAffineTransformScale(rectTransform, image.scale, image.scale);
+    
+    // apply the transformation to the rect to create a new, shifted rect
+    CGRect transformedCropSquare = CGRectApplyAffineTransform(rect, rectTransform);
+    // use the rect to crop the image
+    CGImageRef imageRef = CGImageCreateWithImageInRect(image.CGImage, transformedCropSquare);
+    // create a new UIImage and set the scale and orientation appropriately
+    UIImage *result = [UIImage imageWithCGImage:imageRef scale:image.scale orientation:image.imageOrientation];
+    // memory cleanup
+    CGImageRelease(imageRef);
+    
+    return result;
+}
+
 @end
 
 

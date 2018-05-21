@@ -38,7 +38,7 @@
     }else {
         self.label3.text = @"已点评";
         [self.thirdBtn setBackgroundColor:[UIColor colorWithHexString:@"BEBFBE"]];
-        self.thirdBtn.enabled = NO;
+        self.thirdBtn.enabled = YES;
         [self.thirdBtn setTitle:@"已点评" forState:UIControlStateNormal];
     }
     if ([_model.Isback integerValue] == 0) {

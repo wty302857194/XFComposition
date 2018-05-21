@@ -51,6 +51,7 @@
 @property (nonatomic, strong) NSMutableArray * widthArray;
 @property (weak, nonatomic) IBOutlet UIButton *clipButton;
 
+@property (strong, nonatomic) IBOutlet UIButton *clipBtn;
 @property (nonatomic, strong) TKImageView *tkImageView;
 @property (nonatomic, strong)AudioRecordView * recordView;
 @property (nonatomic, strong) StrokeView * strokeView;
@@ -71,11 +72,17 @@
             sender.selected = !sender.selected;
             
             if (sender.selected) {
-                _image = [Global makeImageWithView:self.imgView withSize:self.imgView.size];
+
                 
-                self.imgView.hidden = YES;
-                self.tkImageView.toCropImage = _image;
+//                self.imgView.hidden = YES;
+//                self.tkImageView.imageView.image = self.imgView.image;
+                
                 [self.view addSubview:self.tkImageView];
+                
+
+                self.tkImageView.cropAreaView.frame = CGRectMake(47, 170, 291, 213);
+                
+                [self.view bringSubviewToFront:_tableView];
                 self.clipButton.hidden = NO;
             }else{
                 
@@ -96,6 +103,8 @@
                 [self.TYCorrecVC.scrollView setContentOffset:CGPointMake(kScreenWidth/2.f, self.TYCorrecVC.scrollView.contentOffset.y)];
                 self.TYCorrecVC.scrollView.scrollEnabled = YES;
             }];
+            
+            [self removeGestureRecognizerFromView:self.imgView];
         }
             break;
         case 13://手绘
@@ -146,8 +155,11 @@
     [self.tkImageView removeFromSuperview];
     self.clipButton.hidden = YES;
     self.imgView.hidden = NO;
-    _image = [self.tkImageView currentCroppedImage];
-        _tkImageView.maskColor = [UIColor clearColor];
+    _image = [Global makeImageWithView:self.imgView withSize:self.imgView.size];
+    _image = [self.tkImageView currentCroppedImage:_image];
+    
+    
+    
     ActionSheetView * actionSheet = [[ActionSheetView alloc] initWithCancleTitle:@"取消" otherTitles:@"范文库",@"病文库" ,nil];
     
     [actionSheet show];
@@ -160,11 +172,14 @@
         }else {
             imageData = UIImageJPEGRepresentation(_image, 0.2);
         }
+        [SVProgressHUD showWithStatus:@"正在提交"];
         UploadPicRequst *requst = [[UploadPicRequst alloc]init];
         [requst UploadPicRequstWithfileValue:imageData withuserid:[XFUserInfo getUserInfo].Loginid withtypeid:@"1" :^(NSDictionary *json){
             NSString * str =   json[@"ret_data"]?:@"";
             
             [[XFRequestManager sharedInstance] XFRequstAddCutPic:[XFUserInfo getUserInfo].Loginid PicID:_picModel.ID blogID:_picModel.BlogID ExtractPicUrl:str ExtractContent:@"" ExtractType:[NSString stringWithFormat:@"%ld",(long)sheetItem.index] :^(NSString *requestName, id responseData, BOOL isSuccess) {
+                [_clipBtn setSelected:NO];
+                [SVProgressHUD dismiss];
                 [SVProgressHUD showInfoWithStatus:responseData];
             }];
         }];
@@ -205,7 +220,13 @@
                           @"XLocation": @(x),  //X轴
                           @"YLocation": @(y)  //Y轴
                           };
-    [self.vedioArr addObject:view.dic];
+    
+    
+    if ([ID isEqualToString:@"0"]) {
+       
+        [self.vedioArr addObject:view.dic];
+    }
+    
     
     view.tapBlock = ^{
         [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
@@ -238,9 +259,16 @@
         UIAlertAction * cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
         
         UIAlertAction *sure = [UIAlertAction actionWithTitle:@"删除" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [SVProgressHUD showWithStatus:@"正在删除"];
+            [[XFRequestManager sharedInstance] XFRequstDeleteCommentAudio:[NSString stringWithFormat:@"%ld",[weakView.dic[@"Id"] integerValue]] :^(NSString *requestName, id responseData, BOOL isSuccess) {
+                [SVProgressHUD dismiss];
+                if (isSuccess) {
+                    [SVProgressHUD showInfoWithStatus:@"删除成功"];
+                    [weakView removeFromSuperview];
+                }
+            }] ;
             
-            [self.vedioArr removeObject:weakView.dic];
-            [weakView removeFromSuperview];
+          
         }];
         
         [alert addAction:cancelAction];
@@ -272,10 +300,10 @@
         //是否显示九宫格交叉线
         //    _tkImageView.showCrossLines = YES;
         _tkImageView.cornerBorderInImage = NO;
-        _tkImageView.cropAreaCornerWidth = 10;
-        _tkImageView.cropAreaCornerHeight = 10;
+        _tkImageView.cropAreaCornerWidth = 0;
+        _tkImageView.cropAreaCornerHeight = 0;
         _tkImageView.minSpace = 5;
-        _tkImageView.cropAreaCornerLineColor = [UIColor redColor];
+        _tkImageView.cropAreaCornerLineColor = [UIColor clearColor];
         _tkImageView.cropAreaBorderLineColor = [UIColor lightGrayColor];
 //        _tkImageView.cropAreaCornerLineWidth = 6;
         _tkImageView.cropAreaBorderLineWidth = 1;
@@ -294,7 +322,7 @@
 
 - (UIImageView *)imgView {
     if (!_imgView) {
-        _imgView = [[UIImageView alloc] initWithFrame:CGRectMake(50, 80, kScreenWidth-100, (kScreenWidth-100)*2083/1602.f)];
+        _imgView = [[UIImageView alloc] initWithFrame:CGRectMake(30, 50, kScreenWidth-60, (kScreenWidth-60)*  (kScreenHeight - 60 - SafeAreaTopHeight)/kScreenWidth)];
         _imgView.backgroundColor = hexColor(ff4e00);
         [_imgView setMultipleTouchEnabled:YES];
         [_imgView setUserInteractionEnabled:YES];
@@ -317,6 +345,9 @@
         _topBackView.clipsToBounds = YES;
         [_topBackView addSubview:_imgView];
 
+        
+        [self.view bringSubviewToFront:_tableView];
+        
         oldFrame = _imgView.frame;
         largeFrame = CGRectMake(-(3 * oldFrame.size.width - self.view.height)/2.f, -(3 * oldFrame.size.height - self.view.height)/2.f, 3 * oldFrame.size.width, 3 * oldFrame.size.height);
         
@@ -365,6 +396,9 @@
     _colorArray = [NSMutableArray array];
     _widthArray = [NSMutableArray array];
     _vedioArr = [NSMutableArray arrayWithCapacity:0];
+    
+    _requesteAudioArr = [NSMutableArray array];
+    
     for (int i =0 ; i< @[@"红色",@"绿色",@"白色"].count; i++) {
         StandardInfo * bean = [[StandardInfo alloc]init];
         NSString * str = @[@"红色",@"绿色",@"白色"][i];
@@ -393,8 +427,9 @@
         self.bottomViewLayout.constant = 0;
         self.bottomView.hidden = YES;
     }
-    _vedioArr = [NSMutableArray array];
     [self getGetWriteAudioRequestData];
+    [self.view bringSubviewToFront:_tableView];
+
 }
 //取消手势
 - (void)removeGestureRecognizerFromView:(UIView *)view {

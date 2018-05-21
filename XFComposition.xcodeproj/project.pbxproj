@@ -146,6 +146,7 @@
 		3FBD7E3120ABCA8E00C7F58E /* XFLbraryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FBD7E2F20ABCA8E00C7F58E /* XFLbraryViewController.xib */; };
 		3FBD7E3520ABCBC100C7F58E /* XFLbraryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FBD7E3320ABCBC100C7F58E /* XFLbraryCell.m */; };
 		3FBD7E3620ABCBC100C7F58E /* XFLbraryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FBD7E3420ABCBC100C7F58E /* XFLbraryCell.xib */; };
+		3FD3073B20B29480001F41EF /* TKImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = BAD0F5D720AAC3F300AAD3D4 /* TKImageView.m */; };
 		3FECC88D20AA8D1300FE6727 /* StrokeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FECC88C20AA8D1300FE6727 /* StrokeView.m */; };
 		3FECC88F20AA8D3000FE6727 /* StrokeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FECC88E20AA8D3000FE6727 /* StrokeView.xib */; };
 		3FECC89320AAA49500FE6727 /* StrokeViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FECC89120AAA49500FE6727 /* StrokeViewCell.m */; };
@@ -6076,6 +6077,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F612EBE11F4FB341000E7432 /* XFCompositionTests.m in Sources */,
+				3FD3073B20B29480001F41EF /* TKImageView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

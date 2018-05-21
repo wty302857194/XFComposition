@@ -13,6 +13,8 @@
 @property (strong, nonatomic) UIImageView *imgView;
 @property (nonatomic, strong) GetWritePicModel* picModel;
 @property (nonatomic, strong) NSMutableArray *vedioArr;
+@property (nonatomic, strong) NSMutableArray *requesteAudioArr;
+
 
 - (void)getGetWriteAudioRequestData;
 @end

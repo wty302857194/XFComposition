@@ -111,9 +111,10 @@ static NSInteger const qiPaoWidth = 160;
                                  }
                          };
   
-    
-    [self.qiPaoArr addObject:dic];
-    
+    if (model == nil) {
+        [self.qiPaoArr addObject:dic];
+
+    }
     __weak typeof(self) weakSelf = self;
     __weak QiPaoTagView *weak_qiPaoView = qiPaoView;
     qiPaoView.contentStrBlock = ^(NSString *contentStr) {
@@ -282,6 +283,7 @@ static NSInteger const qiPaoWidth = 160;
     NSLog(@"dic = %@",dic);
     [request startWithMethod:HTTPTypePOST params:dic successedBlock:^(id succeedResult) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [self.navigationController popViewControllerAnimated:YES];
         NSLog(@"ForecastUrl === %@",succeedResult);
         
     } failedBolck:^(NSURLSessionDataTask *task, NSError *error) {
@@ -361,13 +363,6 @@ static NSInteger const qiPaoWidth = 160;
         NSLog(@"ForecastUrl === %@",succeedResult);
         if ([succeedResult[@"ret_code"] integerValue] == 0) {
             [qiPaoView removeFromSuperview];
-            [self.qiPaoArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                NSMutableDictionary *dataDic = [NSMutableDictionary dictionaryWithDictionary:obj];
-                if ([[dataDic.allKeys firstObject] integerValue] == qiPaoView.tag ) {
-                    [self.qiPaoArr removeObjectAtIndex:qiPaoView.tag];
-                }
-                NSLog(@"self.vedioArr===%@",self.qiPaoArr);
-            }];
         }
     } failedBolck:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"error===%@",error.localizedDescription);

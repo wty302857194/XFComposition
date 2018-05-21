@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -15,6 +15,7 @@
             <connections>
                 <outlet property="bottomView" destination="xIv-bu-KYZ" id="UtL-E3-nWf"/>
                 <outlet property="bottomViewLayout" destination="aZs-Km-tTP" id="6GV-Qn-t4U"/>
+                <outlet property="clipBtn" destination="ils-eM-97w" id="cbd-hh-oVD"/>
                 <outlet property="clipButton" destination="OOT-8S-zfK" id="Qjq-0R-XWF"/>
                 <outlet property="tableView" destination="ZH1-NG-XGj" id="unG-pB-E6a"/>
                 <outlet property="topBackView" destination="QCK-Lr-c9D" id="0EL-Ag-HJA"/>

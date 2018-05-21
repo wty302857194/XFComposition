@@ -33,6 +33,9 @@ typedef void (^XFResponseBlock)(NSString* requestName, id responseData , BOOL is
 #define XFReq_User_DeleteCutPic        @"删除截图"
 #define XFReq_User_GetWritePicRemark   @"获得写作旁批"
 
+#define XFReq_User_DeleteCommentAudio   @"删除语音批注"
+
+
 
 
 @interface XFRequestManager : NSObject
@@ -179,7 +182,12 @@ typedef void (^XFResponseBlock)(NSString* requestName, id responseData , BOOL is
                            PicID:(NSString*)PicID
                             :(XFResponseBlock)block;
 
-
+/**
+ *删除语音批注
+ *@param AudioID:  //语音标识用户标识
+ */
+-(void)XFRequstDeleteCommentAudio:(NSString*)AudioID
+                                :(XFResponseBlock)block;
 +(NSString*)encodedParams:(NSDictionary*)params;
 
 @end
