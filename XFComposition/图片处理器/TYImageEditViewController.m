@@ -152,11 +152,13 @@
 
 - (IBAction)clipImage:(id)sender {
     
-    [self.tkImageView removeFromSuperview];
-    self.clipButton.hidden = YES;
-    self.imgView.hidden = NO;
+    
+   
     _image = [Global makeImageWithView:self.imgView withSize:self.imgView.size];
-    _image = [self.tkImageView currentCroppedImage:_image];
+    
+    CGRect rect = [self.tkImageView.cropAreaView.superview convertRect:self.tkImageView.cropAreaView.frame toView:self.imgView];
+
+    _image = [self.tkImageView currentCroppedImage:_image withRect:rect];
     
     
     
@@ -178,6 +180,8 @@
             NSString * str =   json[@"ret_data"]?:@"";
             
             [[XFRequestManager sharedInstance] XFRequstAddCutPic:[XFUserInfo getUserInfo].Loginid PicID:_picModel.ID blogID:_picModel.BlogID ExtractPicUrl:str ExtractContent:@"" ExtractType:[NSString stringWithFormat:@"%ld",(long)sheetItem.index] :^(NSString *requestName, id responseData, BOOL isSuccess) {
+                [self.tkImageView removeFromSuperview];
+                self.clipButton.hidden = YES;
                 [_clipBtn setSelected:NO];
                 [SVProgressHUD dismiss];
                 [SVProgressHUD showInfoWithStatus:responseData];

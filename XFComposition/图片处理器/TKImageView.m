@@ -1122,9 +1122,9 @@ typedef NS_ENUM(NSInteger, TKMidLineType) {
     
 }
 #pragma Instance Methods
-- (UIImage *)currentCroppedImage:(UIImage*)image {
+- (UIImage *)currentCroppedImage:(UIImage*)image withRect:(CGRect)rect {
     
-    return     [self cropImage:image toRect:_cropAreaView.frame];
+    return     [self cropImage:image toRect:rect];
     
 }
 - (UIImage *)cropImage:(UIImage*)image toRect:(CGRect)rect {
