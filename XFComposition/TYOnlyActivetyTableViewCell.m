@@ -34,7 +34,10 @@
     return [formatter stringFromDate:date2];
 }
 - (NSString *)decoderUrlEncodeStr: (NSString *) input{
-    NSMutableString *outputStr = [NSMutableString stringWithString:input];
+    NSArray *arr = [input componentsSeparatedByString:@";"];
+    NSString *newStr = arr.lastObject;
+    
+    NSMutableString *outputStr = [NSMutableString stringWithString:newStr];
     [outputStr replaceOccurrencesOfString:@"+" withString:@"" options:NSLiteralSearch range:NSMakeRange(0,[outputStr length])];
     NSString *string = [outputStr stringByRemovingPercentEncoding];
     if ([string containsString:@"<p>"]) {
@@ -44,6 +47,12 @@
         string = [string stringByReplacingOccurrencesOfString:@"</p>" withString:@""];
     }
     
+    if ([string containsString:@"</span>"]) {
+        string = [string stringByReplacingOccurrencesOfString:@"</span>" withString:@""];
+    }
+    if ([string containsString:@">"]) {
+        string = [string stringByReplacingOccurrencesOfString:@">" withString:@""];
+    }
     
     
     return string;

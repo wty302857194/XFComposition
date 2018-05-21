@@ -23,7 +23,7 @@
                                  @"flag":flag,
                                  @"istuijian":istuijian
                                  };
-    
+    NSLog(@"parameters== %@",parameters);
     [requst requestWithURLString:APIurl parameters:parameters type:NetworkRequestTypePost imgData:nil resultBlock:^(id responseObject, NSError *error, NSURLSessionDataTask *task) {
         
         

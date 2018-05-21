@@ -393,7 +393,7 @@
         self.bottomViewLayout.constant = 0;
         self.bottomView.hidden = YES;
     }
-    _vedioArr = [NSMutableArray array];
+
     [self getGetWriteAudioRequestData];
 }
 //取消手势

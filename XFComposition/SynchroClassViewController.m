@@ -115,7 +115,7 @@
                 
                 weakSelf.Secondeparameter = data_id;
                 MicroClassTypeModel *model = weakSelf.tizaiArray[index];
-                
+                [weakSelf.array3 removeAllObjects];
                 for (ChildgradeModel *model2 in model.childgrade) {
                     [weakSelf.array3 addObject:model2];
                 }
@@ -152,7 +152,6 @@
             break;
         case 1001:
         {
-            //            MicroClassTypeModel *model = self.tizaiArray[i];
             self.menuView.dataArr = [NSArray arrayWithArray:self.tizaiArray];
         }
             break;
@@ -292,7 +291,7 @@
         NSDictionary *myDic = @{@"tizainame":@"所有分类",@"zaitiid":@"",@"childgrade":arr};
         
         NSMutableArray *mutableArr = [NSMutableArray arrayWithArray:json[@"ret_data"]];
-        [mutableArr addObject:myDic];
+        [mutableArr insertObject:myDic atIndex:0];
         
         for (NSDictionary *dic in mutableArr) {
             MicroClassTypeModel *model = [MicroClassTypeModel mj_objectWithKeyValues:dic];

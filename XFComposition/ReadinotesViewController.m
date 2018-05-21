@@ -53,8 +53,10 @@
 
 //学生老师读书笔记
 -(void)GetStudendAndTeacherBj :(NSString *)flag{
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     GetBookBjRequst *requst = [[GetBookBjRequst alloc]init];
     [requst GetBookBjRequstWithPageIndex:@"1" withPageSize:@"20" withflag:flag withistuijian:@"0" :^(NSDictionary *json) {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
         [self.BjArray removeAllObjects];
         for (NSDictionary *dic in json[@"ret_data"][@"pageInfo"]) {
             GetBookBjModel *model = [GetBookBjModel loadWithJSOn:dic];
@@ -68,8 +70,12 @@
 }
 //获取在读想读已读笔记
 -(void)GetStaicBj :(NSString *)flag{
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+
     GetStaticBookBjRequst *requst = [[GetStaticBookBjRequst alloc]init];
     [requst GetStaticBookBjRequstWithPageIndex:@"1" withPageSize:@"20" withflag:flag withistuijian:@"0" :^(NSDictionary *json) {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+
         [self.BjArray removeAllObjects];
         for (NSDictionary *dic in json[@"ret_data"][@"pageInfo"]) {
             GetBookBjModel *model = [GetBookBjModel loadWithJSOn:dic];
@@ -85,27 +91,45 @@
 -(void)requstMore :(NSString *)flag{
     self.page +=1;
     if (self.staic == 1 || self.staic ==2) {
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+
         GetBookBjRequst *requst = [[GetBookBjRequst alloc]init];
         [requst GetBookBjRequstWithPageIndex:[NSString stringWithFormat:@"%ld",(long)self.page] withPageSize:@"20" withflag:flag withistuijian:@"0" :^(NSDictionary *json) {
-            
-            for (NSDictionary *dic in json[@"ret_data"][@"pageInfo"]) {
-                GetBookBjModel *model = [GetBookBjModel loadWithJSOn:dic];
-                [self.BjArray addObject:model];
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+
+            NSArray *arr = json[@"ret_data"][@"pageInfo"];
+            if (arr.count>0) {
+                for (NSDictionary *dic in json[@"ret_data"][@"pageInfo"]) {
+                    GetBookBjModel *model = [GetBookBjModel loadWithJSOn:dic];
+                    [self.BjArray addObject:model];
+                }
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.tableView reloadData];
+                });
+            }else {
+                [Global promptMessage:@"没有更多了" inView:self.view];
             }
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.tableView reloadData];
-            });
         }];
     }else{
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+
         GetStaticBookBjRequst *requst = [[GetStaticBookBjRequst alloc]init];
-        [requst GetStaticBookBjRequstWithPageIndex:@"1" withPageSize:@"20" withflag:flag withistuijian:@"0" :^(NSDictionary *json) {
-            for (NSDictionary *dic in json[@"ret_data"][@"pageInfo"]) {
-                GetBookBjModel *model = [GetBookBjModel loadWithJSOn:dic];
-                [self.BjArray addObject:model];
+        [requst GetStaticBookBjRequstWithPageIndex:[NSString stringWithFormat:@"%ld",(long)self.page] withPageSize:@"20" withflag:flag withistuijian:@"0" :^(NSDictionary *json) {
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            NSArray *arr = json[@"ret_data"][@"pageInfo"];
+
+            if (arr.count>0) {
+                for (NSDictionary *dic in json[@"ret_data"][@"pageInfo"]) {
+                    GetBookBjModel *model = [GetBookBjModel loadWithJSOn:dic];
+                    [self.BjArray addObject:model];
+                }
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.tableView reloadData];
+                });
+            }else {
+                [Global promptMessage:@"没有更多了" inView:self.view];
             }
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.tableView reloadData];
-            });
+            
             
         }];
     }
