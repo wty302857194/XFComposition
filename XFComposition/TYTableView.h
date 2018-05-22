@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TYTableView : UIView
+@interface TYTableView : UITableView
 
 @end

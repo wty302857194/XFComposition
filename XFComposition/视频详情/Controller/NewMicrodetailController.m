@@ -11,6 +11,7 @@
 #import "PlayerConfiguration.h"
 #import "SynchroClassViewController.h"
 #import "AlertWriteView.h"
+#import "BookWritingTableViewController.h"
 
 #import "NewMicoFristCell.h"
 #import "NewMicoSecondCell.h"
@@ -38,8 +39,8 @@
 #import "DianPingModel.h"
 #import "CommwritelistModel.h"
 #import "GetCommentListModel.h"
-
-
+#import "UploadPicRequst.h"
+#import "ActionSheetView.h"
 
 static NSString *firstCellID = @"NewMicoFristCell";
 static NSString *secondCellID = @"NewMicoSecondCell";
@@ -49,7 +50,7 @@ static NSString *fiveCellID = @"NewMicoFiveCell";
 static NSString *sixthCellID = @"NewMicoSixthCell";
 static NSString *seventhCellID = @"NewMicoSeventhCell";
 
-@interface NewMicrodetailController ()<UITableViewDelegate, UITableViewDataSource,AddwritingViewDelegate>
+@interface NewMicrodetailController ()<UITableViewDelegate, UITableViewDataSource,AddwritingViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 
 @property (nonatomic, strong) UITableView *tableView;
@@ -171,8 +172,10 @@ static NSString *seventhCellID = @"NewMicoSeventhCell";
 //新建作文
 -(void)newWriting:(NSString *)title content:(NSString *)content flag:(NSString *)flg{
     __weak typeof (self) weakSelf = self;
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     AddBlogRequst *requst = [[AddBlogRequst alloc]init];
     [requst AddBlogRequstWithNoticeName:title withNoticeObject:self.classId withNoticeContent:content withNoticeID:flg withuserid:self.userId withactiveItemId:@"0" withposttype:@"0" :^(NSDictionary *json) {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
         if ([json[@"ret_msg"] isEqualToString:@"成功"]) {
             [weakSelf MicroXiezuowenRequst];
         }
@@ -250,8 +253,9 @@ static NSString *seventhCellID = @"NewMicoSeventhCell";
 -(void)comment:(UITextView *)textView{
     __weak typeof (self) weakSelf = self;
     WeikePostCommentRequst *requst = [[WeikePostCommentRequst alloc]init];
-    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [requst WeikePostCommentRequstwithuserid:self.userId withmodelid:@"5" withclassid:self.classId withuserip:@"127.0.0.1" withCommentinfo:textView.text :^(NSDictionary *json) {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
         NSLog(@"%@",json[@"ret_msg"]);
         if ([json[@"ret_msg"] isEqualToString:@"成功"]) {
             [textView setText:nil];
@@ -400,10 +404,10 @@ static NSString *seventhCellID = @"NewMicoSeventhCell";
         cell.clickBlock = ^(NSArray<MicPianduanmodel *> *array, ClickType type) {
             
             if (type == ClickTypeAdd) {//新建作文
-                AlertWriteView *alertView = [[AlertWriteView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
-                alertView.delegate = weakSelf;
-                [alertView showViewWithModel:nil content:nil flag:@"0"];
-
+//                AlertWriteView *alertView = [[AlertWriteView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+//                alertView.delegate = weakSelf;
+//                [alertView showViewWithModel:nil content:nil flag:@"0"];
+                [self newObjectMessage];
             } else if (type == ClickTypeSave) {//保存
                 NSMutableArray *ary = [NSMutableArray array];
                 for (MicPianduanmodel *model in array) {
@@ -484,8 +488,87 @@ static NSString *seventhCellID = @"NewMicoSeventhCell";
 {
     return 100;
 }
-
-
+#pragma mark - 新建作文底部弹框
+- (void)newObjectMessage {
+    ActionSheetView * actionSheet = [[ActionSheetView alloc] initWithCancleTitle:@"取消" otherTitles:@"手动录入",@"上传照片" ,nil];
+    [actionSheet show];
+     __weak typeof(self) weakSelf = self;
+    actionSheet.actionSheetBlock = ^(ActionSheetItem *sheetItem) {
+        if(sheetItem.index == 0) {
+            AlertWriteView *alertView = [[AlertWriteView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+            alertView.delegate = weakSelf;
+            [alertView showViewWithModel:nil content:nil flag:@"0"];
+        }else {
+            [weakSelf openCamera];
+        }
+       
+    };
+}
+- (void)openCamera
+{
+    UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction *cancle = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction *_Nonnull action) {
+        
+    }];
+    
+    UIAlertAction *camera = [UIAlertAction actionWithTitle:@"打开相机" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        
+        UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+        imagePicker.delegate = self;
+        if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]){
+            imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        }
+        
+        [self presentViewController:imagePicker animated:YES completion:nil];
+        
+    }];
+    
+    UIAlertAction *picture = [UIAlertAction actionWithTitle:@"打开相册" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        
+        UIImagePickerController *pickerImage = [[UIImagePickerController alloc] init];
+        if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+            pickerImage.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            pickerImage.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:pickerImage.sourceType];
+            
+        }
+        pickerImage.delegate = self;
+        pickerImage.allowsEditing = NO;
+        
+        
+        [self presentViewController:pickerImage animated:YES completion:nil];
+    }];
+    [alertVc addAction:cancle];
+    [alertVc addAction:camera];
+    [alertVc addAction:picture];
+    [self presentViewController:alertVc animated:YES completion:nil];
+    
+}
+// 获取图片后的操作
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
+{
+    // 销毁控制器
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    
+    NSData *imageData1 = UIImageJPEGRepresentation(info[UIImagePickerControllerOriginalImage], 0.2);
+    UploadPicRequst *requst = [[UploadPicRequst alloc]init];
+    
+    
+    [requst UploadPicRequstWithfileValue:imageData1 withuserid:self.xf.Loginid withtypeid:@"1" :^(NSDictionary *json) {
+        
+        NSLog(@"%@",json);
+        if (json) {
+            UIStoryboard *stotyBoard = [UIStoryboard storyboardWithName:@"TYStoryboard" bundle:nil];
+            BookWritingTableViewController *loginVC = [stotyBoard instantiateViewControllerWithIdentifier:@"BookWritingTableViewController"];
+            loginVC.imgUrlStr = json[@"ret_data"]?:@"";
+            loginVC.noticeObjectId = @"0";
+            loginVC.modelId = @"4";
+            [self.navigationController pushViewController:loginVC animated:YES];
+        }else {
+            [Global promptMessage:@"网络不好" inView:self.view];
+        }
+    }];
+    
+}
 #pragma mark --
 
 - (void)goMore

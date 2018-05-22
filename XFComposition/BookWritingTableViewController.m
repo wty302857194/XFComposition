@@ -100,15 +100,15 @@
             for (int i = 0; i<self.imgUrlArr.count; i++) {
                 AddBlogPicReuqst *requst2 = [[AddBlogPicReuqst alloc]init];
                 [requst2 AddBlogPicReuqstwithblogID:writStr withblogPic:self.imgUrlArr[i] withuserid:_xf.Loginid :^(NSDictionary *json) {
-                    //                        self.isTF = json[@"ret_code"];
                 }];
             }
-            [self.navigationController popToRootViewControllerAnimated:YES];
+            if(self.saveSuccessBlock) {
+                self.saveSuccessBlock();
+            }
+            [self.navigationController popViewControllerAnimated:YES];
         }else{
             [SVProgressHUD showErrorWithStatus:[NSString stringWithFormat:@"%@",json[@"ret_msg"]]];
         }
-        
-        
     }];
     
     

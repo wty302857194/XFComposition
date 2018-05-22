@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^SaveSuccessBlock)();
 @interface BookWritingTableViewController : UITableViewController
 @property (nonatomic,copy) NSString *imgUrlStr;
 @property (nonatomic,strong) NSMutableArray *imgUrlArr;
 @property (nonatomic,copy) NSString *noticeObjectId;
 @property (nonatomic,copy) NSString *modelId;
+@property (nonatomic,copy) SaveSuccessBlock saveSuccessBlock;
 @end
