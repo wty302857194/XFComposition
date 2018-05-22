@@ -135,12 +135,11 @@
 }
 
 - (void)clipImage:(UIButton *)sender {
-    
-    
-   
     self.imgView.hidden = NO;
-    _image = [self.tkImageView currentCroppedImage];
     
+    CGRect rect = [self.tkImageView.cropAreaView.superview convertRect:self.tkImageView.cropAreaView.frame toView:self.imgView];
+    _image = [self.tkImageView currentCroppedImage:_image withRect:rect];
+
     ActionSheetView * actionSheet = [[ActionSheetView alloc] initWithCancleTitle:@"取消" otherTitles:@"范文库",@"病文库" ,nil];
     
     [actionSheet show];
