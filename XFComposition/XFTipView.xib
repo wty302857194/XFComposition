@@ -15,15 +15,15 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nocontent_hint_img" translatesAutoresizingMaskIntoConstraints="NO" id="7ZU-Xp-1Tm">
-                    <rect key="frame" x="148" y="227" width="79" height="65"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xf_Norecord" translatesAutoresizingMaskIntoConstraints="NO" id="7ZU-Xp-1Tm">
+                    <rect key="frame" x="145" y="202.5" width="85" height="114"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="65" id="4s8-C4-1Eo"/>
-                        <constraint firstAttribute="width" constant="79" id="u6E-IP-wrM"/>
+                        <constraint firstAttribute="height" constant="114" id="4s8-C4-1Eo"/>
+                        <constraint firstAttribute="width" constant="85" id="u6E-IP-wrM"/>
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XtZ-cS-HZO">
-                    <rect key="frame" x="24" y="317" width="328" height="21"/>
+                    <rect key="frame" x="24" y="341.5" width="328" height="21"/>
                     <constraints>
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="wJ1-py-XOM"/>
                     </constraints>
@@ -32,7 +32,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wCe-TW-f7G">
-                    <rect key="frame" x="87.5" y="358" width="200" height="40"/>
+                    <rect key="frame" x="87.5" y="382.5" width="200" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="G2B-C4-SRL"/>
                         <constraint firstAttribute="width" constant="200" id="JtD-rX-nC4"/>
@@ -72,6 +72,6 @@
         </view>
     </objects>
     <resources>
-        <image name="nocontent_hint_img" width="79" height="64"/>
+        <image name="xf_Norecord" width="85" height="113"/>
     </resources>
 </document>

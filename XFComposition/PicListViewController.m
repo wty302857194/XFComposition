@@ -11,7 +11,6 @@
 #import "GetWritePicRequst.h"
 #import "GetWritePicModel.h"
 #import "PicListTableViewCell.h"
-#import "TYCorrectViewController.h"
 #import "PlaceholderTextView.h"
 #import "GetWritePicRemarkRequst.h"
 #import "GetWritePicRemarkModel.h"

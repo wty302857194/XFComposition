@@ -66,10 +66,10 @@
                             <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="resetPlay" translatesAutoresizingMaskIntoConstraints="NO" id="lQQ-Ri-RTM">
-                            <rect key="frame" x="159.5" y="92" width="16" height="16"/>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xf_volume1" translatesAutoresizingMaskIntoConstraints="NO" id="lQQ-Ri-RTM">
+                            <rect key="frame" x="151.5" y="92" width="32" height="16"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="16" id="BLL-xs-Tkb"/>
+                                <constraint firstAttribute="width" constant="32" id="BLL-xs-Tkb"/>
                                 <constraint firstAttribute="height" constant="16" id="stY-HP-xz3"/>
                             </constraints>
                         </imageView>
@@ -110,11 +110,12 @@
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
                 <outlet property="audioBtn" destination="MiO-2Z-T1g" id="Mwy-z4-kHn"/>
+                <outlet property="audioView" destination="HXE-HW-L8R" id="1jm-Ef-huc"/>
             </connections>
             <point key="canvasLocation" x="25.5" y="51.5"/>
         </view>
     </objects>
     <resources>
-        <image name="resetPlay" width="64" height="64"/>
+        <image name="xf_volume1" width="63" height="31"/>
     </resources>
 </document>

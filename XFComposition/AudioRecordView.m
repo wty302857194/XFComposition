@@ -21,6 +21,10 @@
     
     [super awakeFromNib];
     
+    _audioView.layer.cornerRadius = 6.0;
+    _audioView.layer.masksToBounds = YES;
+    
+    
 }
 -(void)showAudioRecordView{
     
@@ -174,12 +178,6 @@
 
     if ([self.recorder isRecording]) {
         [self.recorder stop];
-    }
-    if (_recordViewBlock) {
-        if (_isStar) {
-            _recordViewBlock([self audio_PCMtoMP3]);
-            
-        }
     }
     [self removeFromSuperview];
 

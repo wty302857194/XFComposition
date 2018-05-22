@@ -187,7 +187,7 @@
 -(void)creatAudioView:(NSString *)urlStr withID:(NSString *)ID originX:(float )x originY:(float )y {
     
     AudioView * view = [[NSBundle mainBundle] loadNibNamed:@"AudioView" owner:self options:nil].lastObject;
-    view.frame = CGRectMake(x*kScreenWidth, y*kScreenHeight, 50, 50);
+    view.frame = CGRectMake(x*kScreenWidth, y*kScreenHeight, 64, 32);
     audioTag ++ ;
     view.tag = audioTag;
     view.dic = @{

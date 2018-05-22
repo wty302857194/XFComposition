@@ -11,15 +11,24 @@
 @interface XFLbraryViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
 
 @property (strong, nonatomic) IBOutlet UICollectionView *collentionView;
+@property (strong, nonatomic)  XFTipView *tipView;
+
 @end
 
 @implementation XFLbraryViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    _tipView = [[NSBundle mainBundle] loadNibNamed:@"XFTipView" owner:self options:nil].lastObject;
+
     [_collentionView registerNib:[UINib nibWithNibName:@"XFLbraryCell" bundle:nil] forCellWithReuseIdentifier:@"XFLbraryCell"];
     
+//    if (_dataArray.count == 0) {
+//        _collentionView. = _tipView;
+//    }else{
+//        _tableView.tableFooterView = nil;
+//    }
+//    
     [_collentionView reloadData];
     GO_BACK;
 }

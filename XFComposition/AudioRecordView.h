@@ -20,6 +20,7 @@ typedef void(^AudioRecordViewBlock)(id recordFileUrl);
 @property (nonatomic, assign)   BOOL isStar;
 
 @property (strong, nonatomic) IBOutlet UIButton *audioBtn;
+@property (strong, nonatomic) IBOutlet UIView *audioView;
 
 
 -(void)showAudioRecordView;

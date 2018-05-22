@@ -25,6 +25,7 @@
 @property (nonatomic,assign)NSInteger page;
 @property (nonatomic,strong)XFUserInfo *xf;
 @property (nonatomic,strong)NSString *checkType;
+@property (strong, nonatomic)  XFTipView *tipView;
 
 @end
 
@@ -115,7 +116,9 @@
             }
             [_typeButton setTitle:array[i] forState:UIControlStateNormal];
             _imgView.image = [UIImage imageNamed:@"ic_open_down2"];
-            [weakSelf GetTeachNeedCheckList:self.checkType];
+            
+            [_tableView.mj_header beginRefreshing];
+//            [weakSelf GetTeachNeedCheckList:self.checkType];
             
         }];
         [self.view addSubview:_menuView1];
@@ -139,10 +142,12 @@
     self.xf = [XFUserInfo getUserInfo];
     self.page = 1;
     self.checkType = @"-1";
+    
+    _tipView = [[NSBundle mainBundle] loadNibNamed:@"XFTipView" owner:self options:nil].lastObject;
+ 
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         
         [self GetTeachNeedCheckList:self.checkType];
-        [self.tableView.mj_header endRefreshing];
     }];
     header.lastUpdatedTimeLabel.hidden = YES;
     header.stateLabel.hidden = YES;
@@ -153,7 +158,6 @@
         
         
         [self requstMore];
-        [self.tableView.mj_footer endRefreshing];
     }];
     [self creatHeadView];
 
@@ -161,7 +165,7 @@
 //获取制定志愿教师需要批阅的习作列表
 -(void)GetTeachNeedCheckList :(NSString *)checkType{
     GetTeachNeedCheckListRequst *requst = [[GetTeachNeedCheckListRequst alloc]init];
-    [requst GetTeachNeedCheckListRequstWithuserId:self.xf.Loginid withactiveId:self.activeId withPageIndex:@"1" withPageSize:@"20" withcheckType:checkType withworkName:self.textfield.text :^(NSDictionary *json) {
+    [requst GetTeachNeedCheckListRequstWithuserId:self.xf.Loginid withactiveId:self.activeId withPageIndex:@"1" withPageSize:@"20" withcheckType:self.checkType withworkName:self.textfield.text :^(NSDictionary *json) {
         [self.WorkArray removeAllObjects];
         if ([json[@"ret_code"] integerValue] == 0) {
             
@@ -169,8 +173,17 @@
                 GetTeachNeedCheckListModel *model = [GetTeachNeedCheckListModel loadWithJSOn:dic];
                 [self.WorkArray addObject:model];
             }
+            if (self.WorkArray.count == 0) {
+                _tableView.tableFooterView = _tipView;
+            }else{
+                _tableView.tableFooterView = nil;
+            }
+            
+            
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.tableView reloadData];
+                [self.tableView.mj_header endRefreshing];
+
             });
         }
         
@@ -189,6 +202,8 @@
             }
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.tableView reloadData];
+                [self.tableView.mj_footer endRefreshing];
+
             });
         }
       

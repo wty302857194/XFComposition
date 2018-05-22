@@ -45,24 +45,24 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="暂无记录" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QR9-Ml-Kno">
-                    <rect key="frame" x="0.0" y="220" width="375" height="30"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xf_Norecord" translatesAutoresizingMaskIntoConstraints="NO" id="dhn-Il-POz">
+                    <rect key="frame" x="144.5" y="220" width="85" height="114"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="30" id="GoB-bg-F5t"/>
+                        <constraint firstAttribute="width" constant="85" id="2DB-KX-8Tl"/>
+                        <constraint firstAttribute="height" constant="114" id="TC5-31-3xE"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
+                </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="QR9-Ml-Kno" firstAttribute="trailing" secondItem="b8d-YM-M5t" secondAttribute="trailing" id="YbZ-CT-cwP"/>
-                <constraint firstItem="QR9-Ml-Kno" firstAttribute="leading" secondItem="b8d-YM-M5t" secondAttribute="leading" id="hmE-7f-9pb"/>
-                <constraint firstItem="QR9-Ml-Kno" firstAttribute="top" secondItem="b8d-YM-M5t" secondAttribute="top" constant="200" id="lwT-ZF-QyE"/>
+                <constraint firstItem="dhn-Il-POz" firstAttribute="top" secondItem="b8d-YM-M5t" secondAttribute="top" constant="200" id="5sY-LP-MuF"/>
+                <constraint firstItem="dhn-Il-POz" firstAttribute="centerX" secondItem="mMT-fx-JzR" secondAttribute="centerX" id="828-Lw-3Uw"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="b8d-YM-M5t"/>
             <point key="canvasLocation" x="22.5" y="-683.5"/>
         </view>
     </objects>
+    <resources>
+        <image name="xf_Norecord" width="85" height="113"/>
+    </resources>
 </document>

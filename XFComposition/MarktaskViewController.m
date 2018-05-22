@@ -21,6 +21,8 @@
 @property (nonatomic,strong)UITableView *tableView;
 @property (nonatomic,strong)NSMutableArray *activeArray;
 @property (nonatomic,assign)NSInteger page;
+@property (strong, nonatomic)  XFTipView *tipView;
+
 
 @end
 
@@ -58,8 +60,8 @@
     [self.view addSubview:self.tableView];
     self.navigationItem.title = @"批阅任务";
     self.view.backgroundColor = [UIColor whiteColor];
-    
-    
+    _tipView = [[NSBundle mainBundle] loadNibNamed:@"XFTipView" owner:self options:nil].lastObject;
+  
     self.page = 1;
     
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
@@ -90,6 +92,14 @@
             GetTeacherNeedActiveModel *model = [GetTeacherNeedActiveModel loadWithJSOn:dic];
             [weakSelf.activeArray addObject:model];
         }
+        
+        if (weakSelf.activeArray.count == 0) {
+            _tableView.tableFooterView = _tipView;
+        }else{
+            _tableView.tableFooterView = nil;
+        }
+        
+        
         dispatch_async(dispatch_get_main_queue(), ^{
             [weakSelf.tableView reloadData];
         });
@@ -134,9 +144,10 @@
         }];
         UIAlertAction * sureAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             
+            [SVProgressHUD showWithStatus:@"正在添加"];
             
             [[XFRequestManager sharedInstance] XFRequstAddStandard:@"0" objectId:model.ID addUser:[XFUserInfo getUserInfo].Loginid modelId:@"7" standardText:textStr :^(NSString *requestName, id responseData, BOOL isSuccess) {
-                
+                [SVProgressHUD dismiss];
                 if (isSuccess) {
                     [SVProgressHUD showSuccessWithStatus:@"添加成功"];
                 }else{

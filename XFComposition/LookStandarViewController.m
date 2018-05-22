@@ -24,7 +24,6 @@
     self.navigationItem.title =@"查看标准";
     [_tableView registerNib:[UINib nibWithNibName:@"LookStandarCell" bundle:nil] forCellReuseIdentifier:@"LookStandarCell"];
     _tipView = [[NSBundle mainBundle] loadNibNamed:@"XFTipView" owner:self options:nil].lastObject;
-    [_tipView setTipString:@"暂无记录"];
     if (_dataArray.count == 0) {
         _tableView.tableFooterView = _tipView;
     }else{
@@ -60,7 +59,12 @@
                 
                 [_dataArray removeObject:info];
                 
-                [_tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+                if (_dataArray.count == 0) {
+                    _tableView.tableFooterView = _tipView;
+                }else{
+                    _tableView.tableFooterView = nil;
+                }
+                [_tableView reloadData];
                 
             }else{
                 
