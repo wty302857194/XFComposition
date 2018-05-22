@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -16,7 +16,6 @@
                 <outlet property="bottomView" destination="xIv-bu-KYZ" id="UtL-E3-nWf"/>
                 <outlet property="bottomViewLayout" destination="aZs-Km-tTP" id="6GV-Qn-t4U"/>
                 <outlet property="clipBtn" destination="ils-eM-97w" id="cbd-hh-oVD"/>
-                <outlet property="clipButton" destination="OOT-8S-zfK" id="Qjq-0R-XWF"/>
                 <outlet property="tableView" destination="ZH1-NG-XGj" id="unG-pB-E6a"/>
                 <outlet property="topBackView" destination="QCK-Lr-c9D" id="0EL-Ag-HJA"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -29,32 +28,7 @@
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QCK-Lr-c9D">
                     <rect key="frame" x="0.0" y="20" width="375" height="587"/>
-                    <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OOT-8S-zfK">
-                            <rect key="frame" x="50" y="538" width="275" height="44"/>
-                            <color key="backgroundColor" red="0.27843137254901962" green="0.5607843137254902" blue="0.792156862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="275" id="BT6-be-Lc0"/>
-                                <constraint firstAttribute="height" constant="44" id="PUt-Sc-b1M"/>
-                            </constraints>
-                            <state key="normal" title="截图">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </state>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                    <real key="value" value="4"/>
-                                </userDefinedRuntimeAttribute>
-                            </userDefinedRuntimeAttributes>
-                            <connections>
-                                <action selector="clipImage:" destination="-1" eventType="touchUpInside" id="eoG-Ma-ztY"/>
-                            </connections>
-                        </button>
-                    </subviews>
                     <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <constraints>
-                        <constraint firstItem="OOT-8S-zfK" firstAttribute="centerX" secondItem="QCK-Lr-c9D" secondAttribute="centerX" id="4Au-dH-R7C"/>
-                        <constraint firstAttribute="bottom" secondItem="OOT-8S-zfK" secondAttribute="bottom" constant="5" id="zjc-SS-U1g"/>
-                    </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xIv-bu-KYZ">
                     <rect key="frame" x="0.0" y="607" width="375" height="60"/>
