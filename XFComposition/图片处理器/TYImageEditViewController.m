@@ -304,8 +304,8 @@
         //是否显示九宫格交叉线
         //    _tkImageView.showCrossLines = YES;
         _tkImageView.cornerBorderInImage = NO;
-        _tkImageView.cropAreaCornerWidth = 0;
-        _tkImageView.cropAreaCornerHeight = 0;
+        _tkImageView.cropAreaCornerWidth = 10;
+        _tkImageView.cropAreaCornerHeight = 10;
         _tkImageView.minSpace = 5;
         _tkImageView.cropAreaCornerLineColor = [UIColor clearColor];
         _tkImageView.cropAreaBorderLineColor = [UIColor lightGrayColor];

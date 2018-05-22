@@ -171,7 +171,7 @@
                 <constraint firstItem="QCK-Lr-c9D" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="zKm-6e-G83"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
-            <point key="canvasLocation" x="109.5" y="14.5"/>
+            <point key="canvasLocation" x="-75" y="-22"/>
         </view>
     </objects>
     <resources>
