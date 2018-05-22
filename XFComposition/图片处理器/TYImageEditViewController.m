@@ -155,9 +155,9 @@
         [SVProgressHUD showWithStatus:@"正在提交"];
         UploadPicRequst *requst = [[UploadPicRequst alloc]init];
         [requst UploadPicRequstWithfileValue:imageData withuserid:[XFUserInfo getUserInfo].Loginid withtypeid:@"1" :^(NSDictionary *json){
-            NSString * str =   json[@"ret_data"]?:@"";
+            NSString * str =  [NSString stringWithFormat:@"%@%@",HTurl,json[@"ret_data"]?:@""] ;
             
-            [[XFRequestManager sharedInstance] XFRequstAddCutPic:[XFUserInfo getUserInfo].Loginid PicID:_picModel.ID blogID:_picModel.BlogID ExtractPicUrl:str ExtractContent:@"" ExtractType:[NSString stringWithFormat:@"%ld",(long)sheetItem.index] :^(NSString *requestName, id responseData, BOOL isSuccess) {
+            [[XFRequestManager sharedInstance] XFRequstAddCutPic:[XFUserInfo getUserInfo].Loginid PicID:_picModel.ID blogID:_picModel.BlogID ExtractPicUrl:str  ExtractContent:@"" ExtractType:[NSString stringWithFormat:@"%ld",(long)sheetItem.index-1] :^(NSString *requestName, id responseData, BOOL isSuccess) {
                 [self.tkImageView removeFromSuperview];
                 [_clipBtn setSelected:NO];
                 [SVProgressHUD dismiss];
