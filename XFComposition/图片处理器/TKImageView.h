@@ -48,5 +48,5 @@ typedef NS_ENUM(NSInteger, TKCropAreaCornerStyle) {
 
 
 
-- (UIImage *)currentCroppedImage:(UIImage*)image withRect:(CGRect)rect;
+- (UIImage *)currentCroppedImage;
 @end

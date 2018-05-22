@@ -28,7 +28,6 @@
     CGRect oldFrame;    //保存图片原来的大小
     CGRect largeFrame;  //确定图片放大最大的程;
     UIPinchGestureRecognizer *pinchGestureRecognizer;
-//    UIPanGestureRecognizer *panGestureRecognizer;
     UIImage *_image;
     BOOL _isShouHui;
     BOOL isFirst;
@@ -49,7 +48,6 @@
 @property (nonatomic, strong) NSArray *tabArr;
 @property (nonatomic, strong) NSMutableArray * colorArray;
 @property (nonatomic, strong) NSMutableArray * widthArray;
-@property (weak, nonatomic) IBOutlet UIButton *clipButton;
 
 @property (strong, nonatomic) IBOutlet UIButton *clipBtn;
 @property (nonatomic, strong) TKImageView *tkImageView;
@@ -72,29 +70,15 @@
             sender.selected = !sender.selected;
             
             if (sender.selected) {
-
+                _image = [Global makeImageWithView:_topBackView withSize:_topBackView.size];
                 
-//                self.imgView.hidden = YES;
-//                self.tkImageView.imageView.image = self.imgView.image;
-                
+                self.imgView.hidden = YES;
+                self.tkImageView.toCropImage = _image;
                 [self.view addSubview:self.tkImageView];
-                
-
-                self.tkImageView.cropAreaView.frame = CGRectMake(47, 170, 291, 213);
-                
-                [self.view bringSubviewToFront:_tableView];
-                self.clipButton.hidden = NO;
             }else{
-                
                 [self.tkImageView removeFromSuperview];
                 self.imgView.hidden = NO;
-
-                self.clipButton.hidden = YES;
-
             }
-            
-            
-            
         }
             break;
         case 12://旁批
@@ -154,13 +138,8 @@
     
     
    
-    _image = [Global makeImageWithView:self.imgView withSize:self.imgView.size];
-    
-    CGRect rect = [self.tkImageView.cropAreaView.superview convertRect:self.tkImageView.cropAreaView.frame toView:self.imgView];
-
-    _image = [self.tkImageView currentCroppedImage:_image withRect:rect];
-    
-    
+    self.imgView.hidden = NO;
+    _image = [self.tkImageView currentCroppedImage];
     
     ActionSheetView * actionSheet = [[ActionSheetView alloc] initWithCancleTitle:@"取消" otherTitles:@"范文库",@"病文库" ,nil];
     
@@ -181,7 +160,6 @@
             
             [[XFRequestManager sharedInstance] XFRequstAddCutPic:[XFUserInfo getUserInfo].Loginid PicID:_picModel.ID blogID:_picModel.BlogID ExtractPicUrl:str ExtractContent:@"" ExtractType:[NSString stringWithFormat:@"%ld",(long)sheetItem.index] :^(NSString *requestName, id responseData, BOOL isSuccess) {
                 [self.tkImageView removeFromSuperview];
-                self.clipButton.hidden = YES;
                 [_clipBtn setSelected:NO];
                 [SVProgressHUD dismiss];
                 [SVProgressHUD showInfoWithStatus:responseData];
@@ -362,9 +340,7 @@
         _topBackView.clipsToBounds = YES;
         [_topBackView addSubview:_imgView];
 
-        
-        [self.view bringSubviewToFront:_tableView];
-        
+                
         oldFrame = _imgView.frame;
         largeFrame = CGRectMake(-(3 * oldFrame.size.width - self.view.height)/2.f, -(3 * oldFrame.size.height - self.view.height)/2.f, 3 * oldFrame.size.width, 3 * oldFrame.size.height);
         
@@ -404,9 +380,8 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+
     _tabArr = @[@"清屏",@"颜色",@"画笔",@"还原大小",@"范文库",@"病文库",@"撤销"];
-    self.clipButton.hidden = YES;
     isFirst = YES;
     audioTag = 0;
     [self addGestureRecognizerToView:self.imgView];
@@ -612,25 +587,7 @@
     }
     
 }
-/*
- "{
- ""ret_code"": ""0"",
- ""ret_msg"": ""成功"",
- ""ret_data"": [
- {
- ""Id"": 134,   //标识
- ""CreateTime"": ""2017/5/1 22:07:30"",
- ""BlogID"": ""43"",  //习作ID
- ""PicID"": ""43"",  //习作图片ID
- ""UserID"": ""23"", //用户ID
- ""Sort"": ""0"", //排序
- ""AudioUrl"": ""这段写的好"",    //点评内容
- ""XLocation"": ""10.08"",  //X轴
- ""YLocation"": ""10.08""  //Y轴
- }
- ]
- }"
- */
+
 #pragma mark - 获取录音按钮
 - (void)getGetWriteAudioRequestData {
     
