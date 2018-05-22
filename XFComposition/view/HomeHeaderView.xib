@@ -29,11 +29,11 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZuD-rS-hc1">
                             <rect key="frame" x="0.0" y="0.0" width="94" height="105"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon1_zuowenku" translatesAutoresizingMaskIntoConstraints="NO" id="vsj-UL-Uc1">
-                                    <rect key="frame" x="30" y="24" width="34" height="37"/>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xf_composition" translatesAutoresizingMaskIntoConstraints="NO" id="vsj-UL-Uc1">
+                                    <rect key="frame" x="32" y="27" width="30" height="31"/>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="作文库" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p5K-sz-7qM">
-                                    <rect key="frame" x="20.5" y="71" width="52" height="21"/>
+                                    <rect key="frame" x="20.5" y="68" width="52" height="21"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
@@ -61,8 +61,8 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fm2-Vz-6wE">
                             <rect key="frame" x="94" y="0.0" width="93.5" height="105"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon1_zuowenku" translatesAutoresizingMaskIntoConstraints="NO" id="JNb-cE-WTp">
-                                    <rect key="frame" x="30" y="24" width="34" height="37"/>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xf_tiny" translatesAutoresizingMaskIntoConstraints="NO" id="JNb-cE-WTp">
+                                    <rect key="frame" x="32" y="27" width="30" height="31"/>
                                 </imageView>
                                 <button opaque="NO" tag="101" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6CK-1f-fZh">
                                     <rect key="frame" x="0.0" y="0.0" width="93.5" height="105"/>
@@ -71,7 +71,7 @@
                                     </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="微课堂" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4ZM-Os-SDM">
-                                    <rect key="frame" x="21.5" y="71" width="52" height="21"/>
+                                    <rect key="frame" x="21.5" y="68" width="52" height="21"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
@@ -92,8 +92,8 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kmm-98-jBG">
                             <rect key="frame" x="187.5" y="0.0" width="94" height="105"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon1_zuowenku" translatesAutoresizingMaskIntoConstraints="NO" id="cA8-SE-hkC">
-                                    <rect key="frame" x="29.5" y="24" width="34" height="37"/>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xf_read" translatesAutoresizingMaskIntoConstraints="NO" id="cA8-SE-hkC">
+                                    <rect key="frame" x="31.5" y="27" width="30" height="31"/>
                                 </imageView>
                                 <button opaque="NO" tag="102" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="afp-6g-Jay">
                                     <rect key="frame" x="0.0" y="0.0" width="94" height="105"/>
@@ -102,7 +102,7 @@
                                     </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="阅读与评测" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5pp-rn-xWh">
-                                    <rect key="frame" x="3" y="71" width="87" height="21"/>
+                                    <rect key="frame" x="3" y="68" width="87" height="21"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
@@ -154,8 +154,8 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ev2-V3-7Pt">
                             <rect key="frame" x="0.0" y="105" width="94" height="0.0"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon1_zuowenku" translatesAutoresizingMaskIntoConstraints="NO" id="0CS-2r-As5">
-                                    <rect key="frame" x="47.5" y="-28.5" width="0.0" height="37"/>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xf_volunteer" translatesAutoresizingMaskIntoConstraints="NO" id="0CS-2r-As5">
+                                    <rect key="frame" x="47.5" y="-25.5" width="0.0" height="31"/>
                                 </imageView>
                                 <button opaque="NO" tag="104" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ODK-11-jSU">
                                     <rect key="frame" x="0.0" y="0.0" width="94" height="0.0"/>
@@ -164,7 +164,7 @@
                                     </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="志愿者活动" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qsD-rk-xcy">
-                                    <rect key="frame" x="4.5" y="18.5" width="87" height="21"/>
+                                    <rect key="frame" x="4.5" y="15.5" width="87" height="21"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
@@ -186,8 +186,8 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vvn-Ud-5wn">
                             <rect key="frame" x="94" y="105" width="94" height="0.0"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon1_zuowenku" translatesAutoresizingMaskIntoConstraints="NO" id="CN0-UX-CUn">
-                                    <rect key="frame" x="47.5" y="-28.5" width="0.0" height="37"/>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xf_activity" translatesAutoresizingMaskIntoConstraints="NO" id="CN0-UX-CUn">
+                                    <rect key="frame" x="47.5" y="-25.5" width="0.0" height="31"/>
                                 </imageView>
                                 <button opaque="NO" tag="105" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oZ6-uN-ZHg">
                                     <rect key="frame" x="0.0" y="0.0" width="94" height="0.0"/>
@@ -196,7 +196,7 @@
                                     </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="活动" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nZe-cg-kl4">
-                                    <rect key="frame" x="30.5" y="18.5" width="35" height="21"/>
+                                    <rect key="frame" x="30.5" y="15.5" width="35" height="21"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
@@ -218,8 +218,8 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fO2-Tb-tzD">
                             <rect key="frame" x="188" y="105" width="94" height="0.0"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon1_zuowenku" translatesAutoresizingMaskIntoConstraints="NO" id="F5N-yi-wkW">
-                                    <rect key="frame" x="47.5" y="-28.5" width="0.0" height="37"/>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xf_remarkon" translatesAutoresizingMaskIntoConstraints="NO" id="F5N-yi-wkW">
+                                    <rect key="frame" x="47.5" y="-25.5" width="0.0" height="31"/>
                                 </imageView>
                                 <button opaque="NO" tag="106" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qg2-P3-d1x">
                                     <rect key="frame" x="0.0" y="0.0" width="94" height="0.0"/>
@@ -228,7 +228,7 @@
                                     </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="大家点评" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kMq-yN-XaA">
-                                    <rect key="frame" x="13.5" y="18.5" width="69.5" height="21"/>
+                                    <rect key="frame" x="13.5" y="15.5" width="69.5" height="21"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
@@ -312,5 +312,11 @@
     </objects>
     <resources>
         <image name="icon1_zuowenku" width="34" height="37"/>
+        <image name="xf_activity" width="30" height="31"/>
+        <image name="xf_composition" width="30" height="31"/>
+        <image name="xf_read" width="30" height="31"/>
+        <image name="xf_remarkon" width="30" height="31"/>
+        <image name="xf_tiny" width="30" height="31"/>
+        <image name="xf_volunteer" width="30" height="31"/>
     </resources>
 </document>

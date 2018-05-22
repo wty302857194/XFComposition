@@ -111,7 +111,7 @@ typedef void(^MoreMessageBlock)();
     [self addSubview:view];
     
     UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(20, 0, kScreenWidth-40, view.height)];
-    imgView.image = [UIImage imageNamed:@"bg_read_title"];
+    imgView.image = [UIImage imageNamed:@"xf_readingnotes"];
     [view addSubview:imgView];
     
     _lab = [[UILabel alloc] init];
