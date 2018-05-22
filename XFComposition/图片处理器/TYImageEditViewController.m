@@ -28,7 +28,7 @@
     CGRect oldFrame;    //保存图片原来的大小
     CGRect largeFrame;  //确定图片放大最大的程;
     UIPinchGestureRecognizer *pinchGestureRecognizer;
-    UIPanGestureRecognizer *panGestureRecognizer;
+//    UIPanGestureRecognizer *panGestureRecognizer;
     UIImage *_image;
     BOOL _isShouHui;
     BOOL isFirst;
@@ -150,7 +150,7 @@
     }
 }
 
-- (IBAction)clipImage:(id)sender {
+- (void)clipImage:(UIButton *)sender {
     
     
    
@@ -294,7 +294,7 @@
 - (TKImageView *)tkImageView
 {
     if (!_tkImageView) {
-        _tkImageView = [[TKImageView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, self.view.height-50-60)];
+        _tkImageView = [[TKImageView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, self.view.height-60)];
         //需要进行裁剪的图片对象
 //        _tkImageView.toCropImage = _image;
         //是否显示中间线
@@ -319,6 +319,19 @@
         _tkImageView.initialScaleFactor = .8f;
         _tkImageView.cropAspectRatio = 0;
         
+        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        btn.backgroundColor = hexColor(478FCA);
+        [btn setTitle:@"截图" forState:UIControlStateNormal];
+        [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        btn.layer.cornerRadius = 5;
+        [btn addTarget:self action:@selector(clipImage:) forControlEvents:UIControlEventTouchUpInside];
+        [_tkImageView addSubview:btn];
+        [btn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.mas_equalTo(-3);
+            make.left.mas_equalTo(30);
+            make.right.mas_equalTo(-30);
+            make.height.mas_equalTo(50);
+        }];
     }
     return _tkImageView;
 }
@@ -439,7 +452,7 @@
 //取消手势
 - (void)removeGestureRecognizerFromView:(UIView *)view {
     [view removeGestureRecognizer:pinchGestureRecognizer];
-    [view removeGestureRecognizer:panGestureRecognizer];
+//    [view removeGestureRecognizer:panGestureRecognizer];
 }
 //添加手势
 // 添加所有的手势
@@ -450,20 +463,20 @@
     [view addGestureRecognizer:pinchGestureRecognizer];
     
     // 移动手势
-    panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panView:)];
-    [view addGestureRecognizer:panGestureRecognizer];
+//    panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panView:)];
+//    [view addGestureRecognizer:panGestureRecognizer];
 }
 
 // 处理拖拉手势
-- (void) panView:(UIPanGestureRecognizer *)panGestureRecognizer
-{
-    UIView *view = panGestureRecognizer.view;
-    if (panGestureRecognizer.state == UIGestureRecognizerStateBegan || panGestureRecognizer.state == UIGestureRecognizerStateChanged) {
-        CGPoint translation = [panGestureRecognizer translationInView:view.superview];
-        [view setCenter:(CGPoint){view.center.x + translation.x, view.center.y + translation.y}];
-        [panGestureRecognizer setTranslation:CGPointZero inView:view.superview];
-    }
-}
+//- (void) panView:(UIPanGestureRecognizer *)panGestureRecognizer
+//{
+//    UIView *view = panGestureRecognizer.view;
+//    if (panGestureRecognizer.state == UIGestureRecognizerStateBegan || panGestureRecognizer.state == UIGestureRecognizerStateChanged) {
+//        CGPoint translation = [panGestureRecognizer translationInView:view.superview];
+//        [view setCenter:(CGPoint){view.center.x + translation.x, view.center.y + translation.y}];
+//        [panGestureRecognizer setTranslation:CGPointZero inView:view.superview];
+//    }
+//}
 // 处理缩放手势
 - (void) pinchView:(UIPinchGestureRecognizer *)pinchGestureRecognizer
 {
