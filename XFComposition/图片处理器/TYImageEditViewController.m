@@ -548,12 +548,21 @@
             break;
         case 4:
         {
+            
+            [SVProgressHUD showWithStatus:@"正在加载"];
             [[XFRequestManager sharedInstance] XFRequstGetCutPicBlog:[XFUserInfo getUserInfo].Loginid blogID:_picModel.BlogID ExtractType:@"0" :^(NSString *requestName, id responseData, BOOL isSuccess) {
+                [SVProgressHUD dismiss];
+
                 if (isSuccess) {
+                
                     XFLbraryViewController * vc = [[XFLbraryViewController alloc]init];
                     vc.title = @"范文库";
                     vc.dataArray = responseData;
                     [self.TYCorrecVC.navigationController pushViewController:vc animated:YES];
+                }else{
+                    
+                    [SVProgressHUD showInfoWithStatus:@"网络错误"];
+
                 }
             }] ;
             
@@ -562,12 +571,20 @@
             break;
         case 5:
         {
+            [SVProgressHUD showWithStatus:@"正在加载"];
+
             [[XFRequestManager sharedInstance] XFRequstGetCutPicBlog:[XFUserInfo getUserInfo].Loginid blogID:_picModel.BlogID ExtractType:@"1" :^(NSString *requestName, id responseData, BOOL isSuccess) {
+                [SVProgressHUD dismiss];
+
                 if (isSuccess) {
                     XFLbraryViewController * vc = [[XFLbraryViewController alloc]init];
                     vc.title = @"病文库";
                     vc.dataArray = responseData;
                     [self.TYCorrecVC.navigationController pushViewController:vc animated:YES];
+                }else{
+                    
+                    [SVProgressHUD showInfoWithStatus:@"网络错误"];
+                    
                 }
             }] ;
             

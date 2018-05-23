@@ -13,6 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="XFLbraryViewController">
             <connections>
                 <outlet property="collentionView" destination="DmO-Ea-hyj" id="cN7-BK-NxW"/>
+                <outlet property="noneImge" destination="3qk-my-MpT" id="Zbb-he-nBM"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -35,8 +36,17 @@
                         <outlet property="delegate" destination="-1" id="pxv-4w-3Qa"/>
                     </connections>
                 </collectionView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xf_Norecord" translatesAutoresizingMaskIntoConstraints="NO" id="3qk-my-MpT">
+                    <rect key="frame" x="145" y="220" width="85" height="114"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="114" id="mLn-G2-OCy"/>
+                        <constraint firstAttribute="width" constant="85" id="p5u-Z6-oZN"/>
+                    </constraints>
+                </imageView>
             </subviews>
             <constraints>
+                <constraint firstItem="3qk-my-MpT" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="200" id="1RC-ei-kxa"/>
+                <constraint firstItem="3qk-my-MpT" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="5Fn-Hx-eCn"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="DmO-Ea-hyj" secondAttribute="trailing" id="Awd-f2-2ZJ"/>
                 <constraint firstItem="DmO-Ea-hyj" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" id="BgI-Z5-Zgt"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="DmO-Ea-hyj" secondAttribute="bottom" id="Tno-5u-6oI"/>
@@ -45,4 +55,7 @@
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
         </view>
     </objects>
+    <resources>
+        <image name="xf_Norecord" width="85" height="113"/>
+    </resources>
 </document>

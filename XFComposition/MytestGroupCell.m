@@ -13,23 +13,17 @@
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.bt = [UIButton buttonWithType:UIButtonTypeCustom];
-        self.bt.frame = CGRectMake(20, 5, 30, 30);
-        [self.bt setBackgroundImage:[UIImage imageNamed:@"aixin_n"] forState:UIControlStateNormal];
-        [self.bt setBackgroundImage:[UIImage imageNamed:@"aixin_s"] forState:UIControlStateSelected];
-        [self.bt addTarget:self action:@selector(clickgroup :) forControlEvents:UIControlEventTouchUpInside];
+        self.bt.frame = CGRectMake(20, (44 - 14)/2, 14, 14);
+        [self.bt setBackgroundImage:[UIImage imageNamed:@"xf_quadrate"] forState:UIControlStateNormal];
+        [self.bt setBackgroundImage:[UIImage imageNamed:@"xf_quadrate_p"] forState:UIControlStateSelected];
         [self.contentView addSubview:self.bt];
         
-        self.titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(self.bt.frame)+10, 5, WidthFrame-40-80, 30)];
+        self.titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(self.bt.frame)+10, 0, WidthFrame-40-80, 44)];
         self.titleLabel.font = [UIFont systemFontOfSize:14];
+        self.titleLabel.textColor = hexColor(333333);
         [self.contentView addSubview:self.titleLabel];
         
     }
     return self;
-}
--(void)clickgroup :(UIButton *)bt{
-    bt.selected = !bt.selected;
-    if ([self.delegate respondsToSelector:@selector(xuanzhong:)]) {
-        [self.delegate xuanzhong:bt];
-    }
 }
 @end

@@ -11,7 +11,7 @@
 @interface XFLbraryViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
 
 @property (strong, nonatomic) IBOutlet UICollectionView *collentionView;
-@property (strong, nonatomic)  XFTipView *tipView;
+@property (strong, nonatomic) IBOutlet UIImageView *noneImge;
 
 @end
 
@@ -19,16 +19,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _tipView = [[NSBundle mainBundle] loadNibNamed:@"XFTipView" owner:self options:nil].lastObject;
 
     [_collentionView registerNib:[UINib nibWithNibName:@"XFLbraryCell" bundle:nil] forCellWithReuseIdentifier:@"XFLbraryCell"];
     
-//    if (_dataArray.count == 0) {
-//        _collentionView. = _tipView;
-//    }else{
-//        _tableView.tableFooterView = nil;
-//    }
-//    
+    if (_dataArray.count == 0) {
+        
+        _noneImge.hidden = NO;
+        
+    }else{
+        _noneImge.hidden = YES;
+    }
+
     [_collentionView reloadData];
     GO_BACK;
 }
@@ -53,6 +54,13 @@
            if (isSuccess) {
                [SVProgressHUD showInfoWithStatus:@"删除成功"];
                [_dataArray removeObject:library];
+               if (_dataArray.count == 0) {
+                   
+                   _noneImge.hidden = NO;
+                   
+               }else{
+                   _noneImge.hidden = YES;
+               }
                [collectionView reloadData];
            }else{
                

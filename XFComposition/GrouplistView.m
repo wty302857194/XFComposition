@@ -11,9 +11,12 @@
 #import "GetMyGroupListRequst.h"
 #import "GetMygroupListModel.h"
 #import "PublicTextTitleRequst.h"
-@interface GrouplistView()<UITableViewDelegate,UITableViewDataSource,MytestGroupCellDelegate>
+@interface GrouplistView()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong)UIView *backView;
 @property (nonatomic,strong)UITableView *tableView;
+@property (nonatomic,strong)UILabel *topLabel;
+@property (nonatomic,strong)UIView *bottomView;
+
 @property (nonatomic,strong)XFUserInfo *xf;
 @property (nonatomic,strong)NSMutableArray *listArray;
 @property (nonatomic,assign)NSInteger page;
@@ -23,22 +26,75 @@
 
 -(UIView *)backView{
     if (!_backView) {
-        _backView = [[UIView alloc]initWithFrame:CGRectMake(20, HeightFrame/2-140, WidthFrame-40, 280)];
-        self.backView.layer.cornerRadius = 4;
+        _backView = [[UIView alloc]initWithFrame:CGRectMake(20, SafeAreaTopHeight + 50, WidthFrame-40, 350)];
+        self.backView.layer.cornerRadius = 6;
         self.backView.layer.masksToBounds = YES;
         self.backView.backgroundColor = [UIColor whiteColor];
     }
     return _backView;
 }
+-(UIView*)bottomView{
+    
+    if (!_bottomView) {
+        _bottomView = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetHeight(self.backView.frame) - 50, CGRectGetWidth(self.backView.frame), 50)];
+        
+        UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
+        
+        button.frame = CGRectMake(40, 10, (CGRectGetWidth(self.backView.frame)- 20)/2 -40, 30);
+        
+        [button setTitle:@"发布到选定的圈子" forState:UIControlStateNormal];
+        button.backgroundColor = hexColor(009dff);
+        button.titleLabel.font = [UIFont systemFontOfSize:14];
+        button.layer.cornerRadius = 2.0;
+        button.layer.masksToBounds = YES;
+        
+        [button addTarget:self action:@selector(fabu) forControlEvents:UIControlEventTouchUpInside];
+        [_bottomView addSubview:button];
+        
+        UIButton * cancleButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        
+        cancleButton.frame = CGRectMake((CGRectGetWidth(self.backView.frame)- 20)/2 + 40, 10, (CGRectGetWidth(self.backView.frame)- 20)/2 -40 , 30);
+        
+        [cancleButton setTitle:@"取消" forState:UIControlStateNormal];
+        cancleButton.backgroundColor = hexColor(EB6752);
+        cancleButton.titleLabel.font = [UIFont systemFontOfSize:14];
+        cancleButton.layer.cornerRadius = 2.0;
+        cancleButton.layer.masksToBounds = YES;
+        
+        [cancleButton addTarget:self action:@selector(dissMiss) forControlEvents:UIControlEventTouchUpInside];
+        [_bottomView addSubview:cancleButton];
+        
+    }
+    return _bottomView;
+    
+    
+}
 -(UITableView *)tableView{
     if (!_tableView) {
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, WidthFrame-40, 280) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0,40.5, WidthFrame-40, CGRectGetHeight(self.backView.frame) - 50 - 40.5) style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         [_tableView registerClass:[MytestGroupCell class] forCellReuseIdentifier:@"cell"];
         _tableView.backgroundColor = [UIColor whiteColor];
     }
     return _tableView;
+}
+-(UILabel*)topLabel{
+    
+    if (!_topLabel) {
+        _topLabel = [[UILabel alloc] initWithFrame:CGRectMake(14, 0, CGRectGetWidth(self.backView.frame), 40 )];
+        _topLabel.text = @"选择要发布的圈子";
+        _topLabel.textColor = hexColor(333333);
+        _topLabel.font = [UIFont systemFontOfSize:14];
+        UIImageView * imgView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 40, CGRectGetWidth(self.backView.frame), .5)];
+        imgView.backgroundColor = hexColor(e5e5e5);
+        
+
+        [self.backView addSubview:imgView];
+        
+    }
+    return _topLabel;
+    
 }
 -(XFUserInfo *)xf{
     if (!_xf) {
@@ -67,53 +123,28 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    return 40;
+    return 44;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     MytestGroupCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-    cell.delegate = self;
-    cell.bt.tag = 1000 + indexPath.row;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     GetMygroupListModel *model = self.listArray[indexPath.row];
     cell.titleLabel.text = model.GroupName;
     return cell;
 }
-
-#pragma header高度
--(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    return 30;
-}
--(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    MytestGroupCell * cell  = [tableView cellForRowAtIndexPath:indexPath];
+    cell.bt.selected = !cell.bt.selected;
+    GetMygroupListModel *model = self.listArray[indexPath.row];
+    if ([self.xuanzhongArray containsObject:[NSString stringWithFormat:@"%@",model.Id]]) {
+        [self.xuanzhongArray removeObject:[NSString stringWithFormat:@"%@",model.Id]];
+    }else{
+        [self.xuanzhongArray addObject:[NSString stringWithFormat:@"%@",model.Id]];
+        
+    }
     
-    return 40;
-    
-}
--(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    
-    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, WidthFrame-40, 30)];
-    view.backgroundColor = [UIColor whiteColor];
-    
-    UIButton *bt = [UIButton buttonWithType:UIButtonTypeCustom];
-    bt.backgroundColor = [UIColor lightGrayColor];
-    bt.frame = CGRectMake(WidthFrame-40-40, 5, 25, 25);
-    [bt addTarget:self action:@selector(dissMiss) forControlEvents:UIControlEventTouchUpInside];
-    [view addSubview:bt];
-    return view;
-}
--(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
-    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, WidthFrame-40, 40)];
-    view.backgroundColor = [UIColor whiteColor];
-    
-    UIButton *bt = [UIButton buttonWithType:UIButtonTypeCustom];
-    bt.backgroundColor = [UIColor lightGrayColor];
-    [bt setTitle:@"发布到我的圈子" forState:UIControlStateNormal];
-    bt.titleLabel.font = [UIFont systemFontOfSize:15];
-    bt.frame = CGRectMake((WidthFrame-40)/3, 5, (WidthFrame-40)/3, 30);
-    [bt addTarget:self action:@selector(fabu) forControlEvents:UIControlEventTouchUpInside];
-    [view addSubview:bt];
-    return view;
     
 }
 -(instancetype)initWithFrame:(CGRect)frame{
@@ -122,7 +153,10 @@
         self.page = 1;
         [self.backView addSubview:self.tableView];
         [self addSubview:self.backView];
-        
+        [self.backView addSubview:self.topLabel];
+
+        [self.backView addSubview:self.bottomView];
+
         MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
             
             [self groupList];
@@ -145,24 +179,25 @@
 //发布
 -(void)fabu{
 //    NSLog(@"----%@",[self.xuanzhongArray componentsJoinedByString:@","]);
+    
+    if (self.xuanzhongArray.count == 0) {
+        [SVProgressHUD showErrorWithStatus:@"请选择圈子"];
+        return;
+    }
+    [SVProgressHUD showWithStatus:@"正在发布"];
     PublicTextTitleRequst *requst = [[PublicTextTitleRequst alloc]init];
     [requst PublicTextTitleRequstwithGroupId:[self.xuanzhongArray componentsJoinedByString:@","] withPageId:@"37" withuserid:self.xf.Loginid :^(NSDictionary *json) {
+        
+        [SVProgressHUD dismiss];
         if ([json[@"ret_code"] integerValue] == 0) {
             [SVProgressHUD showSuccessWithStatus:@"发布成功"];
             [self dissMiss];
+        }else{
+            [SVProgressHUD showErrorWithStatus:json[@"msg"]];
+
+
         }
     }];
-    
-}
-//点击按钮选中
--(void)xuanzhong:(UIButton *)bt{
-    GetMygroupListModel *model = self.listArray[bt.tag - 1000];
-    if ([self.xuanzhongArray containsObject:[NSString stringWithFormat:@"%@",model.Id]]) {
-        [self.xuanzhongArray removeObject:[NSString stringWithFormat:@"%@",model.Id]];
-    }else{
-        [self.xuanzhongArray addObject:[NSString stringWithFormat:@"%@",model.Id]];
-        
-    }
     
 }
 -(void)groupList{
