@@ -30,9 +30,9 @@
 {
     self.selectBtn.selected = !self.selectBtn.selected;
     if (self.selectBtn.selected) {
-        [self.selectBtn setImage:[UIImage imageNamed:@"selectIcon"] forState:UIControlStateNormal];
+        [self.selectBtn setImage:[UIImage imageNamed:@"xf_quadrate_p"] forState:UIControlStateNormal];
     } else {
-        [self.selectBtn setImage:[UIImage imageNamed:@"normalIcon"] forState:UIControlStateNormal];
+        [self.selectBtn setImage:[UIImage imageNamed:@"xf_quadrate"] forState:UIControlStateNormal];
     }
     self.selectItemBlock(self.selectBtn.selected);
     
