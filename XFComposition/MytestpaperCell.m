@@ -52,7 +52,12 @@
         
         CGFloat w = (WidthFrame-40)/3;
         
-        self.bt1.sd_layout.leftSpaceToView(backView, 40).topSpaceToView(bgimgView, 15).widthIs(w-40).heightIs(30);
+        
+        
+        jgLable1.sd_layout.leftSpaceToView(backView, WidthFrame/3).topSpaceToView(bgimgView, 20).widthIs(.5).heightIs(20);
+        jgLable1.backgroundColor = RGB_COLOR(229, 229, 229);
+        
+        self.bt1.sd_layout.leftSpaceToView(backView, 20).topSpaceToView(bgimgView, 15).rightSpaceToView(jgLable1, 20).heightIs(30);
         [self.bt1 setBackgroundColor:[UIColor colorWithHexString:@"F19833"]];
         self.bt1.layer.cornerRadius = 4;
         self.bt1.layer.masksToBounds = YES;
@@ -61,10 +66,11 @@
         [self.bt1 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         self.bt1.titleLabel.font = [UIFont systemFontOfSize:12];
         
-        jgLable1.sd_layout.leftSpaceToView(backView, WidthFrame/3).topSpaceToView(bgimgView, 20).widthIs(.5).heightIs(20);
-        jgLable1.backgroundColor = RGB_COLOR(229, 229, 229);
         
-        self.bt2.sd_layout.leftSpaceToView(jgLable1, 20).topSpaceToView(bgimgView, 15).widthIs(w-40).heightIs(30);
+        jgLable2.sd_layout.leftSpaceToView(backView, WidthFrame/3*2).topSpaceToView(bgimgView, 20).widthIs(.5).heightIs(20);
+        jgLable2.backgroundColor = RGB_COLOR(229, 229, 229);
+        
+        self.bt2.sd_layout.leftSpaceToView(jgLable1, 20).topSpaceToView(bgimgView, 15).rightSpaceToView(jgLable2, 20).heightIs(30);
         [self.bt2 setBackgroundColor:[UIColor colorWithHexString:@"009dff"]];
         self.bt2.layer.cornerRadius = 4;
         self.bt2.layer.masksToBounds = YES;
@@ -72,9 +78,7 @@
         [self.bt2 setTitle:@"浏览" forState:UIControlStateNormal];
         [self.bt2 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         self.bt2.titleLabel.font = [UIFont systemFontOfSize:12];
-        
-        jgLable2.sd_layout.leftSpaceToView(backView, WidthFrame/3*2).topSpaceToView(bgimgView, 20).widthIs(.5).heightIs(20);
-        jgLable2.backgroundColor = RGB_COLOR(229, 229, 229);
+      
         self.bt3.sd_layout.leftSpaceToView(backView, WidthFrame/6*5 -10).topSpaceToView(bgimgView, 10).widthIs(20).heightIs(20);
         [self.bt3 setBackgroundImage:[UIImage imageNamed:@"icon_shanchu"] forState:UIControlStateNormal];
         [self.bt3 addTarget:self action:@selector(shanchu :) forControlEvents:UIControlEventTouchUpInside];

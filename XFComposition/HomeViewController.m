@@ -355,25 +355,31 @@ timeSpan：0   //0默认 1尚未开始 2正在进行 3已  经结束"
         [self.tableView.mj_footer endRefreshing];
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         NSLog(@"ForecastUrl === %@",succeedResult);
-        NSArray *arr = succeedResult[@"ret_data"][@"pageInfo"];
-        if (_isFresh) {
-            if (arr&&arr.count>0) {
+        
+        
+        if ([succeedResult[@"ret_code"] isEqualToString:@"0"] ) {
+            NSArray *arr = succeedResult[@"ret_data"][@"pageInfo"];
+            if (_isFresh) {
+                if (arr&&arr.count>0) {
+                    for (NSDictionary *dic in arr) {
+                        HomeLessonModel *lessonModel = [HomeLessonModel mj_objectWithKeyValues:dic];
+                        [_homeLessonArr addObject:lessonModel];
+                    }
+                }else {
+                    NSLog(@"没有更多了");
+                    [Global promptMessage:@"没有更多了" inView:self.view];
+                }
+            }else {
+                [_homeLessonArr removeAllObjects];
                 for (NSDictionary *dic in arr) {
                     HomeLessonModel *lessonModel = [HomeLessonModel mj_objectWithKeyValues:dic];
                     [_homeLessonArr addObject:lessonModel];
                 }
-            }else {
-                NSLog(@"没有更多了");
-                [Global promptMessage:@"没有更多了" inView:self.view];
             }
-        }else {
-            [_homeLessonArr removeAllObjects];
-            for (NSDictionary *dic in arr) {
-                HomeLessonModel *lessonModel = [HomeLessonModel mj_objectWithKeyValues:dic];
-                [_homeLessonArr addObject:lessonModel];
-            }
+            [self.tableView reloadData];
         }
-        [self.tableView reloadData];
+        
+       
     } failedBolck:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"error===%@",error.localizedDescription);
         [self.tableView.mj_footer endRefreshing];

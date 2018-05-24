@@ -36,9 +36,10 @@
 }
 -(UITableView *)tableView{
     if (!_tableView) {
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, WidthFrame, HeightFrame) style:UITableViewStyleGrouped];
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, WidthFrame, HeightFrame) style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
+        _tableView.backgroundColor= [UIColor clearColor];
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_tableView registerClass:[ReadnotesCell class] forCellReuseIdentifier:@"cell"];
         [_tableView registerClass:[MyrecommenbookfristCell class] forCellReuseIdentifier:@"cell1"];
@@ -61,7 +62,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"推荐图书";
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = rgba(238, 238, 238, 1);
     [self.view addSubview:self.tableView];
     self.page = 1;
     
@@ -69,7 +70,6 @@
         
         [self GetMyTongji];
         [self GetMybookList];
-        [self.tableView.mj_header endRefreshing];
     }];
     header.lastUpdatedTimeLabel.hidden = YES;
     header.stateLabel.hidden = YES;
@@ -80,7 +80,6 @@
         
         
         [self requstMore];
-        [self.tableView.mj_footer endRefreshing];
     }];
 
 }
@@ -107,6 +106,8 @@
             GetMybookListModel *model = [GetMybookListModel loadWithJSOn:dic];
             [self.bookArray addObject:model];
         }
+        [self.tableView.mj_header endRefreshing];
+
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
         });
@@ -122,6 +123,8 @@
             GetMybookListModel *model = [GetMybookListModel loadWithJSOn:dic];
             [self.bookArray addObject:model];
         }
+        [self.tableView.mj_footer endRefreshing];
+
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
         });
@@ -143,16 +146,15 @@
     __weak typeof (self) weakSelf = self;
     GetMybookListModel *model = self.bookArray[bt.tag -2000];
     DeleteBookRequst *requst = [[DeleteBookRequst alloc]init];
+    
+    [SVProgressHUD showWithStatus:@"正在删除"];
     [requst DeleteBookRequstWithbookids:model.ID :^(NSDictionary *json) {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:json[@"ret_msg"] message:nil preferredStyle:UIAlertControllerStyleAlert];
-        [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-            if ([json[@"ret_code"] isEqualToString:@"0"]){
-                [weakSelf GetMybookList];
-            }
+        [SVProgressHUD dismiss];
+        if ([json[@"ret_code"] isEqualToString:@"0"]){
+            [weakSelf GetMybookList];
             
-        }]];
-        
-        [weakSelf presentViewController:alert animated:YES completion:nil];
+            [SVProgressHUD showSuccessWithStatus:@"删除成功"];
+        }
     }];
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

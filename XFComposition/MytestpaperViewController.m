@@ -22,6 +22,8 @@
 @property (nonatomic,assign)NSInteger page;
 @property (nonatomic,strong)NSMutableArray *testArray;
 @property (nonatomic,strong)GrouplistView *grouplistView;
+@property (strong, nonatomic)  XFTipView *tipView;
+
 @end
 
 @implementation MytestpaperViewController
@@ -37,7 +39,7 @@
 }
 -(UITableView *)tableView{
     if (!_tableView) {
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, WidthFrame, HeightFrame) style:UITableViewStyleGrouped];
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, WidthFrame, HeightFrame) style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;//分割线
@@ -65,11 +67,11 @@
     self.navigationItem.title = @"我的试卷";
     self.view.backgroundColor = [UIColor whiteColor];
     self.page = 1;
-    
+    _tipView = [[NSBundle mainBundle] loadNibNamed:@"XFTipView" owner:self options:nil].lastObject;
+
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         
         [self GetMyPageListRequst];
-        [self.tableView.mj_header endRefreshing];
     }];
 //    header.lastUpdatedTimeLabel.hidden = YES;
 //    header.stateLabel.hidden = YES;
@@ -80,7 +82,6 @@
         
         
         [self requstMore];
-        [self.tableView.mj_footer endRefreshing];
     }];
 
 }
@@ -93,7 +94,16 @@
             MyPageListModel *model = [MyPageListModel loadWithJSOn:dic];
             [self.testArray addObject:model];
         }
+        if (self.testArray.count == 0) {
+            self.tableView.tableFooterView = _tipView;
+        }else{
+            self.tableView.tableFooterView = nil;
+
+            
+        }
         dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView.mj_header endRefreshing];
+
             [self.tableView reloadData];
         });
     }];
@@ -110,6 +120,8 @@
         }
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
+            [self.tableView.mj_footer endRefreshing];
+
         });
     }];
 
@@ -137,23 +149,37 @@
 //删除
 -(void)delecttest:(UIButton *)bt{
 //    NSLog(@"333");
-    __weak typeof (self) weakSelf = self;
-    MyPageListModel *Model = self.testArray[bt.tag-3000];
-    DelPageInfoRequst *requst = [[DelPageInfoRequst alloc]init];
-    [requst DelPageInfoRequstwithgid:[NSString stringWithFormat:@"%ld",(long)Model.ID] :^(NSDictionary *json) {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:json[@"ret_msg"] message:nil preferredStyle:UIAlertControllerStyleAlert];
-        [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-
+    
+    
+    UIAlertController * alertCon = [UIAlertController alertControllerWithTitle:@"" message:@"您确定要删除吗？" preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction * cancleAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    
+    UIAlertAction * sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        [SVProgressHUD showWithStatus:@"正在删除"];
+        __weak typeof (self) weakSelf = self;
+        MyPageListModel *Model = self.testArray[bt.tag-3000];
+        DelPageInfoRequst *requst = [[DelPageInfoRequst alloc]init];
+        [requst DelPageInfoRequstwithgid:[NSString stringWithFormat:@"%ld",(long)Model.ID] :^(NSDictionary *json) {
+            [SVProgressHUD dismiss];
             if ([json[@"ret_code"] isEqualToString:@"0"]){
                 [weakSelf GetMyPageListRequst];
+                
+                [SVProgressHUD showSuccessWithStatus:@"删除成功"];
             }
-
-        }]];
-
-        [weakSelf presentViewController:alert animated:YES completion:nil];
+            
+            
+        }];
 
     }];
+    
+    [alertCon addAction:cancleAction];
+    
+    [alertCon addAction:sureAction];
 
+    [self presentViewController:alertCon animated:YES completion:nil];
+   
 }
 #pragma mark cell的行数
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

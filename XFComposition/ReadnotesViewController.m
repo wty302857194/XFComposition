@@ -27,6 +27,7 @@
 @property (nonatomic,copy)NSString *str1;
 @property (nonatomic,assign)NSInteger page;
 @property (nonatomic,strong)UIButton *bt;
+@property (strong, nonatomic)  XFTipView *tipView;
 
 
 @end
@@ -63,6 +64,7 @@
     selectbt.frame = CGRectMake(CGRectGetMaxX(self.textfield.frame)+10, 10+SafeAreaTopHeight, 50, 30);
     [selectbt setTitle:@"查询" forState:UIControlStateNormal];
     selectbt.titleLabel.font = [UIFont systemFontOfSize:14];
+    [selectbt addTarget:self action:@selector(chaxun) forControlEvents:UIControlEventTouchUpInside];
     [selectbt setBackgroundColor:[UIColor colorWithHexString:@"3691CE"]];
     selectbt.layer.cornerRadius =6;
     selectbt.layer.masksToBounds = YES;
@@ -95,7 +97,7 @@
 
 -(UITableView *)tableView{
     if (!_tableView) {
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, SafeAreaTopHeight+91, WidthFrame, HeightFrame-64-80) style:UITableViewStyleGrouped];
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, SafeAreaTopHeight+91, WidthFrame, HeightFrame-SafeAreaTopHeight-91) style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.backgroundColor = [UIColor clearColor];
@@ -128,8 +130,8 @@
             }
             _imgView.image = [UIImage imageNamed:@"ic_open_down2"];
             [_bt setTitle:array [i] forState:UIControlStateNormal];
-            [weakSelf GetBookBJList:weakSelf.str1];
 
+            [_tableView.mj_header beginRefreshing];
         }];
         [self.view addSubview:_menuView1];
     }
@@ -141,6 +143,7 @@
     self.navigationItem.title = @"读书笔记";
     self.view.backgroundColor = hexColor(e5e5e5);
     [self creatHeadView];
+    _tipView = [[NSBundle mainBundle] loadNibNamed:@"XFTipView" owner:self options:nil].lastObject;
 
     [self.view addSubview:self.tableView];
     self.page = 1;
@@ -148,7 +151,6 @@
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         
         [self GetBookBJList :self.str1];
-        [self.tableView.mj_header endRefreshing];
     }];
     header.lastUpdatedTimeLabel.hidden = YES;
     header.stateLabel.hidden = YES;
@@ -159,21 +161,30 @@
         
         
         [self requstMore:self.str1];
-        [self.tableView.mj_footer endRefreshing];
     }];
 
 }
 //获取笔记列表
 -(void)GetBookBJList :(NSString *)istuijian{
     GetBookBJListRequst *requst = [[GetBookBJListRequst alloc]init];
-    [requst GetBookBJListRequstWithbookid:@"0" withremarktype:@"1" withistuijian:istuijian withremarkStatic:@"-1" withkeyword:self.textfield.text withPageIndex:@"1" withPageSize:@"20" withuserid:self.readnotesUserid :^(NSDictionary *json) {
+    [requst GetBookBJListRequstWithbookid:@"0" withremarktype:@"2" withistuijian:istuijian withremarkStatic:@"-1" withkeyword:self.textfield.text withPageIndex:@"1" withPageSize:@"20" withuserid:self.readnotesUserid :^(NSDictionary *json) {
         [self.bjArray removeAllObjects];
         for (NSDictionary *dic in json[@"ret_data"][@"pageInfo"]) {
             GetBookBjListModel *model = [GetBookBjListModel loadWithJSOn:dic];
             [self.bjArray addObject:model];
         }
+        if (self.bjArray.count == 0) {
+            self.tableView.tableFooterView = _tipView;
+        }else{
+            self.tableView.tableFooterView = nil;
+            
+            
+        }
+        [self.tableView.mj_header endRefreshing];
+
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
+            
         });
     }];
 
@@ -182,12 +193,14 @@
 -(void)requstMore :(NSString *)istuijian{
     self.page +=1;
     GetBookBJListRequst *requst = [[GetBookBJListRequst alloc]init];
-    [requst GetBookBJListRequstWithbookid:@"0" withremarktype:@"1" withistuijian:istuijian withremarkStatic:@"-1" withkeyword:self.textfield.text withPageIndex:[NSString stringWithFormat:@"%ld",(long)self.page] withPageSize:@"20" withuserid:self.readnotesUserid :^(NSDictionary *json) {
+    [requst GetBookBJListRequstWithbookid:@"0" withremarktype:@"2" withistuijian:istuijian withremarkStatic:@"-1" withkeyword:self.textfield.text withPageIndex:[NSString stringWithFormat:@"%ld",(long)self.page] withPageSize:@"20" withuserid:self.readnotesUserid :^(NSDictionary *json) {
         
         for (NSDictionary *dic in json[@"ret_data"][@"pageInfo"]) {
             GetBookBjListModel *model = [GetBookBjListModel loadWithJSOn:dic];
             [self.bjArray addObject:model];
         }
+        [self.tableView.mj_footer endRefreshing];
+
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
         });
@@ -210,6 +223,13 @@
     
     
 }
+-(void)chaxun{
+    
+    [self.textfield resignFirstResponder];
+    [self.tableView.mj_header beginRefreshing];
+    
+}
+
 //删除笔记
 -(void)delectBj:(UIButton *)bt{
     
@@ -217,16 +237,17 @@
 
     GetBookBjListModel *Model = self.bjArray[bt.tag - 2000];
     DelBookBJRequst *requst = [[DelBookBJRequst alloc]init];
+    [SVProgressHUD showWithStatus:@"正在删除"];
     [requst DelBookBJRequstWithids:Model.bookId withFlag:@"3" withuserid:self.readnotesUserid :^(NSDictionary *json) {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:json[@"ret_msg"] message:nil preferredStyle:UIAlertControllerStyleAlert];
-        [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-            if ([json[@"ret_code"] isEqualToString:@"0"]){
-                [weakSelf GetBookBJList :self.str1];
-            }
-            
-        }]];
         
-        [weakSelf presentViewController:alert animated:YES completion:nil];
+        [SVProgressHUD dismiss];
+        if ([json[@"ret_code"] isEqualToString:@"0"]){
+            [SVProgressHUD showSuccessWithStatus:@"删除成功"];
+
+            [weakSelf GetBookBJList :self.str1];
+        }
+    
+        
         
     }];
 

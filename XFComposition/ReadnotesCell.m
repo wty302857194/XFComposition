@@ -18,7 +18,7 @@
 
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        self.backgroundColor = [UIColor colorWithHexString:@"E8F2FA"];
+        self.backgroundColor = [UIColor clearColor];
         self.titleLabel = [[UILabel alloc]init];
         self.timeLabel = [[UILabel alloc]init];
         self.nameLabel = [[UILabel alloc]init];
@@ -58,7 +58,7 @@
         bgimgView.sd_layout.leftSpaceToView(backView, 10).topSpaceToView(self.timeLabel, 5).widthIs(WidthFrame-60).heightIs(.5);
         bgimgView.image = [UIImage imageNamed:@"xuxian"];
         CGFloat w = (WidthFrame-80)/4;
-        self.bt1.sd_layout.leftSpaceToView(backView, w).topSpaceToView(bgimgView, 5).widthIs(20).heightIs(20);
+        self.bt1.sd_layout.leftSpaceToView(backView, w+3).topSpaceToView(bgimgView, 10).widthIs(15).heightIs(15);
         [self.bt1 setBackgroundImage:[UIImage imageNamed:@"icon_xiugai"] forState:UIControlStateNormal];
         [self.bt1 addTarget:self action:@selector(xiugaisomebj :) forControlEvents:UIControlEventTouchUpInside];
         
@@ -71,7 +71,7 @@
         jgLable1.sd_layout.leftSpaceToView(backView, w*2 + 20).topSpaceToView(bgimgView, 5).widthIs(1).heightIs(40);
         jgLable1.backgroundColor = [UIColor lightGrayColor];
         
-        self.bt2.sd_layout.leftSpaceToView(backView, w*3 + 20).topSpaceToView(bgimgView, 5).widthIs(20).heightIs(20);
+        self.bt2.sd_layout.leftSpaceToView(backView, w*3 + 23).topSpaceToView(bgimgView, 10).widthIs(15).heightIs(15);
         [self.bt2 setBackgroundImage:[UIImage imageNamed:@"icon_shanchu"] forState:UIControlStateNormal];
         [self.bt2 addTarget:self action:@selector(delesomebj :) forControlEvents:UIControlEventTouchUpInside];
         

@@ -66,11 +66,11 @@
                             <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xf_volume1" translatesAutoresizingMaskIntoConstraints="NO" id="lQQ-Ri-RTM">
-                            <rect key="frame" x="151.5" y="92" width="32" height="16"/>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sy_yuyin" translatesAutoresizingMaskIntoConstraints="NO" id="lQQ-Ri-RTM">
+                            <rect key="frame" x="155" y="87.5" width="25" height="25"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="32" id="BLL-xs-Tkb"/>
-                                <constraint firstAttribute="height" constant="16" id="stY-HP-xz3"/>
+                                <constraint firstAttribute="width" constant="25" id="BLL-xs-Tkb"/>
+                                <constraint firstAttribute="height" constant="25" id="stY-HP-xz3"/>
                             </constraints>
                         </imageView>
                     </subviews>
@@ -116,6 +116,6 @@
         </view>
     </objects>
     <resources>
-        <image name="xf_volume1" width="63" height="31"/>
+        <image name="sy_yuyin" width="25" height="25"/>
     </resources>
 </document>
