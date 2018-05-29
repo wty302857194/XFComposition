@@ -326,7 +326,7 @@ static NSInteger const qiPaoWidth = 160;
                           @"Action":@"GetWritePicRemark",
                           @"Token":@"0A66A4FD-146F-4542-8D7B-33CDEC2981F9",
                           @"blogID": self.picModel.BlogID,  //习作ID
-                          @"PicID": self.picModel.PicID,  //习作图片ID
+                          @"PicID": self.picModel.ID,  //习作图片ID
                           @"userID": [XFUserInfo getUserInfo].Loginid, //用户ID
                           };
     NSLog(@"dic = %@",dic);
