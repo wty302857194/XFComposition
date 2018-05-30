@@ -20,6 +20,7 @@
     if (!_backImgView) {
         _backImgView = [[UIImageView alloc] initWithFrame:self.bounds];
         _backImgView.image = [UIImage imageNamed:@"xf_book"];
+        _backImgView.userInteractionEnabled = YES;
         
         UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, (_backImgView.width-10)/2, 30)];
         label.text = @"周排行";
@@ -134,6 +135,17 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
 
     return 20;
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    GetBookPaihangModel *model = nil;
+    if (tableView == self.WeekTableView) {
+        model = self.Warray[indexPath.row];
+    }else {
+        model = self.Marray[indexPath.row];
+    }
+    if (self.selectBlock) {
+        self.selectBlock(model.bookpaihangid);
+    }
 }
 //-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
 //    if (tableView == self.WeekTableView) {

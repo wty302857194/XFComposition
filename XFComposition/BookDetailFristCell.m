@@ -163,7 +163,7 @@
     self.label4.text = [NSString stringWithFormat:@"出版日期：%@",_model.bookpublish];
     self.label5.text = [NSString stringWithFormat:@"总 页 数：%@",_model.bookpages];
     NSString *str = [NSString stringWithFormat:@"%@",_model.bookpic];
-    [self.imgView sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"icon_02"] options:SDWebImageRefreshCached];
+    [self.imgView sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"glide_loading"] options:SDWebImageRefreshCached];
     self.neirongLabel.text =self.model.bookinfo;
     
     self.label6.text = [NSString stringWithFormat:@"想读%@人",_model.wandread];

@@ -499,7 +499,7 @@ xuexiao：0    //学校"
         ReadSecondCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Read23" forIndexPath:indexPath];
         BookModel *model1 = self.xuexiaobookArray[indexPath.row];
         
-        [cell.imgView sd_setImageWithURL:[NSURL URLWithString:model1.BookPic] placeholderImage:[UIImage imageNamed:@"icon_02"] options:SDWebImageRefreshCached];
+        [cell.imgView sd_setImageWithURL:[NSURL URLWithString:model1.BookPic] placeholderImage:[UIImage imageNamed:@"glide_loading"] options:SDWebImageRefreshCached];
         cell.nameLabel.text = [NSString stringWithFormat:@"《%@》",model1.BookName];
         return cell;
     }else if (indexPath.section == 3){
@@ -510,7 +510,7 @@ xuexiao：0    //学校"
         ReadSecondCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Read23" forIndexPath:indexPath];
         BookModel *model1 = self.tuijianbookArray[indexPath.row];
         
-        [cell.imgView sd_setImageWithURL:[NSURL URLWithString:model1.BookPic] placeholderImage:[UIImage imageNamed:@"icon_02"] options:SDWebImageRefreshCached];
+        [cell.imgView sd_setImageWithURL:[NSURL URLWithString:model1.BookPic] placeholderImage:[UIImage imageNamed:@"glide_loading"] options:SDWebImageRefreshCached];
         cell.nameLabel.text = [NSString stringWithFormat:@"《%@》",model1.BookName];
         return cell;
 
@@ -523,7 +523,7 @@ xuexiao：0    //学校"
         HomePaSixCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Read45" forIndexPath:indexPath];
         BookModel *model1 = self.remenbookArray[indexPath.row];
         
-        [cell.imageView1 sd_setImageWithURL:[NSURL URLWithString:model1.BookPic] placeholderImage:[UIImage imageNamed:@"icon_02"] options:SDWebImageRefreshCached];
+        [cell.imageView1 sd_setImageWithURL:[NSURL URLWithString:model1.BookPic] placeholderImage:[UIImage imageNamed:@"glide_loading"] options:SDWebImageRefreshCached];
         //        [cell.imageView1 sd_setImageWithURL:[NSURL URLWithString:str]];
         cell.label1.text = [NSString stringWithFormat:@"《%@》",model1.BookName];
         cell.label2.text = [NSString stringWithFormat:@"出版社:%@",model1.BookPublic];
@@ -544,6 +544,16 @@ xuexiao：0    //学校"
         ReadeightCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Read8" forIndexPath:indexPath];
         cell.Warray = self.weekArray;
         cell.Marray = self.monthArray;
+         __weak typeof(self) weakSelf = self;
+        cell.selectBlock = ^(NSString *bookId) {
+            if (weakSelf.xf.Loginid == NULL) {
+                [SVProgressHUD showInfoWithStatus:@"您还未登录"];
+                return;
+            }
+            BookDetailViewController *vc = [[BookDetailViewController alloc]init];
+            vc.bookid = bookId;
+            [weakSelf.navigationController pushViewController:vc animated:YES];
+        };
         return cell;
     }else if (indexPath.section == 8){
         ReadTenCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Read10" forIndexPath:indexPath];

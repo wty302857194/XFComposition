@@ -98,7 +98,7 @@
     BookRecCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"bookreccell" forIndexPath:indexPath];
     BookModel *model = self.bookArray[indexPath.row];
     NSString *str = [NSString stringWithFormat:@"%@",model.BookPic];
-    [cell.imgView sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"icon_02"] options:SDWebImageRefreshCached];
+    [cell.imgView sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"xf_Norecord"] options:SDWebImageRefreshCached];
     cell.titleLabel.text = [NSString stringWithFormat:@"《%@》",model.BookName];
     cell.timeLabel.text = [NSString stringWithFormat:@"推荐时间：%@",model.BookAddTime];
     cell.chubanLabel.text = [NSString stringWithFormat:@"出版社：%@",model.BookPublic];

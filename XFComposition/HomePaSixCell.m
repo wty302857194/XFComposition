@@ -41,7 +41,7 @@
 
 - (void)setModel:(BookModel *)model {
     _model = model;
-    [self.imageView1 sd_setImageWithURL:[NSURL URLWithString:model.BookPic] placeholderImage:[UIImage imageNamed:@"icon_02"] options:SDWebImageRefreshCached];
+    [self.imageView1 sd_setImageWithURL:[NSURL URLWithString:model.BookPic] placeholderImage:[UIImage imageNamed:@"xf_Norecord"] options:SDWebImageRefreshCached];
     self.label1.text = [NSString stringWithFormat:@"《%@》",model.BookName];
 
     self.label2.text = [NSString stringWithFormat:@"推荐时间:%@",[Global dataStringForString:model.BookAddTime]];

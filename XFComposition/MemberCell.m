@@ -45,7 +45,7 @@
 -(void)setModel:(GetGroupUserModel *)model{
     _model = model;
     NSString *str = [NSString stringWithFormat:@"%@%@",HTurl,_model.UserPic];
-    [self.imgView sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"icon_02"] options:SDWebImageRefreshCached];
+    [self.imgView sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"xf_Norecord"] options:SDWebImageRefreshCached];
     self.label1.text = _model.UserName;
     self.label2.text = [NSString stringWithFormat:@"加入时间：%@",_model.JoinTime];
     if ([_model.RoleType integerValue] == 1) {

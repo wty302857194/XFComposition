@@ -25,7 +25,7 @@
                         <constraints>
                             <constraint firstAttribute="width" constant="46" id="Tmk-UY-DAo"/>
                         </constraints>
-                        <state key="normal" image="normalIcon"/>
+                        <state key="normal" image="xf_quadrate"/>
                         <connections>
                             <action selector="selectItem:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="PXP-aI-zvh"/>
                         </connections>
@@ -82,6 +82,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="normalIcon" width="16" height="16"/>
+        <image name="xf_quadrate" width="14" height="14"/>
     </resources>
 </document>

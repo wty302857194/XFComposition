@@ -180,7 +180,7 @@
     }
     cell.bqLabel.text = [NSString stringWithFormat:@"标签：%@",model.labels];
     NSString *str = [NSString stringWithFormat:@"%@%@",HTurl,model.UserPic];
-    [cell.imageView sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"icon_02"] options:SDWebImageRefreshCached];
+    [cell.imageView sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"xf_Norecord"] options:SDWebImageRefreshCached];
     
     
     

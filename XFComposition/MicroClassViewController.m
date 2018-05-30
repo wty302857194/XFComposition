@@ -363,7 +363,7 @@
         GetVoletacherModel *model = self.teacherArray[indexPath.row];
         
         NSString *str = [NSString stringWithFormat:@"%@%@",HTurl,model.teacherPic];
-        [cell.imageView sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"icon_02"] options:SDWebImageRefreshCached];
+        [cell.imageView sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"xf_Norecord"] options:SDWebImageRefreshCached];
         cell.nameLabel.text = model.teacherName;
         cell.jsLabel.text = [NSString stringWithFormat:@"%@  高级教师",model.teacherschool];;
         cell.gyLabel.text = [NSString stringWithFormat:@"公益值:%@",model.teacherGyNum];

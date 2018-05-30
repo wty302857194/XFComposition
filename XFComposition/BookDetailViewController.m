@@ -336,7 +336,7 @@
           cell.delegate = self;
         
         NSString *str = [NSString stringWithFormat:@"%@",self.bookinfoModel.bookpic];
-        [cell.imgView sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"icon_02"] options:SDWebImageRefreshCached];
+        [cell.imgView sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"pic_yuedu11"] options:SDWebImageRefreshCached];
         cell.model = self.subjectModel;
         return cell;
     }else if (indexPath.section == 3){

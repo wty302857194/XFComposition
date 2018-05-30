@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -111,8 +107,8 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jXz-1K-TBF">
                             <rect key="frame" x="0.0" y="81" width="375" height="39.5"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_02" translatesAutoresizingMaskIntoConstraints="NO" id="oZP-hB-RPb">
-                                    <rect key="frame" x="10" y="5" width="29" height="29"/>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xf_Norecord" translatesAutoresizingMaskIntoConstraints="NO" id="oZP-hB-RPb">
+                                    <rect key="frame" x="10" y="11.5" width="16" height="16"/>
                                 </imageView>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="right-arrow-" translatesAutoresizingMaskIntoConstraints="NO" id="13B-My-C3g">
                                     <rect key="frame" x="343" y="9" width="22" height="22"/>
@@ -121,7 +117,7 @@
                                     </constraints>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我的推荐" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xye-Gs-sPI">
-                                    <rect key="frame" x="49" y="11" width="61.5" height="18"/>
+                                    <rect key="frame" x="36" y="11" width="61.5" height="18"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                     <color key="textColor" red="0.1960784314" green="0.1960784314" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
@@ -193,9 +189,9 @@
         </view>
     </objects>
     <resources>
-        <image name="icon_02" width="29" height="29"/>
         <image name="icon_04" width="29" height="29"/>
         <image name="icon_05" width="29" height="29"/>
         <image name="right-arrow-" width="22" height="22"/>
+        <image name="xf_Norecord" width="16" height="16"/>
     </resources>
 </document>

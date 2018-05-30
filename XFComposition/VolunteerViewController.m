@@ -215,14 +215,14 @@
         WriteListModel *model1 = self.microArray[indexPath.row];
         
         NSString *str = [NSString stringWithFormat:@"%@%@",HTurl,model1.MicroclassInfoAttr1];
-        [cell.imgView sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"icon_02"] options:SDWebImageRefreshCached];
+        [cell.imgView sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"glide_loading"] options:SDWebImageRefreshCached];
         return cell;
     }else if (indexPath.section == 2){
         MicoFourCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MicCell4" forIndexPath:indexPath];
         GetVoletacherModel *model = self.teacherArray[indexPath.row];
         
         NSString *str = [NSString stringWithFormat:@"%@%@",HTurl,model.teacherPic];
-        [cell.imageView sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"icon_02"] options:SDWebImageRefreshCached];
+        [cell.imageView sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"glide_loading"] options:SDWebImageRefreshCached];
         cell.nameLabel.text = model.teacherName;
         cell.jsLabel.text = [NSString stringWithFormat:@"%@  高级教师",model.teacherschool];;
         cell.gyLabel.text = [NSString stringWithFormat:@"公益值:%@",model.teacherGyNum];

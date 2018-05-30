@@ -20,7 +20,7 @@
 {
     _lessonModel = lessonModel;
     
-    [self.imgView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",HTurl,lessonModel.MicroclassInfoAttr1?:@""]] placeholderImage:[UIImage imageNamed:@"icon_02"]];
+    [self.imgView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",HTurl,lessonModel.MicroclassInfoAttr1?:@""]] placeholderImage:[UIImage imageNamed:@"xf_Norecord"]];
     self.titleLab.text = lessonModel.MicroclassInfoTitle?:@"";
     self.nameLab.text = [NSString stringWithFormat:@"课程设计导师：%@",lessonModel.MicroclassInfoMaster?:@""];
 }

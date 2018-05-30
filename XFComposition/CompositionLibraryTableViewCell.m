@@ -14,7 +14,7 @@
 - (void)setListModel:(CommwritelistModel *)listModel {
     _listModel = listModel;
    
-    [self.imgView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",HTurl,listModel.UserPic]] placeholderImage:[UIImage imageNamed:@"icon_02"] options:SDWebImageRefreshCached];
+    [self.imgView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",HTurl,listModel.UserPic]] placeholderImage:[UIImage imageNamed:@"xf_Norecord"] options:SDWebImageRefreshCached];
     self.titleLab.text = [NSString stringWithFormat:@"《%@》",listModel.BlogTitle];
     self.nameLab.text = [NSString stringWithFormat:@"作者：%@",listModel.UserName];
     self.numPeople.text = [NSString stringWithFormat:@"点评人数：%@",listModel.PyNum];

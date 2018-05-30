@@ -196,7 +196,7 @@
 
         cell.delegate = self;
         NSString *str = [NSString stringWithFormat:@"%@%@",HTurl,self.groupModel.groupIcon];
-        [cell.imgView sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"icon_02"] options:SDWebImageRefreshCached];
+        [cell.imgView sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"xf_Norecord"] options:SDWebImageRefreshCached];
         
         
         cell.titleLable.text = self.groupModel.groupName;

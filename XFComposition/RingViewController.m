@@ -138,7 +138,7 @@
         GroupModel *model = self.groupArray[indexPath.row];
 //        cell.model = self.groupArray[indexPath.row];
         NSString *str = [NSString stringWithFormat:@"%@%@",HTurl,model.GroupIcon];
-        [cell.imageView sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"icon_02"] options:SDWebImageRefreshCached];
+        [cell.imageView sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"xf_Norecord"] options:SDWebImageRefreshCached];
         
         cell.titleLabel.text = model.GroupName;
         cell.userNumLabel.text = [NSString stringWithFormat:@"用户：%@",model.JoinNum];

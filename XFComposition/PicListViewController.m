@@ -155,7 +155,7 @@
     GetWritePicModel *model = self.picArray[indexPath.row];
     cell.model = model;
 //    NSString *str = [NSString stringWithFormat:@"%@%@",HTurl,model.PicUrl];
-//    [cell.imgView sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"icon_02"] options:SDWebImageRefreshCached];
+//    [cell.imgView sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"xf_Norecord"] options:SDWebImageRefreshCached];
     return cell;
 }
 //设置每个item的尺寸

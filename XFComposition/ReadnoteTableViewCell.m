@@ -83,7 +83,7 @@
 
     _model = model;
     NSString *str = [NSString stringWithFormat:@"%@",_model.bookpic];
-    [self.imgView sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"icon_02"] options:SDWebImageRefreshCached];
+    [self.imgView sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"xf_Norecord"] options:SDWebImageRefreshCached];
     self.titileLabel.text = _model.title;
     self.timeLable.text = _model.addtime;
     self.label1.text = [NSString stringWithFormat:@"用户名：%@",_model.username];

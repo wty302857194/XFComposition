@@ -59,7 +59,7 @@
     _model = model;
     
     NSString *str = [NSString stringWithFormat:@"%@%@",HTurl,_model.UserPic];
-    [self.imgView sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"icon_02"] options:SDWebImageRefreshCached];
+    [self.imgView sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"xf_Norecord"] options:SDWebImageRefreshCached];
     
     self.userLabel.text = _model.UserName;
     self.timeLabel.text = _model.AddTime;

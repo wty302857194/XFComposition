@@ -52,7 +52,7 @@
 -(void)setModel:(GetTitleBackinfoModel *)model{
     _model = model;
     NSString *str = [NSString stringWithFormat:@"%@%@",HTurl,_model.UserPic];
-    [self.imgView sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"icon_02"] options:SDWebImageRefreshCached];
+    [self.imgView sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"xf_Norecord"] options:SDWebImageRefreshCached];
     self.label1.text = _model.UserName;
     self.label2.text = _model.AddTime;
     self.label3.text = [NSString stringWithFormat:@"%@", _model.CommentInfo];

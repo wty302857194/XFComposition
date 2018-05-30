@@ -638,7 +638,7 @@
             detailVC.dataArr = self.detailArr;
             [self.navigationController pushViewController:detailVC animated:YES];
             
-//            [self.imgView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",HTurl,lessonModel.MicroclassInfoAttr1?:@""]] placeholderImage:[UIImage imageNamed:@"icon_02"]];
+//            [self.imgView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",HTurl,lessonModel.MicroclassInfoAttr1?:@""]] placeholderImage:[UIImage imageNamed:@"xf_Norecord"]];
             
             //老版
             /*

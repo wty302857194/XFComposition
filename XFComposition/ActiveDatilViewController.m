@@ -113,7 +113,7 @@
             [self.allArray addObject:self.SecondArray];
         }
         NSString *str = [NSString stringWithFormat:@"%@%@",HTurl,self.Fmodel.activePic];
-        [self.headView.imgView sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"icon_02"] options:SDWebImageRefreshCached];
+        [self.headView.imgView sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"xf_Norecord"] options:SDWebImageRefreshCached];
         self.headView.label4.text = [NSString stringWithFormat:@"初次审核通过：0 作品限制：0"];
         self.headView.label1.text = self.Fmodel.activeName;
         self.headView.label2.text = [NSString stringWithFormat:@"活动时间：%@~%@",[self.Fmodel.activeStartTime substringToIndex:10],[self.Fmodel.activeEndTime substringToIndex:10]];

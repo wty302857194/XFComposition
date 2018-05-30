@@ -51,7 +51,7 @@
 }
 //-(void)layoutSubviews{
 //    NSString *str = [NSString stringWithFormat:@"http://xf.vqune.com%@",self.model.UserPic];
-//    [self.imgView sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"icon_02"] options:SDWebImageRefreshCached];
+//    [self.imgView sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"xf_Norecord"] options:SDWebImageRefreshCached];
 //    self.nameLabel.text = self.model.UserName;
 //    self.timeLabel.text = self.model.C_Intime;
 //    self.cotentLabel.text = self.model.C_Content;
@@ -61,7 +61,7 @@
 
     _model = model;
     NSString *str = [NSString stringWithFormat:@"%@%@",HTurl,_model.UserPic];
-    [self.imgView sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"icon_02"] options:SDWebImageRefreshCached];
+    [self.imgView sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"xf_Norecord"] options:SDWebImageRefreshCached];
     self.nameLabel.text = _model.UserName;
     self.timeLabel.text = _model.C_Intime;
     self.cotentLabel.text = _model.C_Content;

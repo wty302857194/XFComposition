@@ -562,6 +562,12 @@ static NSString *seventhCellID = @"NewMicoSeventhCell";
             loginVC.imgUrlStr = json[@"ret_data"]?:@"";
             loginVC.noticeObjectId = @"0";
             loginVC.modelId = @"4";
+             __weak typeof(self) weakSelf = self;
+            loginVC.saveSuccessBlock = ^{
+                [weakSelf MicroXiezuowenRequst];
+
+            };
+           
             [self.navigationController pushViewController:loginVC animated:YES];
         }else {
             [Global promptMessage:@"网络不好" inView:self.view];

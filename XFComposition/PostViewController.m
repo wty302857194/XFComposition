@@ -208,7 +208,7 @@
         self.model = [GetTitleInforModel loadWithJSOn:json[@"ret_data"]];
         
         NSString *str = [NSString stringWithFormat:@"%@%@",HTurl,self.model.UserPic];
-        [self.headview.imgView sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"icon_02"] options:SDWebImageRefreshCached];
+        [self.headview.imgView sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"xf_Norecord"] options:SDWebImageRefreshCached];
         self.headview.titleLabel.text = self.model.Title;
         self.headview.timeLabel.text = self.model.AddTime;
         [self.headview.bt1 setTitle:self.model.UserName forState: UIControlStateNormal];

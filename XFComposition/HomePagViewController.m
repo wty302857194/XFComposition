@@ -363,7 +363,7 @@
         BookModel *model1 = self.bookArray[indexPath.row];
         
         NSString *str = [NSString stringWithFormat:@"%@%@",HTurl,model1.BookPic];
-        [cell.imageView1 sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"icon_02"] options:SDWebImageRefreshCached];
+        [cell.imageView1 sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"xf_Norecord"] options:SDWebImageRefreshCached];
 
         cell.label1.text = [NSString stringWithFormat:@"《%@》",model1.BookName];
         cell.label2.text = [NSString stringWithFormat:@"出版社:%@",model1.BookPublic];
@@ -377,7 +377,7 @@
         GroupModel *model = self.GroupArray[indexPath.row];
         
         NSString *str = [NSString stringWithFormat:@"%@%@",HTurl,model.GroupIcon];
-        [cell.imageView sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"icon_02"] options:SDWebImageRefreshCached];
+        [cell.imageView sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"xf_Norecord"] options:SDWebImageRefreshCached];
 
         cell.titleLabel.text = model.GroupName;
         cell.userNumLabel.text = [NSString stringWithFormat:@"用户：%@",model.JoinNum];

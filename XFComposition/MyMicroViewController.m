@@ -150,7 +150,7 @@
     MyMicroCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
     MymicroModel *model = self.mymicroArray[indexPath.row];
     NSString *str = [NSString stringWithFormat:@"%@%@",HTurl,model.PicPath];
-    [cell.imageView sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"icon_02"] options:SDWebImageRefreshCached];
+    [cell.imageView sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"xf_Norecord"] options:SDWebImageRefreshCached];
 
     cell.titleLable.text = model.Tiltle;
     cell.bt.tag = 1000+indexPath.row;

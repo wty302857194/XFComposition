@@ -79,7 +79,7 @@
 -(void)setModel:(VolunteerModel *)model{
     _model = model;
     NSString *str = [NSString stringWithFormat:@"%@%@",HTurl,_model.activepic];
-    [self.imgView sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"icon_02"] options:SDWebImageRefreshCached];
+    [self.imgView sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"xf_Norecord"] options:SDWebImageRefreshCached];
     self.label4.text = [NSString stringWithFormat:@"初次审核通过：0 作品限制：0"];
     self.label1.text = _model.activename;
     self.label2.text = [NSString stringWithFormat:@"活动时间：%@~%@",[_model.activestarttime substringToIndex:10],[_model.activeendtime substringToIndex:10]];

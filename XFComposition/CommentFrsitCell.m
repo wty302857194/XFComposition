@@ -88,7 +88,7 @@
 //    NSLog(@"---%@",[_model.content stringByRemovingPercentEncoding]);
     _model = model;
     NSString *str = [NSString stringWithFormat:@"%@%@",HTurl,_model.userpic];
-    [self.imgView sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"icon_02"] options:SDWebImageRefreshCached];
+    [self.imgView sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"xf_Norecord"] options:SDWebImageRefreshCached];
     self.titleLabel.text = _model.title;
     self.timeLabel.text = _model.addtime;
     if ([_model.content isEqualToString:@""]) {

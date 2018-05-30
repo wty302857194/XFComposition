@@ -52,7 +52,7 @@
     if (indexPath.row == self.imgUrlArr.count) {
         cell.imgView.image = [UIImage imageNamed:@"add_photo_Img"];
     }else {
-        [cell.imgView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",HTurl,self.imgUrlArr[indexPath.row]]] placeholderImage:[UIImage imageNamed:@"icon_02"]];
+        [cell.imgView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",HTurl,self.imgUrlArr[indexPath.row]]] placeholderImage:[UIImage imageNamed:@"xf_Norecord"]];
     }
     return cell;
 }

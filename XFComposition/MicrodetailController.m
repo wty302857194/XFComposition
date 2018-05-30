@@ -450,7 +450,7 @@
         MicrodetailThridCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cellthrid" forIndexPath:indexPath];
         WriteListModel *model = self.microArray[indexPath.row];
         NSString *str = [NSString stringWithFormat:@"%@%@",HTurl,model.MicroclassInfoAttr1];
-        [cell.imageView sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"icon_02"] options:SDWebImageRefreshCached];
+        [cell.imageView sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"xf_Norecord"] options:SDWebImageRefreshCached];
         cell.titleLabel.text = model.MicroclassInfoTitle;
         cell.liulanLabel.text = [NSString stringWithFormat:@"%@浏览",model.MicroclassInfoAttr];
         cell.canyuLabel.text =@"8674参与";

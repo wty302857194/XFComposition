@@ -17,7 +17,7 @@
 }
 -(void)setModel:(VolunteerModel *)model {
     _model = model;
-    [self.imgView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",HTurl,model.activepic?:@""]] placeholderImage:[UIImage imageNamed:@"icon_02"]];
+    [self.imgView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",HTurl,model.activepic?:@""]] placeholderImage:[UIImage imageNamed:@"xf_Norecord"]];
     
     self.titleLab.text = model.activename?:@"";
     self.timeLab.text = [NSString stringWithFormat:@"活动时间：%@-%@",[self stringFromDateString:model.activestarttime?:@""],[self stringFromDateString:model.activeendtime?:@""]];

@@ -76,7 +76,7 @@
     
     if ([self.userInfo.dutyId isEqualToString:@"1"]) {//学生
         self.teacherarray1 = @[@"个人中心",@"我的习作",@"申请批阅",@"阅读检测",@"我的微课",@"我的圈子"];
-        self.array1 = @[@"icon_01",@"icon_03",@"icon_03",@"icon_02",@"icon_06",@"icon_06"];
+        self.array1 = @[@"icon_01",@"icon_03",@"icon_03",@"xf_Norecord",@"icon_06",@"icon_06"];
     }else if ([self.userInfo.dutyId isEqualToString:@"0"]){
         
         self.teacherarray1 = @[@"个人中心",@"批阅任务",@"我的试卷",@"阅读检测",@"我的微课",@"我的圈子"];
@@ -198,7 +198,7 @@
     }else if (indexPath.section ==2){
 //        if ([self.userInfo.dutyId isEqualToString:@"1"]) {//学生
 //            self.teacherarray1 = @[@"个人中心",@"我的习作",@"申请批阅",@"阅读检测",@"我的微课"];
-//            self.array1 = @[@"icon_01",@"icon_03",@"icon_03",@"icon_02",@"icon_06"];
+//            self.array1 = @[@"icon_01",@"icon_03",@"icon_03",@"xf_Norecord",@"icon_06"];
 //        }else if ([self.userInfo.dutyId isEqualToString:@"0"]){
 //            
 //            self.teacherarray1 = @[@"个人中心",@"批阅任务",@"我的试卷",@"阅读检测",@"我的微课"];

@@ -23,11 +23,9 @@
     self.window.backgroundColor = [UIColor whiteColor];
     self.window.rootViewController = self.tabbarVc;
     [self.window makeKeyAndVisible];
-    
-     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
 
-    
-    
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+
     return YES;
 }
 

@@ -20,7 +20,7 @@
 {
     _dataModel = dataModel;
     NSString *str =[NSString stringWithFormat:@"%@%@",HTurl,_dataModel.MicroclassInfoAttr1];
-    [_courseImg sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",HTurl,_dataModel.MicroclassInfoAttr1]] placeholderImage:[UIImage imageNamed:@"icon_02"]];
+    [_courseImg sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",HTurl,_dataModel.MicroclassInfoAttr1]] placeholderImage:[UIImage imageNamed:@"xf_Norecord"]];
     _courseLab.text = _dataModel.MicroclassInfoTitle;
     
 }

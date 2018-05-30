@@ -22,9 +22,9 @@
     NSString *str = [NSString stringWithFormat:@"%@%@",HTurl,model.PicUrl];
     NSString *str1 = [NSString stringWithFormat:@"%@%@",HTurl,model.FixPicUrl];
     if (pic.length > 3){
-         [self.imgView sd_setImageWithURL:[NSURL URLWithString:str1] placeholderImage:[UIImage imageNamed:@"icon_02"] options:SDWebImageRefreshCached];
+         [self.imgView sd_setImageWithURL:[NSURL URLWithString:str1] placeholderImage:[UIImage imageNamed:@"xf_Norecord"] options:SDWebImageRefreshCached];
     }else{
-         [self.imgView sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"icon_02"] options:SDWebImageRefreshCached];
+         [self.imgView sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"xf_Norecord"] options:SDWebImageRefreshCached];
     }
    
 }

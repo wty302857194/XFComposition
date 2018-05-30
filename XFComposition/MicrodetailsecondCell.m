@@ -115,7 +115,7 @@
         MicrojiaoliuCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell5" forIndexPath:indexPath];
         DianPingModel *model = self.dagangArray[indexPath.row];
         NSString *str = [NSString stringWithFormat:@"%@%@",HTurl,model.DPid];
-        [cell.imgView sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"icon_02"] options:SDWebImageRefreshCached];
+        [cell.imgView sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"xf_Norecord"] options:SDWebImageRefreshCached];
         cell.teacherlable.text = model.username;
         cell.timeLabel.text = model.checktime;
         return cell;
