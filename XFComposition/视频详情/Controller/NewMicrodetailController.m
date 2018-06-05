@@ -59,7 +59,7 @@ static NSString *seventhCellID = @"NewMicoSeventhCell";
 @property (nonatomic, strong) PlayerConfiguration *configuration;
 
 
-@property (nonatomic, assign) NSString *panduan;
+@property (nonatomic, copy) NSString *panduan;
 @property (nonatomic, strong) NSMutableArray *videoArray;// 课程大纲
 @property (nonatomic, strong) NSMutableArray *articleArray;//写作文
 @property (nonatomic, strong) NSMutableArray *microArray;//相关课程
@@ -68,7 +68,7 @@ static NSString *seventhCellID = @"NewMicoSeventhCell";
 @property (nonatomic, strong) NSMutableArray *discussArray; //课程交流
 @property (nonatomic, strong) MicrodetailModel *detailmodel;
 
-@property (nonatomic,strong)NSString *userId;
+@property (nonatomic,copy)NSString *userId;
 @property (nonatomic,strong)XFUserInfo *xf;
 
 @end
@@ -726,6 +726,7 @@ static NSString *seventhCellID = @"NewMicoSeventhCell";
 
 -(void)dealloc
 {
+    [self.playerView _pauseVideo];
     [self.playerView _deallocPlayer];
     [self.playerView removeFromSuperview];
 }

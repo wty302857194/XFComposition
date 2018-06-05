@@ -10,7 +10,7 @@
 
 @interface NewMicrodetailController : UIViewController
 
-@property (nonatomic, assign) NSString *classId;
+@property (nonatomic, copy) NSString *classId;
 
 @end
 
