@@ -141,7 +141,7 @@ static NSString *seventhCellID = @"NewMicoSeventhCell";
             
 //            self.configuration.sourceUrl = [NSURL URLWithString:@"http://www.crowncake.cn:18080/wav/no.9.mp4"] ;
             weakSelf.configuration.title = model.title;
-            [weakSelf.playerView setPlayerConfiguration:self.configuration];
+            [weakSelf.playerView setPlayerConfiguration:weakSelf.configuration];
         }
         
         [weakSelf.videoArray removeAllObjects];
@@ -175,7 +175,7 @@ static NSString *seventhCellID = @"NewMicoSeventhCell";
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     AddBlogRequst *requst = [[AddBlogRequst alloc]init];
     [requst AddBlogRequstWithNoticeName:title withNoticeObject:self.classId withNoticeContent:content withNoticeID:flg withuserid:self.userId withactiveItemId:@"0" withposttype:@"0" :^(NSDictionary *json) {
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
         if ([json[@"ret_msg"] isEqualToString:@"成功"]) {
             [weakSelf MicroXiezuowenRequst];
         }
@@ -238,7 +238,7 @@ static NSString *seventhCellID = @"NewMicoSeventhCell";
     GetBlogContentInfoRequst *requst = [[GetBlogContentInfoRequst alloc]init];
     [requst GetBlogContentInfoRequstWithNoticeID:model.ID :^(NSDictionary *json) {
         if ([json[@"ret_msg"] isEqualToString:@"成功"]) {
-            NSString *str1 = [self htmlEntityDecode:json[@"ret_data"]];
+            NSString *str1 = [weakSelf htmlEntityDecode:json[@"ret_data"]];
             NSAttributedString * attributeStr = [weakSelf attributedStringWithHTMLString:str1];
             NSString *string = [attributeStr string];
             AlertWriteView *alertView = [[AlertWriteView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
@@ -255,7 +255,7 @@ static NSString *seventhCellID = @"NewMicoSeventhCell";
     WeikePostCommentRequst *requst = [[WeikePostCommentRequst alloc]init];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [requst WeikePostCommentRequstwithuserid:self.userId withmodelid:@"5" withclassid:self.classId withuserip:@"127.0.0.1" withCommentinfo:textView.text :^(NSDictionary *json) {
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
         NSLog(@"%@",json[@"ret_msg"]);
         if ([json[@"ret_msg"] isEqualToString:@"成功"]) {
             [textView setText:nil];
@@ -407,7 +407,7 @@ static NSString *seventhCellID = @"NewMicoSeventhCell";
 //                AlertWriteView *alertView = [[AlertWriteView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
 //                alertView.delegate = weakSelf;
 //                [alertView showViewWithModel:nil content:nil flag:@"0"];
-                [self newObjectMessage];
+                [weakSelf newObjectMessage];
             } else if (type == ClickTypeSave) {//保存
                 NSMutableArray *ary = [NSMutableArray array];
                 for (MicPianduanmodel *model in array) {
